@@ -8,22 +8,25 @@
       <label for="tdate">Date:</label><br>
       <input type="text" id="tdate" name="tdate" placeholder="Date"><br>
       <label for="tplayers">Players:</label><br>
+      <!--<textarea id="tplayers" v-model="players" name="tplayers" rows="4" cols="50"></textarea><br><br>-->
       <textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea><br><br>
       <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
       <!--<input type="submit" value="Submit">-->
     </form>
     <div class="tournament-brackets">
       <div class="bracket">
-        <div v-for="(round, index) in rounds" :key="index">
-          <div  class="round" :class="['round-' + round]">
-            <div v-for="(match, matchIndex) in round" :key="matchIndex">
-              <div class="match">
-                <p class="currentmatch">match: {{match}}</p>
-                <div class="match__content matchstyle" style="border: 2px solid black; width: 100%; height: 30px; position: relative;">
-                  <div class="matchstyle">
-                  {{players[matchIndex]}}
-                  </div>
-                </div>
+        <div class="round" v-for="(round, index) in rounds" :key="index" :class="['round-' + round]" >
+          <div class="match" v-for="(match, matchIndex) in round" :key="matchIndex" >
+            <div class="match__content">
+              <div class="matchplayer">
+
+                <p class="player">{{players[match - 1]}}</p>
+              </div>
+            </div>
+            <div class="match__content">
+              <div class="matchplayer">
+
+                <p class="player">{{players[match - 1]}}</p>
               </div>
             </div>
           </div>
@@ -45,20 +48,18 @@ export default {
     name: "Tournaments",
     data() {
       return {
-        players: [],
-        bracketSize: 2
+        players: null,
+        bracketSize: 0
       }
     },
     methods: {
       newTournament() {
-        const field = document.getElementById('tplayers').value;
-        let players = field.split("\n");
-        console.log(players)
-        this.players = players;
-        this.bracketSize = players.length;
+        const field = document.getElementById("tplayers").value;
+        this.players = field.split("\n");
+        console.log(this.players)
+        this.bracketSize = this.players.length;
         console.log(this.bracketSize)
-        this.rounds();
-        this.$nuxt.refresh();
+        this.$nuxt.refresh;
       },
 
     },

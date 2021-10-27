@@ -1,29 +1,15 @@
-# Nuxt 3 Minimal Starter
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
 
-## Setup
 
-Make sure to install the dependencies
+appex
 
-```bash
-yarn install
-```
+Roller:
 
-## Development
+<p align="center">Frontend: Aleksnadder</p>
+<p align="center">Backend: Arvid</p>
 
-Start the development server on http://localhost:3000
+Frontend:
 
-```bash
-yarn dev
-```
+Har funnet et bracket system for matcher. 
+Har laget en skisse på figma.
 
-## Production
-
-Build the application for production:
-
-```bash
-yarn build
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
