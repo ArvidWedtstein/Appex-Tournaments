@@ -1,6 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://appex:appex@cluster0.ovkm8.mongodb.net/appex?retryWrites=true&w=majority";
-
+require('dotenv').config();
 
 
 
@@ -26,7 +25,7 @@ app.post("/newtournament", (req, res) => {
   const { name, date, players } = req.body;
   res.send(`Tournament name: ${name}\n${date}\n${players}`);
   
-  MongoClient.connect(uri, function(err, db) {
+  MongoClient.connect(process.env.MONGODB_URL, function(err, db) {
     if (err) throw err;
     var dbo = db.db("appex");
     var tournament = { tournamentId: tournamentID, name: name, date: date, players: players };
