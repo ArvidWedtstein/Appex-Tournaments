@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Remove this component to get started! -->
-    <NuxtWelcome />
+    <button class="newTournament" type="button">New Tourament</button>
   </div>
 </template>
