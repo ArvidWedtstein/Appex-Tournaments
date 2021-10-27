@@ -19,14 +19,7 @@
           <div class="match" v-for="(match, matchIndex) in round" :key="matchIndex" >
             <div class="match__content">
               <div class="matchplayer">
-
-                <p class="player">{{players[match - 1]}}</p>
-              </div>
-            </div>
-            <div class="match__content">
-              <div class="matchplayer">
-
-                <p class="player">{{players[match - 1]}}</p>
+                <button type="button">{{players[match - 1]}}</button>
               </div>
             </div>
           </div>
