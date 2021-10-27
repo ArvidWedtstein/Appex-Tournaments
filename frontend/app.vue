@@ -19,7 +19,7 @@
           <div class="match" v-for="(match, matchIndex) in round" :key="matchIndex" >
             <div class="match__content">
               <div class="matchplayer">
-                <button type="button">{{players[match - 1]}}</button>
+                <button v-on:click="match(round)" type="button">{{players[match - 1]}}</button>
               </div>
             </div>
           </div>
@@ -47,14 +47,17 @@ export default {
     },
     methods: {
       newTournament() {
-        const field = document.getElementById("tplayers").value;
+        const field = document.getElementsById("tplayers").value;
         this.players = field.split("\n");
         console.log(this.players)
         this.bracketSize = this.players.length;
         console.log(this.bracketSize)
         this.$nuxt.refresh;
       },
-
+      match(matchInt) {
+        const field = document.getElementByClass(`round-${matchInt}`).firstChild.firstChild.firstChild.firstChild.innerHTML = "test";
+        console.log(document.getElementByClass(`round-${matchInt * 2}`).firstChild.firstChild.firstChild.firstChild.innerHTML)
+      }
     },
     mounted() {
 
