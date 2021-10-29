@@ -157,6 +157,34 @@ body{
             }
         }
     }
+    .pagebtn {
+        flex: 1 1 auto;
+        position: relative;
+        width: 100%;
+        font-size: 2rem;
+        button {
+            padding: 0.2rem 0.5rem;
+            background: #dddddd;
+            outline: none;
+            border-radius: 50%;
+            border: none;
+            transition: all 0.2s ease;
+            &:hover {
+                background: #888;
+            }
+        }
+        .past {
+            float: left;
+            left: 0;
+            position: absolute;
+        }
+        .next {
+            float: right;
+            color: red;
+            right: 0;
+            position: absolute;
+        }
+    }
 }
 .screen__background {		
 	position: absolute;

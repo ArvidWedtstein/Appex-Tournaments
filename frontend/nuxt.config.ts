@@ -2,5 +2,15 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
     css: ['~/style.scss'],
-    buildModules: []
+    buildModules: [],
+    head: {
+        script: [
+            {
+                src: "https://kit.fontawesome.com/0cda3bb6df.js"
+            }
+        ],
+        link: [
+            { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" }
+        ]
+    }
 })

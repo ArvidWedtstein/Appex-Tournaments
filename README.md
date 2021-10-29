@@ -29,7 +29,21 @@ Skal fungere noenlunde som https://challonge.com/
 
 appex
 
-Roller:
+##Roller:
 
 <p align="center">Frontend: Aleksnadder</p>
 <p align="center">Backend: Arvid</p>
+
+##Progress:
+Laget pages for oppretting av turnering (colorscheme in progress)
+
+##TODO
+
+- Sjekke at alle input feltene er fylt ut før man kan gå til neste side/opprette turnering.
+
+- Farger / Colorscheme
+
+- Abbegs background former
+
+- Lage side for tidligere turneringer
+

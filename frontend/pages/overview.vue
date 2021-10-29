@@ -18,8 +18,9 @@
           <input type="range" min="2" max="69" id="players" v-model.number="playerInt">
           <span class="limit">{{playerInt}}</span>
         </div>
-        <div class="inputBox">
-          <button v-on:click="nextPage()">></button>
+        <div class="pagebtn">
+          <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+          <button class="next" v-on:click="pageSwitch('next')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
         </div>
       </form>
       <div class="screen__background">
@@ -38,6 +39,10 @@
         <textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea><br><br>
         <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
         <!--<input type="submit" value="Submit">-->
+        <div class="pagebtn">
+          <button class="past" v-on:click="pageSwitch('past')"><i class="fas fa-arrow-left"></i></button>
+          <button class="next" v-on:click="pageSwitch('next')"><i class="fas fa-arrow-right"></i></button>
+        </div>
       </form>
     </div>
     <div v-else-if="page === 2" class="page">
@@ -107,11 +112,15 @@ export default {
         //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")
         console.log(value)
       },
-      nextPage() {
-        this.page += 1;
-        console.log(this.playerInt)
+      pageSwitch(dir) {
+        console.log(dir)
+        if (dir === 'next') {
+          this.page += 1;
+        } else if (dir === 'past') {
+          this.page -= 1;
+        }
+        
         this.playerInt = parseInt(this.playerInt);
-        console.log(parseInt(this.playerInt))
       },
     },
     mounted() {
