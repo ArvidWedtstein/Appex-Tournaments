@@ -115,8 +115,10 @@ export default {
       pageSwitch(dir) {
         console.log(dir)
         if (dir === 'next') {
+          if (this.page = 2) return
           this.page += 1;
         } else if (dir === 'past') {
+          if (this.page = 0) return
           this.page -= 1;
         }
         
