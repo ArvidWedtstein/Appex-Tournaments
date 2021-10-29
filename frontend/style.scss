@@ -1,6 +1,7 @@
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+$inputcolor: rgba(0,0,0,0.5);
+$inputhovercolor: rgba(0,0,0,1);
 $backclr: #edece9;
 .newTournament {
     background: red;
@@ -123,9 +124,103 @@ body{
     }
 }
 
+.page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    .inputBox {
+        flex: 1 1 auto;
+        padding: 0.2rem;
+        input {
+            position: relative;
+            flex: 1 1 auto;
+            background: transparent;
+            text-align: left;
+            vertical-align: middle;
+            outline: none;
+            width: 100%;
+            border: none;
+            color: $inputcolor;
+            padding-bottom: 10px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid $inputcolor;
+            &:focus {
+                color: $inputhovercolor;
+                border-bottom: 2px solid $inputhovercolor;
+            }
+        }
+    }
+}
+.screen__background {		
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	-webkit-clip-path: inset(0 0 0 0);
+	clip-path: inset(0 0 0 0);	
+    overflow: hidden;
+    /*Riktige farger kommer senere. orker ikke fikse det nå*/
+    .screen__background__shape {
+        transform: rotate(45deg);
+        position: absolute;
+    }
+    .screen__background__shape1 {
+        height: 520px;
+        width: 520px;
+        background: #FFF;	
+        top: -50px;
+        right: 120px;	
+        border-radius: 0 72px 0 0;
+    }
+    .screen__background__shape2 {
+        height: 220px;
+        width: 220px;
+        background: #6C63AC;	
+        top: -172px;
+        right: 0;	
+        border-radius: 32px;
+    }
+    .screen__background__shape3 {
+        height: 540px;
+        width: 190px;
+        background: linear-gradient(270deg, #5D54A4, #6A679E);
+        top: -24px;
+        right: 0;	
+        border-radius: 32px;
+    }
+    .screen__background__shape4 {
+        height: 400px;
+        width: 200px;
+        background: #7E7BB9;	
+        top: 420px;
+        right: 50px;	
+        border-radius: 60px;
+    }
+}
 
 
 
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+	-webkit-text-fill-color: White;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+  box-shadow: 0 0 0px 1000px #000 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
 
 
