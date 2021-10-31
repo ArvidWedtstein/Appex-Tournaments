@@ -1,8 +1,9 @@
-Oppgave 
+## Oppgave 
 
 Appex Tournaments!Her skal dere lage en turneringsapp!
 Skal fungere noenlunde som https://challonge.com/
-Ønsker at dere benytter Nuxt 3 for frontend https://v3.nuxtjs.org/Deloppgaver:
+Ønsker at dere benytter Nuxt 3 for frontend https://v3.nuxtjs.org/
+# Deloppgaver:
 - Avklare roller i prosjektet
 	- Prosjektleder (gir en oppdatering til meg på status hver onsdag)
 	- Designer
@@ -45,4 +46,5 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 - Abbegs background former
 
 - Lage side for tidligere turneringer
+
 

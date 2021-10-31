@@ -3,9 +3,13 @@
 $inputcolor: rgba(0,0,0,0.5);
 $inputhovercolor: rgba(0,0,0,1);
 $backclr: #edece9;
-.newTournament {
-    background: red;
-}
+$black: #221E20;
+$dark-grey: #464544;
+$grey: #D6D2CE;
+$light-grey: #EDECE9;
+$blue: #0835C4;
+$green: #DDE78B;
+$orange: #FAB487;
 /* https://codepen.io/sdudnyk/pen/bWbqMb brackets */
 *,
 *::after,
@@ -186,58 +190,6 @@ body{
         }
     }
 }
-.screen__background {		
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: -1;
-	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);	
-    overflow: hidden;
-    /*Riktige farger kommer senere. orker ikke fikse det nå*/
-    .screen__background__shape {
-        transform: rotate(45deg);
-        position: absolute;
-    }
-    .screen__background__shape1 {
-        height: 520px;
-        width: 520px;
-        background: #FFF;	
-        top: -50px;
-        right: 120px;	
-        border-radius: 0 72px 0 0;
-    }
-    .screen__background__shape2 {
-        height: 220px;
-        width: 220px;
-        background: #6C63AC;	
-        top: -172px;
-        right: 0;	
-        border-radius: 32px;
-    }
-    .screen__background__shape3 {
-        height: 540px;
-        width: 190px;
-        background: linear-gradient(270deg, #5D54A4, #6A679E);
-        top: -24px;
-        right: 0;	
-        border-radius: 32px;
-    }
-    .screen__background__shape4 {
-        height: 400px;
-        width: 200px;
-        background: #7E7BB9;	
-        top: 420px;
-        right: 50px;	
-        border-radius: 60px;
-    }
-}
-
-
-
-
 
 
 input:-webkit-autofill,

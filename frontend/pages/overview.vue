@@ -23,12 +23,6 @@
           <button class="next" v-on:click="pageSwitch('next')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
         </div>
       </form>
-      <div class="screen__background">
-        <span class="screen__background__shape screen__background__shape4"></span>
-        <span class="screen__background__shape screen__background__shape3"></span>		
-        <span class="screen__background__shape screen__background__shape2"></span>
-        <span class="screen__background__shape screen__background__shape1"></span>
-		  </div>		
     </div>
     <div v-else-if="page === 1" class="page">
       <form>
@@ -80,7 +74,7 @@ export default {
     name: "Tournaments",
     data() {
       return {
-        page: 0,
+        page: 2,
         tournamentName: '',
         players: 0,
         playerInt: 0,

@@ -7,8 +7,8 @@
       <div class="pg1-content-container">
         <h1>Velkommen til Appex tournament</h1>
         <div class="btn-container">
-          <button class="blue">Lag nytt tournament</button>
-          <button class="grey">Se tidligere tournaments</button>
+          <NuxtLink to="/overview" class="blue">Lag nytt tournament</NuxtLink>
+          <NuxtLink to="/tournaments" class="grey">Se tidligere tournaments</NuxtLink>
         </div>
       </div>
       
@@ -18,7 +18,7 @@
 <script>
 
 export default {
-    name: "Tournaments",
+    name: "TournamentsHome",
     data() {
       return {
         
@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss">
 $backclr: #edece9;
-$btncolorblue: #0000ff;
+$btncolorblue: #0835C4;
 $btncolorgrey: #444444;
 #logo{
         text-align: center;
@@ -61,29 +61,32 @@ $btncolorgrey: #444444;
   position: relative;
   display: inline-flex;
   flex-direction: row;
-  padding: 2rem;
+  padding: 4rem;
   gap: 50px;
+  
+}
   .blue {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     font-weight: 800;
     padding: 2rem;
     color: #ffffff;
     position: relative;
+    border: none;
     &:hover {
-      border: 5px dotted $btncolorblue;
+      transform: translateY(-5px);
     }
     background: $btncolorblue;
   }
   .grey {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     font-weight: 800;
     padding: 2rem;
     color: #ffffff;
     position: relative;
+    border: none;
     &:hover {
-      border: 5px dotted $btncolorgrey;
+      
     }
     background: $btncolorgrey;
   }
-}
 </style>
