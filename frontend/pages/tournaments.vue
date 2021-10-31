@@ -16,7 +16,7 @@
             </div>
             <h1 class="bracket">}</h1>
         </div>
-        <div class="tournament shadow">
+        <div class="tournament">
             <h1 class="bracket">{</h1>
             <div class="theader">
                 <p>Turnering</p>
@@ -137,9 +137,11 @@ export default {
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
+            const title = document.getElementById("title");
 
             scrollContainer.addEventListener("wheel", (evt) => {
                 evt.preventDefault();
+                //title.scrollLeft += evt.deltaY;
                 scrollContainer.scrollLeft += evt.deltaY;
             });
         }
@@ -184,9 +186,9 @@ $orange: #FAB487;
     align-items: center;
     flex-wrap: nowrap;
     transition: all 0.5s ease;
-    
+    user-select: none;
     .title {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
@@ -232,7 +234,6 @@ $orange: #FAB487;
         padding: 0.75rem 1.25rem;
         margin-bottom: 0;
         border-bottom: 1px solid rgba(0,0,0,.125);
-        //background: rgba(0,0,0,0.8);
     }
     .tcontent {
         //background: url("~/Assets/images/braggets.PNG");
@@ -258,13 +259,15 @@ $orange: #FAB487;
         transition: all 0.1s ease;
         opacity: 0;
         position: absolute;
-        color: $orange;
+        color: $dark-grey;
         font-size: 260px;
         &:first-child {
+            text-shadow: 10px 0px 10px $blue;
             transform: rotateZ(90deg);
             bottom: -15%;
         }
         &:last-child {
+            text-shadow: -10px 0px 10px $blue;
             transform: rotateZ(90deg);
             top: -15%;
         }

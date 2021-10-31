@@ -55,7 +55,7 @@ app.post("/newtournament", (req, res) => {
   
     console.log('INSERT')
   })
-  res.send("Get ")
+  res.send("made a new tournament")
   connection.end()
   tournamentID++;
 });
