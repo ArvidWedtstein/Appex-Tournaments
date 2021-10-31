@@ -159,6 +159,15 @@ body{
                 color: $inputhovercolor;
                 border-bottom: 2px solid $inputhovercolor;
             }
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active  {
+                -webkit-text-fill-color: White;
+              -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+              box-shadow: 0 0 0px 1000px #000 inset;
+              transition: background-color 5000s ease-in-out 0s;
+            }
         }
     }
     .pagebtn {
@@ -190,17 +199,24 @@ body{
         }
     }
 }
-
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-	-webkit-text-fill-color: White;
-  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-  box-shadow: 0 0 0px 1000px #000 inset;
-  transition: background-color 5000s ease-in-out 0s;
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    .display-4 {
+        font-size: 3.5rem;
+        font-weight: 300;
+        line-height: 1.2;
+    }
+    .lead {
+        font-size: 1.25rem;
+        font-weight: 300;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
 }
+
+
 
 
 

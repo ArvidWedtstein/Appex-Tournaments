@@ -74,7 +74,7 @@ export default {
     name: "Tournaments",
     data() {
       return {
-        page: 2,
+        page: 0,
         tournamentName: '',
         players: 0,
         playerInt: 0,

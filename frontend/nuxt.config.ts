@@ -1,6 +1,7 @@
 import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
+    target: 'server',
     css: ['~/style.scss'],
     buildModules: [],
     head: {
@@ -17,8 +18,9 @@ export default defineNuxtConfig({
 
     ],
     serverMiddleware: [
-        
+        {path: '/api', handler: '~/api/index.js'}
     ],
+    
     publicRuntimeConfig: {
         
     }

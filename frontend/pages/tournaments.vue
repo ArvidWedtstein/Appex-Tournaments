@@ -2,13 +2,14 @@
 <template>
     <div class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
-        <div class="tournament shadow">
+        <div v-for="tournament in tournaments" :key="tournament" class="tournament shadow">
             <h1 class="bracket">{</h1>
             <div class="theader">
                 <p>Turnering</p>
+                <hr class="my-4">
             </div>
             <div class="tcontent">
-                <p>Turnering</p>
+                <p>{{tournament.name}}</p>
             </div>
             <div class="tfooter">
                 <p>Forrige Vinner: </p>
@@ -40,18 +41,31 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     name: "Tournaments",
     data() {
-      return {
-        
-      }
+        return {
+            tournaments: []
+        }
     },
     methods: {
-        
-        
-    }
+        async fetchTournaments() {
+            this.tournaments = await axios.get('/api/gettournaments')
+            console.log(this.tournaments)
+        }
+    },
+    async asyncData ({ $http }) {
+        const test = await $http.$get('/api/gettournaments')
+        console.log(test);
+        return {
+            test
+        }
+    },
+    mounted() {
+        this.fetchTournaments()
+    },
+    
 }
 </script>
 
@@ -106,7 +120,12 @@ $orange: #FAB487;
     padding: 0rem;
     margin: 0.2rem;
     text-align: center;
-    background: $dark-grey;
+    //background: $dark-grey;
+    background: url("~/Assets/images/appexwindmill.PNG");
+    background-size: cover;
+    background-clip: padding-box;
+    background-position: 50%;
+    background-repeat: no-repeat;
     color: #fff;
     transition: all 0.5s;
     border-radius: 0.25rem;
@@ -122,7 +141,7 @@ $orange: #FAB487;
         padding: 0.75rem 1.25rem;
         margin-bottom: 0;
         border-bottom: 1px solid rgba(0,0,0,.125);
-        background: rgba(0,0,0,0.8);
+        //background: rgba(0,0,0,0.8);
     }
     .tcontent {
         //background: url("~/Assets/images/braggets.PNG");
