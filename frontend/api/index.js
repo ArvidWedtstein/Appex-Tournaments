@@ -14,7 +14,7 @@ app.listen(PORT, () => {
 module.exports = app;
 
 
-/*const tournament = (req, res) => {
+const tournament = (req, res) => {
   res.send('test');
 }
 
@@ -58,4 +58,4 @@ app.post("/newtournament", (req, res) => {
   res.send("Get ")
   connection.end()
   tournamentID++;
-});*/
+});

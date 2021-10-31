@@ -1,6 +1,6 @@
 
 <template>
-    <div class="tournamentcontainer">
+    <main class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
         <div v-for="tournament in tournaments" :key="tournament" class="tournament shadow">
             <h1 class="bracket">{</h1>
@@ -9,7 +9,7 @@
                 <hr class="my-4">
             </div>
             <div class="tcontent">
-                <p>{{tournament.name}}</p>
+                <p></p>
             </div>
             <div class="tfooter">
                 <p>Forrige Vinner: </p>
@@ -17,31 +17,111 @@
             <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
         <div class="tournament shadow">
-            <p>Biljard</p>
+            <h1 class="bracket">{</h1>
+            <div class="theader">
+                <p>Turnering</p>
+                <hr class="my-4">
+            </div>
+            <div class="tcontent">
+                <p></p>
+            </div>
+            <div class="tfooter">
+                <p>Forrige Vinner: </p>
+            </div>
+            <h1 class="bracket">}</h1>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
+
 import axios from 'axios';
+
+
 export default {
     name: "Tournaments",
     data() {
@@ -51,19 +131,22 @@ export default {
     },
     methods: {
         async fetchTournaments() {
+            
             this.tournaments = await axios.get('/api/gettournaments')
             console.log(this.tournaments)
-        }
-    },
-    async asyncData ({ $http }) {
-        const test = await $http.$get('/api/gettournaments')
-        console.log(test);
-        return {
-            test
+        },
+        horizontalScroll() {
+            const scrollContainer = document.querySelector("main");
+
+            scrollContainer.addEventListener("wheel", (evt) => {
+                evt.preventDefault();
+                scrollContainer.scrollLeft += evt.deltaY;
+            });
         }
     },
     mounted() {
-        this.fetchTournaments()
+        //this.fetchTournaments()
+        this.horizontalScroll()
     },
     
 }
@@ -83,11 +166,16 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
+
 .tournamentcontainer {
+    
     background: $backclr;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;   
     position: absolute;
+    left: 0;
     background: url("~/Assets/images/nam.PNG");
     background-size: 100%;
     padding: 6em;
@@ -95,6 +183,8 @@ $orange: #FAB487;
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
+    transition: all 0.5s ease;
+    
     .title {
         position: absolute;
         top: 0;
@@ -115,10 +205,10 @@ $orange: #FAB487;
     -ms-flex-direction: column;
     flex-direction: column;
     align-items: center;
-    min-width: 0;
+    min-width: 20vw;
     word-wrap: break-word;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem 2rem;
     text-align: center;
     //background: $dark-grey;
     background: url("~/Assets/images/appexwindmill.PNG");
@@ -127,11 +217,12 @@ $orange: #FAB487;
     background-position: 50%;
     background-repeat: no-repeat;
     color: #fff;
-    transition: all 0.5s;
+    transition: all 0.5s ease;
     border-radius: 0.25rem;
-    //transform: rotate3d(1,-2,1,30deg);
-    &:hover {
+    &:hover > .bracket{
         transform: none;
+        opacity: 1;
+        //display: block;
     }
     .theader {
         width: 100%;
@@ -163,6 +254,9 @@ $orange: #FAB487;
         border-top: 1px solid rgba(0,0,0,.125);
     }
     .bracket {
+        //display: none;
+        transition: all 0.1s ease;
+        opacity: 0;
         position: absolute;
         color: $orange;
         font-size: 260px;
