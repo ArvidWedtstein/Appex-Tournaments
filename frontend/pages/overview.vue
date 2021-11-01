@@ -87,6 +87,9 @@ export default {
           ],
           [
 
+          ],
+          [
+            []
           ]
         ]
       }
@@ -122,10 +125,15 @@ export default {
         let nextmatchint = this.matches.indexOf(round) + 1;
         if (nextmatchint >= 2) {
           this.matches[nextmatchint][0].push(playername)
+          if (this.matches[nextmatchint][0].length >= 2) return;
         } else {
           if (winnerint > round.length) {
+            if (this.matches[nextmatchint][1].length >= 2) return;
+              
             this.matches[nextmatchint][1].push(playername)
+            
           } else {
+            if (this.matches[nextmatchint][0].length >= 2) return;
             this.matches[nextmatchint][0].push(playername)
           }
         }
