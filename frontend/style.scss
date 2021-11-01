@@ -58,7 +58,7 @@ body{
     position: relative;
     vertical-align: middle;
     &::before {
-        content: "t";
+        content: "";
         display: block;
         min-height: 20px;
         border-left: 2px solid purple;
@@ -75,7 +75,6 @@ body{
         margin-bottom: 0;
     }
 }
-
 .match:nth-child(odd)::after {
     content: "";
     display: block;
@@ -99,13 +98,24 @@ body{
     position: absolute;
     right: -10px;
     width: 10px;
-    bottom: 38%;
+    bottom: 50%;
 }
-
+.round:last-child {
+    .match__content::before {
+        content: "";
+        display: block;
+        width: 20px;
+        border-bottom: 2px solid purple;
+        margin-left: -10px;
+        position: absolute;
+        top: 50%;
+        left: -10px;
+    }
+}
 .match__content::before {
     content: "";
     display: block;
-    width: 10px;
+    width: 20px;
     border-bottom: 2px solid purple;
     margin-left: -2px;
     position: absolute;
@@ -122,6 +132,7 @@ body{
     .player {
         flex: 1 1 auto;
         margin: 0;
+        padding: 0.3rem 1rem;
         border: 2px solid black;
         text-align: left;
         position: relative;
