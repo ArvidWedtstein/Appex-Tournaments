@@ -1,10 +1,11 @@
 <template>
+  <div>
     <div class="logo">
       <h1 id="logo">Appex</h1>
     </div>
     <slot/>
-
-
+    <NuxtPage/>
+  </div>
 </template>
 
 <style lang="scss">
