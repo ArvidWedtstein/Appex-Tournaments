@@ -2,15 +2,17 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
     target: 'server',
-    css: [
-        '~/style.scss'
-    ],
-    build: {
-        postcss: {
-        postcssOptions: require("./postcss.config.js"),
-        },
+		srcDir: './',
+		build: {
+      postcss: {
+        postcssOptions: {
+          plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
+          }
+        }
+      },
     },
-    buildModules: [],
     head: {
         script: [
             {
@@ -22,13 +24,8 @@ export default defineNuxtConfig({
         ]
     },
     modules: [
-
     ],
-    serverMiddleware: [
-        //{path: '/api', handler: '~/api/index.js'}
-    ],
-    
     publicRuntimeConfig: {
-        
+
     }
 })

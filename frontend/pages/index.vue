@@ -2,8 +2,14 @@
 
 <template>
     <div class="design-container">
-      
-      <!--<img src="./Assets/images/darkLogos.png">-->
+
+
+			<!-- TAILWIND TEST (BARE SLETT DENNE OM DU VIL) -->
+			<div class="bg-gray-100 rounded-xl">
+				<h1>test</h1>
+			</div>
+
+      <!--<img src="./images/darkLogos.png">-->
       <div class="pg1-content-container">
         <h1>Velkommen til Appex tournament</h1>
         <div class="btn-container">
@@ -11,7 +17,7 @@
           <NuxtLink to="/tournaments" class="grey">Se tidligere tournaments</NuxtLink>
         </div>
       </div>
-      
+
     </div>
 </template>
 
@@ -21,7 +27,7 @@ export default {
     name: "TournamentsHome",
     data() {
       return {
-        
+
       }
     }
 }
@@ -63,7 +69,7 @@ $btncolorgrey: #444444;
   flex-direction: row;
   padding: 4rem;
   gap: 50px;
-  
+
 }
   .blue {
     flex: 0 1 auto;

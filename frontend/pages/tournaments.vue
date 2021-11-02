@@ -131,7 +131,7 @@ export default {
     },
     methods: {
         async fetchTournaments() {
-            
+
             this.tournaments = await axios.get('/api/gettournaments')
             console.log(this.tournaments)
         },
@@ -150,7 +150,7 @@ export default {
         //this.fetchTournaments()
         this.horizontalScroll()
     },
-    
+
 }
 </script>
 
@@ -170,15 +170,15 @@ $green: #DDE78B;
 $orange: #FAB487;
 
 .tournamentcontainer {
-    
+
     background: $backclr;
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    overflow-x: hidden;   
+    overflow-x: hidden;
     position: absolute;
     left: 0;
-    background: url("~/Assets/images/nam.PNG");
+    background: url("~/images/nam.PNG");
     background-size: 100%;
     padding: 6em;
     display: flex;
@@ -213,7 +213,7 @@ $orange: #FAB487;
     margin: 0rem 2rem;
     text-align: center;
     //background: $dark-grey;
-    background: url("~/Assets/images/appexwindmill.PNG");
+    background: url("~/images/appexwindmill.PNG");
     background-size: cover;
     background-clip: padding-box;
     background-position: 50%;
@@ -236,11 +236,11 @@ $orange: #FAB487;
         border-bottom: 1px solid rgba(0,0,0,.125);
     }
     .tcontent {
-        //background: url("~/Assets/images/braggets.PNG");
+        //background: url("~/images/braggets.PNG");
         //clip-path: 0% 20%, 0% 40%, 100% 100%, 50% 0%;
         -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
-        flex: 1 1 auto; 
+        flex: 1 1 auto;
         padding: 1.25rem;
         width: 100%;
         color: #221E20;
