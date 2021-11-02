@@ -8,9 +8,11 @@
   </div>
 </template>
 
+
 <script setup>
-// import '~/assets/tailwind.scss'
+import '~/assets/tailwind.scss'
 </script>
+
 
 <style lang="scss">
 
@@ -28,6 +30,16 @@ $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
 
+
+:root {
+	--black: $black;
+	--dark-grey: $dark-grey;
+	--grey: $grey;
+	--light-grey: $light-grey;
+	--blue: $blue;
+	--green: $green;
+	--orange: $orange;
+}
 
 *,
 *::after,

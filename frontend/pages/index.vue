@@ -3,12 +3,6 @@
 <template>
     <div class="design-container">
 
-
-			<!-- TAILWIND TEST (BARE SLETT DENNE OM DU VIL) -->
-			<div class="bg-gray-100 rounded-xl">
-				<h1>test</h1>
-			</div>
-
       <!--<img src="./images/darkLogos.png">-->
       <div class="pg1-content-container">
         <h1>Velkommen til Appex tournament</h1>
