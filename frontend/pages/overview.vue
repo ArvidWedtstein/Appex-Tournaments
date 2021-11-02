@@ -28,7 +28,8 @@
       <form>
         <h1 class="title">{{tournamentName}} deltakere</h1>
         <div v-for="index in playerInt" :key="index" class="deltakere">
-            <input v-bind:id="index" type="text" :v-model="'matches['+index +']'" v-bind:placeholder="'player' + index">
+
+            <input class="playername" v-bind:id="index" type="text" :v-model="'matches['+index +']'" v-bind:placeholder="'player' + index">
         </div>
         <textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea><br><br>
         <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
@@ -65,6 +66,7 @@
       </div>
     </div>
     <canvas id="Matrix"></canvas>
+    
   </div>
 </template>
     
@@ -182,13 +184,13 @@ export default {
                 const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
                 context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
 
-                if(rainDrops[i]*fontSize > canvas.width && Math.random() > 0.975){
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
                     rainDrops[i] = 0;
                 }
                 rainDrops[i]++;
             }
         };
-        setInterval(draw, 30);
+        setInterval(draw, 60);
       }
     },
     mounted() {
@@ -218,12 +220,38 @@ matches: [
 </script>
 
 <style lang="scss">
+$backclr: #edece9;
+$black: #221E20;
+$dark-grey: #464544;
+$grey: #D6D2CE;
+$light-grey: #EDECE9;
+$blue: #0835C4;
+$green: #DDE78B;
+$orange: #FAB487;
 #Matrix {
   position: absolute;
   left: 0;
   top: 0;
   z-index: -1;
 }
-@import url('https://fonts.googleapis.com/css2?family=Fruktur&display=swap');
+.deltakere {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .playername {
+    margin: 0.2rem;
+    flex: 1 1 auto;
+    padding: 0.5rem 1rem;
+    background: $grey;
+    color: #ffffff;
+    border: none;
+    border-bottom: 2px solid $blue;
+    &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
+      color: $green;
+      background: red;
+    }
+  }
+}
+
 </style>
 

@@ -1,6 +1,6 @@
 
 import { MongoClient } from 'mongodb';
-import mysql from 'mysql';
+//import mysql from 'mysql';
 
 export default (async (req, res) => {
     MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
