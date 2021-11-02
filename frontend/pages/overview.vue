@@ -45,7 +45,7 @@
               <div class="match" v-for="match in round" :key="match">
                   <div class="match__content"></div>
                       <div class="matchplayer" v-for="player in match" :key="player">
-                          <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
+                          <button class="player" v-on:click="matchWin(round, player)" type="radio">{{player}}</button>
                       </div>
                   </div>
               </div>
@@ -64,10 +64,12 @@
         </div>-->
       </div>
     </div>
+    <canvas id="Matrix"></canvas>
   </div>
 </template>
     
 <script>
+
 const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 export default {
     name: "Tournaments",
@@ -137,9 +139,6 @@ export default {
             this.matches[nextmatchint][0].push(playername)
           }
         }
-        
-        
-        
         console.log(this.matches)
       },
       pageSwitch(dir) {
@@ -153,11 +152,47 @@ export default {
           this.page -= 1;
         }
         console.log(this.page)
-        
       },
+      matrix() {
+        const canvas = document.getElementById('Matrix');
+        const context = canvas.getContext("2d");
+        this.vueCanvas = context;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+        const draw = () => {
+            context.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            //context.fillStyle = '#0F0';
+            context.fillStyle = '#000000';
+            context.font = fontSize + 'px fraktur';
+
+            for(let i = 0; i < rainDrops.length; i++)
+            {
+                const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
+                context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.width && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        setInterval(draw, 30);
+      }
     },
     mounted() {
-
+      this.matrix()
     },
     computed: {
       rounds () {
@@ -183,6 +218,12 @@ matches: [
 </script>
 
 <style lang="scss">
-
+#Matrix {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+@import url('https://fonts.googleapis.com/css2?family=Fruktur&display=swap');
 </style>
 
