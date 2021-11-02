@@ -1,6 +1,5 @@
 //const MongoClient = require('mongodb').MongoClient;
 import type { IncomingMessage, ServerResponse } from 'http'
-import bodyParser from 'body-parser'
 import mysql from 'mysql';
 import {
   useCookies,
@@ -12,7 +11,7 @@ import {
 
 let tournamentID = 0;
 
-export default async (req: IncomingMessage, res: ServerResponse, next) => {
+export default async (req: IncomingMessage, res: ServerResponse) => {
   console.log('newtournament')
   const headers = (req && req.headers) ? Object.assign({}, req.headers) : {}
   const xForwardedFor = headers['content'];
@@ -35,5 +34,4 @@ export default async (req: IncomingMessage, res: ServerResponse, next) => {
     })
     connection.end()
     tournamentID++;*/
-    next()
 }
