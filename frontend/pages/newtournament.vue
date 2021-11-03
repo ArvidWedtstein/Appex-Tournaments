@@ -19,7 +19,7 @@
       </div>
       <div v-if="page === 1" class="page">
         <div class="jumbotron">
-          <h1 class="display-4">Antall Deltakere</h1>
+          <h1 class="display-4">{{tournamentName}} Deltakere</h1>
           <p class="lead">Antall deltakere</p>
           <button class="lead" @click="addPlayer()">+</button>
           <span class="limit">{{players.length}}</span>
@@ -34,6 +34,20 @@
         <!--<input type="submit" value="Submit">-->
         <div class="pagebtn">
           <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+        </div>
+      </div>
+      <div v-if="page === 2" class="page">
+      <div class="tournament-brackets">
+        <div class="bracket">
+          <div class="round" v-for="round in matches" :key="round">
+              <div class="match" v-for="match in round" :key="match">
+                  <div class="match__content"></div>
+                      <div class="matchplayer" v-for="player in match" :key="player">
+                          <button class="player" v-on:click="matchWin(round, player)" type="radio">{{player}}</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
    </div>
@@ -59,30 +73,20 @@ export default {
         for (let i = 0; i < rounds[0] / 2; i++) {
           this.matches.push([])
         }
-        
         console.log(rounds[0] + 'round')
         for (let i = 0; i < rounds[0]; i+=2) {
-            matchlist.push(players[i].name)
-            matchlist.push(players[i+1].name)
+            matchlist.push(this.players[i].name)
+            matchlist.push(this.players[i+1].name)
             this.matches[0].push(matchlist);
             matchlist = []
         }
-        console.info(this.matches)
-        this.bracketSize = this.players.length;
-        let nextmatchint = this.matches[0].length / 2;
-        for (let i = 0; i < nextmatchint; i++) {
-          this.matches[1].push([])
-          
-        }
-        //this.pageSwitch('next');
+        console.dir(this.matches)
       },
       addPlayer() { 
         this.players.push({ name: "" })
-        console.info(this.players)
       },
       removePlayer(index) {
         this.players.splice(index, 1);
-        console.info(this.players)
       },
       matchWin(round, playername) {
         //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")

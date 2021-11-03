@@ -178,7 +178,7 @@ $orange: #FAB487;
     overflow-x: hidden;
     position: absolute;
     left: 0;
-    background: url("~/images/nam.PNG");
+    background: url("~/static/images/nam.PNG");
     background-size: 100%;
     padding: 6em;
     display: flex;
@@ -213,7 +213,7 @@ $orange: #FAB487;
     margin: 0rem 2rem;
     text-align: center;
     //background: $dark-grey;
-    background: url("~/images/appexwindmill.PNG");
+    background: url("~/static/images/appexwindmill.PNG");
     background-size: cover;
     background-clip: padding-box;
     background-position: 50%;
@@ -264,12 +264,12 @@ $orange: #FAB487;
         &:first-child {
             text-shadow: 10px 0px 10px $blue;
             transform: rotateZ(90deg);
-            bottom: -15%;
+            bottom: -0%;
         }
         &:last-child {
             text-shadow: -10px 0px 10px $blue;
             transform: rotateZ(90deg);
-            top: -15%;
+            top: -0%;
         }
     }
 }
