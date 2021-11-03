@@ -105,13 +105,14 @@ body {
   justify-content: center;
   align-items: center;
   //background-color: $backclr;
-    background-image: url("../static/images/frontpage-grapics.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
+  background-image: url("../static/images/frontpage-grapics.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;  
   
   h1{
+    flex: 1 1 auto;
     font-weight: 500;
     font-size: 32px;
     margin: 0;
