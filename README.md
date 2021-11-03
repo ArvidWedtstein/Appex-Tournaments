@@ -51,4 +51,4 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 
 ## FINISHED
 
-![o_O](/frontend/static/images/sneakpeak.png)
+[o_O](/frontend/static/images/sneakpeak.PNG)
