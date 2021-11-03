@@ -69,7 +69,7 @@ export default {
       newTournament() {
         axios({
           method: 'post',
-          url: '/api/createnewtournament',
+          url: 'http://localhost:3001/newtournament',
           data: {
             tournamentname: this.tournamentName,
             players: this.players
@@ -85,9 +85,9 @@ export default {
         console.log('gettouranemnt')
         await axios({
           method: 'get',
-          url: '/api/gettournaments'
-        }).then(function async (response) {
-          console.log(response)
+          url: 'http://localhost:3001/gettournaments'
+        }).then(async (response) => {
+          await console.log(response)
         });
       },
       addPlayer() { 

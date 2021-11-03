@@ -2,8 +2,6 @@
 
 import { MongoClient } from 'mongodb';
 //import mysql from 'mysql';
-import { useBody } from 'h3'
-
 
 export default (async (req) => {
     const body = await useBody(req)
