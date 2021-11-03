@@ -6,7 +6,6 @@ import { useBody } from 'h3'
 
 
 export default (async (req) => {
-    console.log()
     const body = await useBody(req)
     const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
     const matches = [];
@@ -17,6 +16,16 @@ export default (async (req) => {
         matches[i].push([])
       }
     }
+    MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
+        if (err) throw err;
+    
+        db.collection('tournaments').find().toArray(function (err, result) {
+            if (err) throw err
+            res.end(result)
+            console.log(result)
+            db.close();
+        })
+    });
 
     let player = 0;
     for (let i = 0; i < matches[0].length; i++) {
