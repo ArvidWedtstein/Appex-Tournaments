@@ -38,7 +38,7 @@ export default {
         canvas.height = window.innerHeight;
         console.log(window.innerWidth)
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 18;
+        const fontSize = 32;
         const speed = 60;
         const columns = 500/fontSize;
         const rainDrops = [];

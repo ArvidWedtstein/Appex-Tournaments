@@ -1,6 +1,6 @@
 
 <template>
-    <main class="tournamentcontainer">
+    <main v-if="tournaments.data" class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
         <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
             <div class="cardContainer">
@@ -190,20 +190,22 @@ export default {
 
             this.tournaments = await axios.get('http://localhost:3001/gettournaments')
             console.log(this.tournaments)
+            //this.horizontalScroll()
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
-
-            scrollContainer.addEventListener("wheel", (evt) => {
-                evt.preventDefault();
-                //title.scrollLeft += evt.deltaY;
-                scrollContainer.scrollLeft += evt.deltaY;
-            });
+            if (scrollContainer)  {
+                scrollContainer.addEventListener("wheel", (evt) => {
+                    evt.preventDefault();
+                    //title.scrollLeft += evt.deltaY;
+                    scrollContainer.scrollLeft += evt.deltaY;
+                });
+            }
+            
         }
     },
     mounted() {
         this.fetchTournaments()
-        this.horizontalScroll()
     },
 
 }
@@ -294,13 +296,17 @@ template{
         font-size: 12px;
         padding-top: 5px;
     }
-    &:nth-child(3n + 1) {
+    &:nth-child(3n) {
         background-color: $orange;
         color: $black;
     }
-    &:nth-child(2n + 1) {
+    &:nth-child(3n - 1) {
         background-color: $blue;
         color: $backclr;
+    }
+    &:nth-child(3n - 2) {
+        background-color: $black;
+        color: $orange;
     }
 }
 .cardContainer{
@@ -319,7 +325,7 @@ template{
     //color: $backclr;
 }
 .dark{
-    background-color: $black;
-    color: $orange;
+    //background-color: $black;
+    //color: $orange;
 }
 </style>
