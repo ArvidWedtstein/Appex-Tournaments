@@ -37,6 +37,8 @@ Skal fungere noenlunde som https://challonge.com/
 ## Progress:
 Laget pages for oppretting av turnering (colorscheme in progress)
 
+- Lage side for tidligere turneringer 
+
 ## TODO
 
 - Sjekke at alle input feltene er fylt ut før man kan gå til neste side/opprette turnering.
@@ -45,6 +47,8 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 
 - Abbegs background former
 
-- Lage side for tidligere turneringer
 
 
+## FINISHED
+
+![o_O](/static/images/sneakpeak.png)

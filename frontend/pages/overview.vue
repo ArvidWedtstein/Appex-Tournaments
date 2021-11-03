@@ -62,31 +62,36 @@ export default {
     },
     methods: {
       newTournament() {
-        this.playerInt = parseInt(this.playerInt);
-        const players = [];
-        for (let i = 0; i < this.playerInt; i++) {
-          var namePlayer = document.querySelector(`input[name=playername${i}`).value;
-          players.push(namePlayer);
-        }
-        let matchlist = [];
-        for (let i = 0; i < this.playerInt; i+=2) {
-            matchlist.push(playerlist[i])
-            matchlist.push(playerlist[i+1])
-            this.matches[0].push(matchlist);
-            matchlist = []
-        }
-        console.table(this.matches)
-        this.bracketSize = this.players.length;
-        let nextmatchint = this.matches[0].length / 2;
-        for (let i = 0; i < nextmatchint; i++) {
-          this.matches[1].push([])
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/newtournament',
+          data: {
+            tournamentname: this.tournamentName,
+            players: this.players
+          }
+        }).then(async (response) => {
           
-        }
-        this.matches[2].push([])
-        this.pageSwitch('next');
+          console.log(response.data.matches);
+          this.matches = response.data.matches;
+        })
+        this.increasePage()
+      },
+      async getTournament() {
+        await axios({
+          method: 'get',
+          url: 'http://localhost:3001/gettournaments'
+        }).then(async (response) => {
+          await console.log(response)
+        });
+      },
+      addPlayer() { 
+        this.players.push({ name: "" })
+      },
+      removePlayer(index) {
+        this.players.splice(index, 1);
       },
       matchWin(round, playername) {
-        //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")
+        let rounds = defaultRounds.filter(p => p <= this.players.length)
         console.log(this.matches.indexOf(round))
         let winnerint = this.matches[0].flat().indexOf(playername)
         let nextmatchint = this.matches.indexOf(round) + 1;
@@ -105,18 +110,16 @@ export default {
           }
         }
         console.log(this.matches)
+        
       },
-      pageSwitch(dir) {
-        //console.log(dir)
-        if (dir === 'next') {
-          if (this.page = 2) return
+      increasePage() {
+        if (this.page == 2) alert("aaaa")
           
-          this.page += 1;
-        } else if (dir === 'past') {
-          if (this.page = 0) return
+        this.page += 1;
+      },
+      decreasePage() {
+          if (this.page == 0) return
           this.page -= 1;
-        }
-        console.log(this.page)
       },
       matrix() {
         const canvas = document.getElementById('Matrix');
@@ -157,7 +160,7 @@ export default {
       }
     },
     mounted() {
-      this.matrix()
+      //this.matrix()
     },
     computed: {
       rounds () {

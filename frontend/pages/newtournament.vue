@@ -41,7 +41,7 @@
             <div class="match" v-for="match in round" :key="match">
               <div class="match__content"></div>
               <div class="matchplayer" v-for="player in match" :key="player">
-                <button class="player" v-on:click="matchWin(round, player)" type="radio">{{player}}</button>
+                <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
               </div>
             </div>
           </div>

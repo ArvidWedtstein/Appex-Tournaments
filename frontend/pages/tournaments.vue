@@ -3,7 +3,7 @@
     <main class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
         <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
-            <div class="cardContiner">
+            <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: {{tournament.date}}</p>
                 </div>
@@ -17,7 +17,7 @@
              </div>
         </div>
         <div class="tournament beige">
-            <div class="cardContiner">
+            <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                 </div>
@@ -31,7 +31,7 @@
              </div>
         </div>
         <div class="tournament blue">
-            <div class="cardContiner">
+            <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -45,7 +45,7 @@
             </div> 
         </div>
         <div class="tournament dark">
-            <div class="cardContiner">
+            <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -59,7 +59,7 @@
              </div>
         </div>
         <div class="tournament beige">
-            <div class="cardContiner"> 
+            <div class="cardContainer"> 
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -73,7 +73,7 @@
             </div>  
         </div>
         <div class="tournament blue">
-            <div class="cardContiner"> 
+            <div class="cardContainer"> 
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
