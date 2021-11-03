@@ -7,6 +7,11 @@ var cors = require('cors')
 const app = express();
 const PORT = 3001;
 
+
+// Routes //
+const gettournaments = require('./routes/gettournaments')
+
+
 app.use(cors())
 app.use( bodyParser.json() )
 app.listen(PORT, () => {
@@ -14,18 +19,10 @@ app.listen(PORT, () => {
 })
 
 const tournament = (req, res) => {
-  MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
-      if (err) throw err;
-      
-      const result = await db.db("appex").collection('tournaments').find().toArray()
-      console.info(result[0])
-      db.close()
-      res.end(JSON.stringify(result))
-      //return result;
-  });
+  res.end('test')
 }
 
-app.get("/gettournaments", tournament);
+app.get("/gettournaments", gettournaments);
 app.get("/test", (req, res) => {
   res.end('test')
   /*MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {

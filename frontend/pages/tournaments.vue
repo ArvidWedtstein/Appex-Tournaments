@@ -5,7 +5,7 @@
         <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
             <div class="cardContainer">
                 <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
+                    <p>Dato: {{tournament.date}}</p>
                 </div>
                 <div class="tcontent">
                     <p>{{tournament.name}}</p>

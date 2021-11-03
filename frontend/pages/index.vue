@@ -3,7 +3,7 @@
 <template>
     <div class="design-container">
     
-      
+      <canvas id="Matrix"></canvas>
       <div class="pg1-content-container">
         <div class="txt-btn-pg1">
           <h1>Velkommen til Appex tournament</h1>
@@ -25,7 +25,48 @@ export default {
       return {
 
       }
-    }
+    },
+    mounted() {
+      this.matrix()
+    },
+    methods: {
+      matrix() {
+        const canvas = document.getElementById('Matrix');
+        const context = canvas.getContext("2d");
+        this.vueCanvas = context;
+        canvas.width = 500;
+        canvas.height = window.innerHeight;
+        console.log(window.innerWidth)
+        const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
+        const fontSize = 16;
+        const speed = 60;
+        const columns = 500/fontSize;
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+        const draw = () => {
+            context.fillStyle = 'rgba(237, 236, 233, 0.05)';
+            context.fillRect(0, 0, canvas.width, canvas.height );
+
+            context.fillStyle = '#000000';
+            context.font = fontSize + 'px fraktur';
+
+            for(let i = 0; i < rainDrops.length; i++)
+            {
+                const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
+                context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        setInterval(draw, speed);
+      }
+    },
 }
 </script>
 
@@ -36,6 +77,17 @@ export default {
 $backclr: #edece9;
 $btncolorblue: #0835C4;
 $btncolorgrey: #444444;
+body {
+  overflow: hidden;
+}
+#Matrix {
+  overflow: hidden;
+  position: absolute;
+  margin-left: 70%;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
 #logo{
         text-align: center;
         width: 245px;
@@ -52,16 +104,24 @@ $btncolorgrey: #444444;
   align-content: center;
   justify-content: center;
   align-items: center;
-  background-color: $backclr;
+  //background-color: $backclr;
+    background-image: url("../static/images/frontpage-grapics.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
   
-  background-image: url("../static/images/frontpage-grapics.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   h1{
     font-weight: 500;
     font-size: 32px;
     margin: 0;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    
   }
 }
 .txt-btn-pg1{
