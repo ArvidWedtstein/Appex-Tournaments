@@ -16,104 +16,105 @@
             </div>
              
         </div>-->
-        <div class="tournament beige">
-            <div class="cardContiner">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                    
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-             </div>
-        </div>
-        <div class="tournament blue">
-            <div class="cardContiner">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-            </div> 
-        </div>
-        <div class="tournament dark">
-            <div class="cardContiner">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-             </div>
-        </div>
-        <div class="tournament beige">
-            <div class="cardContiner"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-            </div>  
-        </div>
-        <div class="tournament blue">
-            <div class="cardContiner"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+        
+            <div class="tournament beige">
+                <div class="cardContainer">
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                        
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="tournament dark">
-            <div class="cardContiner">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-            </div> 
-        </div>
-        <div class="tournament beige">
-            <div class="cardContiner">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+            <div class="tournament blue">
+                <div class="cardContainer">
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
+                </div> 
+            </div>
+            <div class="tournament dark">
+                <div class="cardContainer">
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="tournament beige">
+                <div class="cardContainer"> 
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
+                </div>  
+            </div>
+            <div class="tournament blue">
+                <div class="cardContainer"> 
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tournament dark">
+                <div class="cardContainer">
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
+                </div> 
+            </div>
+            <div class="tournament beige">
+                <div class="cardContainer">
+                    <div class="tspace">
+                        <p>Dato: DD:MM:YYYY</p>
+                        
+                    </div>
+                    <div class="tcontent">
+                        <p>Turnering Navn</p>
+                    </div>
+                    <div class="tfooter">
+                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    </div>
+                </div>
+            </div>
     </main>
 </template>
 
@@ -167,33 +168,35 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-
+template{
+    overflow: hidden;
+}
 .tournamentcontainer {
-
-    background: $backclr;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
     overflow-x: hidden;
-    position: absolute;
+    position: relative;
+    width: 100%;
+    height: 60%;
     left: 0;
-    padding: 6em;
+    padding: 2em 2em;
+    margin-top: 160px;
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
     transition: all 0.5s ease;
     user-select: none;
+    
+}
     .title {
         position: fixed;
-        top: 8vh;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 50px;
+        top: 13vh;
+        left: 25%;
+        font-size: 40px;
         font-weight: 500;
+        text-align: center;
+        width: 50%;
 
     }
-}
 
 .tournament {
     flex: 1 1 auto;
@@ -239,22 +242,22 @@ $orange: #FAB487;
     }
     
 }
-.cardContiner{
+.cardContainer{
     position: absolute;
     bottom: 0;
     left: 0;
     padding: 20px;
 }
 
-.tournamentcontainer .beige{
+.beige{
     background-color: $orange;
     color: $black;
 }
-.tournamentcontainer .blue{
+.blue{
     background-color: $blue;
     color: $backclr;
 }
-.tournamentcontainer .dark{
+.dark{
     background-color: $black;
     color: $orange;
 }
