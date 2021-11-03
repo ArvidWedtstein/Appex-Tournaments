@@ -51,20 +51,7 @@ export default {
         players: 0,
         playerInt: 8,
         bracketSize: 0,
-        matches: [
-          [
-
-          ],
-          [
-
-          ],
-          [
-
-          ],
-          [
-            []
-          ]
-        ]
+    
       }
     },
     methods: {

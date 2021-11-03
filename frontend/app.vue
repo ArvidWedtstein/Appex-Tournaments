@@ -10,7 +10,7 @@
 
 
 <script setup>
-//import '~/assets/tailwind.scss'
+import '~/assets/tailwind.scss'
 </script>
 
 
