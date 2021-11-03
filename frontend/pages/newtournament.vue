@@ -11,11 +11,6 @@
             <h3>Tournament dato</h3>
             <input type="date" id="tdate" name="tdate" placeholder="Dato">
           </div>
-          <div class="inputBox">
-            <h3>Antall deltakere</h3>
-            <input type="range" min="2" max="69" id="players" v-model.number="playerInt">
-            <span class="limit">{{playerInt}}</span>
-          </div>
           <div class="pagebtn">
             <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
             <button class="next" v-on:click="pageSwitch('next')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
@@ -24,15 +19,27 @@
       </div>
       <div v-if="page === 1" class="page">
         <form>
-          <h1 class="title">{{tournamentName}} deltakere</h1>
-          <div v-for="index in playerInt" :key="index" class="deltakere">
-              <input class="playername" :id="'playername' + index" type="text" v-bind:placeholder="'Deltaker ' + index">
+          <h1 class="title">{{tournamentName}} Deltakere</h1>
+          <!--<div class="inputBox">
+            <h3>Antall deltakere</h3>
+            <input type="range" min="2" max="69" id="players" v-model.number="playerInt">
+            <span class="limit">{{playerInt}}</span>
+          </div>-->
+          <div class="pagebtn">
+            <h3>Antall deltakere</h3>
+            <button class="past" @click="playeramount('+')">+</button>
+            <button class="next" @click="playeramount('-')">-</button>
+            <!--<input type="range" min="2" max="69" id="players" v-model.number="playerInt">-->
+            <span class="limit">{{players.length}}</span>
+          </div>
+          <div v-for="(name, index) in players" :key="index" class="deltakere">
+              <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker ' + index">
           </div>
           <!--<textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea>-->
           <button class="newTournament" v-on:click="newTournament()" type="button">create New Tourament</button>
           <!--<input type="submit" value="Submit">-->
           <div class="pagebtn">
-          <button class="past" v-on:click="pageSwitch('past')"><i class="fas fa-arrow-left"></i></button>
+            <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
           </div>
         </form>
       </div>
@@ -47,13 +54,23 @@ export default {
       return {
         page: 0,
         tournamentName: 'test',
-        players: 0,
+        players: [],
         playerInt: 0,
         bracketSize: 0,
     
       }
     },
     methods: {
+      playeramount(int) { 
+        if (int == '+') {
+          this.players.push({ name: "" })
+        } else if (int == '-') {
+          if (this.players.length > 0) {
+            this.players.pop({ name: "" })
+          }
+        }
+        console.log(this.players)
+      },
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
         console.log(console)
@@ -78,7 +95,7 @@ export default {
           
         }
         this.matches[2].push([])
-        this.pageSwitch('next');
+        //this.pageSwitch('next');
       },
       matchWin(round, playername) {
         //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")
@@ -153,6 +170,7 @@ export default {
     },
     mounted() {
       this.matrix()
+      this.players()
     },
 }
 </script>
