@@ -41,8 +41,7 @@ export default {
     data() {
       return {
         page: 1,
-        tournamentName: 'test',
-        players: 0,
+        tournamentName: '',
         playerInt: 8,
         bracketSize: 0,
         matches: [
@@ -64,6 +63,11 @@ export default {
     methods: {
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
+        const players = [];
+        for (let i = 0; i < this.playerInt; i++) {
+          var namePlayer = document.querySelector(`input[name=playername${i}`).value;
+          players.push(namePlayer);
+        }
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])

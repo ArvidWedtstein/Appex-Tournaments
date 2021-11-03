@@ -26,7 +26,7 @@
         <form>
           <h1 class="title">{{tournamentName}} deltakere</h1>
           <div v-for="index in playerInt" :key="index" class="deltakere">
-              <input class="playername" v-bind:id="index" type="text" :v-model="'matches['+index +']'" v-bind:placeholder="'player' + index">
+              <input class="playername" :name="'playername' + index" type="text" v-bind:placeholder="'Deltaker ' + index">
           </div>
           <!--<textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea>-->
           <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
@@ -56,9 +56,7 @@ export default {
     methods: {
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
-        const field = document.getElementById("tplayers").value;
-        this.players = field.split("\n").length;
-        let playerlist = field.split("\n");
+        
         console.log(playerlist.length)
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
