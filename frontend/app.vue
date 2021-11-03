@@ -10,7 +10,7 @@
 
 
 <script setup>
-//import '~/assets/tailwind.scss'
+import '~/assets/tailwind.scss'
 </script>
 
 
@@ -59,4 +59,6 @@ body{
   left: 0;
   padding: 2rem;
 }
+
+
 </style>

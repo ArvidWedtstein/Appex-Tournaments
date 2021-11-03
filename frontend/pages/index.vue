@@ -8,7 +8,7 @@
         <div class="txt-btn-pg1">
           <h1>Velkommen til Appex tournament</h1>
           <div class="btn-container">
-            <NuxtLink to="/overview" class="blue">Lag nytt tournament</NuxtLink>
+            <NuxtLink to="/newtournament" class="blue">Lag nytt tournament</NuxtLink>
             <NuxtLink to="/tournaments" class="grey">Se tidligere tournaments</NuxtLink>
           </div>
         </div>

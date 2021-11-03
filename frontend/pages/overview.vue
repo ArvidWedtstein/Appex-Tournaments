@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <div v-if="page === 1" class="page">
+    <div v-if="page === 2" class="page">
       <div class="tournament-brackets">
         <div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
@@ -41,8 +41,7 @@ export default {
     data() {
       return {
         page: 1,
-        tournamentName: 'test',
-        players: 0,
+        tournamentName: '',
         playerInt: 8,
         bracketSize: 0,
         matches: [
@@ -56,7 +55,7 @@ export default {
 
           ],
           [
-            []
+            
           ]
         ]
       }
@@ -64,10 +63,11 @@ export default {
     methods: {
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
-        const field = document.getElementById("tplayers").value;
-        this.players = field.split("\n").length;
-        let playerlist = field.split("\n");
-        console.log(playerlist.length)
+        const players = [];
+        for (let i = 0; i < this.playerInt; i++) {
+          var namePlayer = document.querySelector(`input[name=playername${i}`).value;
+          players.push(namePlayer);
+        }
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])
@@ -197,24 +197,7 @@ $orange: #FAB487;
   top: 0;
   z-index: -1;
 }
-.deltakere {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  .playername {
-    margin: 0.2rem;
-    flex: 1 1 auto;
-    padding: 0.5rem 1rem;
-    background: $grey;
-    color: #ffffff;
-    border: none;
-    border-bottom: 2px solid $blue;
-    &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
-      color: $green;
-      background: red;
-    }
-  }
-}
+
 
 </style>
 
