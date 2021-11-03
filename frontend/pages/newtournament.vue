@@ -39,28 +39,44 @@
 </template>
 
 <script>
+const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 export default {
    template: 'newtournament',
    transition: 'slide-bottom',
    data() {
       return {
-        page: 1,
-        tournamentName: 'test',
+        page: 0,
+        tournamentName: '',
         players: [],
-        bracketSize: 0
-    
+        bracketSize: 0,
+        matches: [
+          [
+
+          ],
+          [
+
+          ],
+          [
+
+          ],
+          [
+            
+          ]
+        ]
       }
     },
     methods: {
       newTournament() {
         let matchlist = [];
+        let rounds = 16;
+        console.log(defaultRounds.filter(rounds => rounds <= this.bracketSize) + 'ree')
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])
             matchlist.push(playerlist[i+1])
             this.matches[0].push(matchlist);
             matchlist = []
         }
-        console.table(this.matches)
+        console.info(this.matches)
         this.bracketSize = this.players.length;
         let nextmatchint = this.matches[0].length / 2;
         for (let i = 0; i < nextmatchint; i++) {
