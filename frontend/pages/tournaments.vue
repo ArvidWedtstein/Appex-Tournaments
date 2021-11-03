@@ -2,33 +2,87 @@
 <template>
     <main class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
-        <!--<div v-for="tournament in tournaments" :key="tournament" class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-             
-        </div>-->
-        
-            <div class="tournament beige">
-                <div class="cardContainer">
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                        
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
+        <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
+            <div class="cardContiner">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                </div>
+                <div class="tcontent">
+                    <p>{{tournament.name}}</p>
+                    
+                </div>
+                <div class="tfooter">
+                    <p>{{tournament.players.length}}    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
+        </div>
+        <div class="tournament beige">
+            <div class="cardContiner">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                    
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
+        </div>
+        <div class="tournament blue">
+            <div class="cardContiner">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
+        </div>
+        <div class="tournament dark">
+            <div class="cardContiner">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
+        </div>
+        <div class="tournament beige">
+            <div class="cardContiner"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div>  
+        </div>
+        <div class="tournament blue">
+            <div class="cardContiner"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
                 </div>
             </div>
             <div class="tournament blue">
@@ -115,6 +169,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 </template>
 
@@ -133,7 +188,7 @@ export default {
     methods: {
         async fetchTournaments() {
 
-            this.tournaments = await axios.get('/api/gettournaments')
+            this.tournaments = await axios.get('http://localhost:3001/gettournaments')
             console.log(this.tournaments)
         },
         horizontalScroll() {
@@ -147,7 +202,7 @@ export default {
         }
     },
     mounted() {
-        //this.fetchTournaments()
+        this.fetchTournaments()
         this.horizontalScroll()
     },
 

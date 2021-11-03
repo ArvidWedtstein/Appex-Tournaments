@@ -1,21 +1,19 @@
 <template>
   <div id='newtournament'>
     <div v-if="page === 0" class="page">
-      <form>
-        <div class="inputBox">
-          <h2>Skriv inn navnet på tournamentet</h2>
-          <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
-          <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
-        </div>
-        <div class="inputBox">
-          <h3>Tournament dato</h3>
-          <input type="date" id="tdate" name="tdate" placeholder="Dato">
-        </div>
-        <div class="pagebtn">
-          <button class="past" v-on:click="decreasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
-          <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
-        </div>
-      </form>
+      <div class="inputBox">
+        <h2>Skriv inn navnet på tournamentet</h2>
+        <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
+        <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
+      </div>
+      <div class="inputBox">
+        <h3>Tournament dato</h3>
+        <input type="date" id="tdate" name="tdate" placeholder="Dato">
+      </div>
+      <div class="pagebtn">
+        <button class="past" @click="getTournament()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+        <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
+      </div>
     </div>
     <div v-if="page === 1" class="page">
       <div class="jumbotron">
@@ -71,7 +69,7 @@ export default {
       newTournament() {
         axios({
           method: 'post',
-          url: '/api/createnewtournament',
+          url: 'http://localhost:3001/newtournament',
           data: {
             tournamentname: this.tournamentName,
             players: this.players
@@ -83,19 +81,14 @@ export default {
         })
         this.increasePage()
       },
-      getTournament() {
-        axios({
+      async getTournament() {
+        console.log('gettouranemnt')
+        await axios({
           method: 'get',
-          url: '/api/gettournament',
-          data: {
-            tournamentname: this.tournamentName,
-            players: this.players
-          }
+          url: 'http://localhost:3001/gettournaments'
         }).then(async (response) => {
-          
-          console.log(response.data.matches);
-          this.matches = response.data.matches;
-        })
+          await console.log(response)
+        });
       },
       addPlayer() { 
         this.players.push({ name: "" })
@@ -176,6 +169,7 @@ export default {
       if (document.querySelector("#Matrix")) {
         this.matrix()
       }
+      //this.getTournament()
     },
 }
 </script>

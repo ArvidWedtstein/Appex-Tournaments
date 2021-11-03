@@ -1,87 +1,70 @@
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require("body-parser");
 const fs = require('fs');
+var cors = require('cors')
 const app = express();
 const PORT = 3001;
 
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'appex'
-})
-
+app.use(cors())
 app.use( bodyParser.json() )
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`)
 })
 
 const tournament = (req, res) => {
-  res.send('test');
+  MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
+      if (err) throw err;
+      
+      const result = await db.db("appex").collection('tournaments').find().toArray()
+      console.info(result[0])
+      db.close()
+      res.end(JSON.stringify(result))
+      //return result;
+  });
 }
 
-let tournamentID = 0;
-app.get("/test", tournament);
-app.get("/gettournaments", (req, res) => {
-  // MongoDB versjon. Sliter med å bestemme meg for mySQL eller mongoDB
-  /*MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
-    if (err) throw err;
-  
-    db.collection('tournaments').find().toArray(function (err, result) {
-      if (err) throw err
-      res.send(result)
-      console.log(result)
-      db.close();
-    })
-  });*/
-  var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'appex'
-  })
-  
-  connection.connect()
-  connection.query('SELECT * FROM `tournaments`', function (err, rows, fields) {
-    if (err) throw err
-    res.send(rows)
-    //console.log(rows)
-  })
-  
-  connection.end()
-  
-})
-app.post("/newtournament", (req, res) => {
-  const { name, players } = req.body;
-  res.send(`Tournament name: ${name}\n${players}`);
-  
-  /*MongoClient.connect(process.env.MONGODB_URL, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("appex");
-    var tournament = { tournamentId: tournamentID, name: name, date: date, players: players };
-    dbo.collection("tournaments").insertOne(tournament, function(err, res) {
+app.get("/gettournaments", tournament);
+app.get("/test", (req, res) => {
+  res.end('test')
+  /*MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
       if (err) throw err;
-      console.log("1 document inserted");
-      dbo.close();
-    });
+      
+      const result = await db.db("appex").collection('tournaments').find().toArray()
+      console.info(result[0])
+      db.close()
+      res.json(result)
+      //return result;
   });*/
-  var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'appex'
-  })
-  connection.connect()
-  connection.query(`INSERT INTO tournaments (name, players) VALUES ("${name}", "${players}")`, function (err, rows, fields) {
-    if (err) throw err
-  
-    console.log('INSERT')
-  })
-  res.send("Get ")
-  connection.end()
-  tournamentID++;
+})
+app.post("/newtournament", async (req, res) => {
+  console.log(req.body)
+  //const body = req.body;
+  //const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
+  const matches = [];
+  /*let rounds = defaultRounds.filter(p => p <= req.body.players.length)
+  for (let i = 0; i < rounds[0] / 2; i++) {
+    matches.push([])
+    for (let z = 0; z < rounds[i] / 2; z++) {
+      matches[i].push([])
+    }
+  }
+  MongoClient.connect('mongodb+srv://appex:appex@cluster0.ovkm8.mongodb.net/appex?retryWrites=true&w=majority', function(err, db) {
+      if (err) throw err;
+      
+      db.db("appex").collection('tournaments').insertOne({name: req.body.tournamentname, date: Date.now(), players: req.body.players})
+      console.log('db created')
+      db.close()
+  });
+
+  let player = 0;
+  for (let i = 0; i < matches[0].length; i++) {
+    matches[0][i].push(req.body.players[player].name)
+    player++;
+    matches[0][i].push(req.body.players[player].name)
+    player++;
+  }*/
+
+  res.end(matches)
 });
