@@ -137,7 +137,6 @@ export default {
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
-            const title = document.getElementById("title");
 
             scrollContainer.addEventListener("wheel", (evt) => {
                 evt.preventDefault();
