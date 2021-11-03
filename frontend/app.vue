@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="logo">
-      <h1 id="logo">Appex</h1>
+      <img src="./static/images/logoDark.png" alt="logo">
     </div>
     <slot/>
     <NuxtPage/>
@@ -51,12 +51,12 @@ body{
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-
-
-
-
-
-.logo {
+ .logo img{
+  z-index: 5;
   position: absolute;
+  width: 200px;
+  top: 0;
+  left: 0;
+  padding: 2rem;
 }
 </style>
