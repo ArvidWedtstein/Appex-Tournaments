@@ -105,10 +105,11 @@ body {
   justify-content: center;
   align-items: center;
   //background-color: $backclr;
-  background-image: url("../static/images/frontpage-grapics.jpg");
-  background-position: center;
+  background-image: url("../static/images/frontpage-grapics.png");
+  background-position: 10% 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:60%;
+  padding: 2rem;
   z-index: -1;  
   
   h1{
@@ -116,13 +117,6 @@ body {
     font-weight: 500;
     font-size: 32px;
     margin: 0;
-  }
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    
   }
 }
 .txt-btn-pg1{

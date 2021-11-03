@@ -4,15 +4,14 @@
       <div class="pg2-content-container">
         <div class="inputBox">
           <h1>Skriv inn navnet på tournamentet</h1>
-          <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
+          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
           <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
         </div>
         <div class="inputBox">
           <h1>Tournament dato</h1>
-          <input type="date" id="tdate" name="tdate" placeholder="Dato">
+          <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato">
         </div>
         <div class="pagebtn">
-          <button class="past" @click="getTournament()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
           <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
         </div>
       </div>
@@ -62,7 +61,10 @@ export default {
    data() {
       return {
         page: 0,
-        tournamentName: '',
+        tournament: {
+          name: '',
+          date: ''
+        },
         players: [],
         matches: []
       }
@@ -73,7 +75,8 @@ export default {
           method: 'post',
           url: 'http://localhost:3001/newtournament',
           data: {
-            tournamentname: this.tournamentName,
+            tournamentname: this.tournament.name,
+            tournamentdate: this.tournament.date,
             players: this.players
           }
         }).then(async (response) => {
