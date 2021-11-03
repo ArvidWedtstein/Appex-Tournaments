@@ -1,18 +1,20 @@
 <template>
   <div id='newtournament'>
     <div v-if="page === 0" class="page">
-      <div class="inputBox">
-        <h2>Skriv inn navnet på tournamentet</h2>
-        <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
-        <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
-      </div>
-      <div class="inputBox">
-        <h3>Tournament dato</h3>
-        <input type="date" id="tdate" name="tdate" placeholder="Dato">
-      </div>
-      <div class="pagebtn">
-        <button class="past" @click="getTournament()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
-        <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
+      <div class="pg2-content-container">
+        <div class="inputBox">
+          <h1>Skriv inn navnet på tournamentet</h1>
+          <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
+          <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
+        </div>
+        <div class="inputBox">
+          <h1>Tournament dato</h1>
+          <input type="date" id="tdate" name="tdate" placeholder="Dato">
+        </div>
+        <div class="pagebtn">
+          <button class="past" @click="getTournament()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+          <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
+        </div>
       </div>
     </div>
     <div v-if="page === 1" class="page">
@@ -222,7 +224,12 @@ $orange: #FAB487;
     }
   }
 }
-
+.pg2-content-container{
+  width: 80%;
+  height: 80vh;
+  padding: 5vh 5%;
+  align-items: center;
+}
 .page {
     display: flex;
     justify-content: center;
@@ -236,6 +243,12 @@ $orange: #FAB487;
     .inputBox {
         flex: 1 1 auto;
         padding: 0.2rem;
+        margin-top: 70px;
+        
+        h1{
+              font-size: 20px;
+              font-weight: 600;
+        }
         input {
             position: relative;
             flex: 1 1 auto;
@@ -251,6 +264,7 @@ $orange: #FAB487;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             border-bottom: 2px solid $inputcolor;
+            
             &:focus {
                 color: $inputhovercolor;
                 border-bottom: 2px solid $inputhovercolor;
