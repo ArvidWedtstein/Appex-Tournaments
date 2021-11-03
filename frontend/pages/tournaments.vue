@@ -294,7 +294,14 @@ template{
         font-size: 12px;
         padding-top: 5px;
     }
-    
+    &:nth-child(3n + 1) {
+        background-color: $orange;
+        color: $black;
+    }
+    &:nth-child(2n + 1) {
+        background-color: $blue;
+        color: $backclr;
+    }
 }
 .cardContainer{
     position: absolute;
@@ -304,12 +311,12 @@ template{
 }
 
 .beige{
-    background-color: $orange;
-    color: $black;
+    //background-color: $orange;
+    //color: $black;
 }
 .blue{
-    background-color: $blue;
-    color: $backclr;
+    //background-color: $blue;
+    //color: $backclr;
 }
 .dark{
     background-color: $black;

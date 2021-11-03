@@ -38,7 +38,7 @@ export default {
         canvas.height = window.innerHeight;
         console.log(window.innerWidth)
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 16;
+        const fontSize = 18;
         const speed = 60;
         const columns = 500/fontSize;
         const rainDrops = [];
@@ -49,7 +49,7 @@ export default {
         const draw = () => {
             context.fillStyle = 'rgba(237, 236, 233, 0.05)';
             context.fillRect(0, 0, canvas.width, canvas.height );
-
+        
             context.fillStyle = '#000000';
             context.font = fontSize + 'px fraktur';
 
