@@ -13,7 +13,19 @@ app.listen(PORT, () => {
     console.log(`running on port ${PORT}`)
 })
 
+const tournament = (req, res) => {
+  MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
+      if (err) throw err;
+      
+      const result = await db.db("appex").collection('tournaments').find().toArray()
+      console.info(result[0])
+      db.close()
+      res.end(JSON.stringify(result))
+      //return result;
+  });
+}
 
+app.get("/gettournaments", tournament);
 app.get("/test", (req, res) => {
   res.end('test')
   /*MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
