@@ -50,5 +50,5 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 
 
 ## FINISHED
-<img align="right" width=175 src="frontend/static/images/sneakpeak.PNG" />
+<img align="center" width=800 src="frontend/static/images/sneakpeak.PNG" />
 
