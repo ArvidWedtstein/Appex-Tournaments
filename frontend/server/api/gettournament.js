@@ -1,9 +1,12 @@
 
 import { MongoClient } from 'mongodb';
+import url from 'url';
 //import mysql from 'mysql';
 
 export default (async (req, res) => {
-    MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
+  const query = url.parse(req.url, true).query
+  res.end(query)
+    /*MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
         if (err) throw err;
     
         db.collection('tournaments').find().toArray(function (err, result) {
@@ -12,7 +15,7 @@ export default (async (req, res) => {
             console.log(result)
             db.close();
         })
-    });
+    });*/
     /*var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
