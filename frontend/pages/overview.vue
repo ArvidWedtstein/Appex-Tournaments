@@ -197,24 +197,7 @@ $orange: #FAB487;
   top: 0;
   z-index: -1;
 }
-.deltakere {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  .playername {
-    margin: 0.2rem;
-    flex: 1 1 auto;
-    padding: 0.5rem 1rem;
-    background: $grey;
-    color: #ffffff;
-    border: none;
-    border-bottom: 2px solid $blue;
-    &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
-      color: $green;
-      background: red;
-    }
-  }
-}
+
 
 </style>
 

@@ -18,30 +18,22 @@
         </form>
       </div>
       <div v-if="page === 1" class="page">
-        <form>
-          <h1 class="title">{{tournamentName}} Deltakere</h1>
-          <!--<div class="inputBox">
-            <h3>Antall deltakere</h3>
-            <input type="range" min="2" max="69" id="players" v-model.number="playerInt">
-            <span class="limit">{{playerInt}}</span>
-          </div>-->
-          <div class="pagebtn">
-            <h3>Antall deltakere</h3>
-            <button class="past" @click="playeramount('+')">+</button>
-            <button class="next" @click="playeramount('-')">-</button>
-            <!--<input type="range" min="2" max="69" id="players" v-model.number="playerInt">-->
-            <span class="limit">{{players.length}}</span>
+        <div class="jumbotron">
+          <p class="lead">Antall deltakere</p>
+          <button class="lead" @click="addPlayer()">+</button>
+          <span class="limit">{{players.length}}</span>
+        </div>
+        <div v-for="(name, index) in players" :key="index" class="deltakere">
+          <div class="playerBox">
+            <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker ' + index">
+            <span @click="removePlayer(index)" class="close">X</span>
           </div>
-          <div v-for="(name, index) in players" :key="index" class="deltakere">
-              <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker ' + index">
-          </div>
-          <!--<textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea>-->
-          <button class="newTournament" v-on:click="newTournament()" type="button">create New Tourament</button>
-          <!--<input type="submit" value="Submit">-->
-          <div class="pagebtn">
-            <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
-          </div>
-        </form>
+        </div>
+        <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
+        <!--<input type="submit" value="Submit">-->
+        <div class="pagebtn">
+          <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+        </div>
       </div>
    </div>
 </template>
@@ -52,34 +44,15 @@ export default {
    transition: 'slide-bottom',
    data() {
       return {
-        page: 0,
+        page: 1,
         tournamentName: 'test',
         players: [],
-        playerInt: 0,
-        bracketSize: 0,
+        bracketSize: 0
     
       }
     },
     methods: {
-      playeramount(int) { 
-        if (int == '+') {
-          this.players.push({ name: "" })
-        } else if (int == '-') {
-          if (this.players.length > 0) {
-            this.players.pop({ name: "" })
-          }
-        }
-        console.log(this.players)
-      },
       newTournament() {
-        this.playerInt = parseInt(this.playerInt);
-        console.log(console)
-        const players = [];
-        for (let i = 1; i <= this.playerInt; i++) {
-          var namePlayer = document.getElementById(`playername${i}`).value;
-          players.push(namePlayer);
-        }
-        console.log(players)
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])
@@ -96,6 +69,14 @@ export default {
         }
         this.matches[2].push([])
         //this.pageSwitch('next');
+      },
+      addPlayer() { 
+        this.players.push({ name: "" })
+        console.info(this.players)
+      },
+      removePlayer(index) {
+        this.players.splice(index, 1);
+        console.info(this.players)
       },
       matchWin(round, playername) {
         //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")
@@ -170,7 +151,144 @@ export default {
     },
     mounted() {
       this.matrix()
-      this.players()
     },
 }
 </script>
+<style lang="scss">
+$inputcolor: rgba(0,0,0,0.5);
+$inputhovercolor: rgba(0,0,0,1);
+$backclr: #edece9;
+$black: #221E20;
+$dark-grey: #464544;
+$grey: #D6D2CE;
+$light-grey: #EDECE9;
+$blue: #0835C4;
+$green: #DDE78B;
+$orange: #FAB487;
+#Matrix {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+.deltakere {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .playerBox {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    margin: 0.2rem;
+    .playername {
+      padding: 0.5rem 1rem;
+      flex: 1 1 auto;
+      background: $grey;
+      color: #000000;
+      border: none;
+      border-bottom: 2px solid $blue;
+      &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
+        color: gray;
+      }
+    }
+    .close {
+      flex: 1 1 auto;
+      position: relative;
+      right: 0;
+      top: 0;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: $backclr !important;
+    .inputBox {
+        flex: 1 1 auto;
+        padding: 0.2rem;
+        input {
+            position: relative;
+            flex: 1 1 auto;
+            background: transparent;
+            text-align: left;
+            vertical-align: middle;
+            outline: none;
+            width: 100%;
+            border: none;
+            color: $inputcolor;
+            padding-bottom: 10px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid $inputcolor;
+            &:focus {
+                color: $inputhovercolor;
+                border-bottom: 2px solid $inputhovercolor;
+            }
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active  {
+                -webkit-text-fill-color: black;
+              -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+              box-shadow: 0 0 0px 1000px #000 inset;
+              transition: background-color 5000s ease-in-out 0s;
+            }
+        }
+    }
+    .pagebtn {
+        flex: 1 1 auto;
+        align-self: flex-end;
+        position: relative;
+        width: 100%;
+        font-size: 2rem;
+        button {
+            padding: 0.2rem 0.5rem;
+            background: #dddddd;
+            outline: none;
+            border-radius: 50%;
+            border: none;
+            transition: all 0.2s ease;
+            &:hover {
+                background: #888;
+            }
+        }
+        .past {
+            float: left;
+            left: 0;
+            position: absolute;
+        }
+        .next {
+            float: right;
+            color: red;
+            right: 0;
+            position: absolute;
+        }
+    }
+}
+.jumbotron {
+  flex: 1 1 auto;
+  padding: 2rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  .display-4 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1.2;
+  }
+  .lead {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-top: 0;
+      margin-bottom: 1rem;
+  }
+}
+</style>
