@@ -56,7 +56,7 @@ export default {
 
           ],
           [
-            []
+            
           ]
         ]
       }
@@ -64,10 +64,6 @@ export default {
     methods: {
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
-        const field = document.getElementById("tplayers").value;
-        this.players = field.split("\n").length;
-        let playerlist = field.split("\n");
-        console.log(playerlist.length)
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])

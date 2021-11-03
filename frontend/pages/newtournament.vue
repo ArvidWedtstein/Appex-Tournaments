@@ -26,10 +26,9 @@
         <form>
           <h1 class="title">{{tournamentName}} deltakere</h1>
           <div v-for="index in playerInt" :key="index" class="deltakere">
-
               <input class="playername" v-bind:id="index" type="text" :v-model="'matches['+index +']'" v-bind:placeholder="'player' + index">
           </div>
-          <textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea><br><br>
+          <!--<textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea>-->
           <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
           <!--<input type="submit" value="Submit">-->
           <div class="pagebtn">
