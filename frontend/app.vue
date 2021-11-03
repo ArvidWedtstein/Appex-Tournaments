@@ -95,7 +95,7 @@ body{
             &:-webkit-autofill:hover, 
             &:-webkit-autofill:focus, 
             &:-webkit-autofill:active  {
-                -webkit-text-fill-color: White;
+                -webkit-text-fill-color: black;
               -webkit-box-shadow: 0 0 0px 1000px #000 inset;
               box-shadow: 0 0 0px 1000px #000 inset;
               transition: background-color 5000s ease-in-out 0s;

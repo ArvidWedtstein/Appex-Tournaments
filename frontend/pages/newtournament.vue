@@ -26,10 +26,10 @@
         <form>
           <h1 class="title">{{tournamentName}} deltakere</h1>
           <div v-for="index in playerInt" :key="index" class="deltakere">
-              <input class="playername" :name="'playername' + index" type="text" v-bind:placeholder="'Deltaker ' + index">
+              <input class="playername" :id="'playername' + index" type="text" v-bind:placeholder="'Deltaker ' + index">
           </div>
           <!--<textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea>-->
-          <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
+          <button class="newTournament" v-on:click="newTournament()" type="button">create New Tourament</button>
           <!--<input type="submit" value="Submit">-->
           <div class="pagebtn">
           <button class="past" v-on:click="pageSwitch('past')"><i class="fas fa-arrow-left"></i></button>
@@ -45,10 +45,10 @@ export default {
    transition: 'slide-bottom',
    data() {
       return {
-        page: 1,
+        page: 0,
         tournamentName: 'test',
         players: 0,
-        playerInt: 8,
+        playerInt: 0,
         bracketSize: 0,
     
       }
@@ -56,8 +56,13 @@ export default {
     methods: {
       newTournament() {
         this.playerInt = parseInt(this.playerInt);
-        
-        console.log(playerlist.length)
+        console.log(console)
+        const players = [];
+        for (let i = 1; i <= this.playerInt; i++) {
+          var namePlayer = document.getElementById(`playername${i}`).value;
+          players.push(namePlayer);
+        }
+        console.log(players)
         let matchlist = [];
         for (let i = 0; i < this.playerInt; i+=2) {
             matchlist.push(playerlist[i])
@@ -99,7 +104,7 @@ export default {
       pageSwitch(dir) {
         //console.log(dir)
         if (dir === 'next') {
-          if (this.page = 2) return
+          if (this.page = 1) return
           
           this.page += 1;
         } else if (dir === 'past') {
