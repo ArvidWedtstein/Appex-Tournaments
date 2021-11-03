@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="logo">
-      <img src="./static/images/logoDark.png" alt="logo">
+      <!--<img src="./static/images/logoDark.png" alt="logo">-->
+      <NuxtLink to="/">
+        <img src="./static/images/logoDark.png" alt="logo">
+      </NuxtLink>
     </div>
     <slot/>
     <NuxtPage/>
@@ -11,6 +14,7 @@
 
 <script setup>
 import '~/assets/tailwind.scss'
+
 </script>
 
 

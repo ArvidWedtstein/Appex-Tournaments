@@ -8,7 +8,7 @@
         <div class="txt-btn-pg1">
           <h1>Velkommen til Appex tournament</h1>
           <div class="btn-container">
-            <NuxtLink to="/newtournament" class="blue">Lag nytt tournament</NuxtLink>
+            <NuxtLink to="/newtournament" class="bluebtn">Lag nytt tournament</NuxtLink>
             <NuxtLink to="/tournaments" class="grey">Se tidligere tournaments</NuxtLink>
           </div>
         </div>
@@ -80,7 +80,7 @@ $btncolorgrey: #444444;
   font-size: 16px;
 
 }
-  .blue {
+  .blueBtn {
     flex: 0 1 auto;
     width: 250px;
     font-weight: 600;
