@@ -54,7 +54,7 @@
 </template>
 
 <script>
-const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
+const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 import axios from 'axios'
 export default {
    template: 'newtournament',
@@ -69,14 +69,33 @@ export default {
     },
     methods: {
       newTournament() {
-        let matches = axios({
+        axios({
           method: 'post',
           url: '/api/createnewtournament',
           data: {
+            tournamentname: this.tournamentName,
             players: this.players
           }
-        });
-        console.log(matches)
+        }).then(async (response) => {
+          
+          console.log(response.data.matches);
+          this.matches = response.data.matches;
+        })
+        this.increasePage()
+      },
+      getTournament() {
+        axios({
+          method: 'get',
+          url: '/api/gettournament',
+          data: {
+            tournamentname: this.tournamentName,
+            players: this.players
+          }
+        }).then(async (response) => {
+          
+          console.log(response.data.matches);
+          this.matches = response.data.matches;
+        })
       },
       addPlayer() { 
         this.players.push({ name: "" })
