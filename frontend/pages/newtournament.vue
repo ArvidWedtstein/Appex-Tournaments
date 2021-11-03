@@ -82,7 +82,6 @@ export default {
         this.increasePage()
       },
       async getTournament() {
-        console.log('gettouranemnt')
         await axios({
           method: 'get',
           url: 'http://localhost:3001/gettournaments'
