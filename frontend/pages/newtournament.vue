@@ -19,6 +19,7 @@
       </div>
       <div v-if="page === 1" class="page">
         <div class="jumbotron">
+          <h1 class="display-4">Antall Deltakere</h1>
           <p class="lead">Antall deltakere</p>
           <button class="lead" @click="addPlayer()">+</button>
           <span class="limit">{{players.length}}</span>
@@ -48,31 +49,21 @@ export default {
         page: 0,
         tournamentName: '',
         players: [],
-        bracketSize: 0,
-        matches: [
-          [
-
-          ],
-          [
-
-          ],
-          [
-
-          ],
-          [
-            
-          ]
-        ]
+        matches: []
       }
     },
     methods: {
       newTournament() {
         let matchlist = [];
-        let rounds = 16;
-        console.log(defaultRounds.filter(rounds => rounds <= this.bracketSize) + 'ree')
-        for (let i = 0; i < this.playerInt; i+=2) {
-            matchlist.push(playerlist[i])
-            matchlist.push(playerlist[i+1])
+        let rounds = defaultRounds.filter(p => p <= this.players.length)
+        for (let i = 0; i < rounds[0] / 2; i++) {
+          this.matches.push([])
+        }
+        
+        console.log(rounds[0] + 'round')
+        for (let i = 0; i < rounds[0]; i+=2) {
+            matchlist.push(players[i].name)
+            matchlist.push(players[i+1].name)
             this.matches[0].push(matchlist);
             matchlist = []
         }
@@ -83,7 +74,6 @@ export default {
           this.matches[1].push([])
           
         }
-        this.matches[2].push([])
         //this.pageSwitch('next');
       },
       addPlayer() { 
@@ -181,6 +171,9 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
+#newtournament {
+  background: $backclr !important;
+}
 #Matrix {
   position: absolute;
   left: 0;
@@ -226,7 +219,7 @@ $orange: #FAB487;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background: $backclr !important;
+    margin-top: 3rem;
     .inputBox {
         flex: 1 1 auto;
         padding: 0.2rem;
@@ -291,6 +284,7 @@ $orange: #FAB487;
     }
 }
 .jumbotron {
+  text-align: center;
   flex: 1 1 auto;
   padding: 2rem 1rem;
   margin-bottom: 1rem;
