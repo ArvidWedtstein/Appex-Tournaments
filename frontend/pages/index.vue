@@ -39,6 +39,7 @@ export default {
         console.log(window.innerWidth)
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
         const fontSize = 16;
+        const speed = 60;
         const columns = 500/fontSize;
         const rainDrops = [];
 
@@ -63,7 +64,7 @@ export default {
                 rainDrops[i]++;
             }
         };
-        setInterval(draw, 30);
+        setInterval(draw, speed);
       }
     },
 }
@@ -104,7 +105,11 @@ body {
   justify-content: center;
   align-items: center;
   //background-color: $backclr;
-  
+    background-image: url("../static/images/frontpage-grapics.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
   
   h1{
     font-weight: 500;
@@ -116,11 +121,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("../static/images/frontpage-grapics.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -2;
+    
   }
 }
 .txt-btn-pg1{
