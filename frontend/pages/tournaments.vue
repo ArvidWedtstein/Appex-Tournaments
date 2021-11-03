@@ -85,88 +85,88 @@
                     <p>Ant. spillere    //  Status  //  Navn vinner</p>
                 </div>
             </div>
-            <div class="tournament blue">
-                <div class="cardContainer">
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
-                </div> 
-            </div>
-            <div class="tournament dark">
-                <div class="cardContainer">
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
+        </div>
+        <div class="tournament blue">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
+        </div>
+        <div class="tournament dark">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
                 </div>
             </div>
-            <div class="tournament beige">
-                <div class="cardContainer"> 
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
-                </div>  
-            </div>
-            <div class="tournament blue">
-                <div class="cardContainer"> 
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
+        </div>
+        <div class="tournament beige">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div>  
+        </div>
+        <div class="tournament blue">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
                 </div>
             </div>
-            <div class="tournament dark">
-                <div class="cardContainer">
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
-                </div> 
-            </div>
-            <div class="tournament beige">
-                <div class="cardContainer">
-                    <div class="tspace">
-                        <p>Dato: DD:MM:YYYY</p>
-                        
-                    </div>
-                    <div class="tcontent">
-                        <p>Turnering Navn</p>
-                    </div>
-                    <div class="tfooter">
-                        <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                    </div>
+        </div>
+        <div class="tournament dark">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
+        </div>
+        <div class="tournament beige">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
                 </div>
             </div>
         </div>
@@ -245,11 +245,10 @@ template{
     .title {
         position: fixed;
         top: 13vh;
-        left: 25%;
         font-size: 40px;
         font-weight: 500;
         text-align: center;
-        width: 50%;
+        width: 100vw;
 
     }
 
