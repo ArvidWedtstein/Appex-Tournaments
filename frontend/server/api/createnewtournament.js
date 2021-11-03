@@ -5,6 +5,7 @@ import { MongoClient } from 'mongodb';
 import { useBody } from 'h3'
 
 
+
 export default (async (req) => {
     const body = await useBody(req)
     const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
@@ -16,15 +17,12 @@ export default (async (req) => {
         matches[i].push([])
       }
     }
-    MongoClient.connect('mongodb://localhost:27017/appex', function(err, db) {
+    MongoClient.connect('mongodb+srv://appex:appex@cluster0.ovkm8.mongodb.net/appex?retryWrites=true&w=majority', function(err, db) {
         if (err) throw err;
-    
-        db.collection('tournaments').find().toArray(function (err, result) {
-            if (err) throw err
-            res.end(result)
-            console.log(result)
-            db.close();
-        })
+        
+        db.db("appex").collection('tournaments').insertOne({name: body.tournamentname, date: Date.now(), players: body.players})
+        console.log('db created')
+        db.close()
     });
 
     let player = 0;
