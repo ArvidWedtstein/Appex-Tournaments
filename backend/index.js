@@ -11,6 +11,7 @@ const PORT = 3001;
 // Routes //
 const gettournaments = require('./routes/gettournaments')
 const newtournament = require('./routes/newtournament')
+const updatetournament = require('./routes/updatetournament')
 
 
 app.use(cors())
@@ -66,3 +67,8 @@ app.post("/newtournament", async (req, res) => {
   
     return JSON.stringify(matches)
 });
+
+app.post("/updatetournament", async (req, res) => {
+  const {projectname, newname, newdate, players} = req.body;
+  updatetournament(projectname, newname, newdate, players);
+})
