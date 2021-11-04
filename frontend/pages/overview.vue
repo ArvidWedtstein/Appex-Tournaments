@@ -2,44 +2,7 @@
 
 <template>
   <div>
-    <div v-if="page === 0" class="page">
-      <form>
-        <div class="inputBox">
-          <h2>Skriv inn navnet på tournamentet</h2>
-          <input v-model="tournamentName" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
-          <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
-        </div>
-        <div class="inputBox">
-          <h3>Tournament dato</h3>
-          <input type="date" id="tdate" name="tdate" placeholder="Dato">
-        </div>
-        <div class="inputBox">
-          <h3>Antall deltakere</h3>
-          <input type="range" min="2" max="69" id="players" v-model.number="playerInt">
-          <span class="limit">{{playerInt}}</span>
-        </div>
-        <div class="pagebtn">
-          <button class="past" v-on:click="pageSwitch('past')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
-          <button class="next" v-on:click="pageSwitch('next')"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
-        </div>
-      </form>
-    </div>
-    <div v-else-if="page === 1" class="page">
-      <form>
-        <h1 class="title">{{tournamentName}} deltakere</h1>
-        <div v-for="index in playerInt" :key="index" class="deltakere">
-
-            <input class="playername" v-bind:id="index" type="text" :v-model="'matches['+index +']'" v-bind:placeholder="'player' + index">
-        </div>
-        <textarea id="tplayers" name="tplayers" rows="4" cols="50"></textarea><br><br>
-        <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
-        <!--<input type="submit" value="Submit">-->
-        <div class="pagebtn">
-          <button class="past" v-on:click="pageSwitch('past')"><i class="fas fa-arrow-left"></i></button>
-        </div>
-      </form>
-    </div>
-    <div v-else-if="page === 2" class="page">
+    <div v-if="page === 2" class="page">
       <div class="tournament-brackets">
         <div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
@@ -78,8 +41,7 @@ export default {
     data() {
       return {
         page: 1,
-        tournamentName: 'test',
-        players: 0,
+        tournamentName: '',
         playerInt: 8,
         bracketSize: 0,
         matches: [
@@ -93,37 +55,43 @@ export default {
 
           ],
           [
-            []
+            
           ]
         ]
       }
     },
     methods: {
       newTournament() {
-        this.playerInt = parseInt(this.playerInt);
-        const field = document.getElementById("tplayers").value;
-        this.players = field.split("\n").length;
-        let playerlist = field.split("\n");
-        console.log(playerlist.length)
-        let matchlist = [];
-        for (let i = 0; i < this.playerInt; i+=2) {
-            matchlist.push(playerlist[i])
-            matchlist.push(playerlist[i+1])
-            this.matches[0].push(matchlist);
-            matchlist = []
-        }
-        console.table(this.matches)
-        this.bracketSize = this.players.length;
-        let nextmatchint = this.matches[0].length / 2;
-        for (let i = 0; i < nextmatchint; i++) {
-          this.matches[1].push([])
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/newtournament',
+          data: {
+            tournamentname: this.tournamentName,
+            players: this.players
+          }
+        }).then(async (response) => {
           
-        }
-        this.matches[2].push([])
-        this.pageSwitch('next');
+          console.log(response.data.matches);
+          this.matches = response.data.matches;
+        })
+        this.increasePage()
+      },
+      async getTournament() {
+        await axios({
+          method: 'get',
+          url: 'http://localhost:3001/gettournaments'
+        }).then(async (response) => {
+          await console.log(response)
+        });
+      },
+      addPlayer() { 
+        this.players.push({ name: "" })
+      },
+      removePlayer(index) {
+        this.players.splice(index, 1);
       },
       matchWin(round, playername) {
-        //const playerfield = document.getElementByClass(`round-${matchInt}`).getElementByClass("player")
+        let rounds = defaultRounds.filter(p => p <= this.players.length)
         console.log(this.matches.indexOf(round))
         let winnerint = this.matches[0].flat().indexOf(playername)
         let nextmatchint = this.matches.indexOf(round) + 1;
@@ -142,18 +110,16 @@ export default {
           }
         }
         console.log(this.matches)
+        
       },
-      pageSwitch(dir) {
-        //console.log(dir)
-        if (dir === 'next') {
-          if (this.page = 2) return
+      increasePage() {
+        if (this.page == 2) alert("aaaa")
           
-          this.page += 1;
-        } else if (dir === 'past') {
-          if (this.page = 0) return
+        this.page += 1;
+      },
+      decreasePage() {
+          if (this.page == 0) return
           this.page -= 1;
-        }
-        console.log(this.page)
       },
       matrix() {
         const canvas = document.getElementById('Matrix');
@@ -194,7 +160,7 @@ export default {
       }
     },
     mounted() {
-      this.matrix()
+      //this.matrix()
     },
     computed: {
       rounds () {
@@ -234,24 +200,7 @@ $orange: #FAB487;
   top: 0;
   z-index: -1;
 }
-.deltakere {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  .playername {
-    margin: 0.2rem;
-    flex: 1 1 auto;
-    padding: 0.5rem 1rem;
-    background: $grey;
-    color: #ffffff;
-    border: none;
-    border-bottom: 2px solid $blue;
-    &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
-      color: $green;
-      background: red;
-    }
-  }
-}
+
 
 </style>
 

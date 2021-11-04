@@ -1,118 +1,174 @@
 
 <template>
-    <main class="tournamentcontainer">
+    <main v-if="tournaments.data" class="tournamentcontainer">
         <h1 class="title">Tidligere Turneringer</h1>
-        <div v-for="tournament in tournaments" :key="tournament" class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: {{tournament.date}}</p>
+                </div>
+                <div class="tcontent">
+                    <p>{{tournament.name}}</p>
+                    
+                </div>
+                <div class="tfooter">
+                    <p>{{tournament.players.length}}    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
         </div>
-        <div class="tournament">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div class="tournament beige">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                    
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div class="tournament blue">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div class="tournament dark">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+             </div>
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div class="tournament beige">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div>  
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
+        <div class="tournament blue">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
             </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
-            </div>
-            <div class="tcontent">
-                <p></p>
-            </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
-            </div>
-            <h1 class="bracket">}</h1>
+        <div class="tournament blue">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
         </div>
-        <div class="tournament shadow">
-            <h1 class="bracket">{</h1>
-            <div class="theader">
-                <p>Turnering</p>
-                <hr class="my-4">
+        <div class="tournament dark">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
             </div>
-            <div class="tcontent">
-                <p></p>
+        </div>
+        <div class="tournament beige">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div>  
+        </div>
+        <div class="tournament blue">
+            <div class="cardContainer"> 
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
             </div>
-            <div class="tfooter">
-                <p>Forrige Vinner: </p>
+        </div>
+        <div class="tournament dark">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
+            </div> 
+        </div>
+        <div class="tournament beige">
+            <div class="cardContainer">
+                <div class="tspace">
+                    <p>Dato: DD:MM:YYYY</p>
+                    
+                </div>
+                <div class="tcontent">
+                    <p>Turnering Navn</p>
+                </div>
+                <div class="tfooter">
+                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                </div>
             </div>
-            <h1 class="bracket">}</h1>
         </div>
     </main>
 </template>
@@ -132,23 +188,24 @@ export default {
     methods: {
         async fetchTournaments() {
 
-            this.tournaments = await axios.get('/api/gettournaments')
+            this.tournaments = await axios.get('http://localhost:3001/gettournaments')
             console.log(this.tournaments)
+            //this.horizontalScroll()
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
-            const title = document.getElementById("title");
-
-            scrollContainer.addEventListener("wheel", (evt) => {
-                evt.preventDefault();
-                //title.scrollLeft += evt.deltaY;
-                scrollContainer.scrollLeft += evt.deltaY;
-            });
+            if (scrollContainer)  {
+                scrollContainer.addEventListener("wheel", (evt) => {
+                    evt.preventDefault();
+                    //title.scrollLeft += evt.deltaY;
+                    scrollContainer.scrollLeft += evt.deltaY;
+                });
+            }
+            
         }
     },
     mounted() {
-        //this.fetchTournaments()
-        this.horizontalScroll()
+        this.fetchTournaments()
     },
 
 }
@@ -168,36 +225,39 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-
+template{
+    overflow: hidden;
+}
 .tournamentcontainer {
-
-    background: $backclr;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
     overflow-x: hidden;
-    position: absolute;
+    position: relative;
+    width: 100%;
+    height: 60%;
     left: 0;
-    background: url("~/images/nam.PNG");
-    background-size: 100%;
-    padding: 6em;
+    padding: 2em 2em;
+    margin-top: 160px;
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
     transition: all 0.5s ease;
     user-select: none;
+    
+}
     .title {
         position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 13vh;
+        font-size: 40px;
+        font-weight: 500;
+        text-align: center;
+        width: 100vw;
+
     }
-}
 
 .tournament {
     flex: 1 1 auto;
-    min-height: 1px;
+    min-height: 300px;
+    max-height: 300px;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -206,76 +266,66 @@ $orange: #FAB487;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    align-items: center;
-    min-width: 20vw;
+    min-width: 300px;
     word-wrap: break-word;
     padding: 0rem;
     margin: 0rem 2rem;
-    text-align: center;
-    //background: $dark-grey;
-    background: url("~/images/appexwindmill.PNG");
-    background-size: cover;
-    background-clip: padding-box;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    color: #fff;
     transition: all 0.5s ease;
-    border-radius: 0.25rem;
-    &:hover > .bracket{
-        transform: none;
-        opacity: 1;
-        //display: block;
-    }
-    .theader {
+    .tspace {
         width: 100%;
-        border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-        font-weight: 800;
-        font-size: 2ch;
-        padding: 0.75rem 1.25rem;
+        font-weight: 500;
+        font-size: 12px;
+        padding-bottom: 0;
         margin-bottom: 0;
-        border-bottom: 1px solid rgba(0,0,0,.125);
+        min-height: 100%;
+        overflow: auto;
+        
     }
     .tcontent {
-        //background: url("~/images/braggets.PNG");
-        //clip-path: 0% 20%, 0% 40%, 100% 100%, 50% 0%;
         -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
-        padding: 1.25rem;
         width: 100%;
-        color: #221E20;
+        max-height: 32.67px;
+        font-size: 22px;
+        font-weight: 600;
     }
     .tfooter {
         width: 100%;
-        border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
-        font-weight: 400;
-        font-size: 2ch;
-        //background: rgba(0,0,0,0.8);
-        padding: 0.75rem 1.25rem;
-        border-top: 1px solid rgba(0,0,0,.125);
+        font-weight: 500;
+        font-size: 12px;
+        padding-top: 5px;
     }
-    .bracket {
-        //display: none;
-        transition: all 0.1s ease;
-        opacity: 0;
-        position: absolute;
-        color: $dark-grey;
-        font-size: 260px;
-        &:first-child {
-            text-shadow: 10px 0px 10px $blue;
-            transform: rotateZ(90deg);
-            bottom: -15%;
-        }
-        &:last-child {
-            text-shadow: -10px 0px 10px $blue;
-            transform: rotateZ(90deg);
-            top: -15%;
-        }
+    &:nth-child(3n) {
+        background-color: $orange;
+        color: $black;
+    }
+    &:nth-child(3n - 1) {
+        background-color: $blue;
+        color: $backclr;
+    }
+    &:nth-child(3n - 2) {
+        background-color: $black;
+        color: $orange;
     }
 }
-.shadow {
-  -moz-box-shadow:    3px 3px 5px 6px #ccc;
-  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-  box-shadow:         3px 3px 5px 6px #ccc;
+.cardContainer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.beige{
+    //background-color: $orange;
+    //color: $black;
+}
+.blue{
+    //background-color: $blue;
+    //color: $backclr;
+}
+.dark{
+    //background-color: $black;
+    //color: $orange;
 }
 </style>

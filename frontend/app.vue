@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="logo">
-      <h1 id="logo">Appex</h1>
+      <!--<img src="./static/images/logoDark.png" alt="logo">-->
+      <NuxtLink to="/">
+        <img src="./static/images/logoDark.png" alt="logo">
+      </NuxtLink>
     </div>
     <slot/>
     <NuxtPage/>
@@ -11,6 +14,7 @@
 
 <script setup>
 import '~/assets/tailwind.scss'
+
 </script>
 
 
@@ -50,13 +54,16 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
+    background: $backclr;
 }
-
-
-
-
-
-.logo {
+ .logo img{
+  z-index: 5;
   position: absolute;
+  width: 200px;
+  top: 0;
+  left: 0;
+  padding: 2rem;
 }
+
+
 </style>
