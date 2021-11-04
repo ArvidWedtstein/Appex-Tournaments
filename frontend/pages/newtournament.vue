@@ -5,7 +5,7 @@
         <div class="inputBox">
           <h1>Skriv inn navnet på tournamentet</h1>
           <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
-          <span class="limiter">{{ 69 - tournamentName.length }} characters remaining</span>
+          <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
         <div class="inputBox">
           <h1>Tournament dato</h1>
@@ -18,7 +18,7 @@
     </div>
     <div v-if="page === 1" class="page">
       <div class="jumbotron">
-        <h1 class="display-4">{{tournamentName}} Deltakere</h1>
+        <h1 class="display-4">{{tournament.name}} Deltakere</h1>
         <p class="lead">Antall deltakere</p>
         <button class="lead" @click="addPlayer()">+</button>
         <span class="limit">{{players.length}}</span>
@@ -54,7 +54,8 @@
 
 <script>
 const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
-import axios from 'axios'
+import axios from 'axios';
+import env from '~/dotenv.json'
 export default {
    template: 'newtournament',
    transition: 'slide-bottom',
@@ -73,7 +74,7 @@ export default {
       newTournament() {
         axios({
           method: 'post',
-          url: 'http://localhost:3001/newtournament',
+          url: `${env.BASE_URL}/newtournament`,
           data: {
             tournamentname: this.tournament.name,
             tournamentdate: this.tournament.date,
@@ -89,7 +90,7 @@ export default {
       async getTournament() {
         await axios({
           method: 'get',
-          url: 'http://localhost:3001/gettournaments'
+          url: `${env.BASE_URL}/gettournaments`
         }).then(async (response) => {
           await console.log(response)
         });
@@ -135,23 +136,21 @@ export default {
         const canvas = document.getElementById('Matrix');
         const context = canvas.getContext("2d");
         this.vueCanvas = context;
-
-        canvas.width = window.innerWidth;
+        canvas.width = 500;
         canvas.height = window.innerHeight;
-
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 16;
-        const columns = canvas.width/fontSize;
+        const fontSize = 32;
+        const speed = 60;
+        const columns = 500/fontSize;
         const rainDrops = [];
 
         for( let x = 0; x < columns; x++ ) {
             rainDrops[x] = 1;
         }
         const draw = () => {
-            context.fillStyle = 'rgba(255, 255, 255, 0.05)';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            //context.fillStyle = '#0F0';
+            context.fillStyle = 'rgba(237, 236, 233, 0.05)';
+            context.fillRect(0, 0, canvas.width, canvas.height );
+        
             context.fillStyle = '#000000';
             context.font = fontSize + 'px fraktur';
 
@@ -166,7 +165,7 @@ export default {
                 rainDrops[i]++;
             }
         };
-        setInterval(draw, 60);
+        setInterval(draw, speed);
       }
     },
     mounted() {

@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 module.exports = () => {
-    const body = req.body;
+    
     const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
     const matches = [];
     let rounds = defaultRounds.filter(p => p <= req.body.players.length)
@@ -11,6 +11,7 @@ module.exports = () => {
         matches[i].push([])
       }
     }
+    
     MongoClient.connect('mongodb+srv://appex:appex@cluster0.ovkm8.mongodb.net/appex?retryWrites=true&w=majority', function(err, db) {
         if (err) throw err;
         

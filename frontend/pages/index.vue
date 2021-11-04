@@ -36,7 +36,6 @@ export default {
         this.vueCanvas = context;
         canvas.width = 500;
         canvas.height = window.innerHeight;
-        console.log(window.innerWidth)
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
         const fontSize = 32;
         const speed = 60;

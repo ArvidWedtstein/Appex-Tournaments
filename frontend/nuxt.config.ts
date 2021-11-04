@@ -24,8 +24,16 @@ export default defineNuxtConfig({
         ]
     },
     modules: [
+
     ],
     publicRuntimeConfig: {
+      axios: {
+        browserBaseURL: 'http://localhost:3001'
+      }
+    },
+    privateRuntimeConfig: {
 
-    }
+    },
+
+    
 })

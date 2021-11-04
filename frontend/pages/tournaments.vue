@@ -173,11 +173,9 @@
     </main>
 </template>
 
-<script>
-
-import axios from 'axios';
-
-
+<script >
+import axios from 'axios'
+import env from '~/dotenv.json'
 export default {
     name: "Tournaments",
     data() {
@@ -187,10 +185,10 @@ export default {
     },
     methods: {
         async fetchTournaments() {
-
-            this.tournaments = await axios.get('http://localhost:3001/gettournaments')
+            this.tournaments = await axios.get(`${env.BASE_URL}/gettournaments`)
             console.log(this.tournaments)
-            //this.horizontalScroll()
+            this.horizontalScroll()
+            
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
