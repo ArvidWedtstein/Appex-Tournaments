@@ -19,8 +19,8 @@
             </div>
         </transition>
         <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
+            <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">
-                <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
                 <div class="tspace">
                     <p>Dato: {{tournament.date}}</p>
                 </div>
@@ -29,13 +29,15 @@
                     
                 </div>
                 <div class="tfooter">
-                    <p>{{tournament.players.length}}    //  Status  //  Navn vinner</p>
+                    <p class="players">{{tournament.players.length}}</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
              </div>
         </div>
         <div class="tournament beige">
+            <button class="top" v-on:click="editTournament()">🖋</button>
             <div class="cardContainer">
-                <button class="top" v-on:click="editTournament(); updateTournament = true">Edit</button>
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                 </div>
@@ -44,13 +46,15 @@
                     
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
              </div>
         </div>
         <div class="tournament blue">
+            <button class="top" v-on:click="editTournament()">Edit</button>
             <div class="cardContainer">
-                <button class="top" v-on:click="editTournament(); updateTournament = true" >Edit</button>
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -59,13 +63,15 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div> 
         </div>
         <div class="tournament dark">
+            <button class="top" v-on:click="editTournament()">Edit</button>
             <div class="cardContainer">
-                <button class="top" v-on:click="editTournament()">Edit</button>
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -74,13 +80,15 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
              </div>
         </div>
         <div class="tournament beige">
+            <button class="top" v-on:click="editTournament()">Edit</button>
             <div class="cardContainer"> 
-                <button class="top" v-on:click="editTournament()">Edit</button>
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
                     
@@ -89,7 +97,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>  
         </div>
@@ -103,7 +113,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>
         </div>
@@ -125,13 +137,14 @@
             <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: DD:MM:YYYY</p>
-                    
                 </div>
                 <div class="tcontent">
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>
         </div>
@@ -145,7 +158,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>  
         </div>
@@ -159,7 +174,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>
         </div>
@@ -173,7 +190,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div> 
         </div>
@@ -187,7 +206,9 @@
                     <p>Turnering Navn</p>
                 </div>
                 <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
+                    <p class="players">Ant. spillere</p>
+                    <p class="status">Status</p>
+                    <p class="winner">Winner</p>
                 </div>
             </div>
         </div>
@@ -257,6 +278,7 @@ export default {
     },
     mounted() {
         this.fetchTournaments()
+        this.horizontalScroll()
     },
 
 }
@@ -336,6 +358,19 @@ template{
     padding: 0rem;
     margin: 0rem 2rem;
     transition: all 0.5s ease;
+    .top {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.2rem;
+    }
+    .cardContainer{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        
+    }
     .tspace {
         width: 100%;
         font-weight: 500;
@@ -360,6 +395,15 @@ template{
         font-weight: 500;
         font-size: 12px;
         padding-top: 5px;
+        display: flex;
+        flex-direction: row;
+        & > *:not(:last-child) {
+            flex: 1 1 auto;
+            &::after {
+                content: '//';
+                padding: 0 1rem;
+            }
+        }
     }
     &:nth-child(3n) {
         background-color: $orange;
@@ -374,12 +418,7 @@ template{
         color: $orange;
     }
 }
-.cardContainer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 20px;
-}
+
 
 
 .editTournament {

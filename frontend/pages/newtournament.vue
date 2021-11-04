@@ -20,8 +20,8 @@
       <div class="jumbotron">
         <h1 class="display-4">{{tournament.name}} Deltakere</h1>
         <p class="lead">Antall deltakere</p>
-        <button class="lead" @click="addPlayer()">+</button>
-        <span class="limit">{{players.length}}</span>
+        <button class="playerCount red" @click="addPlayer()">+</button>
+        <span class="playerCount">{{players.length}}</span>
       </div>
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
@@ -32,7 +32,7 @@
       <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
       <!--<input type="submit" value="Submit">-->
       <div class="pagebtn">
-        <button class="past" v-on:click="decrease()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
+        <button class="past" v-on:click="decreasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
       </div>
     </div>
     <div v-if="page === 2" class="page">
@@ -208,11 +208,15 @@ $orange: #FAB487;
     .playername {
       padding: 0.5rem 1rem;
       flex: 1 1 auto;
-      background: $grey;
       color: #000000;
+      background-color: $grey;
       border: none;
       border-bottom: 2px solid $blue;
-      &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
+      outline: none;
+      &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder {
+        color: gray;
+      }
+      &:focus-within, &:focus {
         color: gray;
       }
     }
@@ -222,6 +226,12 @@ $orange: #FAB487;
       right: 0;
       top: 0;
       padding: 0.5rem 1rem;
+      background: rgba(255,0,0,0.5);
+      border-bottom: 2px solid $blue;
+      transition: all 0.2s ease;
+      &:hover {
+        background: rgba(255,0,0,1);
+      }
     }
   }
 }
@@ -241,6 +251,23 @@ $orange: #FAB487;
     width: 100%;
     height: 100%;
     margin-top: 3rem;
+    .playerCount {
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: calc(0.55rem - 1px);
+      border: 2px solid $dark-grey;
+      font-size: 4ch;
+      transition: all 0.1s ease;
+      background-color: #c34747;
+      box-shadow: 0 5px 5px #853232, 
+        0 9px 0 #5e2525, 0px 9px 10px rgb(0 0 0 / 40%), 
+        inset 0px 2px 9px rgb(255 255 255 / 20%), 
+        inset 0 -2px 9px rgb(0 0 0 / 20%);
+      &:active {
+        text-shadow: 0 1px 1px rgba(255, 255, 255, .9), 0 -1px 1px rgba(0, 0, 0, .1);
+        box-shadow: none;
+      }
+    }
     .inputBox {
         flex: 1 1 auto;
         padding: 0.2rem;
