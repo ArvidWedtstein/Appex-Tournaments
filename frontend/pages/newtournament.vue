@@ -4,12 +4,12 @@
       <div class="pg2-content-container">
         <div class="inputBox">
           <h1>Skriv inn navnet på tournamentet</h1>
-          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69">
+          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
           <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
         <div class="inputBox">
           <h1>Tournament dato</h1>
-          <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato">
+          <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <div class="pagebtn">
           <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
@@ -124,9 +124,13 @@ export default {
         
       },
       increasePage() {
-        if (this.page == 2) alert("aaaa")
-          
-        this.page += 1;
+        if (this.page == 2) return
+        if (this.tournament.name && this.tournament.date) {
+          this.page += 1;
+        } else {
+          alert('Name and/or date cannot be empty')
+        }
+        
       },
       decreasePage() {
           if (this.page == 0) return
