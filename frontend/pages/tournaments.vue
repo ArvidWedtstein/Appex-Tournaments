@@ -16,7 +16,8 @@
                 <input class="update" type="text" placeholder="Edit tournament name">
                 <input class="update" type="date" placeholder="Edit date">
                 <input class="update" type="text" placeholder="Edit players">
-                <button class="updatebtn" type="button" placeholder="Edit players">Update</button>
+                <button class="updatebtn" type="button" >Update</button>
+                <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
             </div>
         </transition>
 
@@ -286,12 +287,15 @@ export default {
         },
         closeTournament() {
             this.editTournamentScreen = false;
+        },
+        deleteTournament(){
+            
         }
     },
     mounted() {
         this.horizontalScroll()
         this.fetchTournaments()
-    },
+    }
 
 }
 </script>
@@ -487,11 +491,35 @@ template{
             border-bottom: 4px solid $blue;
             padding-bottom: calc(8px - 2px);
         }
-        &::before {
-            content: '';
-            width: 100%;
-            background: linear-gradient(45deg, #333333, #ff0000);
+    }
+    .deletebtn {
+        position: absolute;
+        right: 45px;
+        bottom: 45px;
+        width: 30vh;
+        font-size: 20px;
+        padding: 15px 60px;
+        flex: 1 1 auto;
+        align-self: center;
+        background: #C0392B;
+        color: white;
+        border: none;
+        border-bottom: 2px solid white;
+        border-radius: calc(0.25rem - 1px);
+        transition: all 0.1s ease;
+        text-align: center;
+        &:hover {
+            border-bottom: 4px solid red;
+            background: red;
+            padding-bottom: calc(8px - 2px);
+            padding: 20px 60x;
         }
+        &:active {
+            transform: translate(0px, 5px);
+            -webkit-transform: translate(0px, 5px);
+            box-shadow: 0px 1px 0px 0px;
+        }    
+
     }
 }
 .fade-enter-active, .fade-leave-active {

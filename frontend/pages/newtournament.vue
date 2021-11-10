@@ -12,9 +12,7 @@
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <div class="pagebtn">
-          <link rel="preload" href="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png">
           <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
-          
         </div>
       </div>
     </div>
@@ -27,7 +25,7 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
-          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker' + index"/>
+          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
           <span @click="removePlayer(index)" class="close">X</span>
         </div>
       </div>
@@ -102,10 +100,10 @@ export default {
         
       },
       addPlayer() { 
-        const adj = ["gretten", "glad", "fjern"]
-        const noun = ["gris", "data", "pen"]
+        const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig"]
+        const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann"]
         for(let i = 0; i < intPlayer; i++) {
-          this.players.push({ name: `${adj[Math.floor(Math.random()*adj.length)]} ${noun[Math.floor(Math.random()*noun.length)]}` })
+          this.players.push({ name: adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)] })
         }
         intPlayer = (intPlayer * 2);
       },
