@@ -1,12 +1,24 @@
+const tournamentModel = require('../models/tournament')
+
 exports.gettournaments = async (req, res, next) => {
-    const client = new MongoClient(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-    client.connect(async (err) => {
-        const result = await client.db("appex").collection('tournaments').find().toArray()
-        console.info(result[0])
-        client.close();
-        return JSON.stringify(result)
-        
-    });
+    try {
+        const tournaments = await tournamentModel.find()
+        if (!tournaments) {
+          const error = new Error("tournaments not found!");
+          error.statusCode = 401;
+          throw error;
+        }
+        console.log(tournaments)
+        res.status(200).json({
+            message: "Found Tournaments",
+            tournaments: tournaments
+        });
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
 }
 
 exports.newtournament = async (req, res, next) => {
@@ -16,46 +28,53 @@ exports.newtournament = async (req, res, next) => {
     const matches = [];
     let rounds = defaultRounds.filter(p => p <= req.body.players.length)
     for (let i = 0; i < rounds[0] / 2; i++) {
-    matches.push([])
-    for (let z = 0; z < rounds[i] / 2; z++) {
-        matches[i].push([])
+        matches.push([])
+        for (let z = 0; z < rounds[i] / 2; z++) {
+            matches[i].push([])
+        }
     }
-    }
-    MongoClient.connect(process.env.MONGODB_URL, async (err, db) => {
-        if (err) throw err;
-        
-        await db.db("appex").collection('tournaments').insertOne({name: req.body.tournamentname, date: req.body.tournamentdate, players: req.body.players})
-        console.log('db created')
-        await db.close()
-    });
-
+    const tournament = new tournamentModel({
+        name: req.body.tournamentname,
+        date: req.body.tournamentdate,
+        players: req.body.players
+    })
+    const result = await tournament.save();
     let player = 0;
     for (let i = 0; i < matches[0].length; i++) {
-    matches[0][i].push(req.body.players[player].name)
-    player++;
-    matches[0][i].push(req.body.players[player].name)
-    player++;
+        matches[0][i].push(req.body.players[player].name)
+        player++;
+        matches[0][i].push(req.body.players[player].name)
+        player++;
     }
-
-    return JSON.stringify(matches)
+    
+    res.status(200).json({
+      message: "Tournament Created",
+      matches: JSON.stringify(matches)
+    });
 }
 
 exports.updatetournament = async (req, res, next) => {
-    const {projectname, newname, newdate, players} = req.body;
-    MongoClient.connect(process.env.MONGODB_URL, function(err, db) {
-        if (err) throw err;
-        db.db("appex").collection('tournaments').findOneAndUpdate(
+    const {tournamentname, newname, newdate, players} = req.body;
+    try {
+        const tournament = await tournamentModel.findOneAndUpdate(
           {
-            name: projectname
+            name: tournamentname
           },
           {
             name: newname,
-            date: newdate,
+            date: newdate, 
             players: players
           }
         )
-        db.close()
-    });
-  
-    return JSON.stringify(matches)
+        if (!tournament) {
+          const error = new Error("tournament with this name not found!");
+          error.statusCode = 401;
+          throw error;
+        }
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
 }

@@ -18,7 +18,7 @@
                 <button class="updatebtn" type="button" placeholder="Edit players">Update</button>
             </div>
         </transition>
-        <!--<div v-for="tournament in tournamentasync.data" :key="tournament" class="tournament beige">
+        <div v-for="tournament in tournaments" :key="tournament" class="tournament beige">
             <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">
                 <div class="tspace">
@@ -34,7 +34,7 @@
                     <p class="winner">Winner</p>
                 </div>
              </div>
-        </div>-->
+        </div>
         <div class="tournament beige">
             <button class="top" v-on:click="editTournament()">🖋</button>
             <div class="cardContainer">
@@ -220,8 +220,8 @@ import env from '~/dotenv.json'
 import axios from 'axios'
 export default {
     name: "Tournaments",
-    /*async asyncData({ axios }) {
-        console.log(env.BASE_URL)
+    /*async asyncData() {
+        console.log('sus')
         const tournamentasync = await axios.get(`${env.BASE_URL}/gettournaments`)
         console.log(tournamentasync)
         this.horizontalScroll()
@@ -238,9 +238,9 @@ export default {
     methods: {
         async fetchTournaments() {
             this.tournaments = []
-            const tournaments = await axios.get(`${env.BASE_URL}/gettournaments`)
-            console.log(tournaments)
-            this.tournaments = tournaments
+            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
+            console.log(tournamentlist.data)
+            this.tournaments = tournamentlist.data.tournaments
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
@@ -252,7 +252,9 @@ export default {
             }
         },
         updateTournament(tournamentname) {
-            axios.get(`${env.BASE_URL}/updatetournament`)
+            axios.post(`${env.BASE_URL}/updatetournament`, {
+
+            })
             console.log(tournaments)
         },
         left() {

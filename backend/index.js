@@ -12,9 +12,6 @@ const router = require("./routes/router");
 
 app.use(cors())
 app.use( bodyParser.json() )
-app.listen(PORT, () => {
-    console.log(`running on port ${PORT}`)
-})
 
 app.use("", router);
 
@@ -28,4 +25,5 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(process.env.MONGODB_URL).then((result) => {
     app.listen(process.env.PORT || 8080);
+    console.log(`Listening to your request on ${process.env.PORT}`)
 }).catch((err) => console.log(err));
