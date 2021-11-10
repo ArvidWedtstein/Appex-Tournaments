@@ -25,9 +25,9 @@ export default defineNuxtConfig({
     },
     modules: [
     ],
-    axios: {
+    /*axios: {
       baseURL: "http://localhost:3001"
-    },
+    },*/
     publicRuntimeConfig: {
       axios: {
         browserBaseURL: 'http://localhost:3001'

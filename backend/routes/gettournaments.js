@@ -7,7 +7,6 @@ module.exports = async () => {
         console.info(result[0])
         client.close();
         return JSON.stringify(result)
-    // perform actions on the collection object
         
     });
 }

@@ -18,7 +18,7 @@
                 <button class="updatebtn" type="button" placeholder="Edit players">Update</button>
             </div>
         </transition>
-        <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
+        <!--<div v-for="tournament in tournamentasync.data" :key="tournament" class="tournament beige">
             <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">
                 <div class="tspace">
@@ -34,7 +34,7 @@
                     <p class="winner">Winner</p>
                 </div>
              </div>
-        </div>
+        </div>-->
         <div class="tournament beige">
             <button class="top" v-on:click="editTournament()">🖋</button>
             <div class="cardContainer">
@@ -217,34 +217,43 @@
 
 <script >
 import env from '~/dotenv.json'
+import axios from 'axios'
 export default {
     name: "Tournaments",
+    /*async asyncData({ axios }) {
+        console.log(env.BASE_URL)
+        const tournamentasync = await axios.get(`${env.BASE_URL}/gettournaments`)
+        console.log(tournamentasync)
+        this.horizontalScroll()
+        return {
+            tournamentasync
+        }
+    },*/
     data() {
         return {
-            tournaments: [],
+            tournaments: null,
             editTournamentScreen: false
         }
     },
     methods: {
         async fetchTournaments() {
-            this.tournaments = await axios.get(`${env.BASE_URL}/gettournaments`)
-            console.log(this.tournaments)
-            this.horizontalScroll()
-            
+            this.tournaments = []
+            const tournaments = await axios.get(`${env.BASE_URL}/gettournaments`)
+            console.log(tournaments)
+            this.tournaments = tournaments
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
             if (scrollContainer)  {
                 scrollContainer.addEventListener("wheel", (evt) => {
                     evt.preventDefault();
-                    //title.scrollLeft += evt.deltaY;
                     scrollContainer.scrollLeft += evt.deltaY;
                 });
             }
         },
         updateTournament(tournamentname) {
             axios.get(`${env.BASE_URL}/updatetournament`)
-            console.log(this.tournaments)
+            console.log(tournaments)
         },
         left() {
             const scrollContainer = document.querySelector("main");
@@ -263,7 +272,7 @@ export default {
             console.log(x)
             //var tournaments = this.tournaments.data.length;
             var tournaments = document.getElementsByClassName("tournament").length;
-            
+            console.log(tournaments)
             var step = x / tournaments;
             console.log(step)
             scrollContainer.scrollLeft += step;
@@ -276,8 +285,8 @@ export default {
         }
     },
     mounted() {
-        this.fetchTournaments()
         this.horizontalScroll()
+        this.fetchTournaments()
     },
 
 }
