@@ -61,9 +61,7 @@ exports.newtournament = async (req, res, next) => {
       matches: matches
     });
 }
-exports.updatematch = async (req, res, next) => {
-    const
-}
+
 exports.updatetournament = async (req, res, next) => {
     const {tournamentname, newname, newdate, players} = req.body;
     try {

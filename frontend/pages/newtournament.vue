@@ -112,13 +112,13 @@ export default {
         this.players.splice(index, 1);
         intPlayer = this.players.length;
       },
-      matchWin(round, playername) {
-        await axios({
+      async matchWin(round, playername) {
+        /*await axios({
           method: 'post',
           url: `${env.BASE_URL}/gettournaments`
         }).then(async (response) => {
           await console.log(response)
-        });
+        });*/
         
         // Winner
         if (this.matches.indexOf(round) >= this.matches.length-1) {
