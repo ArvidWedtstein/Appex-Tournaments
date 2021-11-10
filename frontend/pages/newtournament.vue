@@ -27,7 +27,7 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
-          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "Detaker " + index>
+          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker' + index"/>
           <span @click="removePlayer(index)" class="close">X</span>
         </div>
       </div>
@@ -42,7 +42,7 @@
         <div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
             <div class="match" v-for="match in round" :key="match">
-              <div class="match__content"></div>
+              <div class="match__content">{{match}}</div>
               <div class="matchplayer" v-for="player in match" :key="player">
                 <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
               </div>
@@ -76,6 +76,7 @@ export default {
     },
     methods: {
       newTournament() {
+        console.log(this.players)
         axios({
           method: 'post',
           url: `${env.BASE_URL}/newtournament`,
@@ -104,12 +105,14 @@ export default {
         const adj = ["gretten", "glad", "fjern"]
         const noun = ["gris", "data", "pen"]
         for(let i = 0; i < intPlayer; i++) {
-          this.players.push({ name: adj[Math.floor(Math.random()*adj.length)] + " "+ noun[Math.floor(Math.random()*noun.length)] })
+          this.players.push({ name: `${adj[Math.floor(Math.random()*adj.length)]} ${noun[Math.floor(Math.random()*noun.length)]}` })
         }
         intPlayer = (intPlayer * 2);
       },
       removePlayer(index) {
+        
         this.players.splice(index, 1);
+        intPlayer = this.players.length;
       },
       matchWin(round, playername) {
         let rounds = defaultRounds.filter(p => p <= this.players.length)
@@ -189,6 +192,11 @@ export default {
       }
       //this.getTournament()
     },
+    computed: {
+      rounds () {
+        return defaultRounds.filter(rounds => rounds <= this.bracketSize)
+      },
+    }
 }
 </script>
 <style lang="scss">

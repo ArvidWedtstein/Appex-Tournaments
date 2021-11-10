@@ -51,7 +51,7 @@ exports.newtournament = async (req, res, next) => {
     const result = await tournament.save();
     res.status(200).json({
       message: "Tournament Created",
-      matches: JSON.stringify(matches)
+      matches: matches
     });
 }
 
