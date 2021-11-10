@@ -21,6 +21,10 @@ const TournamentSchema = new Schema(
         type: String,
         required: true,
     },
+    matches: {
+      type: Object,
+      required: true
+    }
   },
   { timestamps: true }
 );

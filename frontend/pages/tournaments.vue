@@ -30,8 +30,8 @@
                 </div>
                 <div class="tfooter">
                     <p class="players">{{tournament.players.length}}</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
+                    <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+                    <p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>
                 </div>
              </div>
         </div>

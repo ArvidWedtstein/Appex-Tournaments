@@ -33,12 +33,7 @@ exports.newtournament = async (req, res, next) => {
             matches[i].push([])
         }
     }
-    const tournament = new tournamentModel({
-        name: req.body.tournamentname,
-        date: req.body.tournamentdate,
-        players: req.body.players
-    })
-    const result = await tournament.save();
+    
     let player = 0;
     for (let i = 0; i < matches[0].length; i++) {
         matches[0][i].push(req.body.players[player].name)
@@ -46,7 +41,14 @@ exports.newtournament = async (req, res, next) => {
         matches[0][i].push(req.body.players[player].name)
         player++;
     }
-    
+    const tournament = new tournamentModel({
+        name: req.body.tournamentname,
+        date: req.body.tournamentdate,
+        players: req.body.players,
+        status: 'Fremtidig',
+        matches: matches
+    })
+    const result = await tournament.save();
     res.status(200).json({
       message: "Tournament Created",
       matches: JSON.stringify(matches)
