@@ -116,10 +116,11 @@ export default {
       },
       matchWin(round, playername) {
         let rounds = defaultRounds.filter(p => p <= this.players.length)
-        console.log(this.matches.indexOf(round))
         let winnerint = this.matches[0].flat().indexOf(playername)
         let nextmatchint = this.matches.indexOf(round) + 1;
+        console.log(winnerint)
         if (nextmatchint >= 2) {
+          console.log('match')
           this.matches[nextmatchint][0].push(playername)
           if (this.matches[nextmatchint][0].length >= 2) return;
         } else {
