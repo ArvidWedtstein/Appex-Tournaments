@@ -17,6 +17,7 @@ export default defineNuxtConfig({
         script: [
             {
                 src: "https://kit.fontawesome.com/0cda3bb6df.js"
+                
             }
         ],
         link: [
@@ -35,7 +36,6 @@ export default defineNuxtConfig({
     },
     privateRuntimeConfig: {
 
-    },
-
+    }
     
 })

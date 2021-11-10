@@ -10,10 +10,9 @@
     <NuxtPage/>
   </div>
 </template>
-
-
 <script setup>
 import '~/assets/tailwind.scss'
+
 
 </script>
 

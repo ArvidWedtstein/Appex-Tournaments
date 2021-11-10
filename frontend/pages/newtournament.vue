@@ -12,7 +12,9 @@
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <div class="pagebtn">
+          <link rel="preload" href="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png">
           <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
+          
         </div>
       </div>
     </div>
@@ -25,7 +27,7 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
-          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder="'Deltaker ' + index">
+          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "Detaker " + index>
           <span @click="removePlayer(index)" class="close">X</span>
         </div>
       </div>
@@ -52,8 +54,10 @@
   </div>
 </template>
 
+
 <script>
 const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
+let intPlayer = 1;
 import axios from 'axios';
 import env from '~/dotenv.json'
 export default {
@@ -66,7 +70,7 @@ export default {
           name: '',
           date: ''
         },
-        players: [],
+        players: [{name: ''}],
         matches: []
       }
     },
@@ -94,9 +98,15 @@ export default {
         }).then(async (response) => {
           await console.log(response)
         });
+        
       },
       addPlayer() { 
-        this.players.push({ name: "" })
+        const adj = ["gretten", "glad", "fjern"]
+        const noun = ["gris", "data", "pen"]
+        for(let i = 0; i < intPlayer; i++) {
+          this.players.push({ name: adj[Math.floor(Math.random()*adj.length)] + " "+ noun[Math.floor(Math.random()*noun.length)] })
+        }
+        intPlayer = (intPlayer * 2);
       },
       removePlayer(index) {
         this.players.splice(index, 1);

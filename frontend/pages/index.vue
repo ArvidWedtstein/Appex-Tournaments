@@ -8,8 +8,8 @@
         <div class="txt-btn-pg1">
           <h1>Velkommen til Appex tournament</h1>
           <div class="btn-container">
-            <NuxtLink to="/newtournament" class="blueBtn">Lag nytt tournament</NuxtLink>
-            <NuxtLink to="/tournaments" class="grey">Se tidligere tournaments</NuxtLink>
+            <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
+            <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
           </div>
         </div>
       </div>
@@ -27,9 +27,14 @@ export default {
       }
     },
     mounted() {
-      this.matrix()
+      if (document.querySelector('#Matrix')){
+        //this.matrix()
+      }
     },
     methods: {
+      refresh() {
+        //window.location.reload(true)
+      },
       matrix() {
         const canvas = document.getElementById('Matrix');
         const context = canvas.getContext("2d");
@@ -77,7 +82,7 @@ $backclr: #edece9;
 $btncolorblue: #0835C4;
 $btncolorgrey: #444444;
 body {
-  overflow: hidden;
+  overflow: auto;
 }
 #Matrix {
   overflow: hidden;
