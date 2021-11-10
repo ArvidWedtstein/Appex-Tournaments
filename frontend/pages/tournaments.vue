@@ -4,6 +4,7 @@
         <h1 class="title">Tidligere Turneringer</h1>
         <button class="button" v-on:click="left()">Left</button>
         <button class="button2" v-on:click="right()">Right</button>
+        <!--Edit tournament-->
         <transition name="fade">
             <div class="editTournament" v-if="editTournamentScreen">
                 <button class="close" type="button" v-on:click="closeTournament()">X</button>
@@ -19,6 +20,7 @@
                 <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
             </div>
         </transition>
+
         <div v-for="tournament in tournaments" :key="tournament" class="tournament beige">
             <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">

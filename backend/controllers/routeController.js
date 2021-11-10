@@ -24,10 +24,10 @@ exports.gettournaments = async (req, res, next) => {
 exports.newtournament = async (req, res, next) => {
     console.log(req.body)
     const body = req.body;
-    const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2];
+    const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
     const matches = [];
     let rounds = defaultRounds.filter(p => p <= req.body.players.length)
-    for (let i = 0; i < rounds[0] / 2; i++) {
+    for (let i = 0; i < rounds.length; i++) {
         matches.push([])
         for (let z = 0; z < rounds[i] / 2; z++) {
             matches[i].push([])
@@ -51,7 +51,7 @@ exports.newtournament = async (req, res, next) => {
     const result = await tournament.save();
     res.status(200).json({
       message: "Tournament Created",
-      matches: JSON.stringify(matches)
+      matches: matches
     });
 }
 

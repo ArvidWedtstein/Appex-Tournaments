@@ -40,7 +40,7 @@
         <div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
             <div class="match" v-for="match in round" :key="match">
-              <div class="match__content"></div>
+              <div class="match__content">{{match}}</div>
               <div class="matchplayer" v-for="player in match" :key="player">
                 <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
               </div>
@@ -74,6 +74,7 @@ export default {
     },
     methods: {
       newTournament() {
+        console.log(this.players)
         axios({
           method: 'post',
           url: `${env.BASE_URL}/newtournament`,
@@ -107,14 +108,17 @@ export default {
         intPlayer = (intPlayer * 2);
       },
       removePlayer(index) {
+        
         this.players.splice(index, 1);
+        intPlayer = this.players.length;
       },
       matchWin(round, playername) {
         let rounds = defaultRounds.filter(p => p <= this.players.length)
-        console.log(this.matches.indexOf(round))
         let winnerint = this.matches[0].flat().indexOf(playername)
         let nextmatchint = this.matches.indexOf(round) + 1;
+        console.log(winnerint)
         if (nextmatchint >= 2) {
+          console.log('match')
           this.matches[nextmatchint][0].push(playername)
           if (this.matches[nextmatchint][0].length >= 2) return;
         } else {
@@ -187,6 +191,11 @@ export default {
       }
       //this.getTournament()
     },
+    computed: {
+      rounds () {
+        return defaultRounds.filter(rounds => rounds <= this.bracketSize)
+      },
+    }
 }
 </script>
 <style lang="scss">
