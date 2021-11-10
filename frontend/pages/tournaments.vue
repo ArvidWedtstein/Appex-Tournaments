@@ -18,7 +18,7 @@
                 <button class="updatebtn" type="button" placeholder="Edit players">Update</button>
             </div>
         </transition>
-        <div v-for="tournament in tournaments.data" :key="tournament" class="tournament beige">
+        <div v-for="tournament in tournaments" :key="tournament" class="tournament beige">
             <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">
                 <div class="tspace">
@@ -30,8 +30,8 @@
                 </div>
                 <div class="tfooter">
                     <p class="players">{{tournament.players.length}}</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
+                    <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+                    <p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>
                 </div>
              </div>
         </div>
@@ -217,34 +217,45 @@
 
 <script >
 import env from '~/dotenv.json'
+import axios from 'axios'
 export default {
     name: "Tournaments",
+    /*async asyncData() {
+        console.log('sus')
+        const tournamentasync = await axios.get(`${env.BASE_URL}/gettournaments`)
+        console.log(tournamentasync)
+        this.horizontalScroll()
+        return {
+            tournamentasync
+        }
+    },*/
     data() {
         return {
-            tournaments: [],
+            tournaments: null,
             editTournamentScreen: false
         }
     },
     methods: {
         async fetchTournaments() {
-            this.tournaments = await axios.get(`${env.BASE_URL}/gettournaments`)
-            console.log(this.tournaments)
-            this.horizontalScroll()
-            
+            this.tournaments = []
+            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
+            console.log(tournamentlist.data)
+            this.tournaments = tournamentlist.data.tournaments
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
             if (scrollContainer)  {
                 scrollContainer.addEventListener("wheel", (evt) => {
                     evt.preventDefault();
-                    //title.scrollLeft += evt.deltaY;
                     scrollContainer.scrollLeft += evt.deltaY;
                 });
             }
         },
         updateTournament(tournamentname) {
-            axios.get(`${env.BASE_URL}/updatetournament`)
-            console.log(this.tournaments)
+            axios.post(`${env.BASE_URL}/updatetournament`, {
+
+            })
+            console.log(tournaments)
         },
         left() {
             const scrollContainer = document.querySelector("main");
@@ -263,7 +274,7 @@ export default {
             console.log(x)
             //var tournaments = this.tournaments.data.length;
             var tournaments = document.getElementsByClassName("tournament").length;
-            
+            console.log(tournaments)
             var step = x / tournaments;
             console.log(step)
             scrollContainer.scrollLeft += step;
@@ -276,8 +287,8 @@ export default {
         }
     },
     mounted() {
-        this.fetchTournaments()
         this.horizontalScroll()
+        this.fetchTournaments()
     },
 
 }
