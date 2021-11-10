@@ -216,7 +216,6 @@
 </template>
 
 <script >
-import axios from 'axios'
 import env from '~/dotenv.json'
 export default {
     name: "Tournaments",
