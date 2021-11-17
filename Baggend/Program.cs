@@ -22,7 +22,6 @@ builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredS
 builder.Services.AddSingleton<TournamentService>();
 builder.Services.AddControllers();
 
-
 //builder.Services.AddSwaggerGen(c =>
 //{
 //    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
