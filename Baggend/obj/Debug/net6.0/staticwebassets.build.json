@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "kKzSDq0qPvobdTiwtM64LcjDWVxDgTS0dMsnRRNNyUI=",
+  "Hash": "yQnwrSLDSGjCqia/3ejpgyb3MCD8q7fBgV/0BLsUz5s=",
   "Source": "baggend",
   "BasePath": "_content/baggend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "baggend\\wwwroot",
+      "Source": "baggend",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\index.html",
+      "SourceId": "baggend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
 }

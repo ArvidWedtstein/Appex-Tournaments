@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using baggend.Models;
+using baggend.Services;
 
 namespace baggend.Controllers
 {
@@ -14,25 +15,22 @@ namespace baggend.Controllers
     [ApiController]
     public class TournamentsController : ControllerBase
     {
-        private readonly TournamentContext _context;
+        private readonly TournamentService _tournamentService;
 
-        public TournamentsController(TournamentContext context)
+        public TournamentsController(TournamentService tournamentService)
         {
-            _context = context;
+            _tournamentService = tournamentService;
         }
 
         // GET: api/Tournaments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TournamentItem>>> GetTournamentItems()
-        {
-            return await _context.TournamentItems.ToListAsync();
-        }
+        public async Task<ActionResult<List<Tournament>>> Get() => _tournamentService.Get();
 
         // GET: api/Tournaments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TournamentItem>> GetTournamentItem(long id)
+        [HttpGet("{id:length(24)}", Name = "GetTournament")]
+        public async Task<ActionResult<Tournament>> Get(string id)
         {
-            var tournamentItem = await _context.TournamentItems.FindAsync(id);
+            var tournamentItem = _tournamentService.Get(id);
 
             if (tournamentItem == null)
             {
@@ -43,65 +41,44 @@ namespace baggend.Controllers
         }
 
         // PUT: api/Tournaments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTournamentItem(long id, TournamentItem tournamentItem)
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Tournament tournamentItem)
         {
-            if (id != tournamentItem.Id)
-            {
-                return BadRequest();
-            }
+            var tournament = _tournamentService.Get(id);
 
-            _context.Entry(tournamentItem).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TournamentItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Tournaments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<TournamentItem>> PostTournamentItem(TournamentItem tournamentItem)
-        {
-            _context.TournamentItems.Add(tournamentItem);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTournamentItem), new { id = tournamentItem.Id }, tournamentItem);
-        }
-
-        // DELETE: api/Tournaments/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTournamentItem(long id)
-        {
-            var tournamentItem = await _context.TournamentItems.FindAsync(id);
-            if (tournamentItem == null)
+            if (tournament == null)
             {
                 return NotFound();
             }
 
-            _context.TournamentItems.Remove(tournamentItem);
-            await _context.SaveChangesAsync();
+            _tournamentService.Update(id, tournamentItem);
 
             return NoContent();
         }
-
-        private bool TournamentItemExists(long id)
+        
+        // POST: api/Tournaments
+        [HttpPost]
+        public async Task<ActionResult<Tournament>> Create(Tournament tournamentItem)
         {
-            return _context.TournamentItems.Any(e => e.Id == id);
+            
+            _tournamentService.Create(tournamentItem);
+
+            return CreatedAtRoute("GetTournament", new { id = tournamentItem.Id }, tournamentItem);
+        }
+
+        // DELETE: api/Tournaments/5
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var tournament = _tournamentService.Get(id);
+            if (tournament == null)
+            {
+                return NotFound();
+            }
+
+            _tournamentService.Remove(tournament.Id);
+
+            return NoContent();
         }
     }
 }

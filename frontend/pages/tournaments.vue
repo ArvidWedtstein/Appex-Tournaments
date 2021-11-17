@@ -48,9 +48,9 @@
                     <p>{{tournament.name}}</p>
                 </div>
                 <div class="tfooter">
-                    <p class="players">{{tournament.players.length}}</p>
+                    <!--<p class="players">{{tournament.players.length}}</p>-->
                     <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-                    <p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>
+                    <!--<p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>-->
                 </div>
              </div>
         </div>
@@ -79,10 +79,11 @@ export default {
     },
     methods: {
         async fetchTournaments() {
+
             this.tournaments = []
-            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
-            console.log(tournamentlist.data)
-            this.tournaments = tournamentlist.data.tournaments
+            const tournamentlist = await axios.get(`https://localhost:7211/api/Tournaments/123456789012345678901234`)
+            console.log(tournamentlist)
+            this.tournaments = tournamentlist.data
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
