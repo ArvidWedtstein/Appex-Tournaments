@@ -2,28 +2,37 @@
 <template>
     <main class="tournamentcontainer"><!--<main v-if="tournaments.data" class="tournamentcontainer">-->
         <h1 class="title">Tidligere Turneringer</h1>
-        <button class="button" v-on:click="left()">Left</button>
-        <button class="button2" v-on:click="right()">Right</button>
+        <button class="button" v-on:click="left()"><img src="../static/images/arrowBlue.png"></button>
+        <button class="button2" v-on:click="right()"><img src="../static/images/arrowBlue.png"></button>
         <!--Edit tournament-->
         <transition name="fade">
             <div class="editTournament" v-if="editTournamentScreen">
-                <button class="close" type="button" v-on:click="closeTournament()">X</button>
-                <div class="jumbotron">
-                    <h1 class="display-4">Edit Tournament</h1>
-                    <p class="lead">"Tournament Navn"</p>
+                <button class="close" type="button" v-on:click="closeTournament()">✖</button>
+                <div class="headerContainer">
+                    <h1>Edit Tournament</h1>
+                    <p>"Tournament Navn"</p>
                 </div>
-                <div class="inputContainer">
-                <p>Navn:</p>  
-                <input class="update" type="text"></div>
-                <div class="inputContainer">
+                <div class="inputBox">
+                <h1>Navn:</h1>  
+                <input class="update" type="text" placeholder="Tournament navn">
+                </div>
+                <div class="inputBox">
+                <h1>Dato:</h1> 
+                <input class="update" type="date">
+                </div>
+                <div class="inputBox">
+                <h1>Status:</h1>
+                <input class="update" type="text" placeholder="Tournament status">
+                </div>
+                <!--<div class="inputContainer">
                 <p>Dato:</p> 
                 <input class="update" type="date"></div>
                 <div class="inputContainer">
                 <p>Status:</p>
-                <input class="update" type="text"></div>
+                <input class="update" type="text"></div>-->
                 <div class="inputContainer buttons">
-                <button class="updatebtn" type="button" >Update</button>
                 <button class="deltakerbtn" type="button">Rediger Deltakere</button>
+                <button class="updatebtn" type="button" >Update</button>
                 <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
                 </div>
             </div>
@@ -96,22 +105,16 @@ export default {
         },
         left() {
             const scrollContainer = document.querySelector("main");
-            var x = scrollContainer.offsetWidth;
-            console.log(x)
-            //var tournaments = this.tournaments.data.length;
+            var x = window.innerWidth;
             var tournaments = document.getElementsByClassName("tournament").length;
-            location.href="#tournament1"
-            var step = (x / tournaments) * 12;
-            scrollContainer.scrollLeft -= step;
+            var step = (x / tournaments) * -16;
+            scrollContainer.scrollLeft += step;
         },
         right() {
             const scrollContainer = document.querySelector("main");
             var x = window.innerWidth;
-            console.log(x)
-            //var tournaments = this.tournaments.data.length;
             var tournaments = document.getElementsByClassName("tournament").length;
-            var step = (x / tournaments) * 12;
-
+            var step = (x / tournaments) * 16;
             scrollContainer.scrollLeft += step;
         },
         editTournament() {
@@ -136,8 +139,8 @@ export default {
 
 
 <style lang="scss">
-
-
+$inputcolor: rgba(0,0,0,0.5);
+$inputhovercolor: rgba(0,0,0,1);
 $backclr: #edece9;
 $black: #221E20;
 $dark-grey: #464544;
@@ -153,10 +156,10 @@ template{
     overflow-x: hidden;
     position: relative;
     width: 100%;
-    height: 60%;
+    height: 100vh;
     left: 0;
     padding: 2em 2em;
-    margin-top: 160px;
+    padding-top: 75px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -167,27 +170,28 @@ template{
 }
 .title {
     position: fixed;
-    top: 13vh;
+    top: 11vh;
     font-size: 40px;
     font-weight: 500;
     text-align: center;
     width: 100vw;
 }
 .button {
+    transform: rotate(180deg);
+
     position: fixed;
-    bottom: 13vh;
+    bottom: 0;
     left: 0;
-    font-size: 40px;
-    font-weight: 500;
-    text-align: center;
+    width: 50px;
+    margin: 2rem 4rem;
 }
 .button2 {
     position: fixed;
-    bottom: 13vh;
+    bottom: 0;
     right: 0;
-    font-size: 40px;
-    font-weight: 500;
-    text-align: center;
+    width: 50px;
+    margin: 2rem 4rem;
+
 }
 .tournament {
     flex: 1 1 auto;
@@ -275,29 +279,37 @@ template{
     bottom: 0;
     top: 0;
     left: 0;
-    padding: 3rem;
-    padding-top: 2rem;
+    padding: 20vh 20% 0;
+    padding-top: 3rem;
     z-index: 2;
-    background: rgba(0,0,0,0.9);
-    color: #ffffff;
+    background: rgb(237,236,233,0.96);
+    color: $black;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     .close {
-        font-size: 10ch;
+        font-size: 4vw;
         position: absolute;
         top: 0;
         right: 0;
         padding: 3rem;
         &:hover {
-            color: #dddddd;
+            color: rgba(0,0,0,0.7);
+        }
+    }
+    .headerContainer{
+        text-align: center;
+        flex: 1 1 auto;
+        h1{
+            font-size: 4vw;
+        }
+        p{
+            font-size: 2vw;
         }
     }
     
     .update {
-        margin: 1rem;
-        padding: 25px;
         //width: 400px;
         //height: 50px;
         flex: 1 1 auto;
@@ -310,22 +322,23 @@ template{
         &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
             color: gray;
         }
-    }
-    .updatebtn, .deltakerbtn {
-        //padding: 0.5rem 1rem;
-        //margin: 0 1rem;
-        //flex: 1 1 auto;
-        //align-self: center;
-        background: $grey;
+    }/*
+    .deltakerbtn, .updatebtn {
+        background: $orange;
         color: #000000;
         border: none;
-        border-bottom: 2px solid $blue;
-        border-radius: calc(0.25rem - 1px);
         transition: all 0.1s ease;
         &:hover {
-            border-bottom: 4px solid $blue;
-            padding-bottom: calc(8px - 2px);
+            transform: translateY(-2.5px);
         }
+        &:active {
+            transform: translate(0px, 2.5px);
+            -webkit-transform: translate(0px, 5px);
+            box-shadow: 0px 1px 0px 0px;
+        }  
+    }
+    .deltakerbtn >{
+            background-color: $blue;
     }
     .deletebtn {
         position: absolute;
@@ -346,7 +359,7 @@ template{
             border-bottom: 4px solid red;
             background: red;
             padding-bottom: calc(8px - 2px);
-            padding: 20px 60x;
+            padding: 20px 60px;
         }
         &:active {
             transform: translate(0px, 5px);
@@ -354,18 +367,52 @@ template{
             box-shadow: 0px 1px 0px 0px;
         }    
 
-    }
+    }*/ 
     .inputContainer{
         display: flex;
         flex-direction: row;
         flex: 1 1 auto;
         align-items: center;
         align-content: center;
-        margin: 0 8rem;
+        margin: 0 -1rem;
         &.buttons >*{
             padding: 1rem;
             margin: 1rem;
             flex: 1 1 auto;
+            background: $orange;
+            color: #000000;
+            border: none;
+            transition: all 0.1s ease;
+            width: 50%;
+            &:hover {
+                transform: translateY(-2.5px);
+            }
+            &:active {
+                transform: translate(0px, 2.5px);
+                -webkit-transform: translate(0px, 5px);
+                box-shadow: 0px 1px 0px 0px;
+            }
+
+            
+        }
+        .updatebtn{
+            background-color: $blue;
+            color: #fff;
+        }
+        .deletebtn{
+            width: auto;
+            position: absolute;
+            right: 45px;
+            flex: 1 1 auto;
+            align-self: center;
+            background: #C0392B;
+            color: white;
+            border: none;
+            transition: all 0.1s ease;
+            text-align: center;
+            &:hover {
+                background: red;
+            }
         }
         p{
             position: absolute;
@@ -374,6 +421,48 @@ template{
 
 
     }
+
+    .inputBox {
+        flex: 1 1 auto;
+        padding: 0.2rem;
+        
+        h1{
+              font-size: 20px;
+              font-weight: 600;
+        }
+        input {
+            position: relative;
+            flex: 1 1 auto;
+            background: transparent;
+            text-align: left;
+            vertical-align: middle;
+            outline: none;
+            width: 100%;
+            border: none;
+            color: $inputcolor;
+            padding-bottom: 10px;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid $inputcolor;
+            
+            &:focus {
+                color: $inputhovercolor;
+                border-bottom: 2px solid $inputhovercolor;
+            }
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active  {
+                -webkit-text-fill-color: black;
+              -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+              box-shadow: 0 0 0px 1000px #000 inset;
+              transition: background-color 5000s ease-in-out 0s;
+            }
+        }
+    }
+
+
 }
 .fade-enter-active, .fade-leave-active {
   transition: all .5s ease-in-out;
