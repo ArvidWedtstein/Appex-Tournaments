@@ -42,6 +42,7 @@ $orange: #FAB487;
 	--blue: $blue;
 	--green: $green;
 	--orange: $orange;
+  scroll-behavior: smooth;
 }
 
 *,

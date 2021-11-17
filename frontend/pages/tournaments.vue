@@ -27,15 +27,14 @@
             </div>
         </transition>
 
-        <div v-for="tournament in tournaments" :key="tournament" class="tournament beige">
+        <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
             <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
             <div class="cardContainer">
                 <div class="tspace">
-                    <p>Dato: {{tournament.date}}</p>
+                    <p>Dato: {{formatDate(tournament.date)}}</p>
                 </div>
                 <div class="tcontent">
                     <p>{{tournament.name}}</p>
-                    
                 </div>
                 <div class="tfooter">
                     <p class="players">{{tournament.players.length}}</p>
@@ -43,183 +42,6 @@
                     <p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>
                 </div>
              </div>
-        </div>
-        <div class="tournament beige">
-            <button class="top" v-on:click="editTournament()">🖋</button>
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                    
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-             </div>
-        </div>
-        <div class="tournament blue">
-            <button class="top" v-on:click="editTournament()">Edit</button>
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div> 
-        </div>
-        <div class="tournament dark">
-            <button class="top" v-on:click="editTournament()">Edit</button>
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-             </div>
-        </div>
-        <div class="tournament beige">
-            <button class="top" v-on:click="editTournament()">Edit</button>
-            <div class="cardContainer"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>  
-        </div>
-        <div class="tournament blue">
-            <div class="cardContainer"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>
-        </div>
-        <div class="tournament blue">
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p>Ant. spillere    //  Status  //  Navn vinner</p>
-                </div>
-            </div> 
-        </div>
-        <div class="tournament dark">
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>
-        </div>
-        <div class="tournament beige">
-            <div class="cardContainer"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>  
-        </div>
-        <div class="tournament blue">
-            <div class="cardContainer"> 
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>
-        </div>
-        <div class="tournament dark">
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div> 
-        </div>
-        <div class="tournament beige">
-            <div class="cardContainer">
-                <div class="tspace">
-                    <p>Dato: DD:MM:YYYY</p>
-                    
-                </div>
-                <div class="tcontent">
-                    <p>Turnering Navn</p>
-                </div>
-                <div class="tfooter">
-                    <p class="players">Ant. spillere</p>
-                    <p class="status">Status</p>
-                    <p class="winner">Winner</p>
-                </div>
-            </div>
         </div>
     </main>
 </template>
@@ -260,6 +82,10 @@ export default {
                 });
             }
         },
+        formatDate(date) {
+            const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+            return new Date(date).toLocaleDateString('no', options)
+        },
         updateTournament(tournamentname) {
             axios.post(`${env.BASE_URL}/updatetournament`, {
 
@@ -268,24 +94,22 @@ export default {
         },
         left() {
             const scrollContainer = document.querySelector("main");
-            var x = scrollContainer.getBoundingClientRect().right
+            var x = scrollContainer.offsetWidth;
             console.log(x)
             //var tournaments = this.tournaments.data.length;
             var tournaments = document.getElementsByClassName("tournament").length;
-            
-            var step = x / tournaments;
-            console.log(step)
+            location.href="#tournament1"
+            var step = (x / tournaments) * 12;
             scrollContainer.scrollLeft -= step;
         },
         right() {
             const scrollContainer = document.querySelector("main");
-            var x = scrollContainer.getBoundingClientRect().right
+            var x = window.innerWidth;
             console.log(x)
             //var tournaments = this.tournaments.data.length;
             var tournaments = document.getElementsByClassName("tournament").length;
-            console.log(tournaments)
-            var step = x / tournaments;
-            console.log(step)
+            var step = (x / tournaments) * 12;
+
             scrollContainer.scrollLeft += step;
         },
         editTournament() {

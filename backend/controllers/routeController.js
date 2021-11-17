@@ -22,6 +22,7 @@ exports.gettournaments = async (req, res, next) => {
 }
 
 exports.newtournament = async (req, res, next) => {
+    var randomstring = Math.random().toString(36).slice(-8);
     console.log(req.body)
     const body = req.body;
     const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
@@ -30,17 +31,23 @@ exports.newtournament = async (req, res, next) => {
     for (let i = 0; i < rounds.length; i++) {
         matches.push([])
         for (let z = 0; z < rounds[i] / 2; z++) {
-            matches[i].push([])
+            const match = {
+                id: randomstring,
+                matches: [], 
+                winner: ''
+            }
+            matches[i].push(match)
         }
     }
     
     let player = 0;
     for (let i = 0; i < matches[0].length; i++) {
-        matches[0][i].push(req.body.players[player].name)
+        matches[0][i].matches.push(req.body.players[player].name)
         player++;
-        matches[0][i].push(req.body.players[player].name)
+        matches[0][i].matches.push(req.body.players[player].name)
         player++;
     }
+    console.log(matches);
     const tournament = new tournamentModel({
         name: req.body.tournamentname,
         date: req.body.tournamentdate,
@@ -66,6 +73,26 @@ exports.updatetournament = async (req, res, next) => {
             name: newname,
             date: newdate, 
             players: players
+          }
+        )
+        if (!tournament) {
+          const error = new Error("tournament with this name not found!");
+          error.statusCode = 401;
+          throw error;
+        }
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+exports.deletetournament = async (req, res, next) => {
+    const {id} = req.body;
+    try {
+        const tournament = await tournamentModel.deleteOne(
+          {
+            _id: id
           }
         )
         if (!tournament) {

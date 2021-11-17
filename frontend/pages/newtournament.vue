@@ -40,7 +40,7 @@
         <div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
             <div class="match" v-for="match in round" :key="match">
-              <div class="match__content">{{match}}</div>
+              <div class="match__content"></div>
               <div class="matchplayer" v-for="player in match" :key="player">
                 <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
               </div>
@@ -112,28 +112,28 @@ export default {
         this.players.splice(index, 1);
         intPlayer = this.players.length;
       },
-      matchWin(round, playername) {
+      async matchWin(round, playername) {
+        /*await axios({
+          method: 'post',
+          url: `${env.BASE_URL}/gettournaments`
+        }).then(async (response) => {
+          await console.log(response)
+        });*/
+        
+        // Winner
+        if (this.matches.indexOf(round) >= this.matches.length-1) {
+          return
+        }
+        
         let rounds = defaultRounds.filter(p => p <= this.players.length)
         let winnerint = this.matches[0].flat().indexOf(playername)
         let nextmatchint = this.matches.indexOf(round) + 1;
-        console.log(winnerint)
-        if (nextmatchint >= 2) {
-          console.log('match')
-          this.matches[nextmatchint][0].push(playername)
-          if (this.matches[nextmatchint][0].length >= 2) return;
-        } else {
-          if (winnerint > round.length) {
-            if (this.matches[nextmatchint][1].length >= 2) return;
-              
-            this.matches[nextmatchint][1].push(playername)
-            
-          } else {
-            if (this.matches[nextmatchint][0].length >= 2) return;
-            this.matches[nextmatchint][0].push(playername)
-          }
+
+
+        this.matches[nextmatchint][0].push(playername)
+        if (this.matches[nextmatchint][0].length >= rounds[nextmatchint]) {
+          this.matches[nextmatchint][0] = this.matches[nextmatchint][0].slice(0, rounds[nextmatchint])
         }
-        console.log(this.matches)
-        
       },
       increasePage() {
         if (this.page == 2) return

@@ -26,6 +26,9 @@ export default defineNuxtConfig({
     },
     modules: [
     ],
+    buildModules: [
+
+    ],
     /*axios: {
       baseURL: "http://localhost:3001"
     },*/
