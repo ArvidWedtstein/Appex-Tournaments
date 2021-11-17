@@ -1,11 +1,71 @@
 {
   "Version": 1,
-  "Hash": "kKzSDq0qPvobdTiwtM64LcjDWVxDgTS0dMsnRRNNyUI=",
+  "Hash": "GIBc9epb6M7jTI15Q0ga9FM2PV9nG1z80fel2Z5hwE4=",
   "Source": "baggend",
   "BasePath": "_content/baggend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "baggend\\wwwroot",
+      "Source": "baggend",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\css\\site.css",
+      "SourceId": "baggend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\index.html",
+      "SourceId": "baggend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\js\\site.js",
+      "SourceId": "baggend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\veitw\\Documents\\Appex\\Appex Tournaments\\baggend\\wwwroot\\",
+      "BasePath": "_content/baggend",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ]
 }

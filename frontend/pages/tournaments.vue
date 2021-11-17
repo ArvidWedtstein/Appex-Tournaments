@@ -79,9 +79,22 @@ export default {
     },
     methods: {
         async fetchTournaments() {
+            const item = {
+                isComplete: false,
+                name: 'test'
+            };
+
+            fetch('https://localhost:7211/api/Tournaments', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item)
+            })
             this.tournaments = []
-            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
-            console.log(tournamentlist.data)
+            const tournamentlist = await axios.get(`https://localhost:7211/api/tournaments`)
+            console.log(tournamentlist)
             this.tournaments = tournamentlist.data.tournaments
         },
         horizontalScroll() {
