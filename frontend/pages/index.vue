@@ -1,21 +1,21 @@
 
 
 <template>
-    <div class="design-container">
-    
-      <canvas id="Matrix"></canvas>
-      <div class="pg1-content-container">
-        <div class="txt-btn-pg1">
-          <h1>Velkommen til Appex tournament</h1>
-          <div class="btn-container">
-            <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
-            <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
-          </div>
+  <div class="design-container">
+    <canvas id="Matrix"></canvas>
+    <div class="pg1-content-container">
+      <div class="txt-btn-pg1">
+        <h1>Velkommen til Appex tournament</h1>
+        <div class="btn-container">
+          <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
         </div>
       </div>
-
     </div>
+  </div>
 </template>
+
+
 
 <script>
 
@@ -92,13 +92,6 @@ body {
   top: 0;
   z-index: 0;
 }
-#logo{
-        text-align: center;
-        width: 245px;
-        position: absolute;
-        left: 60px;
-        top: 50px;
-    }
 
 .pg1-content-container{
   width: 100%;
@@ -108,11 +101,11 @@ body {
   align-content: center;
   justify-content: center;
   align-items: center;
-  //background-color: $backclr;
+  background-color: $backclr;
   background-image: url("../static/images/frontpage-grapics.png");
   background-position: 10% 100%;
   background-repeat: no-repeat;
-  background-size:60%;
+  background-size: 700px;
   padding: 2rem;
   z-index: -1;  
   
@@ -128,7 +121,7 @@ body {
   margin-bottom: 50px;
   text-align: center;
   align-items: center;
-  width: 800px;
+  width: 50vw;
 }
 .btn-container {
   position: relative;
@@ -138,11 +131,12 @@ body {
   margin-bottom: 10%;
   gap: 50px;
   font-size: 16px;
+  width: 100%;
 
 }
   .blueBtn {
     flex: 0 1 auto;
-    width: 250px;
+    width: 50%;
     font-weight: 600;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -158,7 +152,7 @@ body {
   }
   .grey {
     flex: 0 1 auto;
-    width: 250px;
+    width: 50%;
     font-weight: 600;
     padding-top: 1rem;
     padding-bottom: 1rem;

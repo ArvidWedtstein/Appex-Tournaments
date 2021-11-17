@@ -39,7 +39,7 @@
         </transition>
 
         <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
-            <button class="top" v-on:click="editTournament(tournament.name)">Edit</button>
+            <button class="top" v-on:click="editTournament(tournament.name)">✎</button>
             <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: {{formatDate(tournament.date)}}</p>
@@ -107,8 +107,14 @@ export default {
             const scrollContainer = document.querySelector("main");
             var x = window.innerWidth;
             var tournaments = document.getElementsByClassName("tournament").length;
-            var step = (x / tournaments) * -16;
-            scrollContainer.scrollLeft += step;
+            for (let i = 0; i < 8; i++) {
+                var step = (x / tournaments) * -2;
+                scrollContainer.scrollLeft += step;
+                console.log(i);
+                setTimeout(1000);
+            }
+  
+            
         },
         right() {
             const scrollContainer = document.querySelector("main");
@@ -211,17 +217,18 @@ template{
     margin: 0rem 2rem;
     transition: all 0.5s ease;
     .top {
+        transform: rotate(90deg);
         position: absolute;
-        top: 0;
-        right: 0;
-        padding: 0.2rem;
+        top:10px;
+        right: 10px;
+        width: 24px;
+        text-align: center;
     }
     .cardContainer{
         position: absolute;
         bottom: 0;
         left: 0;
         padding: 20px;
-        
     }
     .tspace {
         width: 100%;
@@ -282,7 +289,7 @@ template{
     padding: 20vh 20% 0;
     padding-top: 3rem;
     z-index: 2;
-    background: rgb(237,236,233,0.96);
+    background: rgb(237,236,233);
     color: $black;
     display: flex;
     flex-direction: column;

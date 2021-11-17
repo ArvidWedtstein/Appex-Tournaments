@@ -17,16 +17,31 @@
       </div>
     </div>
     <div v-if="page === 1" class="page">
-      <div class="jumbotron">
+      <div class="headerContainer">
         <h1 class="display-4">{{tournament.name}} Deltakere</h1>
-        <p class="lead">Antall deltakere</p>
-        <button class="playerCount red" @click="addPlayer()">+</button>
-        <span class="playerCount">{{players.length}}</span>
+        <p class="lead">Rediger deltakere</p>
       </div>
+
+
+
+      <div class="playerAddContainer">
+        <div class="countContainer">
+          <div class="playerCount">{{players.length}}</div>
+          <div><p>deltakere</p></div>
+        </div>
+        <div class="btnContainer">
+          <button class="minusBtn" @click="removePlayer()">-</button>
+          <button class="plusBtn" @click="addPlayer()">+</button>
+        </div>
+
+      </div>
+
+
+
+
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
           <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
-          <span @click="removePlayer(index)" class="close">X</span>
         </div>
       </div>
       <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
@@ -108,9 +123,15 @@ export default {
         intPlayer = (intPlayer * 2);
       },
       removePlayer(index) {
+        if(intPlayer > 1){
+        console.log(intPlayer)
+        var playerDevide = (intPlayer / 2)
+        for (var i = 0; i < playerDevide; i++){
+          this.players.splice(index, 1);
+          intPlayer = this.players.length;
+        }
+        }
         
-        this.players.splice(index, 1);
-        intPlayer = this.players.length;
       },
       async matchWin(round, playername) {
         /*await axios({
@@ -221,7 +242,7 @@ $orange: #FAB487;
 .deltakere {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   .playerBox {
     flex: 1 1 auto;
     display: flex;
@@ -230,7 +251,7 @@ $orange: #FAB487;
     .playername {
       padding: 0.5rem 1rem;
       flex: 1 1 auto;
-      color: #000000;
+      color: #000;
       background-color: $grey;
       border: none;
       border-bottom: 2px solid $blue;
@@ -271,26 +292,57 @@ $orange: #FAB487;
     position: relative;
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    margin-top: 3rem;
-    .playerCount {
-      padding: 1rem;
-      margin: 1rem;
-      border-radius: calc(0.55rem - 1px);
-      border: 2px solid $dark-grey;
-      font-size: 4ch;
-      transition: all 0.1s ease;
-      background-color: #c34747;
-      box-shadow: 0 5px 5px #853232, 
-        0 9px 0 #5e2525, 0px 9px 10px rgb(0 0 0 / 40%), 
-        inset 0px 2px 9px rgb(255 255 255 / 20%), 
-        inset 0 -2px 9px rgb(0 0 0 / 20%);
-      &:active {
-        text-shadow: 0 1px 1px rgba(255, 255, 255, .9), 0 -1px 1px rgba(0, 0, 0, .1);
-        box-shadow: none;
+    max-height: 100%;
+    margin-top: 32px;
+    .headerContainer{
+        text-align: center;
+        flex: 1 1 auto;
+        h1{
+            font-size: 4vw;
+        }
+        p{
+            font-size: 2vw;
+        }
+    }
+    .playerAddContainer{
+      position: absolute;
+      top: 0;
+      right: 128px;
+      height: 140px;
+      width: 100px;
+    }
+    .btnContainer{
+      font-size: 3rem;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      .plusBtn{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+      .minusBtn{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+
+    }
+    .countContainer {
+      .playerCount{
+        color: $blue;
+        font-size: 2.5rem;
+        font-weight: 400;
+        width: 100%;
+        text-align: center;
+      }
+      p{
+        width: 100%;
+        text-align: center;
+        font-weight: 400;
       }
     }
-    .inputBox {
+    .inputBox{
         flex: 1 1 auto;
         padding: 0.2rem;
         margin-top: 70px;
@@ -344,24 +396,7 @@ $orange: #FAB487;
         }
     }
 }
-.jumbotron {
-  text-align: center;
-  flex: 1 1 auto;
-  padding: 2rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.3rem;
-  .display-4 {
-      font-size: 3.5rem;
-      font-weight: 300;
-      line-height: 1.2;
-  }
-  .lead {
-      font-size: 1.25rem;
-      font-weight: 300;
-      margin-top: 0;
-      margin-bottom: 1rem;
-  }
-}
+
 .bracket {
     display: flex;
 }
