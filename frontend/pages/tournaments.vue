@@ -10,13 +10,19 @@
                 <button class="close" type="button" v-on:click="closeTournament()">X</button>
                 <div class="jumbotron">
                     <h1 class="display-4">Edit Tournament</h1>
-                    <hr>
-                    <p class="lead">Edit</p>
+                    <p class="lead">"Tournament Navn"</p>
                 </div>
-                <input class="update" type="text" placeholder="Edit tournament name">
-                <input class="update" type="date" placeholder="Edit date">
-                <input class="update" type="text" placeholder="Edit players">
+                
+                <span><p>Navn:</p>  
+                <input class="update" type="text"></span>
+                <span><p>Dato:</p> 
+                <input class="update" type="date"></span>
+                <span><p>Status:</p>
+                <input class="update" type="text"></span>
+                <div class="btnContainer">
                 <button class="updatebtn" type="button" >Update</button>
+                <button class="deltakerbtn" type="button">Rediger Deltakere</button>
+                </div>
                 <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
             </div>
         </transition>
@@ -443,7 +449,8 @@ template{
     bottom: 0;
     top: 0;
     left: 0;
-    padding: 10rem;
+    padding: 3rem;
+    padding-top: 2rem;
     z-index: 2;
     background: rgba(0,0,0,0.9);
     color: #ffffff;
@@ -463,8 +470,9 @@ template{
     }
     .update {
         margin: 1rem;
-        padding: 0.5rem 1rem;
-        width: 50vw;
+        padding: 25px;
+        width: 400px;
+        height: 50px;
         flex: 1 1 auto;
         background: $grey;
         color: #000000;
@@ -476,9 +484,18 @@ template{
             color: gray;
         }
     }
-    .updatebtn {
-        width: 20vw;
+    .btnContainer{
+        font-size: 20px;
+        padding: 15px 60px;
+        display: flex;
+        flex-direction: row;
+        max-width: 50%;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    .updatebtn, .deltakerbtn {
         padding: 0.5rem 1rem;
+        margin: 0 1rem;
         flex: 1 1 auto;
         align-self: center;
         background: $grey;
@@ -496,9 +513,8 @@ template{
         position: absolute;
         right: 45px;
         bottom: 45px;
-        width: 30vh;
-        font-size: 20px;
-        padding: 15px 60px;
+        padding: 0.5rem 1rem;
+        margin: 0 1rem;
         flex: 1 1 auto;
         align-self: center;
         background: #C0392B;
@@ -519,6 +535,17 @@ template{
             -webkit-transform: translate(0px, 5px);
             box-shadow: 0px 1px 0px 0px;
         }    
+
+    }
+    p{
+        display:inline-table
+    }
+    span{
+        
+        text-align: right;
+        margin-right: 50%;
+        transform: translate(50%,-50%);
+        max-height: 155px;
 
     }
 }
