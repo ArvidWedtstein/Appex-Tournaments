@@ -13,10 +13,10 @@ namespace baggend.Models
         public DateTime Date { get; set; }
         
         public string? Status { get; set; }
-        /*private Dictionary<string, string> players = new Dictionary<string, string>();
+        private Dictionary<string, string> players = new Dictionary<string, string>();
         public string this[string key] { 
             get { return players[key]; }
             set { players.Add(key, value ); }
-        }*/
+        }
     }
 }
