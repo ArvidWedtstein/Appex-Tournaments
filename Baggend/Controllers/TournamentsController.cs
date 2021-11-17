@@ -72,12 +72,27 @@ namespace baggend.Controllers
 
             return NoContent();
         }
+        /*
+        [
+            [
+                {
+                    id: ""
+                    matches: [
+                        "player1"
+                        "player2"
+                    ]
+                    winner: ""
+                }
+            ]
+        ]
 
+
+        */
         // POST: api/Tournaments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<TournamentItem>> PostTournamentItem(TournamentItem tournamentItem)
         {
+            
             _context.TournamentItems.Add(tournamentItem);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetTournamentItem), new { id = tournamentItem.Id }, tournamentItem);
