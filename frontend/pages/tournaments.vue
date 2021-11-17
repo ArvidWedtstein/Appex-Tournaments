@@ -12,18 +12,20 @@
                     <h1 class="display-4">Edit Tournament</h1>
                     <p class="lead">"Tournament Navn"</p>
                 </div>
-                
-                <span><p>Navn:</p>  
-                <input class="update" type="text"></span>
-                <span><p>Dato:</p> 
-                <input class="update" type="date"></span>
-                <span><p>Status:</p>
-                <input class="update" type="text"></span>
-                <div class="btnContainer">
+                <div class="inputContainer">
+                <p>Navn:</p>  
+                <input class="update" type="text"></div>
+                <div class="inputContainer">
+                <p>Dato:</p> 
+                <input class="update" type="date"></div>
+                <div class="inputContainer">
+                <p>Status:</p>
+                <input class="update" type="text"></div>
+                <div class="inputContainer buttons">
                 <button class="updatebtn" type="button" >Update</button>
                 <button class="deltakerbtn" type="button">Rediger Deltakere</button>
-                </div>
                 <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
+                </div>
             </div>
         </transition>
 
@@ -292,36 +294,28 @@ template{
             color: #dddddd;
         }
     }
+    
     .update {
         margin: 1rem;
         padding: 25px;
-        width: 400px;
-        height: 50px;
+        //width: 400px;
+        //height: 50px;
         flex: 1 1 auto;
+        align-self: center;
         background: $grey;
         color: #000000;
         border: none;
-        align-self: center;
         border-bottom: 2px solid $blue;
         border-radius: calc(0.25rem - 1px);
         &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
             color: gray;
         }
     }
-    .btnContainer{
-        font-size: 20px;
-        padding: 15px 60px;
-        display: flex;
-        flex-direction: row;
-        max-width: 50%;
-        margin-left: 50%;
-        transform: translateX(-50%);
-    }
     .updatebtn, .deltakerbtn {
-        padding: 0.5rem 1rem;
-        margin: 0 1rem;
-        flex: 1 1 auto;
-        align-self: center;
+        //padding: 0.5rem 1rem;
+        //margin: 0 1rem;
+        //flex: 1 1 auto;
+        //align-self: center;
         background: $grey;
         color: #000000;
         border: none;
@@ -336,9 +330,9 @@ template{
     .deletebtn {
         position: absolute;
         right: 45px;
-        bottom: 45px;
-        padding: 0.5rem 1rem;
-        margin: 0 1rem;
+        //bottom: 45px;
+        //padding: 0.5rem 1rem;
+        //margin: 0 1rem;
         flex: 1 1 auto;
         align-self: center;
         background: #C0392B;
@@ -361,15 +355,23 @@ template{
         }    
 
     }
-    p{
-        display:inline-table
-    }
-    span{
-        
-        text-align: right;
-        margin-right: 50%;
-        transform: translate(50%,-50%);
-        max-height: 155px;
+    .inputContainer{
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        align-items: center;
+        align-content: center;
+        margin: 0 8rem;
+        &.buttons >*{
+            padding: 1rem;
+            margin: 1rem;
+            flex: 1 1 auto;
+        }
+        p{
+            position: absolute;
+            left: 6rem;
+        }
+
 
     }
 }
