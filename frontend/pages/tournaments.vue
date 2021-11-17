@@ -85,7 +85,7 @@ export default {
                 name: 'aaaaaaaaaaaaaaaaaaa'
             };
 
-            fetch('https://localhost:7211/api/Tournaments', {
+            fetch('http://localhost:7211/api/Tournaments', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
@@ -95,7 +95,7 @@ export default {
                 body: JSON.stringify(item)
             }).then(response => console.log(response.json()))
             this.tournaments = []
-            const tournamentlist = await axios.get(`https://localhost:7211/api/tournaments/2`, {
+            const tournamentlist = await axios.get(`http://localhost:7211/api/tournaments`, {
                 headers: {
                     'Access-Control-Allow-Origin': "https://localhost:7211",
                     'server': "kestrel"
