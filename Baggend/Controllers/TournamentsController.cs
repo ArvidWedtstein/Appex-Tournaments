@@ -41,7 +41,6 @@ namespace baggend.Controllers
         }
 
         // PUT: api/Tournaments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Tournament tournamentItem)
         {
@@ -56,22 +55,7 @@ namespace baggend.Controllers
 
             return NoContent();
         }
-        /*
-        [
-            [
-                {
-                    id: ""
-                    matches: [
-                        "player1"
-                        "player2"
-                    ]
-                    winner: ""
-                }
-            ]
-        ]
-
-
-        */
+        
         // POST: api/Tournaments
         [HttpPost]
         public async Task<ActionResult<Tournament>> Create(Tournament tournamentItem)

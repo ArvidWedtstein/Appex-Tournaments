@@ -27,6 +27,7 @@ namespace baggend.Services
 
         public Tournament Create(Tournament tournament)
         {
+            
             _tournaments.InsertOne(tournament);
             return tournament;
         }
