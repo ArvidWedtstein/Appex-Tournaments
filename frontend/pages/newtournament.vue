@@ -12,7 +12,7 @@
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <div class="pagebtn">
-          <button class="next" @click="increasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+right+chevron+chevronright+right+right+icon+icon-1320185732203239715.png" width="50px"/></button>
+          <button class="next" @click="increasePage()"><img src="../static/images/arrowBlue.png"></button>
         </div>
       </div>
     </div>
@@ -331,30 +331,14 @@ $orange: #FAB487;
         }
     }
     .pagebtn {
-        flex: 1 1 auto;
-        align-self: flex-end;
-        position: relative;
-        width: 100%;
-        font-size: 2rem;
-        button {
-            padding: 0.2rem 0.5rem;
-            background: #dddddd;
-            outline: none;
-            border-radius: 50%;
-            border: none;
-            transition: all 0.2s ease;
-            &:hover {
-                background: #888;
-            }
-        }
-        .past {
-            float: left;
-            left: 0;
-            position: absolute;
-        }
+      position: absolute;
+      width: 50px;
+      right: 0;
+      bottom: 0;
+      margin: 2rem 4rem;
         .next {
             float: right;
-            color: red;
+            color: black;
             right: 0;
             position: absolute;
         }
