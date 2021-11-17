@@ -48,9 +48,9 @@
                     <p>{{tournament.name}}</p>
                 </div>
                 <div class="tfooter">
-                    <p class="players">{{tournament.players.length}}</p>
+                    <!--<p class="players">{{tournament.players.length}}</p>-->
                     <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-                    <p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>
+                    <!--<p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>-->
                 </div>
              </div>
         </div>
@@ -85,24 +85,18 @@ export default {
                 name: 'aaaaaaaaaaaaaaaaaaa'
             };
 
-            fetch('http://localhost:7211/api/Tournaments', {
+            /*fetch('https://localhost:7211/api/Tournaments', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': "https://localhost:7211"
                 },
                 body: JSON.stringify(item)
-            }).then(response => console.log(response.json()))
+            }).then(response => console.log(response.json()))*/
             this.tournaments = []
-            const tournamentlist = await axios.get(`http://localhost:7211/api/tournaments`, {
-                headers: {
-                    'Access-Control-Allow-Origin': "https://localhost:7211",
-                    'server': "kestrel"
-                }
-            })
+            const tournamentlist = await axios.get(`https://localhost:7211/api/Tournaments`)
             console.log(tournamentlist)
-            this.tournaments = tournamentlist.data.tournaments
+            this.tournaments = tournamentlist.data
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
