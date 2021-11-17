@@ -79,22 +79,9 @@ export default {
     },
     methods: {
         async fetchTournaments() {
-            const item = {
-                id: 6,
-                isComplete: true,
-                name: 'aaaaaaaaaaaaaaaaaaa'
-            };
 
-            /*fetch('https://localhost:7211/api/Tournaments', {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(item)
-            }).then(response => console.log(response.json()))*/
             this.tournaments = []
-            const tournamentlist = await axios.get(`https://localhost:7211/api/Tournaments`)
+            const tournamentlist = await axios.get(`https://localhost:7211/api/Tournaments/123456789012345678901234`)
             console.log(tournamentlist)
             this.tournaments = tournamentlist.data
         },

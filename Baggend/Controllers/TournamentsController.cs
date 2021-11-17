@@ -24,16 +24,13 @@ namespace baggend.Controllers
 
         // GET: api/Tournaments
         [HttpGet]
-        public async Task<ActionResult<List<Tournament>>> Get()
-        {
-            return _tournamentService.Get();
-        }
+        public async Task<ActionResult<List<Tournament>>> Get() => _tournamentService.Get();
 
         // GET: api/Tournaments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Tournament>> Get(long id)
+        [HttpGet("{id:length(24)}", Name = "GetTournament")]
+        public async Task<ActionResult<Tournament>> Get(string id)
         {
-            var tournamentItem = _tournamentService.Get(id.ToString());
+            var tournamentItem = _tournamentService.Get(id);
 
             if (tournamentItem == null)
             {
@@ -45,17 +42,17 @@ namespace baggend.Controllers
 
         // PUT: api/Tournaments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, Tournament tournamentItem)
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Tournament tournamentItem)
         {
-            var tournament = _tournamentService.Get(id.ToString());
+            var tournament = _tournamentService.Get(id);
 
             if (tournament == null)
             {
                 return NotFound();
             }
 
-            _tournamentService.Update(id.ToString(), tournamentItem);
+            _tournamentService.Update(id, tournamentItem);
 
             return NoContent();
         }
@@ -82,27 +79,22 @@ namespace baggend.Controllers
             
             _tournamentService.Create(tournamentItem);
 
-            return CreatedAtAction(nameof(Get), new { id = tournamentItem.Id }, tournamentItem);
+            return CreatedAtRoute("GetTournament", new { id = tournamentItem.Id }, tournamentItem);
         }
 
         // DELETE: api/Tournaments/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
         {
-            var tournament = _tournamentService.Get(id.ToString());
+            var tournament = _tournamentService.Get(id);
             if (tournament == null)
             {
                 return NotFound();
             }
 
-            _tournamentService.Remove(tournament.Id.ToString());
+            _tournamentService.Remove(tournament.Id);
 
             return NoContent();
-        }
-
-        private bool TournamentItemExists(long id)
-        {
-            return _tournamentService.Get().Any(e => e.Id == id);
         }
     }
 }
