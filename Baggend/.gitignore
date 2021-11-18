@@ -1,5 +1,7 @@
 appsettings.json
-obj
-bin
+bin/
+obj/
+Bin/
+Obj/
 .vscode
 Properties
