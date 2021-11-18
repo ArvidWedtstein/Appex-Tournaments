@@ -1,8 +1,7 @@
-appsettings.json
+appsettings2.json
 bin/
 obj/
 Bin/
 Obj/
-
-.vscode2
+.vscode
 Properties
