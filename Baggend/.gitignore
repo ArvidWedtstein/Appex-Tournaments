@@ -1,6 +1,6 @@
 appsettings.json
 bin/
-obj2/
+obj/
 Bin/
 Obj/
 .vscode
