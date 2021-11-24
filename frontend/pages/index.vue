@@ -144,11 +144,11 @@ body {
     position: relative;
     border: none;
     text-decoration: none;
+    background: $btncolorblue;
 
     &:hover {
       transform: translateY(-5px);
     }
-    background: $btncolorblue;
   }
   .grey {
     flex: 0 1 auto;

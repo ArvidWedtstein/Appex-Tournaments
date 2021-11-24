@@ -33,12 +33,12 @@
           <button class="minusBtn" @click="removePlayer()">-</button>
           <button class="plusBtn" @click="addPlayer()">+</button>
         </div>
-
       </div>
 
 
 
 
+      
       <div v-for="(name, index) in players" :key="index" class="deltakere">
         <div class="playerBox">
           <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
@@ -46,9 +46,6 @@
       </div>
       <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
       <!--<input type="submit" value="Submit">-->
-      <div class="pagebtn">
-        <button class="past" v-on:click="decreasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
-      </div>
     </div>
     <div v-if="page === 2" class="page">
       <div class="tournament-brackets">
@@ -246,10 +243,12 @@ $orange: #FAB487;
   display: flex;
   flex-direction: column;
   justify-content: left;
+  width: 220px;
+  margin: 0;
   .playerBox {
-    flex: 1 1 auto;
+    //flex: 1 1 auto;
     display: flex;
-    flex-direction: row;
+    //flex-direction: row;
     margin: 0.2rem;
     .playername {
       padding: 0.5rem 1rem;
@@ -264,19 +263,6 @@ $orange: #FAB487;
       }
       &:focus-within, &:focus {
         color: gray;
-      }
-    }
-    .close {
-      flex: 1 1 auto;
-      position: relative;
-      right: 0;
-      top: 0;
-      padding: 0.5rem 1rem;
-      background: rgba(255,0,0,0.5);
-      border-bottom: 2px solid $blue;
-      transition: all 0.2s ease;
-      &:hover {
-        background: rgba(255,0,0,1);
       }
     }
   }
@@ -296,10 +282,14 @@ $orange: #FAB487;
     flex-direction: column;
     width: 100%;
     max-height: 100%;
-    margin-top: 32px;
+    height: 100%;
     .headerContainer{
         text-align: center;
-        flex: 1 1 auto;
+        position: absolute;
+        top: 2vh;
+        left: 50%;
+        transform: translateX(-50%);
+        min-height: 10vh;
         h1{
             font-size: 4vw;
         }
@@ -309,7 +299,7 @@ $orange: #FAB487;
     }
     .playerAddContainer{
       position: absolute;
-      top: 0;
+      top: 2vh;
       right: 128px;
       height: 140px;
       width: 100px;
@@ -395,14 +385,23 @@ $orange: #FAB487;
             float: right;
             color: black;
             right: 0;
-            position: absolute;
         }
     }
 }
 .newTournament{
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 4rem;
+  bottom: 2rem;
+  font-weight: 600;
+  padding: 1rem;
+  color: #ffffff;
+  border: none;
+  text-decoration: none;
+  background: $blue;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 .bracket {
     display: flex;
