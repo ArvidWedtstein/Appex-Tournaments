@@ -29,10 +29,6 @@ export default defineNuxtConfig({
     buildModules: [
 
     ],
-    components: [
-      '~/components',
-      { path: '~/components', extensions: ['vue'] }
-    ],
     /*axios: {
       baseURL: "http://localhost:3001"
     },*/

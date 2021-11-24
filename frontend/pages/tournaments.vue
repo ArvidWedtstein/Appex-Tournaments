@@ -1,10 +1,9 @@
 
 <template>
     <main class="tournamentcontainer"><!--<main v-if="tournaments.data" class="tournamentcontainer">-->
-        <InfoBar v-if="infoBar.show" :message="infoBar.message" :color="infoBar.color"></InfoBar>
         <h1 class="title">Tidligere Turneringer</h1>
-        <button class="button" v-on:click="left()"><img src="../static/images/arrowBlue.png"></button>
-        <button class="button2" v-on:click="right()"><img src="../static/images/arrowBlue.png"></button>
+        <button class="button" v-on:click="left()"><img src="/images/arrowBlue.png"></button>
+        <button class="button2" v-on:click="right()"><img src="/images/arrowBlue.png"></button>
         <!--Edit tournament-->
         <transition name="fade">
             <div class="editTournament" v-if="editTournamentScreen">
@@ -155,6 +154,11 @@ export default {
         },
         closeTournament() {
             this.editTournamentScreen = false;
+            this.editTournamentChanges.name = ""
+            this.editTournamentChanges.date = ""
+            this.editTournamentChanges.status = ""
+            this.editTournamentChanges.players = []
+            this.editTournamentData = null;
         },
         deleteTournament(tournamentId) {
             axios.post(`${env.BASE_URL}/deletetournament`, {
