@@ -1,6 +1,7 @@
 
 <template>
     <main class="tournamentcontainer"><!--<main v-if="tournaments.data" class="tournamentcontainer">-->
+        <InfoBar v-if="infoBar.show" :message="infoBar.message" :color="infoBar.color"></InfoBar>
         <h1 class="title">Tidligere Turneringer</h1>
         <button class="button" v-on:click="left()"><img src="../static/images/arrowBlue.png"></button>
         <button class="button2" v-on:click="right()"><img src="../static/images/arrowBlue.png"></button>
@@ -56,9 +57,8 @@
     </main>
 </template>
 
-<script >
+<script>
 import env from '~/dotenv.json'
-
 import axios from 'axios'
 export default {
     name: "Tournaments",
@@ -81,13 +81,15 @@ export default {
                 date: '',
                 players: [],
                 status: ''
+            },
+            infoBar: {
+                show: false,
+                message: '',
+                color: "#ff0000"
             }
         }
     },
     methods: {
-        showInfobar(message) {
-			this.$notifier.showMessage({ content: message, color: '#ff0000' })
-		},
         async fetchTournaments() {
 
             this.tournaments = []
@@ -117,7 +119,8 @@ export default {
             }).then((res) => {
                 this.editTournamentScreen = false;
                 console.log(res)
-                this.showInfobar(res.message);
+                this.infoBar.show = true
+                this.infoBar.message = 'test'
                 this.editTournamentChanges.name = ""
                 this.editTournamentChanges.date = ""
                 this.editTournamentChanges.status = ""

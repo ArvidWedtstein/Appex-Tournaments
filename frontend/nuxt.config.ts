@@ -29,9 +29,6 @@ export default defineNuxtConfig({
     buildModules: [
 
     ],
-    plugins: [
-      "~/plugins/notifier.js"
-    ],
     components: [
       '~/components',
       { path: '~/components', extensions: ['vue'] }

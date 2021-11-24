@@ -1,5 +1,5 @@
 <template>
-  <div class="info" v-if="show" :style="'background:' + color">
+  <div class="info" :style="'background:' + color">
     <p>{{ message }}</p>
     <button text @click="show = false">&times;</button>
   </div>
@@ -7,25 +7,15 @@
 
 <script>
 export default {
+  template: "<infoBar/>",
+  props: {
+    message: '',
+    color: ''
+  },
   data () {
     return {
       show: false,
-      message: '',
-      color: ''
     }
-  },
-  created () {
-    this.$store.subscribe((mutation, state) => {
-      console.log(state.infoBar.color)
-      if (mutation.type === 'infoBar/showMessage') {
-        this.message = state.infoBar.content
-        this.color = state.infoBar.color
-        this.show = true
-        setTimeout(() => {
-          this.show = false
-        }, 3000)
-      }
-    })
   }
 }
 </script>
