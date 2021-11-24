@@ -10,36 +10,30 @@
                 <button class="close" type="button" v-on:click="closeTournament()">✖</button>
                 <div class="headerContainer">
                     <h1>Edit Tournament</h1>
-                    <p>"Tournament Navn"</p>
+                    <p>"{{editTournamentData.name}}"</p>
                 </div>
                 <div class="inputBox">
-                <h1>Navn:</h1>  
-                <input class="update" type="text" placeholder="Tournament navn">
+                    <h1>Navn:</h1>  
+                    <input class="update" type="text" placeholder="Tournament navn">
                 </div>
                 <div class="inputBox">
-                <h1>Dato:</h1> 
-                <input class="update" type="date">
+                    <h1>Dato:</h1> 
+                    <input class="update" type="date">
                 </div>
                 <div class="inputBox">
-                <h1>Status:</h1>
-                <input class="update" type="text" placeholder="Tournament status">
+                    <h1>Status:</h1>
+                    <input class="update" type="text" placeholder="Tournament status">
                 </div>
-                <!--<div class="inputContainer">
-                <p>Dato:</p> 
-                <input class="update" type="date"></div>
-                <div class="inputContainer">
-                <p>Status:</p>
-                <input class="update" type="text"></div>-->
                 <div class="inputContainer buttons">
-                <button class="deltakerbtn" type="button">Rediger Deltakere</button>
-                <button class="updatebtn" type="button" >Update</button>
-                <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
+                    <button class="deltakerbtn" type="button">Rediger Deltakere</button>
+                    <button class="updatebtn" type="button" >Update</button>
+                    <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
                 </div>
             </div>
         </transition>
 
         <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
-            <button class="top" v-on:click="editTournament(tournament.name)">✎</button>
+            <button class="top" v-on:click="editTournament(tournament)">✎</button>
             <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: {{formatDate(tournament.date)}}</p>
@@ -74,16 +68,17 @@ export default {
     data() {
         return {
             tournaments: null,
-            editTournamentScreen: false
+            editTournamentScreen: false,
+            editTournamentData: null
         }
     },
     methods: {
         async fetchTournaments() {
 
             this.tournaments = []
-            const tournamentlist = await axios.get(`https://localhost:7211/api/Tournaments/123456789012345678901234`)
+            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
             console.log(tournamentlist)
-            this.tournaments = tournamentlist.data
+            this.tournaments = tournamentlist.data.tournaments
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
@@ -124,7 +119,8 @@ export default {
             var step = (x / tournaments) * 16;
             scrollContainer.scrollLeft += step;
         },
-        editTournament() {
+        editTournament(tournament) {
+            this.editTournamentData = tournament;
             this.editTournamentScreen = true;
         },
         closeTournament() {
