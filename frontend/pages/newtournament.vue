@@ -21,9 +21,6 @@
         <h1 class="display-4">{{tournament.name}} Deltakere</h1>
         <p class="lead">Rediger deltakere</p>
       </div>
-
-
-
       <div class="playerAddContainer">
         <div class="countContainer">
           <div class="playerCount">{{players.length}}</div>
@@ -37,13 +34,13 @@
 
 
 
-
-      
-      <div v-for="(name, index) in players" :key="index" class="deltakere">
-        <div class="playerBox">
-          <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
+      <div class="deltakere" v-for="i in Math.ceil(players.length / 8)" :key="i">
+        <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
+          <div class="playerBox">
+            <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
+          </div>
         </div>
-      </div>
+      </div>  
       <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
       <!--<input type="submit" value="Submit">-->
     </div>
@@ -65,7 +62,7 @@
 </template>
 
 
-<script>
+<script lang="js">
 const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
 let intPlayer = 1;
 import axios from 'axios';
