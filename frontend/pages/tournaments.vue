@@ -14,20 +14,25 @@
                 </div>
                 <div class="inputBox">
                     <h1>Navn:</h1>  
-                    <input class="update" type="text" placeholder="Tournament navn">
+                    <input v-model="editTournamentChanges.name" class="update" type="text" placeholder="Tournament navn">
                 </div>
                 <div class="inputBox">
                     <h1>Dato:</h1> 
-                    <input class="update" type="date">
+                    <input v-model="editTournamentChanges.date" class="update" type="date">
                 </div>
                 <div class="inputBox">
                     <h1>Status:</h1>
-                    <input class="update" type="text" placeholder="Tournament status">
+                    <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
+                    <label for="Fremtidig">Fremtidig</label>
+                    <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
+                    <label for="Påbegynt">Påbegynt</label>
+                    <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
+                    <label for="Gjennomført">Gjennomført</label>
                 </div>
                 <div class="inputContainer buttons">
                     <button class="deltakerbtn" type="button">Rediger Deltakere</button>
-                    <button class="updatebtn" type="button" >Update</button>
-                    <button class="deletebtn" type="button" onclick="deleteTournament()" >Delete</button>
+                    <button class="updatebtn" type="button" @click="updateTournament()">Update</button>
+                    <button class="deletebtn" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
                 </div>
             </div>
         </transition>
@@ -53,6 +58,7 @@
 
 <script >
 import env from '~/dotenv.json'
+
 import axios from 'axios'
 export default {
     name: "Tournaments",
@@ -69,10 +75,19 @@ export default {
         return {
             tournaments: null,
             editTournamentScreen: false,
-            editTournamentData: null
+            editTournamentData: null,
+            editTournamentChanges: {
+                name: '',
+                date: '',
+                players: [],
+                status: ''
+            }
         }
     },
     methods: {
+        showInfobar(message) {
+			this.$notifier.showMessage({ content: message, color: '#ff0000' })
+		},
         async fetchTournaments() {
 
             this.tournaments = []
@@ -93,11 +108,25 @@ export default {
             const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
             return new Date(date).toLocaleDateString('no', options)
         },
-        updateTournament(tournamentname) {
+        updateTournament() {
             axios.post(`${env.BASE_URL}/updatetournament`, {
-
+                id: this.editTournamentData._id,
+                name: this.editTournamentChanges.name,
+                date: this.editTournamentChanges.date,
+                status: this.editTournamentChanges.status
+            }).then((res) => {
+                this.editTournamentScreen = false;
+                console.log(res)
+                this.showInfobar(res.message);
+                this.editTournamentChanges.name = ""
+                this.editTournamentChanges.date = ""
+                this.editTournamentChanges.status = ""
+                this.editTournamentChanges.players = []
+                this.editTournamentData = null;
+                this.$nuxt.refresh();
+                
             })
-            console.log(tournaments)
+
         },
         left() {
             const scrollContainer = document.querySelector("main");
@@ -109,8 +138,6 @@ export default {
                 console.log(i);
                 setTimeout(1000);
             }
-  
-            
         },
         right() {
             const scrollContainer = document.querySelector("main");
@@ -126,8 +153,11 @@ export default {
         closeTournament() {
             this.editTournamentScreen = false;
         },
-        deleteTournament(){
-            
+        deleteTournament(tournamentId) {
+            axios.post(`${env.BASE_URL}/deletetournament`, {
+                id: tournamentId
+            })
+            console.log(tournaments)
         }
     },
     mounted() {

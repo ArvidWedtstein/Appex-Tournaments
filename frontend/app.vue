@@ -8,6 +8,7 @@
     </div>
     <slot/>
     <NuxtPage/>
+    <InfoBar></InfoBar>
   </div>
 </template>
 <script setup>
