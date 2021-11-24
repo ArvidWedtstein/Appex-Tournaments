@@ -63,23 +63,22 @@ exports.newtournament = async (req, res, next) => {
 }
 
 exports.updatetournament = async (req, res, next) => {
-    const {tournamentname, newname, newdate, players} = req.body;
+    const {id, ...tournamentData} = req.body;
     try {
         const tournament = await tournamentModel.findOneAndUpdate(
           {
-            name: tournamentname
+            _id: id
           },
-          {
-            name: newname,
-            date: newdate, 
-            players: players
-          }
+          tournamentData
         )
         if (!tournament) {
           const error = new Error("tournament with this name not found!");
-          error.statusCode = 401;
+          error.statusCode = 404;
           throw error;
         }
+        res.status(200).json({
+            message: "Updated Tournament"
+        });
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -90,16 +89,22 @@ exports.updatetournament = async (req, res, next) => {
 exports.deletetournament = async (req, res, next) => {
     const {id} = req.body;
     try {
-        const tournament = await tournamentModel.deleteOne(
+        const tournament = await tournamentModel.findOneAndDelete(
           {
             _id: id
           }
         )
         if (!tournament) {
-          const error = new Error("tournament with this name not found!");
-          error.statusCode = 401;
-          throw error;
+            const error = new Error("tournament with this ID not found!");
+            error.statusCode = 404;
+            res.status(404).json({
+                message: "tournament with this ID not found!",
+            });
+            throw error;
         }
+        res.status(200).json({
+            message: "Tournament Deleted",
+        });
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
