@@ -115,13 +115,14 @@ export default {
         
       },
       addPlayer() { 
+        if (intPlayer < 32){
         const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig"]
         const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann"]
         for(let i = 0; i < intPlayer; i++) {
           this.players.push({ name: adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)] })
         }
         intPlayer = (intPlayer * 2);
-      },
+      }},
       removePlayer(index) {
         if(intPlayer > 1){
         console.log(intPlayer)
@@ -232,6 +233,8 @@ $green: #DDE78B;
 $orange: #FAB487;
 #newtournament {
   background: $backclr !important;
+  height: 100vh;
+
 }
 #Matrix {
   position: absolute;
@@ -396,7 +399,11 @@ $orange: #FAB487;
         }
     }
 }
-
+.newTournament{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 .bracket {
     display: flex;
 }
