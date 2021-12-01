@@ -2,30 +2,29 @@
 
 <template>
   <div>
-    <div v-if="page === 2" class="page">
+    <div v-if="page === 1" class="page">
       <div class="tournament-brackets">
-        <div class="bracket">
+        <!--<div class="bracket">
           <div class="round" v-for="round in matches" :key="round">
-              <div class="match" v-for="match in round" :key="match">
-                  <div class="match__content"></div>
-                      <div class="matchplayer" v-for="player in match" :key="player">
-                          <button class="player" v-on:click="matchWin(round, player)" type="radio">{{player}}</button>
-                      </div>
-                  </div>
+            <div class="match" v-for="match in round" :key="match">
+              <div class="match__content">
+
               </div>
-          </div>
-        <!--<div class="round" v-for="round in rounds" :class="['round-' + 2]" >
-          <p>{{rounds}}</p>
-          
-          <div class="match" v-for="(match, matchIndex) in rounds[0]" :key="matchIndex" >
-            <p>{{round}}</p>
-            <div class="match__content">
-              <div class="matchplayer">
-                <button class="player" v-on:click="matchWin(players[match - 1])" type="button">{{players[match - 1]}}</button>
+              <div class="matchplayer" v-for="player in match" :key="player">
+                <button class="player" v-on:click="matchWin(round, player)" type="radio">{{player}}</button>
               </div>
             </div>
           </div>
         </div>-->
+        <div class="bracket">
+          <div class="round" v-for="(round, i) in matches" :key="i">
+            <div class="match" v-for="(match, x) in round" :key="x">
+              <div class="matchplayer" v-for="(player, l) in match.matches" :key="l">
+                <p>{{ player }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <canvas id="Matrix"></canvas>
@@ -46,16 +45,35 @@ export default {
         bracketSize: 0,
         matches: [
           [
-
+            {
+              id:"a174mqnu",
+              winner: "",
+              matches: [
+                "bruker1",
+                "bruker2"
+              ]
+            },
+            {
+              id:"heko7o7h",
+              winner: "",
+              matches: [
+                "bruker1",
+                "bruker2"
+              ]
+            }
+          ],
+          [
+            {
+              id:"a174mqnu",
+              winner: "",
+              matches: [
+                "bruker1",
+                "bruker2"
+              ]
+            }
           ],
           [
 
-          ],
-          [
-
-          ],
-          [
-            
           ]
         ]
       }

@@ -22,7 +22,7 @@ exports.gettournaments = async (req, res, next) => {
 }
 
 exports.newtournament = async (req, res, next) => {
-    var randomstring = Math.random().toString(36).slice(-8);
+    const randomstring = () => Math.random().toString(36).slice(-8);
     console.log(req.body)
     const body = req.body;
     const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
@@ -32,7 +32,7 @@ exports.newtournament = async (req, res, next) => {
         matches.push([])
         for (let z = 0; z < rounds[i] / 2; z++) {
             const match = {
-                id: randomstring,
+                id: randomstring(),
                 matches: [], 
                 winner: ''
             }
@@ -61,7 +61,34 @@ exports.newtournament = async (req, res, next) => {
       matches: matches
     });
 }
-
+exports.matchwin = async (req, res, next) => {
+    const { _id, matchid, winner } = req.body;
+    try {
+        const tournament = await tournamentModel.findOne(
+          {
+            _id: _id
+          }
+        )
+        console.log(tournament.matches.flat())
+        const match = tournament.matches.flat().find(x => x.id === matchid);
+        console.log(match)
+        match.winner = winner;
+        if (!tournament) {
+          const error = new Error("tournament with this id not found!");
+          error.statusCode = 404;
+          throw error;
+        }
+        res.status(200).json({
+            message: "Winner set",
+            data: match
+        });
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
 exports.updatetournament = async (req, res, next) => {
     const {id, ...tournamentData} = req.body;
     try {

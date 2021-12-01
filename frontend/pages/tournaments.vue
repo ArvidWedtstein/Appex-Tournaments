@@ -92,7 +92,7 @@ export default {
         async fetchTournaments() {
 
             this.tournaments = []
-            const tournamentlist = await axios.get(`${env.BASE_URL}/gettournaments`)
+            const tournamentlist = await axios.get(`${env.BASE_URL}/Tournament`)
             console.log(tournamentlist)
             this.tournaments = tournamentlist.data.tournaments
         },
@@ -110,7 +110,7 @@ export default {
             return new Date(date).toLocaleDateString('no', options)
         },
         updateTournament() {
-            axios.post(`${env.BASE_URL}/updatetournament`, {
+            axios.post(`${env.BASE_URL}/updatetournament`, { // in progress
                 id: this.editTournamentData._id,
                 name: this.editTournamentChanges.name,
                 date: this.editTournamentChanges.date,

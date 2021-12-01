@@ -24,7 +24,7 @@
       <div class="playerAddContainer">
         <div class="countContainer">
           <div class="playerCount">{{players.length}}</div>
-          <div><p>deltakere</p></div>
+          <p>Deltakere</p>
         </div>
         <div class="btnContainer">
           <button class="minusBtn" @click="removePlayer()">-</button>
@@ -47,6 +47,7 @@
         <button class="past" v-on:click="decreasePage()"><img src="https://icons-for-free.com/iconfiles/png/512/arrow+left+chevron+chevronleft+left+left+icon+icon-1320185731545502691.png" width="50px"></button>
       </div>
     </div>
+
     <div v-if="page === 2" class="page">
       <div class="tournament-brackets">
         <div class="bracket">
@@ -54,7 +55,7 @@
             <div class="match" v-for="match in round" :key="match">
               <div class="match__content"></div>
               <div class="matchplayer" v-for="player in match" :key="player">
-                <button class="player" v-on:click="matchWin(round, player)" type="button">{{player}}</button>
+                <button class="player" v-on:click="matchWin(matchId, player, match.Id)" type="button">{{player}}</button>
               </div>
             </div>
           </div>
@@ -81,13 +82,14 @@ export default {
           date: ''
         },
         players: [{name: ''}],
-        matches: []
+        matches: [],
+        tournamentId: ""
       }
     },
     methods: {
       newTournament() {
         console.log(this.players)
-        axios({
+        /*axios({
           method: 'post',
           url: `${env.BASE_URL}/newtournament`,
           data: {
@@ -95,17 +97,24 @@ export default {
             tournamentdate: this.tournament.date,
             players: this.players
           }
+        })*/
+        axios({
+          method: 'post',
+          url: `${env.BASE_URL}/Tournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          data: this.players
         }).then(async (response) => {
           
-          console.log(response.data.matches);
-          this.matches = response.data.matches;
+          console.log(response);
+          //this.matches = response.data.matches;
+          this.matches = response.Rounds;
+          this.tournamentId = response.Id;
         })
         this.increasePage()
       },
       async getTournament() {
         await axios({
           method: 'get',
-          url: `${env.BASE_URL}/gettournaments`
+          url: `${env.BASE_URL}/Tournament`
         }).then(async (response) => {
           await console.log(response)
         });
@@ -122,25 +131,25 @@ export default {
       }},
       removePlayer(index) {
         if(intPlayer > 1){
-        console.log(intPlayer)
-        var playerDevide = (intPlayer / 2)
-        for (var i = 0; i < playerDevide; i++){
-          this.players.splice(index, 1);
-          intPlayer = this.players.length;
-        }
+          console.log(intPlayer)
+          var playerDevide = (intPlayer / 2)
+          for (var i = 0; i < playerDevide; i++){
+            this.players.splice(index, 1);
+            intPlayer = this.players.length;
+          }
         }
         
       },
-      async matchWin(round, playername) {
-        /*await axios({
+      async matchWin(tournamentId, winner, matchId) {
+        await axios({
           method: 'post',
-          url: `${env.BASE_URL}/gettournaments`
+          url: `${env.BASE_URL}/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
         }).then(async (response) => {
           await console.log(response)
-        });*/
+        });
         
         // Winner
-        if (this.matches.indexOf(round) >= this.matches.length-1) {
+        /*if (this.matches.indexOf(round) >= this.matches.length-1) {
           return
         }
         
@@ -152,7 +161,7 @@ export default {
         this.matches[nextmatchint][0].push(playername)
         if (this.matches[nextmatchint][0].length >= rounds[nextmatchint]) {
           this.matches[nextmatchint][0] = this.matches[nextmatchint][0].slice(0, rounds[nextmatchint])
-        }
+        }*/
       },
       increasePage() {
         if (this.page == 2) return
