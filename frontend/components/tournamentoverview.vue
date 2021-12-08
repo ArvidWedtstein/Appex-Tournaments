@@ -95,6 +95,7 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
+$bracketlinecolor: #DDE78B;
 body {
   overflow: auto;
 }
@@ -181,7 +182,7 @@ body {
         content: "";
         display: block;
         width: 20px;
-        border-bottom: 2px solid purple;
+        border-bottom: 2px solid $bracketlinecolor;
         margin-left: -10px;
         position: absolute;
         top: 50%;
@@ -201,7 +202,7 @@ body {
         content: "";
         display: block;
         min-height: 20px;
-        border-left: 2px solid purple;
+        border-left: 2px solid $bracketlinecolor;
         position: absolute;
         left: -10px;
         top: 60%;
@@ -218,20 +219,20 @@ body {
         content: "";
         display: block;
         border: 2px solid transparent;
-        border-top-color: purple;
-        border-right-color: purple;
+        border-top-color: $bracketlinecolor;
+        border-right-color: $bracketlinecolor;
         height: 50%;
         position: absolute;
         right: -10px;
         width: 10px;
-        top: 50%;
+        top: 60%;
       }
       &:nth-child(even)::after {
         content: "";
         display: block;
         border: 2px solid transparent;
-        border-bottom-color: purple;
-        border-right-color: purple;
+        border-bottom-color: $bracketlinecolor;
+        border-right-color: $bracketlinecolor;
         height: 50%;
         position: absolute;
         right: -10px;
@@ -243,11 +244,11 @@ body {
           content: "";
           display: block;
           width: 20px;
-          border-bottom: 2px solid purple;
+          border-bottom: 2px solid $bracketlinecolor;
           margin-left: -2px;
           position: absolute;
-          top: 50%;
-          left: -10px;
+          top: 55%;
+          //left: -10px;
         }
       }
       .matchplayer {
@@ -261,7 +262,7 @@ body {
           flex: 1 1 auto;
           margin: 0;
           padding: 0.3rem 1rem;
-          border: 2px solid black;
+          border: 2px solid $green;
 		  /*background: $orange;
 		  color: $black;*/
 

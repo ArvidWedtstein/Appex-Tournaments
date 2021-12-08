@@ -53,9 +53,10 @@
             <div class="editTournament" v-if="showTournamentScreen">
                 <button class="close" type="button" v-on:click="closeTournament()">✖</button>
                 <div class="headerContainer">
-                    <h6>{{showTournamentData.Name}}</h6>
+                    <h3><b>"{{showTournamentData.Name}}"</b> Tournament</h3>
+                    <h3>Status: <b>{{showTournamentData.status}}</b></h3>
                 </div>
-                <div class="inputBox">
+                <div class="inputBox border">
                     <div class="bracket">
                         <div class="round" v-for="round in showTournamentData.rounds" :key="round">
                             <div class="match" v-for="match in round" :key="match">
@@ -69,7 +70,8 @@
                     <Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>
                 </div>
                 <div class="inputContainer buttons">
-                    <a class="deltakerbtn" :href="'/tournament?id=' + showTournamentData.id" type="button">Fortsett turnering</a>
+                    <a class="deltakerbtn" :href="'/tournament?id=' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
+                    <a class="updatebtn" :href="'/tournament?id=' + showTournamentData.id" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
                     <button class="deltakerbtn" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</button>
                 </div>
             </div>
@@ -85,9 +87,9 @@
                     <p>{{tournament.Name}}</p>
                 </div>
                 <div class="tfooter">
-                    <!--<p class="players">{{tournament.players.length}}</p>-->
+                    <p class="players">{{countPlayers(tournament)}}</p>
                     <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-                    <!--<p class="winner">{{tournament.players[tournament.players.length -1].name}}</p>-->
+                    <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
                 </div>
              </div>
         </div>
@@ -134,6 +136,10 @@ export default {
         };
     },
     methods: {
+        countPlayers(tournament) {
+            let length = tournament.rounds[0].length * 2;
+            return length
+        },
         async fetchTournaments() {
             this.tournaments = [];
             const tournamentlist = await axios.get(`${env.BASE_URL}/get-tournament`);
@@ -354,7 +360,7 @@ template{
             flex: 1 1 auto;
             &::after {
                 content: '//';
-                padding: 0 1rem;
+                padding: 0 0.5rem;
             }
         }
     }
@@ -469,6 +475,18 @@ template{
         }    
 
     }*/ 
+    @mixin rad-shadow {
+        border: 1px solid hsl(200 10% 50% / 15%);
+        box-shadow: 0 1rem .5rem -.5rem;
+        box-shadow:
+        0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
+        0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
+        0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
+        0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
+        0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
+        0 100px 80px hsl(200 50% 3% / .3)
+        ;
+    }
     .inputContainer{
         display: flex;
         flex-direction: row;
@@ -476,7 +494,7 @@ template{
         align-items: center;
         align-content: center;
         margin: 0 -1rem;
-        &.buttons >*{
+        &.buttons > * {
             padding: 1rem;
             margin: 1rem;
             flex: 1 1 auto;
@@ -493,12 +511,11 @@ template{
                 -webkit-transform: translate(0px, 5px);
                 box-shadow: 0px 1px 0px 0px;
             }
-
-            
         }
-        .updatebtn{
+        .updatebtn {
             background-color: $blue;
             color: #fff;
+            border-radius: 0.25rem;
         }
         .deletebtn{
             width: auto;
@@ -526,10 +543,15 @@ template{
     .inputBox {
         flex: 1 1 auto;
         padding: 0.2rem;
-        
-        h1{
-              font-size: 20px;
-              font-weight: 600;
+        &.border {
+            padding: 3rem;
+            background: $dark-grey;
+            border-radius: 0.5rem;
+            @include rad-shadow;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
         }
         input {
             position: relative;
