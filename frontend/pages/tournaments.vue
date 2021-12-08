@@ -22,8 +22,8 @@
             <div class="editTournament" v-if="editTournamentScreen">
                 <button class="close" type="button" v-on:click="closeTournament()">✖</button>
                 <div class="headerContainer">
-                    <h1>Edit Tournament</h1>
-                    <p>"{{editTournamentData.name}}"</p>
+                    <h1>Rediger Tournament</h1>
+                    <p>{{editTournamentData.Name}}</p>
                 </div>
                 <div class="inputBox">
                     <h1>Navn:</h1>  
@@ -49,15 +49,40 @@
                 </div>
             </div>
         </transition>
+        <transition name="fade">
+            <div class="editTournament" v-if="showTournamentScreen">
+                <button class="close" type="button" v-on:click="closeTournament()">✖</button>
+                <div class="headerContainer">
+                    <h6>{{showTournamentData.Name}}</h6>
+                </div>
+                <div class="inputBox">
+                    <div class="bracket">
+                        <div class="round" v-for="round in showTournamentData.rounds" :key="round">
+                            <div class="match" v-for="match in round" :key="match">
+                                <div class="match__content">{{match.id}}</div>
+                                <div class="matchplayer" v-for="player in match.players" :key="player">
+                                    <button class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>
+                </div>
+                <div class="inputContainer buttons">
+                    <a class="deltakerbtn" :href="'/tournament?id=' + showTournamentData.id" type="button">Fortsett turnering</a>
+                    <button class="deltakerbtn" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</button>
+                </div>
+            </div>
+        </transition>
 
         <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
-            <button class="top" v-on:click="editTournament(tournament)">✎</button>
+            <button class="top" v-on:click="editTournament(tournament)" v-cloak>✎</button>
             <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: {{formatDate(tournament.date)}}</p>
                 </div>
-                <div class="tcontent">
-                    <p>{{tournament.name}}</p>
+                <div class="tcontent" v-on:click="showTournament(tournament)">
+                    <p>{{tournament.Name}}</p>
                 </div>
                 <div class="tfooter">
                     <!--<p class="players">{{tournament.players.length}}</p>-->
@@ -72,6 +97,7 @@
 <script>
 import env from '~/dotenv.json'
 import axios from 'axios'
+import Tournamentoverview from '~~/components/tournamentoverview.vue'
 export default {
     name: "Tournaments",
     /*async asyncData() {
@@ -83,35 +109,40 @@ export default {
             tournamentasync
         }
     },*/
+    async asyncData({ $axios, $config }) {
+      console.log($config)
+    
+    },
     data() {
         return {
             tournaments: null,
             editTournamentScreen: false,
+            showTournamentScreen: false,
             editTournamentData: null,
+            showTournamentData: null,
             editTournamentChanges: {
-                name: '',
-                date: '',
+                name: "",
+                date: "",
                 players: [],
-                status: ''
+                status: ""
             },
             infoBar: {
                 show: false,
-                message: '',
+                message: "",
                 color: "#ff0000"
             }
-        }
+        };
     },
     methods: {
         async fetchTournaments() {
-
-            this.tournaments = []
-            const tournamentlist = await axios.get(`${env.BASE_URL}/Tournament`)
-            console.log(tournamentlist)
-            this.tournaments = tournamentlist.data.tournaments
+            this.tournaments = [];
+            const tournamentlist = await axios.get(`${env.BASE_URL}/get-tournament`);
+            console.log(tournamentlist);
+            this.tournaments = tournamentlist.data;
         },
         horizontalScroll() {
             const scrollContainer = document.querySelector("main");
-            if (scrollContainer)  {
+            if (scrollContainer) {
                 scrollContainer.addEventListener("wheel", (evt) => {
                     evt.preventDefault();
                     scrollContainer.scrollLeft += evt.deltaY;
@@ -119,29 +150,27 @@ export default {
             }
         },
         formatDate(date) {
-            const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
-            return new Date(date).toLocaleDateString('no', options)
+            const options = { year: "numeric", month: "numeric", day: "2-digit" };
+            return new Date(date).toLocaleDateString("no", options);
         },
         updateTournament() {
-            axios.post(`${env.BASE_URL}/updatetournament`, { // in progress
+            axios.post(`${env.BASE_URL}/updateTournament`, {
                 id: this.editTournamentData._id,
                 name: this.editTournamentChanges.name,
                 date: this.editTournamentChanges.date,
                 status: this.editTournamentChanges.status
             }).then((res) => {
                 this.editTournamentScreen = false;
-                console.log(res)
-                this.infoBar.show = true
-                this.infoBar.message = 'test'
-                this.editTournamentChanges.name = ""
-                this.editTournamentChanges.date = ""
-                this.editTournamentChanges.status = ""
-                this.editTournamentChanges.players = []
+                console.log(res);
+                this.infoBar.show = true;
+                this.infoBar.message = "test";
+                this.editTournamentChanges.name = "";
+                this.editTournamentChanges.date = "";
+                this.editTournamentChanges.status = "";
+                this.editTournamentChanges.players = [];
                 this.editTournamentData = null;
                 this.$nuxt.refresh();
-                
-            })
-
+            });
         },
         left() {
             const scrollContainer = document.querySelector("main");
@@ -161,30 +190,38 @@ export default {
             var step = (x / tournaments) * 16;
             scrollContainer.scrollLeft += step;
         },
-        editTournament(tournament) {
-            this.editTournamentData = tournament;
+        async editTournament(tournament) {
+            console.log(tournament);
+            this.editTournamentData = await tournament;
             this.editTournamentScreen = true;
+        },
+        async showTournament(tournament) {
+            this.showTournamentData = await tournament;
+            this.showTournamentScreen = true;
+            console.log(this.showTournamentData);
         },
         closeTournament() {
             this.editTournamentScreen = false;
-            this.editTournamentChanges.name = ""
-            this.editTournamentChanges.date = ""
-            this.editTournamentChanges.status = ""
-            this.editTournamentChanges.players = []
+            this.showTournamentScreen = false;
+            this.editTournamentChanges.name = "";
+            this.editTournamentChanges.date = "";
+            this.editTournamentChanges.status = "";
+            this.editTournamentChanges.players = [];
             this.editTournamentData = null;
+            this.showTournamentData = null;
         },
         deleteTournament(tournamentId) {
             axios.post(`${env.BASE_URL}/deletetournament`, {
                 id: tournamentId
-            })
-            console.log(tournaments)
+            });
+            console.log(tournaments);
         }
     },
     mounted() {
-        this.horizontalScroll()
-        this.fetchTournaments()
-    }
-
+        this.horizontalScroll();
+        this.fetchTournaments();
+    },
+    components: { Tournamentoverview }
 }
 </script>
 
@@ -365,10 +402,10 @@ template{
     .headerContainer{
         text-align: center;
         flex: 1 1 auto;
-        h1{
+        h1 {
             font-size: 4vw;
         }
-        p{
+        p {
             font-size: 2vw;
         }
     }

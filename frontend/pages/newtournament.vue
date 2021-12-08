@@ -12,18 +12,22 @@
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <div class="pagebtn">
-          <button class="next" @click="increasePage()"><img src="../static/images/arrowBlue.png"></button>
+          <button class="next" @click="increasePage()">
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
     <div v-if="page === 1" class="page">
       <div class="headerContainer">
-        <h1 class="display-4">{{tournament.name}} Deltakere</h1>
+        <h1 class="display-4">"{{ tournament.name }}" Deltakere</h1>
         <p class="lead">Rediger deltakere</p>
       </div>
       <div class="playerAddContainer">
         <div class="countContainer">
-          <div class="playerCount">{{players.length}}</div>
+          <div class="playerCount">{{ players.length }}</div>
           <p>Deltakere</p>
         </div>
         <div class="btnContainer">
@@ -37,34 +41,24 @@
       <div class="deltakere" v-for="i in Math.ceil(players.length / 8)" :key="i">
         <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
           <div class="playerBox">
-            <input class="playername" v-model="players[index].name" type="text" v-bind:placeholder= "'Deltaker' + index">
+            <input class="playername" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
           </div>
         </div>
       </div>  
-      <button class="newTournament" v-on:click="newTournament()" type="button">New Tourament</button>
+      <button class="newTournament" @click="newTournament()" type="button">New Tournament</button>
       <!--<input type="submit" value="Submit">-->
     </div>
 
     <div v-if="page === 2" class="page">
-      <div class="tournament-brackets">
-        <div class="bracket">
-          <div class="round" v-for="round in matches" :key="round">
-            <div class="match" v-for="match in round" :key="match">
-              <div class="match__content"></div>
-              <div class="matchplayer" v-for="player in match" :key="player">
-                <button class="player" v-on:click="matchWin(matchId, player, match.Id)" type="button">{{player}}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <tournamentoverview :tournamentprop="turnering"></tournamentoverview>
+      <NuxtLink to="/tournament">Begynn turnerng</NuxtLink>
+      <NuxtLink to="/">Utsett turnerng</NuxtLink>
     </div>
   </div>
 </template>
 
 
-<script lang="js">
-const defaultRounds = [256, 128, 64, 32, 16, 8, 4, 2, 1];
+<script>
 let intPlayer = 1;
 import axios from 'axios';
 import env from '~/dotenv.json'
@@ -78,51 +72,34 @@ export default {
           name: '',
           date: ''
         },
-        players: [{name: ''}],
+        players: [""],
         matches: [],
-        tournamentId: ""
+        turnering: {}
       }
     },
     methods: {
-      newTournament() {
+      async newTournament() {
         console.log(this.players)
-        /*axios({
-          method: 'post',
-          url: `${env.BASE_URL}/newtournament`,
-          data: {
-            tournamentname: this.tournament.name,
-            tournamentdate: this.tournament.date,
-            players: this.players
-          }
-        })*/
         axios({
           method: 'post',
-          url: `${env.BASE_URL}/Tournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `${env.BASE_URL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
-          console.log(response);
+          console.log(response.data);
           //this.matches = response.data.matches;
-          this.matches = response.Rounds;
-          this.tournamentId = response.Id;
+          this.matches = response.data.rounds;
+          this.turnering = response.data;
         })
         this.increasePage()
       },
-      async getTournament() {
-        await axios({
-          method: 'get',
-          url: `${env.BASE_URL}/Tournament`
-        }).then(async (response) => {
-          await console.log(response)
-        });
-        
-      },
       addPlayer() { 
         if (intPlayer < 32){
-        const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig"]
-        const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann"]
+        const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig", "Treig"];
+        const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
         for(let i = 0; i < intPlayer; i++) {
-          this.players.push({ name: adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)] })
+          let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
+          this.players.push(playername)
         }
         intPlayer = (intPlayer * 2);
       }},
@@ -136,29 +113,6 @@ export default {
           }
         }
         
-      },
-      async matchWin(tournamentId, winner, matchId) {
-        await axios({
-          method: 'post',
-          url: `${env.BASE_URL}/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
-        }).then(async (response) => {
-          await console.log(response)
-        });
-        
-        // Winner
-        /*if (this.matches.indexOf(round) >= this.matches.length-1) {
-          return
-        }
-        
-        let rounds = defaultRounds.filter(p => p <= this.players.length)
-        let winnerint = this.matches[0].flat().indexOf(playername)
-        let nextmatchint = this.matches.indexOf(round) + 1;
-
-
-        this.matches[nextmatchint][0].push(playername)
-        if (this.matches[nextmatchint][0].length >= rounds[nextmatchint]) {
-          this.matches[nextmatchint][0] = this.matches[nextmatchint][0].slice(0, rounds[nextmatchint])
-        }*/
       },
       increasePage() {
         if (this.page == 2) return
@@ -215,11 +169,6 @@ export default {
         this.matrix()
       }
       //this.getTournament()
-    },
-    computed: {
-      rounds () {
-        return defaultRounds.filter(rounds => rounds <= this.bracketSize)
-      },
     }
 }
 </script>
@@ -249,7 +198,7 @@ $orange: #FAB487;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  width: 220px;
+  width: auto;
   margin: 0;
   .playerBox {
     //flex: 1 1 auto;
@@ -409,121 +358,6 @@ $orange: #FAB487;
     transform: translateY(-5px);
   }
 }
-.bracket {
-    display: flex;
-}
-
-.round {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-}
 
 
-.round:first-child .match::before {
-    display: none;
-}
-
-.round:first-child .match__content::before {
-    display: none;
-}
-
-.round:last-child .match::after {
-    display: none;
-}
-.round:last-child .match::before {
-    display: none;
-}
-.match {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 10px;
-    padding: 6px 0;
-    flex-grow: 1;
-    position: relative;
-    vertical-align: middle;
-    &::before {
-        content: "";
-        display: block;
-        min-height: 20px;
-        border-left: 2px solid purple;
-        position: absolute;
-        left: -10px;
-        top: 60%;
-        margin-top: -15px;
-        margin-left: -2px;
-    }
-    &:nth-child(2n+0) {
-        padding-top: 0;
-        padding-top: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-}
-.match:nth-child(odd)::after {
-    content: "";
-    display: block;
-    border: 2px solid transparent;
-    border-top-color: purple;
-    border-right-color: purple;
-    height: 50%;
-    position: absolute;
-    right: -10px;
-    width: 10px;
-    top: 50%;
-}
-
-.match:nth-child(even)::after {
-    content: "";
-    display: block;
-    border: 2px solid transparent;
-    border-bottom-color: purple;
-    border-right-color: purple;
-    height: 50%;
-    position: absolute;
-    right: -10px;
-    width: 10px;
-    bottom: 50%;
-}
-.round:last-child {
-    .match__content::before {
-        content: "";
-        display: block;
-        width: 20px;
-        border-bottom: 2px solid purple;
-        margin-left: -10px;
-        position: absolute;
-        top: 50%;
-        left: -10px;
-    }
-}
-.match__content::before {
-    content: "";
-    display: block;
-    width: 20px;
-    border-bottom: 2px solid purple;
-    margin-left: -2px;
-    position: absolute;
-    top: 50%;
-    left: -10px;
-}
-.matchplayer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    .player {
-        flex: 1 1 auto;
-        margin: 0;
-        padding: 0.3rem 1rem;
-        border: 2px solid black;
-        text-align: left;
-        position: relative;
-    }
-}
 </style>

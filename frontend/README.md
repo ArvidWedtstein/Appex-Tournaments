@@ -39,12 +39,7 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 
 ## TODO
 
-- Sjekke at alle input feltene er fylt ut før man kan gå til neste side/opprette turnering.
+- Lage funksjon for å sette turnering på pause/gjenoppta turnering
 
-- Farger / Colorscheme
-
-- Abbegs background former
-
-- Lage side for tidligere turneringer
-
+- Endre bracketoppsettet til å være i Abbegs stil
 
