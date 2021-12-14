@@ -97,14 +97,14 @@
 </template>
 
 <script>
-import env from '~/dotenv.json'
+//import env from '~/dotenv.json'
 import axios from 'axios'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
 export default {
     name: "Tournaments",
     /*async asyncData() {
         console.log('sus')
-        const tournamentasync = await axios.get(`${env.BASE_URL}/gettournaments`)
+        const tournamentasync = await axios.get(`http://localhost:7122/gettournaments`)
         console.log(tournamentasync)
         this.horizontalScroll()
         return {
@@ -142,7 +142,7 @@ export default {
         },
         async fetchTournaments() {
             this.tournaments = [];
-            const tournamentlist = await axios.get(`${env.BASE_URL}/get-tournament`);
+            const tournamentlist = await axios.get(`http://localhost:7122/get-tournament`);
             console.log(tournamentlist);
             this.tournaments = tournamentlist.data;
         },
@@ -160,7 +160,7 @@ export default {
             return new Date(date).toLocaleDateString("no", options);
         },
         updateTournament() {
-            axios.post(`${env.BASE_URL}/updateTournament`, {
+            axios.post(`http://localhost:7122/updateTournament`, {
                 id: this.editTournamentData._id,
                 name: this.editTournamentChanges.name,
                 date: this.editTournamentChanges.date,
@@ -217,7 +217,7 @@ export default {
             this.showTournamentData = null;
         },
         deleteTournament(tournamentId) {
-            axios.post(`${env.BASE_URL}/deletetournament`, {
+            axios.post(`http://localhost:7122/deletetournament`, {
                 id: tournamentId
             });
             console.log(tournaments);
