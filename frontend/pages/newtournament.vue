@@ -61,7 +61,7 @@
 <script>
 let intPlayer = 1;
 import axios from 'axios';
-import env from '~/dotenv.json'
+//import env from '~/dotenv.json'
 export default {
    template: 'newtournament',
    transition: 'slide-bottom',
@@ -82,7 +82,7 @@ export default {
         console.log(this.players)
         axios({
           method: 'post',
-          url: `${env.BASE_URL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `http://localhost:7122/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
