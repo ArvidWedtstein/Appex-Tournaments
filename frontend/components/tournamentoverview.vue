@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios';
-import env from '~/dotenv.json'
+//import env from '~/dotenv.json'
 export default {
 	name: "tournamentoverview",
 	props: {
@@ -60,7 +60,7 @@ export default {
 		async matchWin(tournamentId, winner, matchId) {
 			await axios({
 				method: 'post',
-				url: `${env.BASE_URL}/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: `http://localhost:7122/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
 			}).then(async (response) => {
 				//await console.log(response)
 				this.getTournament(tournamentId)
@@ -69,7 +69,7 @@ export default {
 		async getTournament(id) {
 			await axios({
 				method: 'get',
-				url: `${env.BASE_URL}/get-tournament/${id}`
+				url: `http://localhost:7122/get-tournament/${id}`
 			}).then(async (response) => {
 				//await console.log(response.data)
 				this.tournament = response.data;
