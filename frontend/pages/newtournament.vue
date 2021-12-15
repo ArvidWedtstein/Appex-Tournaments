@@ -50,19 +50,8 @@
     </div>
 
     <div v-if="page === 2" class="page">
-      <div class="inputBox border">
-        <div class="bracket">
-          <div class="round" v-for="round in turnering.rounds" :key="round">
-            <div class="match" v-for="match in round" :key="match">
-              <div class="match__content">{{match.id}}</div>
-              <div class="matchplayer" v-for="player in match.players" :key="player">
-                  <button class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--<Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>-->
-      </div>
+      <h1>Oppsett:</h1>
+      <Tournamentoverview :tournamentprop="turnering"></Tournamentoverview>
       <NuxtLink :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
       <NuxtLink to="/">Utsett turnering</NuxtLink>
     </div>

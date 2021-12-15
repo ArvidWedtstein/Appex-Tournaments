@@ -1,8 +1,8 @@
 <template>
   <div class="editTournament">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
-    <button class="deletebtn">Sett turnering på pause</button>
-  
+    <a href="/tournaments" class="deletebtn">Sett turnering på pause</a>
+    <canvas id="Matrix"></canvas>
   </div>
 </template>
   
@@ -47,45 +47,45 @@ export default {
       });
     },
     matrix() {
-    const canvas = document.getElementById('Matrix');
-    const context = canvas.getContext("2d");
-    this.vueCanvas = context;
+      const canvas = document.getElementById('Matrix');
+      const context = canvas.getContext("2d");
+      this.vueCanvas = context;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-    const fontSize = 16;
-    const columns = canvas.width/fontSize;
-    const rainDrops = [];
+      const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
+      const fontSize = 16;
+      const columns = canvas.width/fontSize;
+      const rainDrops = [];
 
-    for( let x = 0; x < columns; x++ ) {
-      rainDrops[x] = 1;
-    }
-    const draw = () => {
-      context.fillStyle = 'rgba(255, 255, 255, 0.05)';
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      //context.fillStyle = '#0F0';
-      context.fillStyle = '#000000';
-      context.font = fontSize + 'px fraktur';
-
-      for(let i = 0; i < rainDrops.length; i++)
-      {
-        const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-        context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-        if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-          rainDrops[i] = 0;
-        }
-        rainDrops[i]++;
+      for( let x = 0; x < columns; x++ ) {
+        rainDrops[x] = 1;
       }
-    };
-    setInterval(draw, 60);
+      const draw = () => {
+        context.fillStyle = 'rgba(255, 240, 255, 0.05)';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = '#0835C4';
+        //context.fillStyle = '#ffffff';
+        context.font = fontSize + 'px fraktur';
+
+        for(let i = 0; i < rainDrops.length; i++)
+        {
+          const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
+          context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+          if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+            rainDrops[i] = 0;
+          }
+          rainDrops[i]++;
+        }
+      };
+      setInterval(draw, 60);
     }
   },
   mounted() {
-    //this.matrix()
+    this.matrix()
     this.getturnering();
   },
 }
@@ -104,6 +104,7 @@ $orange: #FAB487;
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
   z-index: -1;
 }
 

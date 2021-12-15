@@ -71,7 +71,7 @@
                 </div>
                 <div class="inputContainer buttons">
                     <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
-                    <a class="updatebtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
+                    <a class="updatebtn" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
                     <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
                 </div>
             </div>
@@ -136,6 +136,16 @@ export default {
         };
     },
     methods: {
+        async resetTournament(id) {
+            const t = await axios.get(`https://localhost:7021/resetTournament/${id}`).then(async (res) => {
+                console.log(res.data)
+                let chosentournament = this.tournaments.find(t => t.id === res.data.id);
+                
+                chosentournament = res.data;
+                this.tournaments[this.tournaments.indexOf(chosentournament)] = chosentournament;
+            });
+            window.location.reload();
+        },
         countPlayers(tournament) {
             let length = tournament.rounds[0].length * 2;
             return length
@@ -217,7 +227,7 @@ export default {
             this.showTournamentData = null;
         },
         deleteTournament(tournamentId) {
-            axios.post(`https://localhost:7021/deletetournament`, {
+            axios.delete(`https://localhost:7021/deletetournament`, {
                 id: tournamentId
             });
             console.log(tournaments);
