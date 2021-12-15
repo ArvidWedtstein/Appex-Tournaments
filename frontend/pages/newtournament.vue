@@ -50,9 +50,21 @@
     </div>
 
     <div v-if="page === 2" class="page">
-      <tournamentoverview :tournamentprop="turnering"></tournamentoverview>
-      <NuxtLink to="/tournament">Begynn turnerng</NuxtLink>
-      <NuxtLink to="/">Utsett turnerng</NuxtLink>
+      <div class="inputBox border">
+        <div class="bracket">
+          <div class="round" v-for="round in turnering.rounds" :key="round">
+            <div class="match" v-for="match in round" :key="match">
+              <div class="match__content">{{match.id}}</div>
+              <div class="matchplayer" v-for="player in match.players" :key="player">
+                  <button class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>-->
+      </div>
+      <NuxtLink :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
+      <NuxtLink to="/">Utsett turnering</NuxtLink>
     </div>
   </div>
 </template>
@@ -62,9 +74,11 @@
 let intPlayer = 1;
 import axios from 'axios';
 //import env from '~/dotenv.json'
+import tournamentoverview from '~~/components/tournamentoverview.vue';
 export default {
    template: 'newtournament',
    transition: 'slide-bottom',
+   components: { tournamentoverview },
    data() {
       return {
         page: 0,
@@ -82,7 +96,7 @@ export default {
         console.log(this.players)
         axios({
           method: 'post',
-          url: `http://localhost:7122/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `https://localhost:7021/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
@@ -290,11 +304,33 @@ $orange: #FAB487;
         font-weight: 400;
       }
     }
+    @mixin rad-shadow {
+        border: 1px solid hsl(200 10% 50% / 15%);
+        box-shadow: 0 1rem .5rem -.5rem;
+        box-shadow:
+        0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
+        0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
+        0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
+        0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
+        0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
+        0 100px 80px hsl(200 50% 3% / .3)
+        ;
+    }
     .inputBox{
-        flex: 1 1 auto;
         padding: 0.2rem;
-        margin-top: 70px;
-        
+        margin: 8vw 0;
+        padding: 5rem 0!important;
+  
+        &.border {
+            display: flex;
+            flex: 1 1 auto;
+            align-content: center;
+            align-items: center;
+            padding: 8rem 8rem !important;
+            background: $dark-grey;
+            border-radius: 0.5rem;
+            @include rad-shadow;
+        }
         h1{
               font-size: 20px;
               font-weight: 600;
@@ -331,16 +367,16 @@ $orange: #FAB487;
         }
     }
     .pagebtn {
-      position: absolute;
-      width: 50px;
+      position: fixed;
+      min-width: 50px !important;
       right: 0;
       bottom: 0;
-      margin: 2rem 4rem;
-        .next {
-            float: right;
-            color: black;
-            right: 0;
-        }
+      margin: 4rem 4rem;
+      .next {
+        width: 100%;
+        color: black;
+        right: 0;
+      }
     }
 }
 .newTournament{

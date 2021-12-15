@@ -53,7 +53,7 @@
             <div class="editTournament" v-if="showTournamentScreen">
                 <button class="close" type="button" v-on:click="closeTournament()">✖</button>
                 <div class="headerContainer">
-                    <h3><b>"{{showTournamentData.Name}}"</b> Tournament</h3>
+                    <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
                     <h3>Status: <b>{{showTournamentData.status}}</b></h3>
                 </div>
                 <div class="inputBox border">
@@ -62,28 +62,28 @@
                             <div class="match" v-for="match in round" :key="match">
                                 <div class="match__content">{{match.id}}</div>
                                 <div class="matchplayer" v-for="player in match.players" :key="player">
-                                    <button class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+                                    <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>
+                    <!--<Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>-->
                 </div>
                 <div class="inputContainer buttons">
-                    <a class="deltakerbtn" :href="'/tournament?id=' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
-                    <a class="updatebtn" :href="'/tournament?id=' + showTournamentData.id" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
-                    <button class="deltakerbtn" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</button>
+                    <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
+                    <a class="updatebtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
+                    <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
                 </div>
             </div>
         </transition>
 
-        <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
+        <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament" v-on:click="showTournament(tournament)">
             <button class="top" v-on:click="editTournament(tournament)" v-cloak>✎</button>
             <div class="cardContainer">
                 <div class="tspace">
                     <p>Dato: {{formatDate(tournament.date)}}</p>
                 </div>
-                <div class="tcontent" v-on:click="showTournament(tournament)">
+                <div class="tcontent">
                     <p>{{tournament.Name}}</p>
                 </div>
                 <div class="tfooter">
@@ -104,7 +104,7 @@ export default {
     name: "Tournaments",
     /*async asyncData() {
         console.log('sus')
-        const tournamentasync = await axios.get(`http://localhost:7122/gettournaments`)
+        const tournamentasync = await axios.get(`https://localhost:7021/get-tournament`)
         console.log(tournamentasync)
         this.horizontalScroll()
         return {
@@ -142,7 +142,7 @@ export default {
         },
         async fetchTournaments() {
             this.tournaments = [];
-            const tournamentlist = await axios.get(`http://localhost:7122/get-tournament`);
+            const tournamentlist = await axios.get(`https://localhost:7021/get-tournament`);
             console.log(tournamentlist);
             this.tournaments = tournamentlist.data;
         },
@@ -160,7 +160,7 @@ export default {
             return new Date(date).toLocaleDateString("no", options);
         },
         updateTournament() {
-            axios.post(`http://localhost:7122/updateTournament`, {
+            axios.post(`https://localhost:7021/Tournament`, {
                 id: this.editTournamentData._id,
                 name: this.editTournamentChanges.name,
                 date: this.editTournamentChanges.date,
@@ -217,7 +217,7 @@ export default {
             this.showTournamentData = null;
         },
         deleteTournament(tournamentId) {
-            axios.post(`http://localhost:7122/deletetournament`, {
+            axios.post(`https://localhost:7021/deletetournament`, {
                 id: tournamentId
             });
             console.log(tournaments);
@@ -544,6 +544,9 @@ template{
         flex: 1 1 auto;
         padding: 0.2rem;
         &.border {
+            display: flex;
+            align-content: center;
+            align-items: center;
             padding: 3rem;
             background: $dark-grey;
             border-radius: 0.5rem;
@@ -592,5 +595,12 @@ template{
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.bracket {
+    flex: 1 1 auto;
+    position: relative;
+    align-content: center;
+    align-self: center;
+    vertical-align: middle;
 }
 </style>
