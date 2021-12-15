@@ -90,6 +90,7 @@ body {
   overflow: hidden;
   position: absolute;
   //left: -17%;
+  right: 0;
   top: 0;
   z-index: -2;
 }
