@@ -5,7 +5,7 @@
     <div class="pg1-content-container">
     <canvas id="Matrix"></canvas>
       <div class="txt-btn-pg1">
-        <h1>Velkommen til Appex tournament</h1>
+        <h1>Velkommen til Appex Tournaments!</h1>
         <div class="btn-container">
             <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
             <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
@@ -135,27 +135,27 @@ body {
   width: 100%;
 
 }
-  .blueBtn, .grey {
-    //flex-grow: 1;
-    width: 40%;
-    font-weight: 600;
-    padding: 1rem;
-    margin: 5%;
-    color: #fff;
-    position: relative;
-    border: none;
-    text-decoration: none;
-    background: $btncolorblue;
+.blueBtn, .grey {
+  //flex-grow: 1;
+  width: 40%;
+  font-weight: 600;
+  padding: 1rem;
+  margin: 5%;
+  color: #fff;
+  position: relative;
+  border: none;
+  text-decoration: none;
+  background: $btncolorblue;
 
-    &:hover {
-      transform: translateY(-5px);
-    }
+  &:hover {
+    transform: translateY(-5px);
   }
-  .grey {
-    background: $btncolorgrey;
-  }
+}
+.grey {
+  background: $btncolorgrey;
+}
 
-  @media(max-width: 500px) {
+@media(max-width: 500px) {
   .blueBtn, .grey{
     width: 100%;
     padding: 0.5rem;

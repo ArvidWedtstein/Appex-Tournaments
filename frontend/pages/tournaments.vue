@@ -439,52 +439,7 @@ template{
         &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
             color: gray;
         }
-    }/*
-    .deltakerbtn, .updatebtn {
-        background: $orange;
-        color: #000000;
-        border: none;
-        transition: all 0.1s ease;
-        &:hover {
-            transform: translateY(-2.5px);
-        }
-        &:active {
-            transform: translate(0px, 2.5px);
-            -webkit-transform: translate(0px, 5px);
-            box-shadow: 0px 1px 0px 0px;
-        }  
     }
-    .deltakerbtn >{
-            background-color: $blue;
-    }
-    .deletebtn {
-        position: absolute;
-        right: 45px;
-        //bottom: 45px;
-        //padding: 0.5rem 1rem;
-        //margin: 0 1rem;
-        flex: 1 1 auto;
-        align-self: center;
-        background: #C0392B;
-        color: white;
-        border: none;
-        border-bottom: 2px solid white;
-        border-radius: calc(0.25rem - 1px);
-        transition: all 0.1s ease;
-        text-align: center;
-        &:hover {
-            border-bottom: 4px solid red;
-            background: red;
-            padding-bottom: calc(8px - 2px);
-            padding: 20px 60px;
-        }
-        &:active {
-            transform: translate(0px, 5px);
-            -webkit-transform: translate(0px, 5px);
-            box-shadow: 0px 1px 0px 0px;
-        }    
-
-    }*/ 
     @mixin rad-shadow {
         border: 1px solid hsl(200 10% 50% / 15%);
         box-shadow: 0 1rem .5rem -.5rem;

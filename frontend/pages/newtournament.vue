@@ -362,6 +362,36 @@ $orange: #FAB487;
       bottom: 0;
       margin: 4rem 4rem;
       .next {
+        transition: all 0.5s;
+        &:hover {
+          &::before {
+            content: "";
+            width: 100%;
+            padding: 1rem;
+            position: absolute;
+            top: 0;
+            left: 10px;
+            right: 0;
+            background-image: url('/images/arrow.svg');
+            opacity: 0.5;
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+          &::after {
+            content: "";
+            width: 100%;
+            padding: 1rem;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            right: 0;
+            background-image: url('/images/arrow.svg');
+            opacity: 0.5;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            transform: translateX(-10px);
+          }
+        }
         width: 100%;
         color: black;
         right: 0;
