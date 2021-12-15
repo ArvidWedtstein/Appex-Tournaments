@@ -7,7 +7,7 @@
     
 <script>
 
-//import env from '~/dotenv.json'
+import env from '~/dotenv.json'
 import axios from 'axios'
 import Tournamentoverview from '~/components/tournamentoverview.vue'
 export default {
