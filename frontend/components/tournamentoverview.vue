@@ -4,7 +4,7 @@
 			<div v-if="tournament" class="bracket">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
 					<div class="match" v-for="(match, m) in round" :key="m">
-						<div class="match__content">{{match.id}}</div>
+						<div class="match__content"></div>
 						<div class="matchplayer" v-for="player in match.players" :key="player">
 							<button class="player" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
 						</div>

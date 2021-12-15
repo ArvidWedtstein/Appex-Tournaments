@@ -56,8 +56,7 @@ public class TournamentController : ControllerBase {
 
     private static Random rng = new Random();
     // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
-    //[Route("/matchwin/{id:length(24)}?{winner}&{matchId}")]
-    [HttpPost("{id:length(24)}")]
+    [HttpPost]
     public async Task<ActionResult> Matchwin(string id, string winner, string matchId)
     {
         var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
@@ -157,8 +156,8 @@ public class TournamentController : ControllerBase {
         return CreatedAtAction(nameof(Get), new { id = newTournament.Id }, newTournament);
     }
 
-    [Route("/updateTournment")]
     //[HttpPut("{id:length(24)}")]
+    [Route("/updateTournment")]
     [HttpPost]
     public async Task<IActionResult> Update(string id, Tournament updatedTournament)
     {
@@ -175,7 +174,7 @@ public class TournamentController : ControllerBase {
     }
 
     [Route("/resetTournament/{id:length(24)}")]
-    [HttpGet("{id:length(24)}")]
+    [HttpGet]
     public async Task<IActionResult> Reset(string id)
     {
         var tournament = await _tournamentService.GetAsync(id);
