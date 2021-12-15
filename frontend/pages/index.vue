@@ -107,7 +107,7 @@ body {
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
-  z-index: -1;  
+  z-index: 1;  
   
   h1{
     flex: 1 1 auto;
