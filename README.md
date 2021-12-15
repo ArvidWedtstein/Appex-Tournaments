@@ -27,7 +27,7 @@ Skal fungere noenlunde som https://challonge.com/
 - Teste og justere.
 - Kalle inn til første test-turnering "Appex Biljard 2022"  :D
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ca7f49fe-7b58-4944-bf0c-dba98a8b8576/deploy-status)](https://app.netlify.com/sites/appextournaments/deploys)
 
 ## Roller:
 
