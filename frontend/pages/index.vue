@@ -39,10 +39,10 @@ export default {
         const canvas = document.getElementById('Matrix');
         const context = canvas.getContext("2d");
         this.vueCanvas = context;
-        canvas.width = 10000;
+        canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 45;
+        const fontSize = 32;
         const speed = 60;
         const columns = 500/fontSize;
         const rainDrops = [];
@@ -89,7 +89,7 @@ body {
 #Matrix {
   overflow: hidden;
   position: absolute;
-  left: -17%;
+  //left: -17%;
   top: 0;
   z-index: -2;
 }
