@@ -89,7 +89,7 @@ body {
 #Matrix {
   overflow: hidden;
   position: absolute;
-  left: 17%;
+  left: 60%;
   top: 0;
   z-index: -2;
 }
