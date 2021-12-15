@@ -1,5 +1,3 @@
-
-
 <template>
 	<div class="design-container">
 		<div class="tournament-brackets">
@@ -8,18 +6,19 @@
 					<div class="match" v-for="(match, m) in round" :key="m">
 						<div class="match__content">{{match.id}}</div>
 						<div class="matchplayer" v-for="player in match.players" :key="player">
-							<button class="player" v-on:click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+							<button class="player" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
 						</div>
 						<!--<p>Match: {{m+1}}</p>-->
 					</div>
-					<div v-if="i == tournament.rounds.length - 1 && tournament.rounds[tournament.rounds.length - 1][0].winner" class="finalWinner">
-						<div class="bogs">
-							<h3>Final Winner:</h3>
-							<h1>{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</h1>
-							<br>
-							<NuxtLink to="/">Return</NuxtLink>
-						</div>
-					</div>
+          <div v-if="!Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')" class="finalWinner">
+            <div class="bogs">
+              {{Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')}}
+              <h3>Final Winner:</h3>
+              <h1>{{ tournament.rounds[tournament.rounds.length - 1][0] }}</h1>
+              <br>
+              <NuxtLink to="/">Hjem</NuxtLink>
+            </div>
+          </div>
 				</div>
 			</div>
 		</div>
@@ -30,7 +29,6 @@
 
 <script>
 import axios from 'axios';
-//import env from '~/dotenv.json'
 export default {
 	name: "tournamentoverview",
 	props: {
@@ -41,12 +39,11 @@ export default {
 			tournament: {}
 		}
 	},
-	mounted() {
+	async mounted() {
 	  if (document.querySelector('#Matrix')){
 		//this.matrix()
 	  }
-	  console.log("tournamentoverview test")
-	  console.log(this.tournament)
+    
 	},
 	watch: {
 		tournamentprop: function () {
@@ -60,23 +57,38 @@ export default {
 		async matchWin(tournamentId, winner, matchId) {
 			await axios({
 				method: 'post',
-				url: `http://localhost:7122/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: `https://localhost:7021/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
 			}).then(async (response) => {
-				//await console.log(response)
-				this.getTournament(tournamentId)
+				await console.log(response.data)
+        
+        this.tournament = response.data;
+        //await this.$nuxt.refresh();
+        window.location.reload()
+				//this.getTournament(tournamentId)
 			});
 		},
 		async getTournament(id) {
+      console.log('gettournament')
 			await axios({
 				method: 'get',
-				url: `http://localhost:7122/get-tournament/${id}`
+				url: `https://localhost:7021/get-tournament/${id}`
 			}).then(async (response) => {
 				//await console.log(response.data)
 				this.tournament = response.data;
 			});
-
-			
 		},
+    async Contains(obj, key) {
+      console.log(obj)
+      if (!obj) return false;
+      let value = false;
+      if (obj.winner == null || obj.winner == 'undefined') {
+        value = false;
+      } else if (obj.winner != null) {
+        value = true;
+      }
+      console.log('contains isnull', value)
+      return value;
+    }
 	},
 }
 </script>
@@ -96,6 +108,18 @@ $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
 $bracketlinecolor: #DDE78B;
+@mixin rad-shadow {
+  border: 1px solid hsl(200 10% 50% / 15%);
+  box-shadow: 0 1rem .5rem -.5rem;
+  box-shadow:
+  0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
+  0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
+  0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
+  0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
+  0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
+  0 100px 80px hsl(200 50% 3% / .3)
+  ;
+}
 body {
   overflow: auto;
 }
@@ -107,7 +131,16 @@ body {
   top: 0;
   z-index: 0;
 }
-
+.tournament-brackets {
+  display: flex;
+  flex: 1 1 auto;
+  align-content: center;
+  align-items: center;
+  padding: 8rem 8rem !important;
+  background: $dark-grey;
+  border-radius: 0.5rem;
+  @include rad-shadow;
+}
 .finalWinner {
 	position: fixed;
 	top: 0;
@@ -154,7 +187,10 @@ body {
 }
 .bracket {
   display: flex;
+  align-content: center;
+  align-items: center;
   .round {
+    flex: 1 1 auto;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
