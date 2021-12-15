@@ -2,13 +2,13 @@
 
 <template>
   <div class="design-container">
-    <canvas id="Matrix"></canvas>
     <div class="pg1-content-container">
+    <canvas id="Matrix"></canvas>
       <div class="txt-btn-pg1">
         <h1>Velkommen til Appex tournament</h1>
         <div class="btn-container">
-          <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
-          <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
+            <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
+            <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default {
     },
     mounted() {
       if (document.querySelector('#Matrix')){
-        //this.matrix()
+        this.matrix()
       }
     },
     methods: {
@@ -39,19 +39,19 @@ export default {
         const canvas = document.getElementById('Matrix');
         const context = canvas.getContext("2d");
         this.vueCanvas = context;
-        canvas.width = 500;
+        canvas.width = 10000;
         canvas.height = window.innerHeight;
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 32;
+        const fontSize = 45;
         const speed = 60;
-        const columns = 500/fontSize;
+        const columns = 10000/fontSize;
         const rainDrops = [];
 
         for( let x = 0; x < columns; x++ ) {
             rainDrops[x] = 1;
         }
         const draw = () => {
-            context.fillStyle = 'rgba(237, 236, 233, 0.05)';
+            context.fillStyle = 'rgba(237, 236, 233, 0.5)';
             context.fillRect(0, 0, canvas.width, canvas.height );
         
             context.fillStyle = '#000000';
@@ -78,7 +78,9 @@ export default {
 
 
 <style lang="scss">
-$backclr: #edece9;
+//$backclr: #edece9;
+$backclr: #edebe9;
+
 $btncolorblue: #0835C4;
 $btncolorgrey: #444444;
 body {
@@ -87,15 +89,14 @@ body {
 #Matrix {
   overflow: hidden;
   position: absolute;
-  margin-left: 70%;
-  right: 0;
+  left: -17%;
   top: 0;
-  z-index: 0;
+  //z-index: 0;
 }
 
 .pg1-content-container{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   display: flex;
   align-content: center;
@@ -105,8 +106,7 @@ body {
   background-image: url("../static/images/frontpage-grapics.png");
   background-position: 10% 100%;
   background-repeat: no-repeat;
-  background-size: 700px;
-  padding: 2rem;
+  background-size: 1008px;
   z-index: -1;  
   
   h1{
@@ -117,30 +117,31 @@ body {
   }
 }
 .txt-btn-pg1{
-  margin-right: 40%;
-  margin-bottom: 50px;
+  //margin-right: 40%;
+  //margin-bottom: 50px;
   text-align: center;
-  align-items: center;
   width: 50vw;
+  margin-right: 40%;
+  h1{
+    font-size: 45px;
+  }
 }
 .btn-container {
-  position: relative;
-  display: inline-flex;
-  flex-direction: row;
-  padding: 1rem;
-  margin-bottom: 10%;
-  gap: 50px;
+  //padding: 1rem;
+  //margin-bottom: 10%;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 16px;
   width: 100%;
 
 }
-  .blueBtn {
-    flex: 0 1 auto;
-    width: 50%;
+  .blueBtn, .grey {
+    //flex-grow: 1;
+    width: 40%;
     font-weight: 600;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: #ffffff;
+    padding: 1rem;
+    margin: 5%;
+    color: #fff;
     position: relative;
     border: none;
     text-decoration: none;
@@ -151,19 +152,31 @@ body {
     }
   }
   .grey {
-    flex: 0 1 auto;
-    width: 50%;
-    font-weight: 600;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: #ffffff;
-    position: relative;
-    border: none;
-    text-decoration: none;
-
-    &:hover {
-       transform: translateY(-5px);
-    }
     background: $btncolorgrey;
   }
+
+  @media(max-width: 500px) {
+  .blueBtn, .grey{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 13px;
+    margin: 5px;
+  }
+  .txt-btn-pg1{
+    width: 100%;
+    margin-right: 0;
+    padding: 5%;
+    margin-top: -20vh;
+    h1{
+      font-size: 31px;
+    }
+  }
+  .pg1-content-container{
+    background-size: 350px;
+    background-position: 200% 100%;
+  }
+  #Matrix{
+    display: none;
+  }
+}
 </style>
