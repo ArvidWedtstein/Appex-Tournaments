@@ -91,7 +91,7 @@ body {
   position: absolute;
   left: -17%;
   top: 0;
-  //z-index: 0;
+  z-index: -2;
 }
 
 .pg1-content-container{
