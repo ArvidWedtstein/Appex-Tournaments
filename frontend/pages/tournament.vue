@@ -13,7 +13,6 @@ import Tournamentoverview from '~/components/tournamentoverview.vue'
 export default {
     name: "tournament",
     async asyncData({ $axios, params, $route }) {
-      console.log("ASYNCDATA AAAAAAAAAAAAAAAAAAAA")
       console.log(this.$route.query)
       await $axios.get(`http://localhost:7122/get-tournament/${$route.query.id}`).then(async (res) => {
         console.log(res)
