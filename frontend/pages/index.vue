@@ -44,7 +44,7 @@ export default {
         const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
         const fontSize = 45;
         const speed = 60;
-        const columns = 10000/fontSize;
+        const columns = 500/fontSize;
         const rainDrops = [];
 
         for( let x = 0; x < columns; x++ ) {
@@ -103,7 +103,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: $backclr;
-  background-image: url("/images/frontpage-grapics.png");
+  background-image: url("./images/frontpage-grapics.png");
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
