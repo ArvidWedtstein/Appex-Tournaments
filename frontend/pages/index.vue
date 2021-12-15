@@ -103,7 +103,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: $backclr;
-  background-image: url("../static/images/frontpage-grapics.png");
+  background-image: url("/images/frontpage-grapics.png");
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
