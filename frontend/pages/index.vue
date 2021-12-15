@@ -84,7 +84,7 @@ $backclr: #edebe9;
 $btncolorblue: #0835C4;
 $btncolorgrey: #444444;
 body {
-  overflow: auto;
+  overflow: hidden;
 }
 #Matrix {
   overflow: hidden;
@@ -103,7 +103,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: $backclr;
-  background-image: url("./images/frontpage-grapics.png");
+  background-image: url("/images/frontpage-grapics.png"); // Bildebug blir fikset. 
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
