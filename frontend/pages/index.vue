@@ -51,7 +51,7 @@ export default {
             rainDrops[x] = 1;
         }
         const draw = () => {
-            context.fillStyle = 'rgba(237, 236, 233, 0.5)';
+            context.fillStyle = 'rgba(237, 236, 233, 0.1)';
             context.fillRect(0, 0, canvas.width, canvas.height );
         
             context.fillStyle = '#000000';
