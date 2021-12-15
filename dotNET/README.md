@@ -3,9 +3,10 @@
 Routes: 
 |Request Type|Name|Funker|
 |---|---|---|
-|GET|GetTournament|✔|
-|GET|GetTournament/id|✔|
-|POST|NewTourament|✔|
-|PUT|UpdateTournament|✔|
-|DELETE|DeleteTournament|✔|
-|POST|MatchWin|✔|
+|GET|get-tournament|✔|
+|GET|get-tournament/id|✔|
+|POST|createTournament|✔|
+|POST|updateTournament|✔|
+|GET|resetTournament|✔|
+|DELETE|Tournament/id|✔|
+|POST|Tournament|✔|
