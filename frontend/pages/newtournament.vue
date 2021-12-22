@@ -2,12 +2,12 @@
   <div id='newtournament'>
     <div v-if="page === 0" class="page">
       <div class="pg2-content-container">
-        <div class="inputBox">
+        <div class="inputBox padding">
           <h1>Skriv inn navnet på tournamentet</h1>
           <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
           <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
-        <div class="inputBox">
+        <div class="inputBox padding">
           <h1>Tournament dato</h1>
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
@@ -305,11 +305,12 @@ $orange: #FAB487;
         0 100px 80px hsl(200 50% 3% / .3)
         ;
     }
-    .inputBox{
+    .inputBox {
         padding: 0.2rem;
-        margin: 8vw 0;
-        padding: 5rem 0!important;
-  
+        &.padding {
+          margin: 4vw 0;
+          padding: 5rem 0;
+        }
         &.border {
             display: flex;
             flex: 1 1 auto;
