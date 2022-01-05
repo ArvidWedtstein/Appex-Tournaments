@@ -19,25 +19,7 @@ namespace tournament {
     public class Startup {
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var builder = WebApplication.CreateBuilder(args);
-            var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-            builder.Logging.ClearProviders();
-            builder.Logging.AddConsole();
-            // Add services to the container.
-            builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins, builder => { builder.WithOrigins("*", "https://localhost:3000").AllowAnyHeader() .AllowAnyMethod(); });
-                
-            });
-            builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredService<IOptions<TournamentDatabaseSettings>>().Value);
-            builder.Services.AddSingleton<TournamentService>();
-            builder.Services.AddControllers();
 
-
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
             //builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             if (env.IsDevelopment())
             {
@@ -47,12 +29,12 @@ namespace tournament {
             }
             
             app.UseRouting();
-            app.UseCors(MyAllowSpecificOrigins);
+            //app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
-            app.MapControllers();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
