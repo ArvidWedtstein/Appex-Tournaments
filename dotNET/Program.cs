@@ -20,6 +20,11 @@ builder.Services.AddCors(options =>
     {
         builder.WithOrigins("https://appextournament.netlify.app", "*").AllowAnyHeader();
     });
+    options.AddPolicy("CORSPolicy",
+    builder =>
+    {
+        builder.WithOrigins().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+    });
 });
 builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredService<IOptions<TournamentDatabaseSettings>>().Value);
 builder.Services.AddSingleton<TournamentService>();
