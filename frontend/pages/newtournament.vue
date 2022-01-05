@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>  
-      <button class="newTournament" @click="newTournament()" type="button">New Tournament</button>
+      <button class="btn blue abs p-1" @click="newTournament()" type="button">New Tournament</button>
       <!--<input type="submit" value="Submit">-->
     </div>
 
@@ -395,21 +395,7 @@ $orange: #FAB487;
     }
   }
 }
-.newTournament{
-  position: absolute;
-  right: 4rem;
-  bottom: 2rem;
-  font-weight: 600;
-  padding: 1rem;
-  color: #ffffff;
-  border: none;
-  text-decoration: none;
-  background: $blue;
 
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
 
 
 </style>
