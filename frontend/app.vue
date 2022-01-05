@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="logo">
-      <!--<img src="./static/images/logoDark.png" alt="logo">-->
       <NuxtLink to="/">
-        <img src="/images/logoDark.png" alt="logo">
+        <img src="/images/logoDark.png" alt="appexlogo">
       </NuxtLink>
     </div>
     <slot/>
