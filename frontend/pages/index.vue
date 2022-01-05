@@ -7,8 +7,8 @@
       <div class="txt-btn-pg1">
         <h1>Velkommen til Appex Tournaments!</h1>
         <div class="btn-container">
-            <nuxt-link to="/newtournament" class="blueBtn">Lag nytt tournament</nuxt-link>
-            <nuxt-link to="/tournaments" class="grey">Se tidligere tournaments</nuxt-link>
+          <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="btn grey rel p-1 mg-5">Se tidligere tournaments</nuxt-link>
         </div>
       </div>
     </div>
@@ -48,25 +48,25 @@ export default {
         const rainDrops = [];
 
         for( let x = 0; x < columns; x++ ) {
-            rainDrops[x] = 1;
+          rainDrops[x] = 1;
         }
         const draw = () => {
-            context.fillStyle = 'rgba(237, 236, 233, 0.1)';
-            context.fillRect(0, 0, canvas.width, canvas.height );
-        
-            context.fillStyle = '#000000';
-            context.font = fontSize + 'px fraktur';
+          context.fillStyle = 'rgba(237, 236, 233, 0.1)';
+          context.fillRect(0, 0, canvas.width, canvas.height );
+      
+          context.fillStyle = '#000000';
+          context.font = fontSize + 'px fraktur';
 
-            for(let i = 0; i < rainDrops.length; i++)
-            {
-                const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-                context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+          for(let i = 0; i < rainDrops.length; i++)
+          {
+            const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
+            context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
 
-                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+              rainDrops[i] = 0;
             }
+            rainDrops[i]++;
+          }
         };
         setInterval(draw, speed);
       }
@@ -94,7 +94,7 @@ body {
   z-index: -2;
 }
 
-.pg1-content-container{
+.pg1-content-container {
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -135,6 +135,7 @@ body {
   width: 100%;
 
 }
+
 .blueBtn, .grey {
   //flex-grow: 1;
   width: 40%;

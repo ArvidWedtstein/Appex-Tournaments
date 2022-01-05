@@ -51,10 +51,10 @@ $orange: #FAB487;
     box-sizing: border-box;
 }
 body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: $backclr;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: $backclr;
 }
  .logo img{
   z-index: 5;
@@ -65,5 +65,38 @@ body{
   padding: 2rem;
 }
 
+// Buttons 
+
+.btn {
+  font-weight: 600;
+  color: #ffffff;
+  border: none;
+  text-decoration: none;
+  
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+  &.blue {
+    background: $blue;
+  }
+  &.grey {
+    background: $dark-grey;
+  }
+  &.abs {
+    right: 4rem;
+    bottom: 2rem;
+    position: absolute;
+  }
+  &.rel {
+    position: relative;
+  }
+  &.p-1 {
+    padding: 1rem;
+  }
+  &.mg-5 {
+    margin: 5%;
+  }
+}
 
 </style>

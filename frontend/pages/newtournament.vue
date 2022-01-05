@@ -115,7 +115,6 @@ export default {
             intPlayer = this.players.length;
           }
         }
-        
       },
       increasePage() {
         if (this.page == 2) return
@@ -125,11 +124,10 @@ export default {
         } else {
           alert('Name and/or date cannot be empty')
         }
-        
       },
       decreasePage() {
-          if (this.page == 0) return
-          this.page -= 1;
+        if (this.page == 0) return
+        this.page -= 1;
       },
       matrix() {
         const canvas = document.getElementById('Matrix');
@@ -143,26 +141,26 @@ export default {
         const columns = 500/fontSize;
         const rainDrops = [];
 
-        for( let x = 0; x < columns; x++ ) {
-            rainDrops[x] = 1;
+        for (let x = 0; x < columns; x++ ) {
+          rainDrops[x] = 1;
         }
         const draw = () => {
-            context.fillStyle = 'rgba(237, 236, 233, 0.05)';
-            context.fillRect(0, 0, canvas.width, canvas.height );
-        
-            context.fillStyle = '#000000';
-            context.font = fontSize + 'px fraktur';
+          context.fillStyle = 'rgba(237, 236, 233, 0.05)';
+          context.fillRect(0, 0, canvas.width, canvas.height );
+      
+          context.fillStyle = '#000000';
+          context.font = fontSize + 'px fraktur';
 
-            for(let i = 0; i < rainDrops.length; i++)
-            {
-                const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-                context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+          for (let i = 0; i < rainDrops.length; i++)
+          {
+            const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
+            context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
 
-                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+            if (rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+              rainDrops[i] = 0;
             }
+            rainDrops[i]++;
+          }
         };
         setInterval(draw, speed);
       }
@@ -189,7 +187,6 @@ $orange: #FAB487;
 #newtournament {
   background: $backclr !important;
   height: 100vh;
-
 }
 #Matrix {
   position: absolute;
@@ -225,179 +222,178 @@ $orange: #FAB487;
     }
   }
 }
-.pg2-content-container{
+.pg2-content-container {
   width: 80%;
   height: 80vh;
   padding: 5vh 5%;
   align-items: center;
 }
 .page {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  .headerContainer{
+    text-align: center;
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 10vh;
+    h1{
+        font-size: 4vw;
+    }
+    p{
+        font-size: 2vw;
+    }
+  }
+  .playerAddContainer {
+    position: absolute;
+    top: 2vh;
+    right: 128px;
+    height: 140px;
+    width: 100px;
+  }
+  .btnContainer {
+    font-size: 3rem;
+    font-weight: 400;
     display: flex;
-    justify-content: center;
-    align-content: center;
     align-items: center;
-    position: relative;
-    flex-direction: column;
-    width: 100%;
-    max-height: 100%;
-    height: 100%;
-    .headerContainer{
-        text-align: center;
-        position: absolute;
-        top: 2vh;
-        left: 50%;
-        transform: translateX(-50%);
-        min-height: 10vh;
-        h1{
-            font-size: 4vw;
-        }
-        p{
-            font-size: 2vw;
-        }
-    }
-    .playerAddContainer{
+    .plusBtn {
       position: absolute;
-      top: 2vh;
-      right: 128px;
-      height: 140px;
-      width: 100px;
-    }
-    .btnContainer{
-      font-size: 3rem;
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      .plusBtn{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
-      .minusBtn{
-        position: absolute;
-        left: 0;
-        bottom: 0;
-      }
-
-    }
-    .countContainer {
-      .playerCount{
-        color: $blue;
-        font-size: 2.5rem;
-        font-weight: 400;
-        width: 100%;
-        text-align: center;
-      }
-      p{
-        width: 100%;
-        text-align: center;
-        font-weight: 400;
-      }
-    }
-    @mixin rad-shadow {
-        border: 1px solid hsl(200 10% 50% / 15%);
-        box-shadow: 0 1rem .5rem -.5rem;
-        box-shadow:
-        0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
-        0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
-        0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
-        0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
-        0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
-        0 100px 80px hsl(200 50% 3% / .3)
-        ;
-    }
-    .inputBox {
-        padding: 0.2rem;
-        &.padding {
-          margin: 4vw 0;
-          padding: 5rem 0;
-        }
-        &.border {
-            display: flex;
-            flex: 1 1 auto;
-            align-content: center;
-            align-items: center;
-            padding: 8rem 8rem !important;
-            background: $dark-grey;
-            border-radius: 0.5rem;
-            @include rad-shadow;
-        }
-        h1{
-              font-size: 20px;
-              font-weight: 600;
-        }
-        input {
-            position: relative;
-            flex: 1 1 auto;
-            background: transparent;
-            text-align: left;
-            vertical-align: middle;
-            outline: none;
-            width: 100%;
-            border: none;
-            color: $inputcolor;
-            padding-bottom: 10px;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid $inputcolor;
-            
-            &:focus {
-                color: $inputhovercolor;
-                border-bottom: 2px solid $inputhovercolor;
-            }
-            &:-webkit-autofill,
-            &:-webkit-autofill:hover, 
-            &:-webkit-autofill:focus, 
-            &:-webkit-autofill:active  {
-                -webkit-text-fill-color: black;
-              -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-              box-shadow: 0 0 0px 1000px #000 inset;
-              transition: background-color 5000s ease-in-out 0s;
-            }
-        }
-    }
-    .pagebtn {
-      position: fixed;
-      min-width: 50px !important;
       right: 0;
       bottom: 0;
-      margin: 4rem 4rem;
-      .next {
-        transition: all 0.5s;
-        &:hover {
-          &::before {
-            content: "";
-            width: 100%;
-            padding: 1rem;
-            position: absolute;
-            top: 0;
-            left: 10px;
-            right: 0;
-            background-image: url('/images/arrow.svg');
-            opacity: 0.5;
-            background-size: 100%;
-            background-repeat: no-repeat;
-          }
-          &::after {
-            content: "";
-            width: 100%;
-            padding: 1rem;
-            position: absolute;
-            top: 0;
-            left: -10px;
-            right: 0;
-            background-image: url('/images/arrow.svg');
-            opacity: 0.5;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            transform: translateX(-10px);
-          }
-        }
-        width: 100%;
-        color: black;
-        right: 0;
+    }
+    .minusBtn {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  .countContainer {
+    .playerCount{
+      color: $blue;
+      font-size: 2.5rem;
+      font-weight: 400;
+      width: 100%;
+      text-align: center;
+    }
+    p{
+      width: 100%;
+      text-align: center;
+      font-weight: 400;
+    }
+  }
+  @mixin rad-shadow {
+    border: 1px solid hsl(200 10% 50% / 15%);
+    box-shadow: 0 1rem .5rem -.5rem;
+    box-shadow:
+    0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
+    0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
+    0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
+    0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
+    0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
+    0 100px 80px hsl(200 50% 3% / .3)
+    ;
+  }
+  .inputBox {
+    padding: 0.2rem;
+    &.padding {
+      margin: 4vw 0;
+      padding: 5rem 0;
+    }
+    &.border {
+      display: flex;
+      flex: 1 1 auto;
+      align-content: center;
+      align-items: center;
+      padding: 8rem 8rem !important;
+      background: $dark-grey;
+      border-radius: 0.5rem;
+      @include rad-shadow;
+    }
+    h1{
+      font-size: 20px;
+      font-weight: 600;
+    }
+    input {
+      position: relative;
+      flex: 1 1 auto;
+      background: transparent;
+      text-align: left;
+      vertical-align: middle;
+      outline: none;
+      width: 100%;
+      border: none;
+      color: $inputcolor;
+      padding-bottom: 10px;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid $inputcolor;
+      
+      &:focus {
+        color: $inputhovercolor;
+        border-bottom: 2px solid $inputhovercolor;
+      }
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover, 
+      &:-webkit-autofill:focus, 
+      &:-webkit-autofill:active  {
+          -webkit-text-fill-color: black;
+        -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+        box-shadow: 0 0 0px 1000px #000 inset;
+        transition: background-color 5000s ease-in-out 0s;
       }
     }
+  }
+  .pagebtn {
+    position: fixed;
+    min-width: 50px !important;
+    right: 0;
+    bottom: 0;
+    margin: 4rem 4rem;
+    .next {
+      transition: all 0.5s;
+      &:hover {
+        /*&::before {
+          content: "";
+          width: 100%;
+          padding: 1rem;
+          position: absolute;
+          top: 0;
+          left: 10px;
+          right: 0;
+          background-image: url('/images/arrow.svg');
+          opacity: 0.5;
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+        &::after {
+          content: "";
+          width: 100%;
+          padding: 1rem;
+          position: absolute;
+          top: 0;
+          left: -10px;
+          right: 0;
+          background-image: url('/images/arrow.svg');
+          opacity: 0.5;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          transform: translateX(-10px);
+        }*/
+      }
+      width: 100%;
+      color: black;
+      right: 0;
+    }
+  }
 }
 .newTournament{
   position: absolute;
