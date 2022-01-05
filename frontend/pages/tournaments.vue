@@ -43,9 +43,9 @@
           <label for="Gjennomført">Gjennomført</label>
         </div>
         <div class="inputContainer buttons">
-          <button class="deltakerbtn" type="button">Rediger Deltakere</button>
-          <button class="updatebtn" type="button" @click="updateTournament()">Update</button>
-          <button class="deletebtn" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
+          <button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
+          <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
         </div>
       </div>
     </transition>
@@ -71,13 +71,13 @@
         </div>
         <div class="inputContainer buttons">
           <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
-          <a class="updatebtn" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
+          <a class="btn flex blue p-1 mg-1" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
           <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
         </div>
       </div>
     </transition>
 
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament" v-on:click="showTournament(tournament)">
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
       <button class="top" v-on:click="editTournament(tournament)" v-cloak>✎</button>
       <div class="cardContainer">
         <div class="tspace">
@@ -87,7 +87,7 @@
           <p>{{tournament.Name}}</p>
         </div>
         <div class="tfooter">
-          <p class="players">{{countPlayers(tournament)}}</p>
+          <p class="players" v-on:click="showTournament(tournament)">{{countPlayers(tournament)}}</p>
           <p v-if="tournament.status" class="status">{{tournament.status}}</p>
           <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
         </div>
@@ -433,10 +433,9 @@ template{
     flex: 1 1 auto;
     align-items: center;
     align-content: center;
-    margin: 0 -1rem;
-    &.buttons > * {
+    /*&.buttons > * {
       padding: 1rem;
-      margin: 1rem;
+      //margin: 1rem;
       flex: 1 1 auto;
       background: $orange;
       color: #000000;
@@ -451,7 +450,7 @@ template{
         -webkit-transform: translate(0px, 5px);
         box-shadow: 0px 1px 0px 0px;
       }
-    }
+    }*/
     .updatebtn {
       background-color: $blue;
       color: #fff;

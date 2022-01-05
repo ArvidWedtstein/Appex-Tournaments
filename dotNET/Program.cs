@@ -1,28 +1,44 @@
+﻿using tournament.Models;
+using tournament.Services;
+using Microsoft.Extensions.Options;
 
-using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using tournament;
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var builder = WebApplication.CreateBuilder(args);
 
-namespace tournament
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+// Add services to the container.
+builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
+builder.Services.AddCors(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.AddPolicy(name: MyAllowSpecificOrigins, builder => { builder.WithOrigins("*", "http://localhost:3000").AllowAnyHeader() .AllowAnyMethod(); });
+    
+});
+builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredService<IOptions<TournamentDatabaseSettings>>().Value);
+builder.Services.AddSingleton<TournamentService>();
+builder.Services.AddControllers();
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            string port = "8080";
-            string url = String.Concat("http://0.0.0.0:", port);
 
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>().UseUrls(url);
-                });
-        }
-    }
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+//builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+var app = builder.Build();
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+app.UseHttpsRedirection();
+
+app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
+//app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

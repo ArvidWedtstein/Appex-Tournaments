@@ -123,14 +123,7 @@ $bracketlinecolor: #DDE78B;
 body {
   overflow: auto;
 }
-#Matrix {
-  overflow: hidden;
-  position: absolute;
-  margin-left: 70%;
-  right: 0;
-  top: 0;
-  z-index: 0;
-}
+
 .tournament-brackets {
   display: flex;
   flex: 1 1 auto;

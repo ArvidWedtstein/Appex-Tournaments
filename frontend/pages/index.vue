@@ -8,7 +8,7 @@
         <h1>Velkommen til Appex Tournaments!</h1>
         <div class="btn-container">
           <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
-          <nuxt-link to="/tournaments" class="btn grey rel p-1 mg-5">Se tidligere tournaments</nuxt-link>
+          <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link>
         </div>
       </div>
     </div>
@@ -83,15 +83,9 @@ $backclr: #edebe9;
 $btncolorblue: #0835C4;
 $btncolorgrey: #444444;
 body {
-  overflow: hidden;
+  overflow: hidden !important;
 }
-#Matrix {
-  overflow: hidden;
-  position: absolute;
-  left: 60%;
-  top: 0;
-  z-index: -2;
-}
+
 
 .pg1-content-container {
   width: 100%;
@@ -135,33 +129,7 @@ body {
 
 }
 
-.blueBtn, .grey {
-  //flex-grow: 1;
-  width: 40%;
-  font-weight: 600;
-  padding: 1rem;
-  margin: 5%;
-  color: #fff;
-  position: relative;
-  border: none;
-  text-decoration: none;
-  background: $btncolorblue;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
-.grey {
-  background: $btncolorgrey;
-}
-
 @media(max-width: 500px) {
-  .blueBtn, .grey{
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 13px;
-    margin: 5px;
-  }
   .txt-btn-pg1{
     width: 100%;
     margin-right: 0;

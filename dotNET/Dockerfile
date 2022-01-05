@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["tournament.csproj", "tournament/"]
+COPY ["dotNET/tournament.csproj", "tournament/"]
 RUN dotnet restore "tournament/tournament.csproj"
 COPY . .
 WORKDIR "/src/tournament"

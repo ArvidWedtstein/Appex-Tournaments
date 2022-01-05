@@ -66,22 +66,30 @@ body{
 }
 
 // Buttons 
+$abbegsColors: (
+  "black": #221E20,
+  "darkgrey": #464544,
+  "grey": #D6D2CE,
+  "light-grey": #EDECE9,
+  "blue": #0835C4,
+  "green": #DDE78B,
+  "orange": #FAB487
+);
 
 .btn {
   font-weight: 600;
   color: #ffffff;
   border: none;
   text-decoration: none;
-  
+  border-radius: 0.25rem;
 
   &:hover {
     transform: translateY(-5px);
   }
-  &.blue {
-    background: $blue;
-  }
-  &.grey {
-    background: $dark-grey;
+  @each $abbegsColor, $i in $abbegsColors {
+    &.#{$abbegsColor} {
+      background-color: $i;
+    }	
   }
   &.abs {
     right: 4rem;
@@ -99,6 +107,25 @@ body{
   }
   &.mg-5 {
     margin: 5%;
+  }
+  &.mg-1 {
+    margin: 1rem;
+  }
+  &.flex {
+    flex: 1 1 auto;
+  }
+  &.delbtn {
+    background: #C0392B;
+    color: white;
+    border: none;
+    width: auto;
+    right: 45px;
+    flex: 1 1 auto;
+    align-self: center;
+    transition: all 0.1s ease;
+    &:hover {
+      background: red;
+    }
   }
 }
 
@@ -128,5 +155,14 @@ body{
     }
     
   }
+}
+
+// Matrix Animation
+#Matrix {
+  overflow: hidden;
+  position: absolute;
+  left: 60%;
+  top: 0;
+  z-index: -2;
 }
 </style>

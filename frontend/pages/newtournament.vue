@@ -186,12 +186,6 @@ $orange: #FAB487;
   background: $backclr !important;
   height: 100vh;
 }
-#Matrix {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-}
 .deltakere {
   display: flex;
   flex-direction: column;

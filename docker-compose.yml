@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tournament:
+    image: ${DOCKER_REGISTRY-}tournament
+    build:
+      context: .
+      dockerfile: dotNET/Dockerfile
