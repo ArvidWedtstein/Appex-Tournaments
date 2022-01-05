@@ -2,6 +2,7 @@
 using tournament.Services;
 using Microsoft.Extensions.Options;
 
+
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,7 @@ builder.Logging.AddConsole();
 // Add services to the container.
 builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
 builder.Services.AddCors(options => {
-    options.AddPolicy(name: MyAllowSpecificOrigins, builder => { builder.WithOrigins("*", "https://appextournament.netlify.app").AllowAnyHeader() .AllowAnyMethod(); });
+    options.AddPolicy(name: MyAllowSpecificOrigins, builder => { builder.WithOrigins("*", "https://appextournament.netlify.app"); });
 });
 builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredService<IOptions<TournamentDatabaseSettings>>().Value);
 builder.Services.AddSingleton<TournamentService>();
