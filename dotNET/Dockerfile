@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["dotNET/tournament.csproj", "tournament/"]
 RUN dotnet restore "tournament/tournament.csproj"
-COPY . .
+COPY dotNET tournament
 WORKDIR "/src/tournament"
 RUN dotnet build "tournament.csproj" -c Release -o /app/build
 
