@@ -88,6 +88,9 @@ body{
     bottom: 2rem;
     position: absolute;
   }
+  &.fix {
+    position: fixed;
+  }
   &.rel {
     position: relative;
   }
