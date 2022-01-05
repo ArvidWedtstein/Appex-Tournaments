@@ -83,7 +83,7 @@ export default {
         console.log(this.players)
         axios({
           method: 'post',
-          url: `https://localhost:7021/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           

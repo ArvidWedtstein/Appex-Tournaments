@@ -12,7 +12,7 @@ import axios from 'axios'
 export default {
   name: "tournament",
   async asyncData({ $axios, params, $route }) {
-    await $axios.get(`https://localhost:7021/get-tournament/${$route.params.id[0]}`).then(async (res) => {
+    await $axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${$route.params.id[0]}`).then(async (res) => {
       console.log(res)
     })
   },
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async getturnering() {
-      await axios.get(`https://localhost:7021/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
+      await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
         console.log(res.data)
         this.tournament = res.data
       })
@@ -31,7 +31,7 @@ export default {
     /*async matchWin(tournamentId, winner, matchId) {
       await axios({
         method: 'post',
-        url: `https://localhost:7021/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+        url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
       }).then(async (response) => {
         //await console.log(response)
         this.getTournament(tournamentId)
@@ -40,7 +40,7 @@ export default {
     async getTournament(id) {
       await axios({
         method: 'get',
-        url: `https://localhost:7021/get-tournament/${id}`
+        url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
       }).then(async (response) => {
         //await console.log(response.data)
         this.tournament = response.data;

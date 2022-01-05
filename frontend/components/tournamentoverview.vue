@@ -57,7 +57,7 @@ export default {
 		async matchWin(tournamentId, winner, matchId) {
 			await axios({
 				method: 'post',
-				url: `https://localhost:7021/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
 			}).then(async (response) => {
 				await console.log(response.data)
         
@@ -71,7 +71,7 @@ export default {
       console.log('gettournament')
 			await axios({
 				method: 'get',
-				url: `https://localhost:7021/get-tournament/${id}`
+				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
 			}).then(async (response) => {
 				//await console.log(response.data)
 				this.tournament = response.data;
