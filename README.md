@@ -47,8 +47,8 @@ Laget pages for oppretting av turnering (colorscheme in progress)
 
 - Abbegs background former
 
-<img align="center" width=800 src="frontend/static/images/sneakpeak1.PNG" />
-<img align="center" width=800 src="frontend/static/images/sneakpeak2.PNG" />
-<img align="center" width=800 src="frontend/static/images/sneakpeak3.PNG" />
-<img align="center" width=800 src="frontend/static/images/sneakpeak4.PNG" />
-<img align="center" width=800 src="frontend/static/images/sneakpeak5.PNG" />
+<img align="center" width=800 src="frontend/public/images/sneakpeak1.PNG" />
+<img align="center" width=800 src="frontend/public/images/sneakpeak2.PNG" />
+<img align="center" width=800 src="frontend/public/images/sneakpeak3.PNG" />
+<img align="center" width=800 src="frontend/public/images/sneakpeak4.PNG" />
+<img align="center" width=800 src="frontend/public/images/sneakpeak5.PNG" />
