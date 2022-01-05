@@ -78,7 +78,6 @@ export default {
 
 
 <style lang="scss">
-//$backclr: #edece9;
 $backclr: #edebe9;
 
 $btncolorblue: #0835C4;
