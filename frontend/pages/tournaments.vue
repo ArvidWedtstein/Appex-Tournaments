@@ -283,32 +283,7 @@ template{
   text-align: center;
   width: 100vw;
 }
-.dirbuttons {
-  position: fixed;
-  width: 50px;
-  margin: 2rem 4rem;
-  &.left {
-    img {
-      transform: rotate(180deg);
-    }
-    left: 0;
-  }
-  &.right {
-    right: 0;
-  }
-  &.top {
-    top: 6ch;
-  }
-  &.bottom {
-    bottom: 0;
-  }
-  &:hover, &:focus {
-    svg {
-      color: $dark-grey;
-    }
-    
-  }
-}
+
 .tournament {
   flex: 1 1 auto;
   min-height: 300px;
