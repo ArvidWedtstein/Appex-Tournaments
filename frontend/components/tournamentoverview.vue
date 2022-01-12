@@ -52,7 +52,7 @@ export default {
 	},
 	methods: {
 		async matchWin(tournamentId, winner, matchId) {
-      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament?id=${tournamentId}&winner=${winner}&matchId=${matchId}`
       const res = await axios.post(uri)
       console.log(res)
 			/*await axios({
