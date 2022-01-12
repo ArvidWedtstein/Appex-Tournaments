@@ -206,6 +206,7 @@ export default {
     },
     async redigerDeltakere() {
       console.log(this.editTournamentData)
+      console.log(this.editPlayers)
     },
     left() {
       const scrollContainer = document.querySelector("main");
