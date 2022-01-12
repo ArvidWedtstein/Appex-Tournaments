@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="deltakere" v-for="i in Math.ceil(editTournamentData.players.length / 8)" :key="i">
-          <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
+          <div v-for="(name, index) in editTournamentData.players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
             <div class="playerBox">
               <input class="playername" v-model="editTournamentData.players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
             </div>
