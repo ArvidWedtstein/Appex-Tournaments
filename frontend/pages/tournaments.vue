@@ -82,13 +82,6 @@
           <h1 class="display-4">"{{ editTournamentData.Name }}" Deltakere</h1>
           <p class="lead">Rediger deltakere</p>
         </div>
-        <div v-for="(round, i) in editTournamentData.rounds" :key="i">
-					<div v-for="(match, m) in round" :key="m">
-						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + i+m+k">
-						</div>
-					</div>
-				</div>
         <div v-for="(player, h) in editPlayers" :key="player">
           <div class="playerBox">
             <input class="playername" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
