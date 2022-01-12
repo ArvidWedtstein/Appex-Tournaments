@@ -43,9 +43,9 @@
           <label for="Gjennomført">Gjennomført</label>
         </div>
         <div class="inputContainer buttons">
-          <button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
+          <button class="btn flex orange p-1 mg-1" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
-          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)">Delete</button>
         </div>
       </div>
     </transition>
@@ -74,6 +74,33 @@
           <a class="btn flex blue p-1 mg-1" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
           <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
         </div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="editTournament" v-if="redigerDeltakerScreen">
+        <button class="close" type="button" v-on:click="closeTournament()">✖</button>
+        <div class="headerContainer">
+          <h1 class="display-4">"{{ showTournamentData.name }}" Deltakere</h1>
+          <p class="lead">Rediger deltakere</p>
+        </div>
+        <div class="playerAddContainer">
+          <div class="countContainer">
+            <div class="playerCount">{{ players.length }}</div>
+            <p>Deltakere</p>
+          </div>
+          <div class="btnContainer">
+            <button class="minusBtn" @click="removePlayer()">-</button>
+            <button class="plusBtn" @click="addPlayer()">+</button>
+          </div>
+        </div>
+        <div class="deltakere" v-for="i in Math.ceil(players.length / 8)" :key="i">
+          <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
+            <div class="playerBox">
+              <input class="playername" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
+            </div>
+          </div>
+        </div>  
+        <button class="btn blue abs p-1" @click="newTournament()" type="button">Ny Turnering</button>
       </div>
     </transition>
 
@@ -120,6 +147,7 @@ export default {
       tournaments: null,
       editTournamentScreen: false,
       showTournamentScreen: false,
+      redigerDeltakerScreen: false,
       editTournamentData: null,
       showTournamentData: null,
       editTournamentChanges: {
@@ -185,6 +213,9 @@ export default {
         this.$nuxt.refresh();
       });
     },
+    async redigerDeltakere() {
+
+    },
     left() {
       const scrollContainer = document.querySelector("main");
       var x = window.innerWidth;
@@ -216,6 +247,7 @@ export default {
     closeTournament() {
       this.editTournamentScreen = false;
       this.showTournamentScreen = false;
+      this.redigerDeltakerScreen = false;
       this.editTournamentChanges.name = "";
       this.editTournamentChanges.date = "";
       this.editTournamentChanges.status = "";
