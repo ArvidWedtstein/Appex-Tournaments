@@ -48,7 +48,7 @@
 
     <div v-if="page === 2" class="page">
       <h1 class="">Oppsett:</h1>
-      <Tournamentoverview :tournamentprop="turnering"></Tournamentoverview>
+      <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
       <!--<NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
       <NuxtLink class="btn orange rel p-1 mg-1" to="/">Utsett turnering</NuxtLink>-->
@@ -78,12 +78,12 @@ export default {
         },
         players: [""],
         matches: [],
-        turnering: {}
+        turnering: {},
+        previewturnering: {}
       }
     },
     methods: {
       async newTournament() {
-        console.log(this.players)
         axios({
           method: 'POST',
           url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
@@ -93,6 +93,13 @@ export default {
           console.log(response.data);
           //this.matches = response.data.matches;
           this.matches = response.data.rounds;
+          axios({
+            method: 'POST',
+            url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/previewmatch?id=${response.data.id}`
+          }).then(async (res) => {
+            console.log(res.data)
+            this.previewturnering = res.data;
+          })
           this.turnering = response.data;
         })
         this.increasePage()
