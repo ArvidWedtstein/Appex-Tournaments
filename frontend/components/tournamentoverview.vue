@@ -53,8 +53,9 @@ export default {
 	methods: {
 		async matchWin(tournamentId, winner, matchId) {
       const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
-      console.log(uri)
-			await axios({
+      const res = await axios.post(uri)
+      console.log(res)
+			/*await axios({
 				method: 'post',
 				url: uri
 			}).then(async (response) => {
@@ -64,7 +65,7 @@ export default {
         //await this.$nuxt.refresh();
         await window.location.reload()
 				//this.getTournament(tournamentId)
-			});
+			});*/
 		},
 		async getTournament(id) {
       console.log('gettournament')
