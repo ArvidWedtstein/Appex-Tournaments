@@ -91,8 +91,8 @@ export default {
         }).then(async (response) => {
           
           console.log(response.data);
-          //this.matches = response.data.matches;
           this.matches = response.data.rounds;
+          this.turnering = response.data;
           axios({
             method: 'POST',
             url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/previewmatch?id=${response.data.id}`
@@ -100,7 +100,7 @@ export default {
             console.log(res.data)
             this.previewturnering = res.data;
           })
-          this.turnering = response.data;
+          
         })
         this.increasePage()
       },
