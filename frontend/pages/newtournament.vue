@@ -127,7 +127,10 @@ export default {
       increasePage() {
         if (this.page == 2) return
         const regex = /^[a-zA-Z0-9]*$/
-        if (this.tournament.name && this.tournament.date && regex.test(this.tournament.name)) {
+        if (!regex.test(this.tournament.name)) {
+          alert('Name cannot contain invalid characters (only letters and numbers)')
+        }
+        if (this.tournament.name && this.tournament.date) {
           this.page += 1;
         } else {
           alert('Name and/or date cannot be empty')
