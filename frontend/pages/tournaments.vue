@@ -84,7 +84,7 @@
         </div>
         <div class="playerAddContainer">
           <div class="countContainer">
-            <div class="playerCount">{{ players.length }}</div>
+            <div class="playerCount">{{ editTournamentData.players.length }}</div>
             <p>Deltakere</p>
           </div>
           <div class="btnContainer">
@@ -92,14 +92,14 @@
             <button class="plusBtn" @click="addPlayer()">+</button>
           </div>
         </div>
-        <div class="deltakere" v-for="i in Math.ceil(players.length / 8)" :key="i">
+        <div class="deltakere" v-for="i in Math.ceil(editTournamentData.players.length / 8)" :key="i">
           <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
             <div class="playerBox">
-              <input class="playername" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
+              <input class="playername" v-model="editTournamentData.players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
             </div>
           </div>
         </div>  
-        <button class="btn blue abs p-1" @click="newTournament()" type="button">Ny Turnering</button>
+        <button class="btn blue abs p-1" @click="savePlayersToTournament()" type="button">Lagre</button>
       </div>
     </transition>
 
