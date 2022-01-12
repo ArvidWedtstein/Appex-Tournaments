@@ -18,20 +18,24 @@
 
 
 <script>
-
+import axios from 'axios'
 export default {
     name: "TournamentsHome",
     data() {
       return {
-
       }
     },
     mounted() {
       if (document.querySelector('#Matrix')){
         this.matrix()
       }
+      this.testrequest()
     },
     methods: {
+      async testrequest() {
+        const tournamentlist = await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament`);
+        console.log(tournamentlist)
+      },
       refresh() {
         //window.location.reload(true)
       },
