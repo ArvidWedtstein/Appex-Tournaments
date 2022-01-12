@@ -67,7 +67,6 @@
               </div>
             </div>
           </div>
-          <Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>
         </div>
         <div class="inputContainer buttons">
           <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
@@ -80,7 +79,7 @@
       <div class="editTournament" v-if="redigerDeltakerScreen">
         <button class="close" type="button" v-on:click="closeTournament()">✖</button>
         <div class="headerContainer">
-          <h1 class="display-4">"{{ showTournamentData.name }}" Deltakere</h1>
+          <h1 class="display-4">"{{ editTournamentData.name }}" Deltakere</h1>
           <p class="lead">Rediger deltakere</p>
         </div>
         <div class="playerAddContainer">
@@ -111,7 +110,7 @@
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="tcontent">
-          <button class="hover: underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
+          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
         </div>
         <div class="tfooter">
           <p class="players">{{countPlayers(tournament)}}</p>
