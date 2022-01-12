@@ -67,12 +67,12 @@
               </div>
             </div>
           </div>
-          <!--<Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>-->
+          <Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>
         </div>
         <div class="inputContainer buttons">
-          <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
+          <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
           <a class="btn flex blue p-1 mg-1" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
-          <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
+          <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
         </div>
       </div>
     </transition>
@@ -84,7 +84,7 @@
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="tcontent">
-          <a v-on:click="showTournament(tournament)">{{tournament.Name}}</a>
+          <button class="hover: underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
         </div>
         <div class="tfooter">
           <p class="players">{{countPlayers(tournament)}}</p>
