@@ -15,19 +15,6 @@ builder.Services.AddCors(options => {
         builder.WithOrigins("https://appextournament.netlify.app");
     });
 });
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(
-//     builder =>
-//     {
-//         builder.WithOrigins("https://appextournament.netlify.app", "*").AllowAnyHeader();
-//     });
-//     options.AddPolicy("CORSPolicy",
-//     builder =>
-//     {
-//         builder.WithOrigins().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-//     });
-// });
 builder.Services.AddSingleton<ITournamentDatabaseSettings>(sp => sp.GetRequiredService<IOptions<TournamentDatabaseSettings>>().Value);
 builder.Services.AddSingleton<TournamentService>();
 builder.Services.AddControllers();
@@ -51,10 +38,6 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
-// app.UseCors(policy =>
-//     policy.WithOrigins(new string[] { "https://appextournament.netlify.app", "https://appextournament.netlify.app/tournaments" })
-// );
-// app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -5,8 +5,10 @@
       <div class="txt-btn-pg1">
         <h1>Velkommen til Appex Tournaments!</h1>
         <div class="btn-container">
-          <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
-          <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link>
+          <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
+          <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 mx-auto hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="bg-appexdarkgrey text-white rounded py-4 px-8 mx-auto hover:bg-white border border-transparent font-semibold hover:border-appexdarkgrey transition-all duration-100 ease-linear hover:text-appexdarkgrey">Se tidligere tournaments</nuxt-link>
         </div>
       </div>
     </div>
@@ -27,18 +29,8 @@ export default {
       if (document.querySelector('#Matrix')){
         this.matrix()
       }
-      this.testrequest()
     },
     methods: {
-      async testrequest() {
-        /*const tournamentlist = await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament`, {
-          headers: {
-            'Access-Control-Allow-Origin' : '*',
-            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          }
-        });
-        console.log(tournamentlist)*/
-      },
       refresh() {
         //window.location.reload(true)
       },

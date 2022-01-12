@@ -43,12 +43,9 @@
           <label for="Gjennomført">Gjennomført</label>
         </div>
         <div class="inputContainer buttons">
-          <!--<button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
+          <button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
           <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
-          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>-->
-          <button class="bg-appexorange p-1" type="button">Rediger Deltakere</button>
-          <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
-          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)">Delete</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
         </div>
       </div>
     </transition>

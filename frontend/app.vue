@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="logo">
-      <NuxtLink to="/" class="float-left">
-        <!-- <img src="/images/logoDark.png" alt="appexlogo"> -->
+      <NuxtLink to="/" class="">
+        <img src="/images/logoDark.png" alt="appexlogo">
         <!-- SVG logo stjålet (lånt) fra appex nettsiden-->
-        <svg width="300" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241.371 56.99">
+        <!--<svg width="300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241.371 56.99">
           <defs>
             <clipPath id="prefix__a">
               <path fill="#000" d="M0-56.99h241.371V0H0z"></path>
@@ -20,7 +20,7 @@
             <path fill="#000" d="M232.629-46.103l-5.2 7.2-5.217-7.2h-7.7l9.079 12.523-10.026 13.9h7.569l6.252-8.665 6.286 8.662h7.7l-10.143-13.986 8.968-12.434z"></path>
             <path fill="#000" d="M106.543-46.293h6.63v26.421h-6.63v-2.793a13 13 0 01-3.893 2.659 10.889 10.889 0 01-4.232.814 11.765 11.765 0 01-8.854-3.97 13.855 13.855 0 01-3.735-9.872 14.192 14.192 0 013.614-10.028 11.517 11.517 0 018.782-3.911 11.164 11.164 0 014.463.9 12.209 12.209 0 013.855 2.694zm-6.969 5.44a6.694 6.694 0 00-5.105 2.173 7.828 7.828 0 00-2.033 5.574 7.909 7.909 0 002.068 5.633 6.7 6.7 0 005.095 2.21 6.822 6.822 0 005.178-2.174 7.943 7.943 0 002.058-5.694 7.718 7.718 0 00-2.058-5.585 6.912 6.912 0 00-5.2-2.137"></path>
           </g>
-        </svg>
+        </svg>-->
       </NuxtLink>
     </div>
     <slot/>
@@ -73,7 +73,7 @@ body{
   font-family: 'Poppins', sans-serif;
   background: $backclr;
 }
- .logo img{
+.logo {
   z-index: 5;
   position: absolute;
   width: 200px;
