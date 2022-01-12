@@ -82,21 +82,14 @@
           <h1 class="display-4">"{{ editTournamentData.Name }}" Deltakere</h1>
           <p class="lead">Rediger deltakere</p>
         </div>
-        <div class="playerAddContainer">
-          <div class="countContainer">
-            <div class="playerCount">{{ editTournamentData }}</div>
-            <p class="bg-gradient-to-r from-cyan-500 to-blue-500">Deltakere</p>
-          </div>
-        </div>
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              {{player}}
-              <input class="playername" :v-model="player" type="text" :placeholder= "'Deltaker' + k">
+              <input class="playername" :v-model="player" type="text" :placeholder= "'Deltaker' + k" :value="player">
 						</div>
 					</div>
 				</div>
-        <button class="btn blue abs p-1" @click="savePlayersToTournament()" type="button">Lagre</button>
+        <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="savePlayersToTournament()" type="button">Lagre</button>
       </div>
     </transition>
 
