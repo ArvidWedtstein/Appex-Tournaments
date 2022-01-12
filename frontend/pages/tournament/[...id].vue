@@ -1,7 +1,7 @@
 <template>
   <div class="m-4">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
-    <nuxt-link to="/tournaments" class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-4 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
+    <nuxt-link to="/tournaments" class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
   </div>
 </template>
   
