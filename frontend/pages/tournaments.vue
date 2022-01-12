@@ -153,7 +153,6 @@ export default {
     async fetchTournaments() {
       this.tournaments = [];
       const tournamentlist = await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament`);
-      console.log(tournamentlist);
       this.tournaments = tournamentlist.data;
     },
     horizontalScroll() {
