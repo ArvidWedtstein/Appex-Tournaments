@@ -51,7 +51,6 @@ public class TournamentController : ControllerBase {
 
     private static Random rng = new Random();
     // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
-    [Route("/matchwin")]
     [HttpPost]
     public async Task<ActionResult> Matchwin(string id, string winner, string matchId)
     {
@@ -61,6 +60,7 @@ public class TournamentController : ControllerBase {
          _logger.LogInformation(id);
         if (tournament is null)
         {
+            _logger.LogInformation("no tournament");
             return NotFound();
         }
         var rounds = tournament.Rounds; // Get number of rounds
