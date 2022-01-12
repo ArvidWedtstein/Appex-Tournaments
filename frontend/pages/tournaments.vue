@@ -79,26 +79,26 @@
       <div class="editTournament" v-if="redigerDeltakerScreen">
         <button class="close" type="button" v-on:click="closeTournament()">✖</button>
         <div class="headerContainer">
-          <h1 class="display-4">"{{ editTournamentData.name }}" Deltakere</h1>
+          <h1 class="display-4">"{{ editTournamentData.Name }}" Deltakere</h1>
           <p class="lead">Rediger deltakere</p>
         </div>
         <div class="playerAddContainer">
           <div class="countContainer">
             <div class="playerCount">{{ editTournamentData }}</div>
-            <p>Deltakere</p>
+            <p class="bg-gradient-to-r from-cyan-500 to-blue-500">Deltakere</p>
           </div>
           <div class="btnContainer">
             <button class="minusBtn" @click="removePlayer()">-</button>
             <button class="plusBtn" @click="addPlayer()">+</button>
           </div>
         </div>
-        <!--<div class="deltakere" v-for="i in Math.ceil(editTournamentData.players.length / 8)" :key="i">
-          <div v-for="(name, index) in editTournamentData.players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere">
-            <div class="playerBox">
-              <input class="playername" v-model="editTournamentData.players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
-            </div>
-          </div>
-        </div>-->  
+        <div v-for="(round, i) in editTournamentData.rounds" :key="i">
+					<div v-for="(match, m) in round" :key="m">
+						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
+              <input class="playername" :v-model="editTournamentData.rounds[i].match[m].players[k]" type="text" v-bind:placeholder= "'Deltaker' + index">
+						</div>
+					</div>
+				</div>
         <button class="btn blue abs p-1" @click="savePlayersToTournament()" type="button">Lagre</button>
       </div>
     </transition>
@@ -126,6 +126,7 @@
 //import env from '~/dotenv.json'
 import axios from 'axios'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
+let intPlayer = 1;
 export default {
   name: "Tournaments",
   /*async asyncData() {
@@ -149,6 +150,7 @@ export default {
       redigerDeltakerScreen: false,
       editTournamentData: null,
       showTournamentData: null,
+      editPlayers: [],
       editTournamentChanges: {
         name: "",
         date: "",
@@ -213,7 +215,7 @@ export default {
       });
     },
     async redigerDeltakere() {
-
+      
     },
     left() {
       const scrollContainer = document.querySelector("main");
@@ -232,6 +234,26 @@ export default {
       var tournaments = document.getElementsByClassName("tournament").length;
       var step = (x / tournaments) * 16;
       scrollContainer.scrollLeft += step;
+    },
+    addPlayer() { 
+      if (intPlayer < 32){
+      const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig", "Treig"];
+      const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
+      for(let i = 0; i < intPlayer; i++) {
+        let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
+        this.editPlayers.push(playername)
+      }
+      intPlayer = (intPlayer * 2);
+    }},
+    removePlayer(index) {
+      if(intPlayer > 1){
+        console.log(intPlayer)
+        var playerDevide = (intPlayer / 2)
+        for (var i = 0; i < playerDevide; i++){
+          this.editPlayers.splice(index, 1);
+          intPlayer = this.editPlayers.length;
+        }
+      }
     },
     async editTournament(tournament) {
       console.log(tournament);
