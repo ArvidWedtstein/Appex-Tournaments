@@ -85,7 +85,7 @@
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" :v-model="player" type="text" :placeholder= "'Deltaker' + k" :value="player">
+              <input class="playername" :v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + k" :value="player">
 						</div>
 					</div>
 				</div>
