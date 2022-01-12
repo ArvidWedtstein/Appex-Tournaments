@@ -3,7 +3,7 @@ using tournament.Services;
 using Microsoft.Extensions.Options;
 
 
-var  MyAllowSpecificOrigins = "AccessControlAllowOrigin";
+var MyAllowSpecificOrigins = "AccessControlAllowOrigin";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
