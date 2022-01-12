@@ -54,7 +54,7 @@ export default {
 		async matchWin(tournamentId, winner, matchId) {
 			await axios({
 				method: 'POST',
-				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/matchwin/${tournamentId}?winner=${winner}&matchId=${matchId}`
 			}).then(async (response) => {
 				await console.log(response.data)
         

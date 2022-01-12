@@ -27,15 +27,6 @@ export default {
         this.tournament = res.data
       })
     },
-    async matchWin(tournamentId, winner, matchId) {
-      await axios({
-        method: 'post',
-        url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/matchwin/${tournamentId}?winner=${winner}&matchId=${matchId}`
-      }).then(async (response) => {
-        //await console.log(response)
-        this.getTournament(tournamentId)
-      });
-    },
     async getTournament(id) {
       await axios({
         method: 'get',
