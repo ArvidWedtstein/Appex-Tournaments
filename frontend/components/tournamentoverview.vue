@@ -1,5 +1,5 @@
 <template>
-	<div class="design-container">
+	<div class="container m-8">
 		<div class="tournament-brackets">
 			<div v-if="tournament" class="bracket">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
@@ -40,9 +40,6 @@ export default {
 		}
 	},
 	async mounted() {
-	  if (document.querySelector('#Matrix')){
-		//this.matrix()
-	  }
     
 	},
 	watch: {

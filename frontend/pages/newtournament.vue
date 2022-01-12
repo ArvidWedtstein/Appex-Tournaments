@@ -47,14 +47,14 @@
     </div>
 
     <div v-if="page === 2" class="page">
-      <h1 class="">Oppsett:</h1>
+      <h1 class="font-14">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
-      <!--<NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
+      <!--<NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="btn orange rel p-1 mg-1" to="/">Utsett turnering</NuxtLink>-->
       <!-- Tailwind versjon-->
-      <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-2 px-4 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
-      <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-2 px-4 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
+      <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
+      <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
     </div>
   </div>
 </template>

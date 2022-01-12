@@ -1,8 +1,7 @@
 <template>
-  <div class="editTournament">
+  <div class="container m-4">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
     <a href="/tournaments" class="deletebtn">Sett turnering på pause</a>
-    <canvas id="Matrix"></canvas>
   </div>
 </template>
   
@@ -46,46 +45,8 @@ export default {
         this.tournament = response.data;
       });
     },
-    matrix() {
-      const canvas = document.getElementById('Matrix');
-      const context = canvas.getContext("2d");
-      this.vueCanvas = context;
-
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-      const fontSize = 16;
-      const columns = canvas.width/fontSize;
-      const rainDrops = [];
-
-      for( let x = 0; x < columns; x++ ) {
-        rainDrops[x] = 1;
-      }
-      const draw = () => {
-        context.fillStyle = 'rgba(255, 240, 255, 0.05)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        context.fillStyle = '#0835C4';
-        //context.fillStyle = '#ffffff';
-        context.font = fontSize + 'px fraktur';
-
-        for(let i = 0; i < rainDrops.length; i++)
-        {
-          const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-          context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-          if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-            rainDrops[i] = 0;
-          }
-          rainDrops[i]++;
-        }
-      };
-      setInterval(draw, 60);
-    }
   },
   mounted() {
-    this.matrix()
     this.getturnering();
   },
 }
