@@ -51,6 +51,7 @@ public class TournamentController : ControllerBase {
 
     private static Random rng = new Random();
     // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
+    [Route("/matchwin")]
     [HttpPost]
     public async Task<ActionResult> matchwin(string id, string winner, string matchId)
     {
