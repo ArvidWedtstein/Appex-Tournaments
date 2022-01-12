@@ -229,10 +229,11 @@ export default {
       console.log(tournament);
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
-      for (let a = 0; a < tournament.Rounds.length; a++) {
-        for (let b = 0; b < tournament.Rounds[a].length; b++) {
-          for (let c = 0; c < tournament.Rounds[a][b].Players.length; c++) {
-            this.editPlayers.push(tournament.Rounds[a][b].Players[c])
+      for (let a = 0; a < await tournament.rounds.length; a++) {
+        console.log(tournament.rounds[a])
+        for (let b = 0; b < tournament.rounds[a].length; b++) {
+          for (let c = 0; c < tournament.rounds[a][b].players.length; c++) {
+            this.editPlayers.push(tournament.rounds[a][b].players[c])
           }
         }
       }
