@@ -43,15 +43,15 @@
           </div>
         </div>
       </div>  
-      <button class="btn blue abs p-1" @click="newTournament()" type="button">New Tournament</button>
-      <!--<input type="submit" value="Submit">-->
+      <button class="btn blue abs p-1" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
     <div v-if="page === 2" class="page">
-      <h1>Oppsett:</h1>
+      <h1 class="">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="turnering"></Tournamentoverview>
-      <NuxtLink :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
-      <NuxtLink to="/">Utsett turnering</NuxtLink>
+      <br>
+      <NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnerng</NuxtLink>
+      <NuxtLink class="btn orange rel p-1 mg-1" to="/">Utsett turnering</NuxtLink>
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ export default {
       async newTournament() {
         console.log(this.players)
         axios({
-          method: 'post',
+          method: 'POST',
           url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
