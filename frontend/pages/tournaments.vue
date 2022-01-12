@@ -85,10 +85,15 @@
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" :v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + i+m+k" :value="player">
+              <input class="playername" v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + i+m+k">
 						</div>
 					</div>
 				</div>
+        <div v-for="(player, h) in editPlayers" :key="player">
+          <div class="playerBox">
+            <input class="playername" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+          </div>
+        </div>
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
