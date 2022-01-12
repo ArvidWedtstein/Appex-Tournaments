@@ -61,12 +61,8 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-#Matrix {
-  position: absolute;
-  left: 0;
-  top: 0;
+html {
   width: 100%;
-  z-index: -1;
 }
 
 
