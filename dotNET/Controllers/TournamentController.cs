@@ -258,8 +258,8 @@ public class TournamentController : ControllerBase {
     }
 
     // DELETE: /Tournaments/id
-    [Route("/deleteTournament")]
-    [HttpDelete("{id:length(24)}")]
+    [Route("/deleteTournament/{id:length(24)}")]
+    [HttpDelete]
     public async Task<IActionResult> Delete(string id)
     {
         var tournament = await _tournamentService.GetAsync(id);
