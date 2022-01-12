@@ -87,15 +87,12 @@
             <div class="playerCount">{{ editTournamentData }}</div>
             <p class="bg-gradient-to-r from-cyan-500 to-blue-500">Deltakere</p>
           </div>
-          <div class="btnContainer">
-            <button class="minusBtn" @click="removePlayer()">-</button>
-            <button class="plusBtn" @click="addPlayer()">+</button>
-          </div>
         </div>
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" :v-model="player" type="text" v-bind:placeholder= "'Deltaker' + index">
+              {{player}}
+              <input class="playername" :v-model="player" type="text" :placeholder= "'Deltaker' + k">
 						</div>
 					</div>
 				</div>
@@ -234,26 +231,6 @@ export default {
       var tournaments = document.getElementsByClassName("tournament").length;
       var step = (x / tournaments) * 16;
       scrollContainer.scrollLeft += step;
-    },
-    addPlayer() { 
-      if (intPlayer < 32){
-      const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig", "Treig"];
-      const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
-      for(let i = 0; i < intPlayer; i++) {
-        let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
-        this.editPlayers.push(playername)
-      }
-      intPlayer = (intPlayer * 2);
-    }},
-    removePlayer(index) {
-      if(intPlayer > 1){
-        console.log(intPlayer)
-        var playerDevide = (intPlayer / 2)
-        for (var i = 0; i < playerDevide; i++){
-          this.editPlayers.splice(index, 1);
-          intPlayer = this.editPlayers.length;
-        }
-      }
     },
     async editTournament(tournament) {
       console.log(tournament);
