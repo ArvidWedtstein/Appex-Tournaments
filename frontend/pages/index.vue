@@ -1,15 +1,13 @@
 <template>
-  <div class="design-container">
-    <div class="pg1-content-container">
+  <div class="pg1-content-container flex">
     <canvas id="Matrix"></canvas>
-      <div class="txt-btn-pg1">
-        <h1>Velkommen til Appex Tournaments!</h1>
-        <div class="btn-container">
-          <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
-          <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
-          <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 mx-auto hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>
-          <nuxt-link to="/tournaments" class="bg-appexdarkgrey text-white rounded py-4 px-8 mx-auto hover:bg-white border border-transparent font-semibold hover:border-appexdarkgrey transition-all duration-100 ease-linear hover:text-appexdarkgrey">Se tidligere tournaments</nuxt-link>
-        </div>
+    <div class="my-auto align-middle content-center mx-12">
+      <h1 class="m-6 py-4 text-6xl">Velkommen til <br>Appex Tournaments!</h1>
+      <div class="btn-container">
+        <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
+        <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
+        <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>
+        <nuxt-link to="/tournaments" class="bg-appexdarkgrey text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexdarkgrey transition-all duration-100 ease-linear hover:text-appexdarkgrey">Se tidligere tournaments</nuxt-link>
       </div>
     </div>
   </div>
@@ -87,33 +85,21 @@ body {
   width: 100%;
   height: 100vh;
   position: absolute;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  
   background-color: $backclr;
   background-image: url("/images/frontpage-grapics.png"); // Bildebug blir fikset. 
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
   z-index: 1;  
-  
-  h1{
-    flex: 1 1 auto;
-    font-weight: 500;
-    font-size: 32px;
-    margin: 0;
-  }
 }
 .txt-btn-pg1 {
-  //margin-right: 40%;
-  //margin-bottom: 50px;
-  text-align: center;
-  width: 50vw;
-  margin-right: 40%;
-  h1{
-    font-size: 45px;
-  }
+  padding: 4rem;
+  
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 .btn-container {
   //padding: 1rem;
