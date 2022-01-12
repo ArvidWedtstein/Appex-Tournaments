@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     publicRuntimeConfig: {
       axios: {
         //browserBaseURL: 'http://localhost:3001'
-        browserBaseURL: 'https://localhost:7021'
+        browserBaseURL: 'https://appex-tournaments-gylkpaupva-uc.a.run.app'
       }
     },
     privateRuntimeConfig: {
