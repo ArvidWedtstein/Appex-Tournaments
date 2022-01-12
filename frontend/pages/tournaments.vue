@@ -85,7 +85,7 @@
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" :v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + k" :value="player">
+              <input class="playername" :v-model="editPlayers[i+m+k]" type="text" :placeholder= "'Deltaker' + i+m+k" :value="player">
 						</div>
 					</div>
 				</div>
@@ -205,8 +205,7 @@ export default {
       });
     },
     async redigerDeltakere() {
-      console.log(this.editTournamentData)
-      console.log(this.editPlayers)
+      
     },
     left() {
       const scrollContainer = document.querySelector("main");
@@ -230,6 +229,14 @@ export default {
       console.log(tournament);
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
+      for (let a = 0; a < tournament.Rounds.length; a++) {
+        for (let b = 0; b < tournament.Rounds[a].length; b++) {
+          for (let c = 0; c < tournament.Rounds[a][b].Players.length; c++) {
+            this.editPlayers.push(tournament.Rounds[a][b].Players[c])
+          }
+        }
+      }
+      console.log(this.editPlayers)
     },
     async showTournament(tournament) {
       this.showTournamentData = await tournament;
