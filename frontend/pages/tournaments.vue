@@ -169,7 +169,7 @@ export default {
       return new Date(date).toLocaleDateString("no", options);
     },
     updateTournament() {
-      axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament`, {
+      axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/updateTournament`, {
         id: this.editTournamentData._id,
         name: this.editTournamentChanges.name,
         date: this.editTournamentChanges.date,
@@ -177,8 +177,6 @@ export default {
       }).then((res) => {
         this.editTournamentScreen = false;
         console.log(res);
-        this.infoBar.show = true;
-        this.infoBar.message = "test";
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";
         this.editTournamentChanges.status = "";

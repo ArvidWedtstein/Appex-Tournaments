@@ -52,16 +52,10 @@ export default {
 	},
 	methods: {
 		async matchWin(tournamentId, winner, matchId) {
-      await axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/matchwin/${tournamentId}?winner=${winner}&matchId=${matchId}`).then(async (response) => {
-        await console.log(response.data)
-        
-        this.tournament = response.data;
-        //await this.$nuxt.refresh();
-        await window.location.reload()
-      })
-			/*await axios({
+      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/matchwin/${tournamentId}?winner=${winner}&matchId=${matchId}`
+			await axios({
 				method: 'post',
-				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/matchwin/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: uri
 			}).then(async (response) => {
 				await console.log(response.data)
         
@@ -69,7 +63,7 @@ export default {
         //await this.$nuxt.refresh();
         await window.location.reload()
 				//this.getTournament(tournamentId)
-			});*/
+			});
 		},
 		async getTournament(id) {
       console.log('gettournament')
