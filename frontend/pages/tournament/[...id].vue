@@ -63,6 +63,7 @@ $green: #DDE78B;
 $orange: #FAB487;
 html {
   width: 100%;
+  height: 100%;
 }
 
 
