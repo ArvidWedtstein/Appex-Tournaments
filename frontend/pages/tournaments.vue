@@ -95,7 +95,7 @@
         <div v-for="(round, i) in editTournamentData.rounds" :key="i">
 					<div v-for="(match, m) in round" :key="m">
 						<div class="playerBox" v-for="(player, k) in match.players" :key="player">
-              <input class="playername" :v-model="editTournamentData.rounds[i].match[m].players[k]" type="text" v-bind:placeholder= "'Deltaker' + index">
+              <input class="playername" :v-model="player" type="text" v-bind:placeholder= "'Deltaker' + index">
 						</div>
 					</div>
 				</div>
