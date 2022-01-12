@@ -89,7 +89,7 @@
 						</div>
 					</div>
 				</div>
-        <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="savePlayersToTournament()" type="button">Lagre</button>
+        <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
 
@@ -205,7 +205,7 @@ export default {
       });
     },
     async redigerDeltakere() {
-      
+      console.log(this.editTournamentData)
     },
     left() {
       const scrollContainer = document.querySelector("main");
