@@ -10,11 +10,11 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 // Add services to the container.
 builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
-// builder.Services.AddCors(options => {
-//     options.AddPolicy(name: MyAllowSpecificOrigins, builder => { 
-//         builder.WithOrigins("*", "https://appextournament.netlify.app").AllowAnyHeader();
-//     });
-// });
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: MyAllowSpecificOrigins, builder => { 
+        builder.WithOrigins("https://appextournament.netlify.app");
+    });
+});
 // builder.Services.AddCors(options =>
 // {
 //     options.AddDefaultPolicy(
@@ -50,13 +50,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
-// app.UseCors(MyAllowSpecificOrigins);
-app.UseCors(policy =>
-    policy.WithOrigins(new string[] { "https://appextournament.netlify.app", "https://appextournament.netlify.app/tournaments" })
-);
+app.UseCors(MyAllowSpecificOrigins);
+// app.UseCors(policy =>
+//     policy.WithOrigins(new string[] { "https://appextournament.netlify.app", "https://appextournament.netlify.app/tournaments" })
+// );
 // app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStaticFiles();
 
 app.Run();

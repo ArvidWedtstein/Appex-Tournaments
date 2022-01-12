@@ -43,9 +43,12 @@
           <label for="Gjennomført">Gjennomført</label>
         </div>
         <div class="inputContainer buttons">
-          <button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
+          <!--<button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
           <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
-          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>-->
+          <button class="bg-appexorange p-1" type="button">Rediger Deltakere</button>
+          <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)">Delete</button>
         </div>
       </div>
     </transition>
@@ -78,7 +81,7 @@
     </transition>
 
     <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
-      <button class="top" v-on:click="editTournament(tournament)" v-cloak>✎</button>
+      <button class="top" v-on:click="editTournament(tournament)">✎</button>
       <div class="cardContainer">
         <div class="tspace">
           <p>Dato: {{formatDate(tournament.date)}}</p>
