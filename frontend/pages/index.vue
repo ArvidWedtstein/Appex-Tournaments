@@ -3,7 +3,7 @@
     <canvas id="Matrix"></canvas>
     <div class="my-auto align-middle content-center mx-12">
       <h1 class="m-6 py-4 text-6xl">Velkommen til <br>Appex Tournaments!</h1>
-      <div class="btn-container">
+      <div class="btn-container bg-rose-50">
         <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
         <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
         <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>

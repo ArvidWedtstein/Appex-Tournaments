@@ -52,7 +52,7 @@ public class TournamentController : ControllerBase {
     private static Random rng = new Random();
     // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
     [HttpPost]
-    public async Task<ActionResult> Matchwin(string id, string winner, string matchId)
+    public async Task<ActionResult> matchwin(string id, string winner, string matchId)
     {
         var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
          _logger.LogInformation(winner);
