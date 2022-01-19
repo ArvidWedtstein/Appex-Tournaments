@@ -19,11 +19,11 @@
     </button>
     <!--Edit tournament-->
     <transition name="fade">
-      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
-        <button class="top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
+      <div class="w-full fixed bottom-0 top-0 left-0 p-16 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
+        <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
-          <h1>Rediger Tournament</h1>
-          <p>{{editTournamentData.Name}}</p>
+          <h1 class="text-4xl">Rediger Tournament</h1>
+          <p class="text-2xl">{{editTournamentData.Name}}</p>
         </div>
         <div class="flex-auto">
           <h1 class="text-3md font-semibold">Navn:</h1>  
@@ -51,7 +51,7 @@
     </transition>
     <transition name="fade">
       <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="showTournamentScreen">
-        <button class="top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
+        <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
@@ -90,21 +90,19 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div class="flex flex-row fixed bottom-0 h-full pt-30">
-      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 h-full relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
-        <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-        <div class="absolute bottom-0 left-0 p-5">
-          <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
-            <p>Dato: {{formatDate(tournament.date)}}</p>
-          </div>
-          <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
-            <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
-          </div>
-          <div class="tfooter">
-            <p class="players">{{countPlayers(tournament)}}</p>
-            <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-            <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
-          </div>
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 h-full relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
+      <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
+      <div class="absolute bottom-0 left-0 p-5">
+        <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
+          <p>Dato: {{formatDate(tournament.date)}}</p>
+        </div>
+        <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
+          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
+        </div>
+        <div class="tfooter">
+          <p class="players">{{countPlayers(tournament)}}</p>
+          <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+          <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
         </div>
       </div>
     </div>
