@@ -90,7 +90,7 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div class="flex flex-row fixed bottom-0 h-full">
+    <div class="flex flex-row fixed bottom-0 h-full pt-30">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 h-full relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
         <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
         <div class="absolute bottom-0 left-0 p-5">
