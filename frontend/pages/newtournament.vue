@@ -20,8 +20,8 @@
     </div>
     <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 max-h-100 h-100">
       <div class="text-center absolute top-8 left-[50%] translate-x-1/2 min-h-10">
-        <h1 class="display-4">"{{ tournament.name }}" Deltakere</h1>
-        <p class="lead">Rediger deltakere</p>
+        <h1 class="text-xl">"{{ tournament.name }}" Deltakere</h1>
+        <p class="text-md">Rediger deltakere</p>
       </div>
       <div class="absolute top-8 right-32 h-36 w-24">
         <div class="text-center font-semibold">
