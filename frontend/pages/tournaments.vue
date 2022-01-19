@@ -19,8 +19,8 @@
     </button>
     <!--Edit tournament-->
     <transition name="fade">
-      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
-        <button class="close" type="button" v-on:click="closeTournament()">✖</button>
+      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
+        <button class="top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h1>Rediger Tournament</h1>
           <p>{{editTournamentData.Name}}</p>
@@ -90,7 +90,7 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div class="my-auto">
+    <div class="my-auto flex flex-row">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 my-auto relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
         <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
         <div class="absolute bottom-0 left-0 p-5">
