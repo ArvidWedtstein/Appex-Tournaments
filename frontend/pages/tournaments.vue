@@ -277,6 +277,8 @@ html {
   position: absolute;
   bottom: 0;
   top:0;
+  left: 0;
+  right: 0;
 }
 .tournament {
   -webkit-box-orient: vertical;
