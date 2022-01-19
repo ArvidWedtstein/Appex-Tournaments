@@ -86,7 +86,7 @@ export default {
       async newTournament() {
         axios({
           method: 'POST',
-          url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
@@ -95,7 +95,7 @@ export default {
           this.turnering = response.data;
           axios({
             method: 'POST',
-            url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/previewmatch?id=${response.data.id}`
+            url: `/previewmatch?id=${response.data.id}`
           }).then(async (res) => {
             console.log(res.data)
             this.previewturnering = res.data;
@@ -126,7 +126,7 @@ export default {
       },
       increasePage() {
         if (this.page == 2) return
-        const regex = /^[a-zA-Z0-9]*$/
+        const regex = /[^A-Za-z0-9]+/
         if (!regex.test(this.tournament.name)) {
           alert('Name cannot contain invalid characters (only letters and numbers)')
         }

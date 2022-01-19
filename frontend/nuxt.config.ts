@@ -39,6 +39,6 @@ export default defineNuxtConfig({
       }
     },
     privateRuntimeConfig: {
-
+      baseURL: 'https://appex-tournaments-gylkpaupva-uc.a.run.app'
     }
 })

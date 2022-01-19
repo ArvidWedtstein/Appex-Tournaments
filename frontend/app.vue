@@ -29,7 +29,7 @@
 </template>
 <script setup>
 import '~/assets/tailwind.scss'
-
+const config = useRuntimeConfig()
 
 </script>
 

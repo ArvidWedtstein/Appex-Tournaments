@@ -28,6 +28,9 @@ export default {
         this.matrix()
       }
     },
+    async asyncData({ $config }) {
+      console.log($config.axios)
+    },
     methods: {
       refresh() {
         //window.location.reload(true)
