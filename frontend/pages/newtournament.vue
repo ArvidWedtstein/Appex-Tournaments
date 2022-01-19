@@ -18,7 +18,7 @@
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-100 overflow-y-visible">
+    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-y-visible">
       <div class="text-center relative w-100 mx-auto min-h-10 my-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
@@ -36,7 +36,7 @@
       <div class="deltakere overflow-y-visible" v-for="i in Math.ceil(players.length / 8)" :key="i">
         <div v-for="(name, index) in players" :key="index" class="deltakere">
           <div class="flex">
-            <input class="p-3 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + index * (i)">
+            <input class="p-1 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + i * index">
           </div>
         </div>
       </div>  
