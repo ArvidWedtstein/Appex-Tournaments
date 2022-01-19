@@ -125,7 +125,7 @@ export default {
         if (this.page == 2) return
         const regex = /[^A-Za-z0-9]+/
         if (!regex.test(this.tournament.name)) {
-          alert('Name cannot contain invalid characters (only letters and numbers)')
+          return alert('Name cannot contain invalid characters (only letters and numbers)')
         }
         if (this.tournament.name && this.tournament.date) {
           this.page += 1;
