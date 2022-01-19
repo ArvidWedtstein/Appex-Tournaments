@@ -2,17 +2,17 @@
   <div id='newtournament'>
     <div v-if="page === 0" class="flex content-center justify-center items-center relative flex-col w-100 h-full overflow-y-visible">
       <div class="w-full h-80 p-30 flex flex-col content-center justify-center items-center">
-        <div class="p-5 flex-auto">
+        <div class="p-5 my-8 flex-auto relative w-100">
           <h1 class="text-lg font-bold">Skriv inn navnet på tournamentet</h1>
           <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required class="relative flex-auto text-left bg-transparent min-w-100 text-appexblack text-xl border-b-2 border-solid border-appexblack pb-2.5 m-6">
           <br>
           <span class="p-3">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
-        <div class="p-5 flex-auto">
+        <div class="p-5 my-8 flex-auto relative w-100">
           <h1 class="text-lg font-bold">Tournament dato</h1>
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required class="relative flex-auto text-left bg-transparent w-100 text-appexblack text-xl border-b-2 border-solid border-appexblack pb-2.5 m-6">
         </div>
-        <button class="fixed w-12 my-16 right-0 bottom-0" @click="increasePage()">
+        <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
           </svg>
@@ -20,16 +20,16 @@
       </div>
     </div>
     <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-100 overflow-y-visible">
-      <div class="text-center relative top-30 w-100 mx-auto min-h-10 py-10">
+      <div class="text-center relative w-100 mx-auto min-h-10 my-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
       </div>
-      <div class="relative my-auto min-h-min w-24">
+      <div class="relative min-h-max w-24 my-16">
         <div class="text-center font-semibold">
           <h1 class="text-appexblue text-4lg w-100">{{ players.length }}</h1>
           <p class="text-center w-100">Deltakere</p>
         </div>
-        <div class="text-2xl font-semibold flex items-center">
+        <div class="text-2xl font-semibold flex items-center my-16">
           <button class="absolute text-4xl left-0 bottom-0" @click="removePlayer()">-</button>
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
