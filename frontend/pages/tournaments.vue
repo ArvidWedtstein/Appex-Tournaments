@@ -56,7 +56,7 @@
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="flex-auto p-1">
+        <div class="flex-auto p-1 bg-appexblack">
           <div class="flex-auto relative content-center self-center align-middle">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
