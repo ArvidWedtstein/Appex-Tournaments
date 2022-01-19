@@ -35,8 +35,8 @@
       </div>
       <div class="deltakere overflow-y-visible" v-for="i in Math.ceil(players.length / 8)" :key="i">
         <div v-for="(name, index) in players" :key="index" class="deltakere">
-          <div class="playerBox">
-            <input class="playername" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + index * (i)">
+          <div class="flex">
+            <input class="p-3 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + index * (i)">
           </div>
         </div>
       </div>  
