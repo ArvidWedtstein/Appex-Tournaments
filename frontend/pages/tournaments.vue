@@ -94,7 +94,7 @@
     <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
       <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
       <div class="absolute bottom-0 left-0 p-5">
-        <div class="w-100 text-md pb-0 min-h-100 overflow-auto">
+        <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
