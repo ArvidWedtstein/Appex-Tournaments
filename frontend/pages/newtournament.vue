@@ -11,7 +11,7 @@
           <h1>Tournament dato</h1>
           <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
-        <button class="dirbuttons right bottom" @click="increasePage()">
+        <button class="fixed w-12 mx-8 my-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
           </svg>
@@ -106,7 +106,7 @@ export default {
       },
       addPlayer() { 
         if (intPlayer < 32){
-        const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig", "Treig"];
+        const adj = ["Gretten", "Glad", "Fjern", "Smart", "God", "Vakker", "Snill", "Første", "Rask", "Kreativ", "Lys", "Mandig", "Treig", "Smart"];
         const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
         for(let i = 0; i < intPlayer; i++) {
           let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
@@ -139,48 +139,10 @@ export default {
       decreasePage() {
         if (this.page == 0) return
         this.page -= 1;
-      },
-      matrix() {
-        const canvas = document.getElementById('Matrix');
-        const context = canvas.getContext("2d");
-        this.vueCanvas = context;
-        canvas.width = 500;
-        canvas.height = window.innerHeight;
-        const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 32;
-        const speed = 60;
-        const columns = 500/fontSize;
-        const rainDrops = [];
-
-        for (let x = 0; x < columns; x++ ) {
-          rainDrops[x] = 1;
-        }
-        const draw = () => {
-          context.fillStyle = 'rgba(237, 236, 233, 0.05)';
-          context.fillRect(0, 0, canvas.width, canvas.height );
-      
-          context.fillStyle = '#000000';
-          context.font = fontSize + 'px fraktur';
-
-          for (let i = 0; i < rainDrops.length; i++)
-          {
-            const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-            context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-            if (rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-              rainDrops[i] = 0;
-            }
-            rainDrops[i]++;
-          }
-        };
-        setInterval(draw, speed);
       }
     },
     mounted() {
-      if (document.querySelector("#Matrix")) {
-        this.matrix()
-      }
-      //this.getTournament()
+
     }
 }
 </script>

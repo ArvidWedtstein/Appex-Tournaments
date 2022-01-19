@@ -2,17 +2,17 @@
 <template>
   <main class="tournamentcontainer"><!--<main v-if="tournaments.data" class="tournamentcontainer">-->
     <h1 class="title">Tidligere Turneringer</h1>
-    <button class="dirbuttons left bottom" @click="left()">
+    <button class="fixed w-12 mx-8 my-16 left-0 bottom-0 rotate-180" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
       </svg>
     </button>
-    <button class="dirbuttons right bottom" @click="right()">
+    <button class="fixed w-12 mx-8 my-16 right-0 bottom-0" @click="right()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
       </svg>
     </button>
-    <button class="dirbuttons left top" @click="$router.go(-1)">
+    <button class="fixed w-12 mx-8 my-16 left-0 top-0" @click="$router.go(-1)" title="back">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
       </svg>
@@ -27,22 +27,22 @@
         </div>
         <div class="inputBox">
           <h1>Navn:</h1>  
-          <input v-model="editTournamentChanges.name" class="update" type="text" placeholder="Tournament navn">
+          <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="text" placeholder="Tournament navn">
         </div>
         <div class="inputBox">
           <h1>Dato:</h1> 
-          <input v-model="editTournamentChanges.date" class="update" type="date">
+          <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="date">
         </div>
         <div class="inputBox">
           <h1>Status:</h1>
-          <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
+          <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
           <label for="Fremtidig">Fremtidig</label>
-          <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
+          <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
           <label for="Påbegynt">Påbegynt</label>
-          <input v-model="editTournamentChanges.status" class="update" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
+          <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
           <label for="Gjennomført">Gjennomført</label>
         </div>
-        <div class="inputContainer buttons">
+        <div class="flex flex-auto flex-row items-center content-center">
           <button class="btn flex orange p-1 mg-1" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
           <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)">Delete</button>
@@ -56,7 +56,7 @@
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="inputBox border">
+        <div class="flex-auto p-1">
           <div class="bracket">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
@@ -68,7 +68,7 @@
             </div>
           </div>
         </div>
-        <div class="inputContainer buttons">
+        <div class="flex flex-auto flex-row items-center content-center">
           <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
           <a class="btn flex blue p-1 mg-1" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
           <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
@@ -493,7 +493,6 @@ template{
 
   .inputBox {
     flex: 1 1 auto;
-    padding: 0.2rem;
     &.border {
       display: flex;
       align-content: center;
