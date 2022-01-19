@@ -1,13 +1,19 @@
 <template>
-  <div class="pg1-content-container flex">
-    <canvas id="Matrix"></canvas>
-    <div class="my-auto align-middle content-center mx-12">
-      <h1 class="m-6 py-4 text-6xl">Velkommen til <br>Appex Tournaments!</h1>
-      <div class="btn-container bg-rose-50">
-        <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
-        <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
-        <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>
-        <nuxt-link to="/tournaments" class="bg-appexdarkgrey text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexdarkgrey transition-all duration-100 ease-linear hover:text-appexdarkgrey">Se tidligere tournaments</nuxt-link>
+  <div class="design-container">
+    <div class="pg1-content-container">
+    <div class="tegn-container">
+      <img class="tegn" src="\images\tegn.svg">
+      <h1>bilde</h1>
+    </div>
+    <!--<canvas id="Matrix"></canvas>-->
+      <div class="txt-btn-pg1">
+        <h1>Velkommen til Appex Tournaments!</h1>
+        <div class="btn-container">
+          <!-- <nuxt-link to="/newtournament" class="btn blue rel p-1 mg-5">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="btn darkgrey rel p-1 mg-5">Se tidligere tournaments</nuxt-link> -->
+          <nuxt-link to="/newtournament" class="bg-appexblue text-white rounded py-4 px-8 columns-2 text-center hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue">Lag nytt tournament</nuxt-link>
+          <nuxt-link to="/tournaments" class="bg-appexdarkgrey text-white rounded py-4 px-8 columns-2 text-center hover:bg-white border border-transparent font-semibold hover:border-appexdarkgrey transition-all duration-100 ease-linear hover:text-appexdarkgrey">Se tidligere tournaments</nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -109,6 +115,7 @@ body {
   //margin-bottom: 10%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   font-size: 16px;
   width: 100%;
 
@@ -131,5 +138,29 @@ body {
   #Matrix{
     display: none;
   }
+}
+.tegn-container{
+  position: absolute;
+  right: 0;
+  min-width: 40%;
+  min-height: 100vh;
+  overflow: hidden;
+   z-index: -1;
+}
+.tegn{
+  flex-grow: 1;
+  min-height: 100vh!important;
+}
+@media(max-width: 1700px){
+  .tegn-container{
+    min-height: 200vh;
+    min-width: 200%;
+    opacity: 0.2;
+  }
+  .tegn{
+  flex-grow: 1;
+  min-width: 200%;
+  min-height: 200vh;
+}
 }
 </style>
