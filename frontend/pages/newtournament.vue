@@ -86,7 +86,7 @@ export default {
       async newTournament() {
         axios({
           method: 'POST',
-          url: `/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
@@ -95,7 +95,7 @@ export default {
           this.turnering = response.data;
           axios({
             method: 'POST',
-            url: `/previewmatch?id=${response.data.id}`
+            url: `${this.$config.baseURL}/previewmatch?id=${response.data.id}`
           }).then(async (res) => {
             console.log(res.data)
             this.previewturnering = res.data;

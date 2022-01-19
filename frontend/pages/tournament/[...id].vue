@@ -11,9 +11,7 @@ import axios from 'axios'
 export default {
   name: "tournament",
   async asyncData({ $axios, params, $route }) {
-    /*await $axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${$route.params.id[0]}`).then(async (res) => {
-      console.log(res)
-    })*/
+
   },
   data() {
     return {
@@ -22,7 +20,7 @@ export default {
   },
   methods: {
     async getturnering() {
-      await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
+      await axios.get(`${this.$config.baseURL}/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
         console.log(res.data)
         this.tournament = res.data
       })
@@ -30,7 +28,7 @@ export default {
     async getTournament(id) {
       await axios({
         method: 'get',
-        url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
+        url: `${this.$config.baseURL}/get-tournament/${id}`
       }).then(async (response) => {
         //await console.log(response.data)
         this.tournament = response.data;
@@ -44,14 +42,6 @@ export default {
 </script>
 
 <style lang="scss">
-$backclr: #edece9;
-$black: #221E20;
-$dark-grey: #464544;
-$grey: #D6D2CE;
-$light-grey: #EDECE9;
-$blue: #0835C4;
-$green: #DDE78B;
-$orange: #FAB487;
 html {
   width: 100%;
   height: 100%;

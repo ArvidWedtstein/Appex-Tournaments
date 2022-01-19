@@ -118,8 +118,7 @@ let intPlayer = 1;
 export default {
   name: "Tournaments",
   async asyncData({ $axios, $config }) {
-    console.log($config)
-  
+
   },
   data() {
     return {
@@ -140,7 +139,7 @@ export default {
   },
   methods: {
     async resetTournament(id) {
-      const t = await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/resetTournament/${id}`).then(async (res) => {
+      const t = await axios.get(`${this.$config.baseURL}/resetTournament/${id}`).then(async (res) => {
         console.log(res.data)
         let chosentournament = this.tournaments.find(t => t.id === res.data.id);
         
@@ -155,7 +154,7 @@ export default {
     },
     async fetchTournaments() {
       this.tournaments = [];
-      const tournamentlist = await axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament`);
+      const tournamentlist = await axios.get(`${this.$config.baseURL}/get-tournament`);
       this.tournaments = tournamentlist.data;
     },
     horizontalScroll() {
@@ -172,7 +171,7 @@ export default {
       return new Date(date).toLocaleDateString("no", options);
     },
     updateTournament() {
-      axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/updateTournament`, {
+      axios.post(`${this.$config.baseURL}/updateTournament`, {
         id: this.editTournamentData._id,
         name: this.editTournamentChanges.name,
         date: this.editTournamentChanges.date,
@@ -240,7 +239,7 @@ export default {
       this.showTournamentData = null;
     },
     deleteTournament(tournamentId) {
-      axios.delete(`https://appex-tournaments-gylkpaupva-uc.a.run.app/deletetournament`, {
+      axios.delete(`${this.$config.baseURL}/deletetournament`, {
         id: tournamentId
       });
       console.log(tournaments);

@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from 'nuxt3'
-
+import dotenv from 'dotenv'
+dotenv.config();
 export default defineNuxtConfig({
     target: 'server',
 		srcDir: './',
@@ -33,12 +34,9 @@ export default defineNuxtConfig({
       baseURL: "http://localhost:3001"
     },*/
     publicRuntimeConfig: {
-      axios: {
-        //browserBaseURL: 'http://localhost:3001'
-        browserBaseURL: 'https://appex-tournaments-gylkpaupva-uc.a.run.app'
-      }
+      baseURL: process.env.BASE_URL
     },
     privateRuntimeConfig: {
-      baseURL: 'https://appex-tournaments-gylkpaupva-uc.a.run.app'
+      baseURL: process.env.BASE_URL
     }
 })
