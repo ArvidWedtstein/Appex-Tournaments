@@ -28,11 +28,11 @@
         inputBox
         <div class="flex-auto">
           <h1 class="text-3md font-semibold">Navn:</h1>  
-          <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="text" placeholder="Tournament navn">
+          <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="text" placeholder="Tournament navn">
         </div>
         <div class="flex-auto">
           <h1 class="text-3md font-semibold">Dato:</h1> 
-          <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="date">
+          <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="date">
         </div>
         <div class="flex-auto">
           <h1 class="text-3md font-semibold">Status:</h1>
