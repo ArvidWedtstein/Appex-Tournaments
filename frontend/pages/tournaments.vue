@@ -1,6 +1,6 @@
 
 <template>
-  <main class="overflow-x-hidden relative w-full h-full left-0 bottom-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
+  <main class="overflow-x-hidden fixed w-full h-full left-0 bottom-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
     <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
     <button class="fixed w-12 mx-4 my-8 left-0 bottom-0" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
