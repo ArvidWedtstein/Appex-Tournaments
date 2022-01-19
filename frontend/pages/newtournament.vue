@@ -1,16 +1,15 @@
 <template>
-  <div id='newtournament'>
-    <div v-if="page === 0" class="flex content-center justify-center items-center relative flex-col w-100 h-full overflow-y-visible">
-      <div class="w-full h-80 p-30 flex flex-col content-center justify-center items-center">
-        <div class="p-5 my-8 flex-auto relative w-100">
-          <h1 class="text-lg font-bold">Skriv inn navnet på tournamentet</h1>
-          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required class="relative flex-auto text-left bg-transparent min-w-100 text-appexblack text-xl border-b-2 border-solid border-appexblack pb-2.5 m-6">
-          <br>
-          <span class="p-3">{{ 69 - tournament.name.length }} characters remaining</span>
+  <div id='newtournament' class="bg-appexbackclr h-screen">
+    <div v-if="page === 0" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
+      <div class="pg2-content-container w-full h-4/5 p-16 items-center">
+        <div class="inputBox py-20 my-20">
+          <h1>Skriv inn navnet på tournamentet</h1>
+          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
+          <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
-        <div class="p-5 my-8 flex-auto relative w-100">
-          <h1 class="text-lg font-bold">Tournament dato</h1>
-          <input v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required class="relative flex-auto text-left bg-transparent w-100 text-appexblack text-xl border-b-2 border-solid border-appexblack pb-2.5 m-6">
+        <div class="inputBox py-20 my-20">
+          <h1 class="text-xl">Tournament dato</h1>
+          <input class="relative flex-auto bg-transparent text-left align-middle outline-0 w-full border-0 decoration-[#00000080] pb-2 text-base " v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -44,7 +43,7 @@
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
-    <div v-if="page === 2" class="flex content-center justify-center items-center relative flex-col w-100 max-h-100 h-100">
+    <div v-if="page === 2" class="page flex justify-center content-center relative flex-col w-full max-h-full h-full">
       <h1 class="font-14">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
@@ -152,46 +151,9 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-#newtournament {
-  background: $backclr !important;
-  height: 100vh;
-}
-.deltakere {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: auto;
-  margin: 0;
-  .playerBox {
-    //flex: 1 1 auto;
-    display: flex;
-    //flex-direction: row;
-    margin: 0.2rem;
-    .playername {
-      padding: 0.5rem 1rem;
-      flex: 1 1 auto;
-      color: #000;
-      background-color: $grey;
-      border: none;
-      border-bottom: 2px solid $blue;
-      outline: none;
-      &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder {
-        color: gray;
-      }
-      &:focus-within, &:focus {
-        color: gray;
-      }
-    }
-  }
-}
-.pg2-content-container {
-  width: 80%;
-  height: 80vh;
-  padding: 5vh 5%;
-  align-items: center;
-}
+
 .page {
-  display: flex;
+  /*display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -199,8 +161,8 @@ $orange: #FAB487;
   flex-direction: column;
   width: 100%;
   max-height: 100%;
-  height: 100%;
-  .headerContainer{
+  height: 100%;*/
+  .headerContainer{/*
     text-align: center;
     position: absolute;
     top: 2vh;
@@ -212,7 +174,7 @@ $orange: #FAB487;
     }
     p{
         font-size: 2vw;
-    }
+    }*/
   }
   .playerAddContainer {
     position: absolute;
@@ -314,47 +276,6 @@ $orange: #FAB487;
       }
     }
   }
-  .pagebtn {
-    position: fixed;
-    min-width: 50px !important;
-    right: 0;
-    bottom: 0;
-    margin: 4rem 4rem;
-    .next {
-      transition: all 0.5s;
-      &:hover {
-        /*&::before {
-          content: "";
-          width: 100%;
-          padding: 1rem;
-          position: absolute;
-          top: 0;
-          left: 10px;
-          right: 0;
-          background-image: url('/images/arrow.svg');
-          opacity: 0.5;
-          background-size: 100%;
-          background-repeat: no-repeat;
-        }
-        &::after {
-          content: "";
-          width: 100%;
-          padding: 1rem;
-          position: absolute;
-          top: 0;
-          left: -10px;
-          right: 0;
-          background-image: url('/images/arrow.svg');
-          opacity: 0.5;
-          background-size: 100%;
-          background-repeat: no-repeat;
-          transform: translateX(-10px);
-        }*/
-      }
-      width: 100%;
-      color: black;
-      right: 0;
-    }
-  }
+  
 }
 </style>
