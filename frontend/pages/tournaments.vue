@@ -272,6 +272,12 @@ $orange: #FAB487;
 template{
   overflow: hidden;
 }
+html {
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  top:0;
+}
 .tournament {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
