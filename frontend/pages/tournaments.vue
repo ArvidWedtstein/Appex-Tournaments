@@ -90,21 +90,23 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 my-auto relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
-      <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-      <div class="absolute bottom-0 left-0 p-5">
-        <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
-          <p>Dato: {{formatDate(tournament.date)}}</p>
+    <div class="my-auto">
+      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 my-auto relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
+        <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
+        <div class="absolute bottom-0 left-0 p-5">
+          <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
+            <p>Dato: {{formatDate(tournament.date)}}</p>
+          </div>
+          <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
+            <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
+          </div>
+          <div class="tfooter">
+            <p class="players">{{countPlayers(tournament)}}</p>
+            <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+            <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
+          </div>
         </div>
-        <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
-          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
-        </div>
-        <div class="tfooter">
-          <p class="players">{{countPlayers(tournament)}}</p>
-          <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-          <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
-        </div>
-       </div>
+      </div>
     </div>
   </main>
 </template>
