@@ -1,8 +1,7 @@
 <template>
-  <div class="editTournament">
+  <div class="m-4">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
-    <a href="/tournaments" class="deletebtn">Sett turnering på pause</a>
-    <canvas id="Matrix"></canvas>
+    <nuxt-link to="/tournaments" class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
   </div>
 </template>
   
@@ -12,9 +11,9 @@ import axios from 'axios'
 export default {
   name: "tournament",
   async asyncData({ $axios, params, $route }) {
-    await $axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${$route.params.id[0]}`).then(async (res) => {
+    /*await $axios.get(`https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${$route.params.id[0]}`).then(async (res) => {
       console.log(res)
-    })
+    })*/
   },
   data() {
     return {
@@ -28,15 +27,6 @@ export default {
         this.tournament = res.data
       })
     },
-    /*async matchWin(tournamentId, winner, matchId) {
-      await axios({
-        method: 'post',
-        url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
-      }).then(async (response) => {
-        //await console.log(response)
-        this.getTournament(tournamentId)
-      });
-    },*/
     async getTournament(id) {
       await axios({
         method: 'get',
@@ -46,46 +36,8 @@ export default {
         this.tournament = response.data;
       });
     },
-    matrix() {
-      const canvas = document.getElementById('Matrix');
-      const context = canvas.getContext("2d");
-      this.vueCanvas = context;
-
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-      const fontSize = 16;
-      const columns = canvas.width/fontSize;
-      const rainDrops = [];
-
-      for( let x = 0; x < columns; x++ ) {
-        rainDrops[x] = 1;
-      }
-      const draw = () => {
-        context.fillStyle = 'rgba(255, 240, 255, 0.05)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        context.fillStyle = '#0835C4';
-        //context.fillStyle = '#ffffff';
-        context.font = fontSize + 'px fraktur';
-
-        for(let i = 0; i < rainDrops.length; i++)
-        {
-          const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-          context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-          if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-            rainDrops[i] = 0;
-          }
-          rainDrops[i]++;
-        }
-      };
-      setInterval(draw, 60);
-    }
   },
   mounted() {
-    this.matrix()
     this.getturnering();
   },
 }
@@ -100,12 +52,9 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-#Matrix {
-  position: absolute;
-  left: 0;
-  top: 0;
+html {
   width: 100%;
-  z-index: -1;
+  height: 100%;
 }
 
 

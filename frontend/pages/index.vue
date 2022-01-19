@@ -91,33 +91,21 @@ body {
   width: 100%;
   height: 100vh;
   position: absolute;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  
   background-color: $backclr;
   background-image: url("/images/frontpage-grapics.png"); // Bildebug blir fikset. 
   background-position: 10% 100%;
   background-repeat: no-repeat;
   background-size: 1008px;
   z-index: 1;  
-  
-  h1{
-    flex: 1 1 auto;
-    font-weight: 500;
-    font-size: 32px;
-    margin: 0;
-  }
 }
 .txt-btn-pg1 {
-  //margin-right: 40%;
-  //margin-bottom: 50px;
-  text-align: center;
-  width: 50vw;
-  margin-right: 40%;
-  h1{
-    font-size: 45px;
-  }
+  padding: 4rem;
+  
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 .btn-container {
   //padding: 1rem;

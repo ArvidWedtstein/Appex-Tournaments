@@ -1,5 +1,5 @@
 <template>
-	<div class="design-container">
+	<div class="container">
 		<div class="tournament-brackets">
 			<div v-if="tournament" class="bracket">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
@@ -40,9 +40,6 @@ export default {
 		}
 	},
 	async mounted() {
-	  if (document.querySelector('#Matrix')){
-		//this.matrix()
-	  }
     
 	},
 	watch: {
@@ -55,15 +52,15 @@ export default {
 	},
 	methods: {
 		async matchWin(tournamentId, winner, matchId) {
+      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament?id=${tournamentId}&winner=${winner}&matchId=${matchId}`
 			await axios({
 				method: 'post',
-				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament/${tournamentId}?winner=${winner}&matchId=${matchId}`
+				url: uri
 			}).then(async (response) => {
-				await console.log(response.data)
         
         this.tournament = response.data;
         //await this.$nuxt.refresh();
-        window.location.reload()
+        await window.location.reload()
 				//this.getTournament(tournamentId)
 			});
 		},
@@ -86,7 +83,6 @@ export default {
       } else if (obj.winner != null) {
         value = true;
       }
-      console.log('contains isnull', value)
       return value;
     }
 	},

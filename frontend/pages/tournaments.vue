@@ -43,9 +43,9 @@
           <label for="Gjennomført">Gjennomført</label>
         </div>
         <div class="inputContainer buttons">
-          <button class="btn flex orange p-1 mg-1" type="button">Rediger Deltakere</button>
+          <button class="btn flex orange p-1 mg-1" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="btn flex blue p-1 mg-1" type="button" @click="updateTournament()">Update</button>
-          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)" >Delete</button>
+          <button class="btn flex abs delbtn mg-1 p-1" type="button" @click="deleteTournament(editTournamentData._id)">Delete</button>
         </div>
       </div>
     </transition>
@@ -67,13 +67,27 @@
               </div>
             </div>
           </div>
-          <!--<Tournamentoverview :tournamentprop="showTournamentData"></Tournamentoverview>-->
         </div>
         <div class="inputContainer buttons">
-          <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
+          <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
           <a class="btn flex blue p-1 mg-1" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
-          <a class="deltakerbtn" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
+          <a class="btn flex blue p-1 mg-1" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
         </div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="editTournament" v-if="redigerDeltakerScreen">
+        <button class="close" type="button" v-on:click="closeTournament()">✖</button>
+        <div class="headerContainer">
+          <h1 class="display-4">"{{ editTournamentData.Name }}" Deltakere</h1>
+          <p class="lead">Rediger deltakere</p>
+        </div>
+        <div v-for="(player, h) in editPlayers" :key="player">
+          <div class="playerBox">
+            <input class="playername" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+          </div>
+        </div>
+        <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
 
@@ -84,10 +98,10 @@
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="tcontent">
-          <p>{{tournament.Name}}</p>
+          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
         </div>
         <div class="tfooter">
-          <p class="players" v-on:click="showTournament(tournament)">{{countPlayers(tournament)}}</p>
+          <p class="players">{{countPlayers(tournament)}}</p>
           <p v-if="tournament.status" class="status">{{tournament.status}}</p>
           <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
         </div>
@@ -100,6 +114,7 @@
 //import env from '~/dotenv.json'
 import axios from 'axios'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
+let intPlayer = 1;
 export default {
   name: "Tournaments",
   /*async asyncData() {
@@ -120,8 +135,10 @@ export default {
       tournaments: null,
       editTournamentScreen: false,
       showTournamentScreen: false,
+      redigerDeltakerScreen: false,
       editTournamentData: null,
       showTournamentData: null,
+      editPlayers: [],
       editTournamentChanges: {
         name: "",
         date: "",
@@ -169,7 +186,7 @@ export default {
       return new Date(date).toLocaleDateString("no", options);
     },
     updateTournament() {
-      axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament`, {
+      axios.post(`https://appex-tournaments-gylkpaupva-uc.a.run.app/updateTournament`, {
         id: this.editTournamentData._id,
         name: this.editTournamentChanges.name,
         date: this.editTournamentChanges.date,
@@ -177,8 +194,6 @@ export default {
       }).then((res) => {
         this.editTournamentScreen = false;
         console.log(res);
-        this.infoBar.show = true;
-        this.infoBar.message = "test";
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";
         this.editTournamentChanges.status = "";
@@ -186,6 +201,9 @@ export default {
         this.editTournamentData = null;
         this.$nuxt.refresh();
       });
+    },
+    async redigerDeltakere() {
+      console.log(this.editPlayers)
     },
     left() {
       const scrollContainer = document.querySelector("main");
@@ -209,6 +227,15 @@ export default {
       console.log(tournament);
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
+      for (let a = 0; a < await tournament.rounds.length; a++) {
+        console.log(tournament.rounds[a])
+        for (let b = 0; b < tournament.rounds[a].length; b++) {
+          for (let c = 0; c < tournament.rounds[a][b].players.length; c++) {
+            this.editPlayers.push(tournament.rounds[a][b].players[c])
+          }
+        }
+      }
+      console.log(this.editPlayers)
     },
     async showTournament(tournament) {
       this.showTournamentData = await tournament;
@@ -218,6 +245,7 @@ export default {
     closeTournament() {
       this.editTournamentScreen = false;
       this.showTournamentScreen = false;
+      this.redigerDeltakerScreen = false;
       this.editTournamentChanges.name = "";
       this.editTournamentChanges.date = "";
       this.editTournamentChanges.status = "";
