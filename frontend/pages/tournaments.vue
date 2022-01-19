@@ -1,40 +1,41 @@
 
 <template>
-  <main class="tournamentcontainer"><!--<main v-if="tournaments.data" class="tournamentcontainer">-->
-    <h1 class="title">Tidligere Turneringer</h1>
-    <button class="fixed w-12 mx-8 my-16 left-0 bottom-0 rotate-180" @click="left()">
-      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
+  <main class="overflow-x-hidden relative w-full h-full left-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
+    <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
+    <button class="fixed w-12 mx-4 my-8 left-0 bottom-0" @click="left()">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-8 my-16 right-0 bottom-0" @click="right()">
-      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
+    <button class="fixed w-12 mx-4 my-8 right-0 bottom-0" @click="right()">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-8 my-16 left-0 top-0" @click="$router.go(-1)" title="back">
+    <button class="fixed w-12 mx-4 my-20 left-0 top-0" @click="$router.go(-1)" title="back">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
       </svg>
     </button>
     <!--Edit tournament-->
     <transition name="fade">
-      <div class="editTournament" v-if="editTournamentScreen">
+      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
         <button class="close" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="headerContainer">
+        <div class="text-center flex-auto">
           <h1>Rediger Tournament</h1>
           <p>{{editTournamentData.Name}}</p>
         </div>
-        <div class="inputBox">
-          <h1>Navn:</h1>  
+        inputBox
+        <div class="flex-auto">
+          <h1 class="text-3md font-semibold">Navn:</h1>  
           <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="text" placeholder="Tournament navn">
         </div>
-        <div class="inputBox">
-          <h1>Dato:</h1> 
+        <div class="flex-auto">
+          <h1 class="text-3md font-semibold">Dato:</h1> 
           <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="date">
         </div>
-        <div class="inputBox">
-          <h1>Status:</h1>
+        <div class="flex-auto">
+          <h1 class="text-3md font-semibold">Status:</h1>
           <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
           <label for="Fremtidig">Fremtidig</label>
           <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
@@ -50,14 +51,14 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="editTournament" v-if="showTournamentScreen">
+      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="showTournamentScreen">
         <button class="close" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="headerContainer">
+        <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
         <div class="flex-auto p-1">
-          <div class="bracket">
+          <div class="flex-auto relative content-center self-center align-middle">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
                 <!-- <div class="match__content">{{match.id}}</div> -->
@@ -76,27 +77,27 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="editTournament" v-if="redigerDeltakerScreen">
-        <button class="close" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="headerContainer">
-          <h1 class="display-4">"{{ editTournamentData.Name }}" Deltakere</h1>
-          <p class="lead">Rediger deltakere</p>
+      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="redigerDeltakerScreen">
+        <button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
+        <div class="text-center flex-auto">
+          <h1 class="text-xl">"{{ editTournamentData.Name }}" Deltakere</h1>
+          <p class="text-lg">Rediger deltakere</p>
         </div>
         <div v-for="(player, h) in editPlayers" :key="player">
-          <div class="playerBox">
-            <input class="playername" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+          <div class="m-1 flex">
+            <input class="py-2 px-1 flex-auto bg-appexgrey border-b-2 border-solid border-abbexblue text-appexblack" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
           </div>
         </div>
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
-      <button class="top" v-on:click="editTournament(tournament)">✎</button>
-      <div class="cardContainer">
-        <div class="tspace">
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="flex-auto min-h-80 relative flex flex-col min-w-80 p-0 my-8 transition-all duration-500 ease-in-out">
+      <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
+      <div class="absolute bottom-0 left-0 p-5">
+        <div class="w-100 font-semibold text-md pb-0 min-h-100 overflow-auto">
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
-        <div class="tcontent">
+        <div class="flex-auto w-100 max-h-8 text-2lg font-semibold">
           <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
         </div>
         <div class="tfooter">
@@ -271,81 +272,8 @@ $orange: #FAB487;
 template{
   overflow: hidden;
 }
-.tournamentcontainer {
-  overflow-x: hidden;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  left: 0;
-  padding: 2em 2em;
-  padding-top: 75px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: nowrap;
-  transition: all 0.5s ease;
-  user-select: none;
-  
-}
-.title {
-  position: fixed;
-  top: 11vh;
-  font-size: 40px;
-  font-weight: 500;
-  text-align: center;
-  width: 100vw;
-}
 
 .tournament {
-  flex: 1 1 auto;
-  min-height: 300px;
-  max-height: 300px;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 300px;
-  word-wrap: break-word;
-  padding: 0rem;
-  margin: 0rem 2rem;
-  transition: all 0.5s ease;
-  .top {
-    transform: rotate(90deg);
-    position: absolute;
-    top:10px;
-    right: 10px;
-    width: 24px;
-    text-align: center;
-  }
-  .cardContainer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 20px;
-  }
-  .tspace {
-    width: 100%;
-    font-weight: 500;
-    font-size: 12px;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    min-height: 100%;
-    overflow: auto;
-    
-  }
-  .tcontent {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    width: 100%;
-    max-height: 32.67px;
-    font-size: 22px;
-    font-weight: 600;
-  }
   .tfooter {
     width: 100%;
     font-weight: 500;
@@ -375,182 +303,10 @@ template{
   }
 }
 
-
-
-.editTournament {
-  position: fixed;
-  width: 100vw;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  padding: 20vh 20% 0;
-  padding-top: 3rem;
-  z-index: 2;
-  background: rgb(237,236,233);
-  color: $black;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  .close {
-    font-size: 4vw;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 3rem;
-    &:hover {
-      color: rgba(0,0,0,0.7);
-    }
-  }
-  .headerContainer{
-    text-align: center;
-    flex: 1 1 auto;
-    h1 {
-      font-size: 4vw;
-    }
-    p {
-      font-size: 2vw;
-    }
-  }
-  
-  .update {
-    //width: 400px;
-    //height: 50px;
-    flex: 1 1 auto;
-    align-self: center;
-    background: $grey;
-    color: #000000;
-    border: none;
-    border-bottom: 2px solid $blue;
-    border-radius: calc(0.25rem - 1px);
-    &::placeholder, &::-moz-placeholder, &:-ms-input-placeholder{
-      color: gray;
-    }
-  }
-  @mixin rad-shadow {
-    border: 1px solid hsl(200 10% 50% / 15%);
-    box-shadow: 0 1rem .5rem -.5rem;
-    box-shadow:
-    0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
-    0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
-    0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
-    0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
-    0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
-    0 100px 80px hsl(200 50% 3% / .3)
-    ;
-  }
-  .inputContainer {
-    display: flex;
-    flex-direction: row;
-    flex: 1 1 auto;
-    align-items: center;
-    align-content: center;
-    /*&.buttons > * {
-      padding: 1rem;
-      //margin: 1rem;
-      flex: 1 1 auto;
-      background: $orange;
-      color: #000000;
-      border: none;
-      transition: all 0.1s ease;
-      width: 50%;
-      &:hover {
-        transform: translateY(-2.5px);
-      }
-      &:active {
-        transform: translate(0px, 2.5px);
-        -webkit-transform: translate(0px, 5px);
-        box-shadow: 0px 1px 0px 0px;
-      }
-    }*/
-    .updatebtn {
-      background-color: $blue;
-      color: #fff;
-      border-radius: 0.25rem;
-    }
-    .deletebtn {
-      width: auto;
-      position: absolute;
-      right: 45px;
-      flex: 1 1 auto;
-      align-self: center;
-      background: #C0392B;
-      color: white;
-      border: none;
-      transition: all 0.1s ease;
-      text-align: center;
-      &:hover {
-        background: red;
-      }
-    }
-    p {
-      position: absolute;
-      left: 6rem;
-    }
-
-
-  }
-
-  .inputBox {
-    flex: 1 1 auto;
-    &.border {
-      display: flex;
-      align-content: center;
-      align-items: center;
-      padding: 3rem;
-      background: $dark-grey;
-      border-radius: 0.5rem;
-      @include rad-shadow;
-    }
-    h1 {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    input {
-      position: relative;
-      flex: 1 1 auto;
-      background: transparent;
-      text-align: left;
-      vertical-align: middle;
-      outline: none;
-      width: 100%;
-      border: none;
-      color: $inputcolor;
-      padding-bottom: 10px;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border-bottom: 2px solid $inputcolor;
-      
-      &:focus {
-        color: $inputhovercolor;
-        border-bottom: 2px solid $inputhovercolor;
-      }
-      &:-webkit-autofill,
-      &:-webkit-autofill:hover, 
-      &:-webkit-autofill:focus, 
-      &:-webkit-autofill:active  {
-        -webkit-text-fill-color: black;
-        -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-        box-shadow: 0 0 0px 1000px #000 inset;
-        transition: background-color 5000s ease-in-out 0s;
-      }
-    }
-  }
-
-
-}
 .fade-enter-active, .fade-leave-active {
   transition: all .5s ease-in-out;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-}
-.bracket {
-  flex: 1 1 auto;
-  position: relative;
-  align-content: center;
-  align-self: center;
-  vertical-align: middle;
 }
 </style>

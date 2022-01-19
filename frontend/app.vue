@@ -146,40 +146,4 @@ $abbegsColors: (
   }
 }
 
-// Buttons til å bytte side
-.dirbuttons {
-  position: fixed;
-  width: 50px;
-  margin: 2rem 4rem;
-  &.left {
-    img {
-      transform: rotate(180deg);
-    }
-    left: 0;
-  }
-  &.right {
-    right: 0;
-  }
-  &.top {
-    top: 6ch;
-  }
-  &.bottom {
-    bottom: 0;
-  }
-  &:hover, &:focus {
-    svg {
-      color: $dark-grey;
-    }
-    
-  }
-}
-
-// Matrix Animation
-#Matrix {
-  overflow: hidden;
-  position: absolute;
-  left: 60%;
-  top: 0;
-  z-index: -2;
-}
 </style>
