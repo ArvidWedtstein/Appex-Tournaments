@@ -273,6 +273,25 @@ template{
 }
 
 .tournament {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 300px;
+  max-height: 300px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 300px;
+  word-wrap: break-word;
+  padding: 0rem;
+  margin: 0rem 2rem;
+  transition: all 0.5s ease;
   .tfooter {
     width: 100%;
     font-weight: 500;
