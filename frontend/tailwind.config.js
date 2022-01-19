@@ -21,6 +21,9 @@ module.exports = {
         appexblue: "#0835C4",
         appexgreen: "#DDE78B",
         appexorange: "#FAB487"
+      },
+      backgroundImage: {
+        'frontpageGrapics': "/images/frontpage-grapics.png"
       }
     },
   },
