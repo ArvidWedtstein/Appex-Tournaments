@@ -33,13 +33,11 @@
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
-      <div class="deltakere overflow-y-visible" v-for="i in Math.ceil(players.length / 8)" :key="i">
-        <div v-for="(name, index) in players" :key="index" class="deltakere">
-          <div class="flex">
-            <input class="p-1 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + i * index">
-          </div>
+      <div v-for="(name, index) in players" :key="index" class="deltakere overflow-y-visible">
+        <div class="flex">
+          <input class="p-1 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
         </div>
-      </div>  
+      </div>
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
