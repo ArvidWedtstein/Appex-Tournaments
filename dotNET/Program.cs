@@ -12,6 +12,7 @@ builder.Logging.AddConsole();
 builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
 builder.Services.AddCors(options => {
     options.AddPolicy(name: MyAllowSpecificOrigins, builder => { 
+        //builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
         builder.WithOrigins("https://appextournament.netlify.app").AllowAnyMethod().AllowAnyHeader();
     });
 });

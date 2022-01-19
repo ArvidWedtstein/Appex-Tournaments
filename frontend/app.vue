@@ -29,7 +29,7 @@
 </template>
 <script setup>
 import '~/assets/tailwind.scss'
-
+const config = useRuntimeConfig()
 
 </script>
 
@@ -93,93 +93,57 @@ $abbegsColors: (
   "orange": #FAB487
 );
 
-.btn {
-  font-weight: 600;
-  color: #ffffff;
-  border: none;
-  text-decoration: none;
-  border-radius: 0.25rem;
+// .btn {
+//   font-weight: 600;
+//   color: #ffffff;
+//   border: none;
+//   text-decoration: none;
+//   border-radius: 0.25rem;
 
-  &:hover {
-    transform: translateY(-5px);
-  }
-  @each $abbegsColor, $i in $abbegsColors {
-    &.#{$abbegsColor} {
-      background-color: $i;
-    }	
-  }
-  &.abs {
-    right: 4rem;
-    bottom: 2rem;
-    position: absolute;
-  }
-  &.fix {
-    position: fixed;
-  }
-  &.rel {
-    position: relative;
-  }
-  &.p-1 {
-    padding: 1rem;
-  }
-  &.mg-5 {
-    margin: 5%;
-  }
-  &.mg-1 {
-    margin: 1rem;
-  }
-  &.flex {
-    flex: 1 1 auto;
-  }
-  &.delbtn {
-    background: #C0392B;
-    color: white;
-    border: none;
-    width: auto;
-    right: 45px;
-    flex: 1 1 auto;
-    align-self: center;
-    transition: all 0.1s ease;
-    &:hover {
-      background: red;
-    }
-  }
-}
+//   &:hover {
+//     transform: translateY(-5px);
+//   }
+//   @each $abbegsColor, $i in $abbegsColors {
+//     &.#{$abbegsColor} {
+//       background-color: $i;
+//     }	
+//   }
+//   &.abs {
+//     right: 4rem;
+//     bottom: 2rem;
+//     position: absolute;
+//   }
+//   &.fix {
+//     position: fixed;
+//   }
+//   &.rel {
+//     position: relative;
+//   }
+//   &.p-1 {
+//     padding: 1rem;
+//   }
+//   &.mg-5 {
+//     margin: 5%;
+//   }
+//   &.mg-1 {
+//     margin: 1rem;
+//   }
+//   &.flex {
+//     flex: 1 1 auto;
+//   }
+//   &.delbtn {
+//     background: #C0392B;
+//     color: white;
+//     border: none;
+//     width: auto;
+//     right: 45px;
+//     flex: 1 1 auto;
+//     align-self: center;
+//     transition: all 0.1s ease;
+//     &:hover {
+//       background: red;
+//     }
+//   }
+// }
 
-// Buttons til å bytte side
-.dirbuttons {
-  position: fixed;
-  width: 50px;
-  margin: 2rem 4rem;
-  &.left {
-    img {
-      transform: rotate(180deg);
-    }
-    left: 0;
-  }
-  &.right {
-    right: 0;
-  }
-  &.top {
-    top: 6ch;
-  }
-  &.bottom {
-    bottom: 0;
-  }
-  &:hover, &:focus {
-    svg {
-      color: $dark-grey;
-    }
-    
-  }
-}
-
-// Matrix Animation
-#Matrix {
-  overflow: hidden;
-  position: absolute;
-  left: 60%;
-  top: 0;
-  z-index: -2;
-}
 </style>

@@ -11,49 +11,42 @@
           <h1 class="text-xl">Tournament dato</h1>
           <input class="relative flex-auto bg-transparent text-left align-middle outline-0 w-full border-0 decoration-[#00000080] pb-2 text-base " v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
-        <button class="dirbuttons right bottom" @click="increasePage()">
+        <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
           </svg>
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="page flex justify-center content-center relative flex-col w-full max-h-full h-full top-3">
-      <div class="headerContainer text-center min-h-[10vh]">
-        <h1 class="display-4 text-7xl">"{{ tournament.name }}" Deltakere</h1>
-        <p class="lead text-5xl">Rediger deltakere</p>
+    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-100 overflow-y-visible">
+      <div class="text-center relative w-100 mx-auto min-h-10 my-16">
+        <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
+        <p class="text-2md text-center">Rediger deltakere</p>
       </div>
-      <div class="playerAddContainer flex justify-center w-24">
-        <div class="countContainer">
-          <div class="playerCount decoration-appexblue text-4xl font-normal w-full text-center">{{ players.length }}</div>
-          <p class="w-full text-center font-normal">Deltakere</p>
+      <div class="relative min-h-max w-24 my-16">
+        <div class="text-center font-semibold">
+          <h1 class="text-appexblue text-4lg w-100">{{ players.length }}</h1>
+          <p class="text-center w-100">Deltakere</p>
         </div>
-        <div class="btnContainer text-5xl font-normal flex intems-center">
-          <button class="minusBtn" @click="removePlayer()">-</button>
-          <button class="plusBtn" @click="addPlayer()">+</button>
+        <div class="text-2xl font-semibold flex items-center my-16">
+          <button class="absolute text-4xl left-0 bottom-0" @click="removePlayer()">-</button>
+          <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
-
-
-
-      <div class="deltakere flex flex-col justify-start w-auto m-0" v-for="i in Math.ceil(players.length / 8)" :key="i">
-        <div v-for="(name, index) in players.slice((i - 1) * 8, i * 8)" :key="index" class="deltakere flex flex-col justify-start w-auto m-0">
-          <div class="playerBox page flex justify-center content-center m-0.5">
-            <input class="playername max-w-xs flex-auto justify-self-center pt-2 pl-4 decoration-black bg-appexgrey border-0 border-b-2 border-appexblue outline-none placeholder:decoraton-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
-            
+      <div class="deltakere overflow-y-visible" v-for="i in Math.ceil(players.length / 8)" :key="i">
+        <div v-for="(name, index) in players" :key="index" class="deltakere">
+          <div class="playerBox">
+            <input class="playername" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + index * (i)">
           </div>
         </div>
       </div>  
-      <button class="btn blue abs p-1" @click="newTournament()" type="button">Ny Turnering</button>
+      <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
     <div v-if="page === 2" class="page flex justify-center content-center relative flex-col w-full max-h-full h-full">
       <h1 class="font-14">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
-      <!--<NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
-      <NuxtLink class="btn orange rel p-1 mg-1" to="/">Utsett turnering</NuxtLink>-->
-      <!-- Tailwind versjon-->
       <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
     </div>
@@ -87,7 +80,7 @@ export default {
       async newTournament() {
         axios({
           method: 'POST',
-          url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
+          url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
           
@@ -96,7 +89,7 @@ export default {
           this.turnering = response.data;
           axios({
             method: 'POST',
-            url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/previewmatch?id=${response.data.id}`
+            url: `${this.$config.baseURL}/previewmatch?id=${response.data.id}`
           }).then(async (res) => {
             console.log(res.data)
             this.previewturnering = res.data;
@@ -107,7 +100,7 @@ export default {
       },
       addPlayer() { 
         if (intPlayer < 32){
-        const adj = ["Gretten", "Glad", "Fjern","Smart","God","Vakker","Snill","Første","Rask","Kreativ", "Lys", "Mandig", "Treig"];
+        const adj = ["Gretten", "Glad", "Fjern", "Smart", "God", "Vakker", "Snill", "Første", "Rask", "Kreativ", "Lys", "Mandig", "Treig", "Smart"];
         const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
         for(let i = 0; i < intPlayer; i++) {
           let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
@@ -127,10 +120,10 @@ export default {
       },
       increasePage() {
         if (this.page == 2) return
-        const regex = /^[a-zA-Z0-9]*$/
-        if (!regex.test(this.tournament.name)) {
-          alert('Name cannot contain invalid characters (only letters and numbers)')
-        }
+        const regex = /[^A-Za-z0-9]+/
+        /*if (!regex.test(this.tournament.name)) {
+          return alert('Name cannot contain invalid characters (only letters and numbers)')
+        }*/
         if (this.tournament.name && this.tournament.date) {
           this.page += 1;
         } else {
@@ -140,48 +133,10 @@ export default {
       decreasePage() {
         if (this.page == 0) return
         this.page -= 1;
-      },
-      matrix() {
-        const canvas = document.getElementById('Matrix');
-        const context = canvas.getContext("2d");
-        this.vueCanvas = context;
-        canvas.width = 500;
-        canvas.height = window.innerHeight;
-        const abbegssymbols = "+ + + + + + + . . . . . . . . < > + + . . . . : : : : : : : : : : / / / + + + + + + + + / / / < > . . . . . . . . { } . : : : : : : : "
-        const fontSize = 32;
-        const speed = 60;
-        const columns = 500/fontSize;
-        const rainDrops = [];
-
-        for (let x = 0; x < columns; x++ ) {
-          rainDrops[x] = 1;
-        }
-        const draw = () => {
-          context.fillStyle = 'rgba(237, 236, 233, 0.05)';
-          context.fillRect(0, 0, canvas.width, canvas.height );
-      
-          context.fillStyle = '#000000';
-          context.font = fontSize + 'px fraktur';
-
-          for (let i = 0; i < rainDrops.length; i++)
-          {
-            const text = abbegssymbols.charAt(Math.floor(Math.random() * abbegssymbols.length));
-            context.fillText(text, i*fontSize, rainDrops[i]*fontSize);
-
-            if (rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
-              rainDrops[i] = 0;
-            }
-            rainDrops[i]++;
-          }
-        };
-        setInterval(draw, speed);
       }
     },
     mounted() {
-      if (document.querySelector("#Matrix")) {
-        this.matrix()
-      }
-      //this.getTournament()
+
     }
 }
 </script>
