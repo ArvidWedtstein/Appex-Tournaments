@@ -18,19 +18,19 @@
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="page">
-      <div class="headerContainer">
+    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 max-h-100 h-100">
+      <div class="text-center absolute top-8 left-[50%] translate-x-1/2 min-h-10">
         <h1 class="display-4">"{{ tournament.name }}" Deltakere</h1>
         <p class="lead">Rediger deltakere</p>
       </div>
-      <div class="playerAddContainer">
-        <div class="countContainer">
-          <div class="playerCount">{{ players.length }}</div>
-          <p>Deltakere</p>
+      <div class="absolute top-8 right-32 h-36 w-24">
+        <div class="text-center font-semibold">
+          <h1 class="text-appexblue text-4lg w-100">{{ players.length }}</h1>
+          <p class="text-center w-100">Deltakere</p>
         </div>
-        <div class="btnContainer">
-          <button class="minusBtn" @click="removePlayer()">-</button>
-          <button class="plusBtn" @click="addPlayer()">+</button>
+        <div class="text-4lg font-semibold flex items-center">
+          <button class="absolute left-0 bottom-0" @click="removePlayer()">-</button>
+          <button class="absolute right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
 
@@ -43,16 +43,13 @@
           </div>
         </div>
       </div>  
-      <button class="btn blue abs p-1" @click="newTournament()" type="button">Ny Turnering</button>
+      <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
-    <div v-if="page === 2" class="page">
+    <div v-if="page === 2" class="flex content-center justify-center items-center relative flex-col w-100 max-h-100 h-100">
       <h1 class="font-14">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
-      <!--<NuxtLink class="btn blue rel p-1 mg-1" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
-      <NuxtLink class="btn orange rel p-1 mg-1" to="/">Utsett turnering</NuxtLink>-->
-      <!-- Tailwind versjon-->
       <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
     </div>
