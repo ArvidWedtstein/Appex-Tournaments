@@ -1,5 +1,5 @@
 <template>
-	<div class="container flex flex-col content-center justify-center">
+	<div class="container flex flex-col content-center justify-center align-center">
 		<div class="flex flex-auto content-center items-center rounded p-8 bg-appexdarkgrey">
 			<div v-if="tournament" class="flex content-center items-center">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
