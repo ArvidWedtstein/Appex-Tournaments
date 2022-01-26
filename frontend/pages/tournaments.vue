@@ -28,7 +28,7 @@
         <div class="flex flex-auto flex-col content-center justify-center">
           <div class="flex-auto">
             <h1 class="text-3md font-semibold">Navn:</h1>  
-            <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="text" placeholder="Tournament navn">
+            <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2" type="text" placeholder="Tournament navn">
           </div>
           <div class="flex-auto">
             <h1 class="text-3md font-semibold">Dato:</h1> 
@@ -36,11 +36,11 @@
           </div>
           <div class="flex-auto">
             <h1 class="text-3md font-semibold">Status:</h1>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
+            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
             <label for="Fremtidig">Fremtidig</label>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
+            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
             <label for="Påbegynt">Påbegynt</label>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
+            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
             <label for="Gjennomført">Gjennomført</label>
           </div>
         </div>
