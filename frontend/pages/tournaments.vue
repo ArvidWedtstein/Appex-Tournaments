@@ -90,14 +90,14 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament" v-on:click="showTournament(tournament)">
       <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
       <div class="absolute bottom-0 left-0 p-5">
         <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
-          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
+          <button class="no-underline hover:underline">{{tournament.Name}}</button>
         </div>
         <div class="tfooter">
           <p class="players">{{countPlayers(tournament)}}</p>
@@ -300,6 +300,7 @@ html {
   padding-top: 4rem;
   margin: 0rem 2rem;
   transition: all 0.5s ease;
+
   .tfooter {
     width: 100%;
     font-weight: 500;
@@ -316,15 +317,27 @@ html {
     }
   }
   &:nth-child(3n) {
+    &:hover {
+      border: 2px solid $black;
+    }
     background-color: $orange;
+    border: 2px solid transparent;
     color: $black;
   }
   &:nth-child(3n - 1) {
+    &:hover {
+      border: 2px solid $backclr;
+    }
     background-color: $blue;
+    border: 2px solid transparent;
     color: $backclr;
   }
   &:nth-child(3n - 2) {
+    &:hover {
+      border: 2px solid $orange;
+    }
     background-color: $black;
+    border: 2px solid transparent;
     color: $orange;
   }
 }
