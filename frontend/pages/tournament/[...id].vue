@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mx-auto my-auto flex flex-col content-center justify-center">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
-    <nuxt-link to="/tournaments" class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
+    <nuxt-link to="/tournaments" class="w-10 bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
   </div>
 </template>
   
