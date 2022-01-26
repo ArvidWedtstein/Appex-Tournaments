@@ -20,12 +20,12 @@
     <!--Edit tournament-->
     <transition name="fade">
       <div class="w-full fixed bottom-0 top-0 left-0 p-16 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
-        <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
+        <button class="fixed top-0 right-0 text-6xl m-6" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h1 class="text-4xl">Rediger Tournament</h1>
           <p class="text-2xl">{{editTournamentData.Name}}</p>
         </div>
-        <div class="flex flex-row content-center justify-center">
+        <div class="flex flex-auto flex-row content-center justify-center">
           <div class="flex flex-auto flex-col content-center justify-center">
             <div class="flex-auto">
               <h1 class="text-3md font-semibold">Navn:</h1>  
