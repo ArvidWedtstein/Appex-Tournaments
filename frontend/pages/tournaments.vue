@@ -71,7 +71,7 @@
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-10">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey m-10">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
