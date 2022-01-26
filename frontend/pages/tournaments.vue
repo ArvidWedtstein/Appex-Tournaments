@@ -247,6 +247,7 @@ export default {
   mounted() {
     this.horizontalScroll();
     this.fetchTournaments();
+    console.log('test')
   },
   components: { Tournamentoverview }
 }
