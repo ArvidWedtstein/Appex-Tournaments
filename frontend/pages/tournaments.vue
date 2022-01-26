@@ -108,7 +108,7 @@
 
     <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" >
       <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-      <div class="absolute bottom-0 left-0 p-5 " v-on:click="showTournament(tournament)">
+      <div class="absolute bottom-0 left-0 p-5 " @click="showTournament(tournament)">
         <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
