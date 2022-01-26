@@ -165,6 +165,8 @@ export default {
           
         });
         scrollContainer.addEventListener('touchmove', (evt) => {
+          console.log('touchevent')
+          $(document).trigger('mousewheel')
           evt.preventDefault();
           scrollContainer.scrollLeft += evt.deltaY;
         })
