@@ -44,7 +44,7 @@
             <label for="Gjennomført">Gjennomført</label>
           </div>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in editTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
