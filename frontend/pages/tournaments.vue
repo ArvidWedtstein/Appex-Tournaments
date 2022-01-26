@@ -76,7 +76,7 @@
       </div>
     </transition>
     <transition name="fade">
-      <div  v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
+      <div v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h1 class="text-xl">"{{ editTournamentData.Name }}" Deltakere</h1>
@@ -90,9 +90,10 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" v-on:click="showTournament(tournament)">
+
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" >
       <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-      <div class="absolute bottom-0 left-0 p-5">
+      <div class="absolute bottom-0 left-0 p-5" v-on:click="showTournament(tournament)">
         <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
