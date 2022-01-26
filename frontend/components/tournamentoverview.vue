@@ -65,17 +65,14 @@ export default {
 			});
 		},
 		async getTournament(id) {
-      console.log('gettournament')
 			await axios({
 				method: 'get',
 				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
 			}).then(async (response) => {
-				//await console.log(response.data)
 				this.tournament = response.data;
 			});
 		},
     async Contains(obj, key) {
-      console.log(obj)
       if (!obj) return false;
       let value = false;
       if (obj.winner == null || obj.winner == 'undefined') {
