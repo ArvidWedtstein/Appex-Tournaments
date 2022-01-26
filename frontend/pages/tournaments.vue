@@ -50,7 +50,7 @@
       </div>
     </transition>
     <transition name="fade">
-      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 mx-auto z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
+      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 m-6 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="fixed top-0 right-0 text-6xl p-12" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
