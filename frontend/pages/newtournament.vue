@@ -47,7 +47,7 @@
       <h1 class="font-14">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
       <br>
-      <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
+      <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear abosulute bottom-4 right-3" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
     </div>
   </div>
