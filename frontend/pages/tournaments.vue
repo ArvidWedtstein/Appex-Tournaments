@@ -167,7 +167,7 @@ export default {
         scrollContainer.addEventListener('touchmove', (evt) => {
           console.log(evt.touches[0])
           evt.preventDefault();
-          scrollContainer.scrollLeft += evt.touches[0].clientX;
+          scrollContainer.scrollLeft += evt.touches[0].clientX / 10;
         })
       } else {
         setTimeout(() => {
