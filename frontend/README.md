@@ -34,12 +34,3 @@ Skal fungere noenlunde som https://challonge.com/
 <p align="center">Frontend: Aleksnadder</p>
 <p align="center">Backend: Arvid</p>
 
-## Progress:
-Laget pages for oppretting av turnering (colorscheme in progress)
-
-## TODO
-
-- Lage funksjon for å sette turnering på pause/gjenoppta turnering
-
-- Endre bracketoppsettet til å være i Abbegs stil
-

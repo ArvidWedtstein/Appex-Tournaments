@@ -34,21 +34,7 @@ Skal fungere noenlunde som https://challonge.com/
 <p align="center">Frontend: Aleksnadder</p>
 <p align="center">Backend: Arvid</p>
 
-## Progress:
-Laget pages for oppretting av turnering (colorscheme in progress)
-
-- Lage side for tidligere turneringer 
-
-## TODO
-
-- Sjekke at alle input feltene er fylt ut før man kan gå til neste side/opprette turnering.
-
-- Farger / Colorscheme
-
-- Abbegs background former
 
 <img align="center" width=800 src="frontend/public/images/sneakpeak1.PNG" />
 <img align="center" width=800 src="frontend/public/images/sneakpeak2.PNG" />
 <img align="center" width=800 src="frontend/public/images/sneakpeak3.PNG" />
-<img align="center" width=800 src="frontend/public/images/sneakpeak4.PNG" />
-<img align="center" width=800 src="frontend/public/images/sneakpeak5.PNG" />
