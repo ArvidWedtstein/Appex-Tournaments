@@ -67,7 +67,7 @@ $orange: #FAB487;
 *::before {
     box-sizing: border-box;
 }
-body{
+body, html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;

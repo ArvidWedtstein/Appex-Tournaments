@@ -1,6 +1,6 @@
 
 <template>
-  <main class="overflow-x-hidden relative w-full h-full left-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
+  <main class="overflow-x-hidden fixed w-full h-full left-0 bottom-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
     <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
     <button class="fixed w-12 mx-4 my-8 left-0 bottom-0" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -19,11 +19,11 @@
     </button>
     <!--Edit tournament-->
     <transition name="fade">
-      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
-        <button class="top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
+      <div class="w-full fixed bottom-0 top-0 left-0 p-16 p-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="editTournamentScreen">
+        <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
-          <h1>Rediger Tournament</h1>
-          <p>{{editTournamentData.Name}}</p>
+          <h1 class="text-4xl">Rediger Tournament</h1>
+          <p class="text-2xl">{{editTournamentData.Name}}</p>
         </div>
         <div class="flex-auto">
           <h1 class="text-3md font-semibold">Navn:</h1>  
@@ -50,14 +50,14 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="showTournamentScreen">
-        <button class="top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
+      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
+        <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="flex-auto p-1">
-          <div class="flex-auto relative content-center self-center align-middle">
+        <div class="flex-auto p-1 bg-appexblack text-white">
+          <div class="flex content-center items-center">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
                 <!-- <div class="match__content">{{match.id}}</div> -->
@@ -90,21 +90,19 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div class="flex flex-row absolute bottom-0">
-      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament flex-auto h-80 h-full relative flex flex-col w-80 p-0 top-30 my-auto rounded mx-16 transition-all duration-500 ease-in-out">
-        <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-        <div class="absolute bottom-0 left-0 p-5">
-          <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
-            <p>Dato: {{formatDate(tournament.date)}}</p>
-          </div>
-          <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
-            <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
-          </div>
-          <div class="tfooter">
-            <p class="players">{{countPlayers(tournament)}}</p>
-            <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-            <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
-          </div>
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament">
+      <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
+      <div class="absolute bottom-0 left-0 p-5">
+        <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
+          <p>Dato: {{formatDate(tournament.date)}}</p>
+        </div>
+        <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
+          <button class="no-underline hover:underline" v-on:click="showTournament(tournament)">{{tournament.Name}}</button>
+        </div>
+        <div class="tfooter">
+          <p class="players">{{countPlayers(tournament)}}</p>
+          <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+          <!--<p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p>-->
         </div>
       </div>
     </div>
@@ -249,6 +247,7 @@ export default {
   mounted() {
     this.horizontalScroll();
     this.fetchTournaments();
+    console.log('test')
   },
   components: { Tournamentoverview }
 }
@@ -277,6 +276,8 @@ html {
   position: absolute;
   bottom: 0;
   top:0;
+  left: 0;
+  right: 0;
 }
 .tournament {
   -webkit-box-orient: vertical;
@@ -296,6 +297,7 @@ html {
   min-width: 300px;
   word-wrap: break-word;
   padding: 0rem;
+  padding-top: 4rem;
   margin: 0rem 2rem;
   transition: all 0.5s ease;
   .tfooter {
@@ -326,7 +328,137 @@ html {
     color: $orange;
   }
 }
-
+.bracket {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  .round {
+    flex: 1 1 auto;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    &:first-child {
+      .match {
+        &::before {
+          display: none;
+        }
+      }
+      .match__content {
+        &::before {
+          display: none !important;
+        }
+      }
+    }
+    &:last-child {
+      .match {
+        &::before, &::after {
+          display: none !important;
+        }
+      }
+      .match__content::before {
+        content: "";
+        display: block;
+        width: 20px;
+        border-bottom: 2px solid $green;
+        margin-left: -10px;
+        position: absolute;
+        top: 50%;
+        left: -10px;
+      }
+    }
+    .match {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 10px;
+      padding: 6px 0;
+      flex-grow: 1;
+      position: relative;
+      vertical-align: middle;
+      &::before {
+        content: "";
+        display: block;
+        min-height: 20px;
+        border-left: 2px solid $green;
+        position: absolute;
+        left: -10px;
+        top: 60%;
+        margin-top: -15px;
+        margin-left: -2px;
+      }
+      &:nth-child(2n+0) {
+        padding-top: 0;
+        padding-top: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      &:nth-child(odd)::after {
+        content: "";
+        display: block;
+        border: 2px solid transparent;
+        border-top-color: $green;
+        border-right-color: $green;
+        height: 50%;
+        position: absolute;
+        right: -10px;
+        width: 10px;
+        top: 60%;
+      }
+      &:nth-child(even)::after {
+        content: "";
+        display: block;
+        border: 2px solid transparent;
+        border-bottom-color: $green;
+        border-right-color: $green;
+        height: 50%;
+        position: absolute;
+        right: -10px;
+        width: 10px;
+        bottom: 50%;
+      }
+      .match__content {
+        &::before {
+          content: "";
+          display: block;
+          width: 20px;
+          border-bottom: 2px solid $green;
+          margin-left: -2px;
+          position: absolute;
+          top: 55%;
+          //left: -10px;
+        }
+      }
+      .matchplayer {
+        display: flex;
+        flex-direction: column;
+        //width: 100%;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        .player {
+          flex: 1 1 auto;
+          margin: 0;
+          padding: 0.3rem 1rem;
+          border: 2px solid $green;
+          background: $black;
+          color: $orange;
+          border-radius: 0.25rem;
+          text-align: left;
+          position: relative;
+          &.winner {
+			      &::after {
+              content: "🏅";
+              float: right;
+            }
+            //background: gold;
+          }
+        }
+      }
+    }
+  }
+}
 .fade-enter-active, .fade-leave-active {
   transition: all .5s ease-in-out;
 }

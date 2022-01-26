@@ -18,7 +18,7 @@
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-100 overflow-y-visible">
+    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-y-visible">
       <div class="text-center relative w-100 mx-auto min-h-10 my-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
@@ -33,13 +33,11 @@
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
-      <div class="deltakere overflow-y-visible" v-for="i in Math.ceil(players.length / 8)" :key="i">
-        <div v-for="(name, index) in players" :key="index" class="deltakere">
-          <div class="playerBox">
-            <input class="playername" v-model="players[(i) * index]" type="text" v-bind:placeholder= "'Deltaker' + index * (i)">
-          </div>
+      <div v-for="(name, index) in players" :key="index" class="flex flex-col content-left overflow-y-visible">
+        <div class="flex">
+          <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
         </div>
-      </div>  
+      </div>
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
