@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-screen m-auto">
+  <div class="relative h-screen m-auto p-20">
     <Tournamentoverview :tournamentprop="tournament"></Tournamentoverview>
     <nuxt-link to="/tournaments" class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
   </div>
