@@ -287,6 +287,7 @@ html {
   top:0;
   left: 0;
   right: 0;
+  overflow-x: scroll;
 }
 .tournament {
   -webkit-box-orient: vertical;
