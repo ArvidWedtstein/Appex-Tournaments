@@ -22,28 +22,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="tournament-brackets">
-			<div v-if="tournament" class="bracket">
-				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
-					<div class="match" v-for="(match, m) in round" :key="m">
-						<div class="match__content"></div>
-						<div class="matchplayer" v-for="player in match.players" :key="player">
-							<button class="player" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
-						</div>
-						<p>Match: {{m+1}}</p>
-					</div>
-          <div v-if="!Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')" class="finalWinner">
-            <div class="bogs">
-              {{Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')}}
-              <h3>Final Winner:</h3>
-              <h1>{{ tournament.rounds[tournament.rounds.length - 1][0] }}</h1>
-              <br>
-              <NuxtLink to="/">Hjem</NuxtLink>
-            </div>
-          </div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 </template>										
 

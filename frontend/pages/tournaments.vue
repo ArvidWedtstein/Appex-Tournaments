@@ -12,7 +12,7 @@
         <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-4 my-20 left-0 top-0" @click="$router.go(-1)" title="back">
+    <button class="fixed w-12 mx-4 my-20 left-0 top-0" @click="$router.go(0)" title="back">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
       </svg>
@@ -90,7 +90,7 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament" v-on:click="showTournament(tournament)">
+    <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" v-on:click="showTournament(tournament)">
       <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
       <div class="absolute bottom-0 left-0 p-5">
         <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
@@ -164,8 +164,8 @@ export default {
           scrollContainer.scrollLeft += evt.deltaY;
           
         });
+        // funke bare å scrolldragge mot høyre..
         scrollContainer.addEventListener('touchmove', (evt) => {
-          console.log(evt.touches[0])
           evt.preventDefault();
           scrollContainer.scrollLeft += evt.touches[0].clientX / 10;
         })
@@ -188,7 +188,6 @@ export default {
         status: this.editTournamentChanges.status
       }).then((res) => {
         this.editTournamentScreen = false;
-        console.log(res);
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";
         this.editTournamentChanges.status = "";
@@ -218,7 +217,6 @@ export default {
       scrollContainer.scrollLeft += step;
     },
     async editTournament(tournament) {
-      console.log(tournament);
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
       for (let a = 0; a < await tournament.rounds.length; a++) {
