@@ -45,15 +45,13 @@
               <label for="Gjennomført">Gjennomført</label>
             </div>
           </div>
-          <div class="flex flex-auto flex-col content-center justify-center w-50">
-            <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey">
-              <div class="flex content-center items-center">
-                <div class="round" v-for="round in editTournamentData.rounds" :key="round">
-                  <div class="match" v-for="match in round" :key="match">
-                    <!-- <div class="match__content">{{match.id}}</div> -->
-                    <div class="matchplayer" v-for="player in match.players" :key="player">
-                      <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
-                    </div>
+          <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey w-1/2">
+            <div class="flex content-center items-center">
+              <div class="round" v-for="round in editTournamentData.rounds" :key="round">
+                <div class="match" v-for="match in round" :key="match">
+                  <!-- <div class="match__content">{{match.id}}</div> -->
+                  <div class="matchplayer" v-for="player in match.players" :key="player">
+                    <p class="player" v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
                   </div>
                 </div>
               </div>
@@ -69,13 +67,13 @@
       </div>
     </transition>
     <transition name="fade">
-      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 m-6 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
+      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="fixed top-0 right-0 text-6xl p-12" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey mx-auto">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
