@@ -48,7 +48,7 @@
           <div class="flex content-center items-center">
             <div class="round" v-for="round in editTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
-                <!-- <div class="match__content">{{match.id}}</div> -->
+                <div class="match__content">{{match.id}}</div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
                   <p class="player" v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
                 </div>
