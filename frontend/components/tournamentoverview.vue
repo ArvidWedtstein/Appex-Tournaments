@@ -196,132 +196,127 @@ body {
 		background-position: 1000px;
 	}
 }
-.bracket {
+.round {
+  flex: 1 1 auto;
   display: flex;
-  align-content: center;
-  align-items: center;
-  .round {
-    flex: 1 1 auto;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    &:first-child {
-      .match {
-        &::before {
-          display: none;
-        }
-      }
-      .match__content {
-        &::before {
-          display: none !important;
-        }
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  &:first-child {
+    .match {
+      &::before {
+        display: none;
       }
     }
-    &:last-child {
-      .match {
-        &::before, &::after {
-          display: none !important;
-        }
+    .match__content {
+      &::before {
+        display: none !important;
       }
-      .match__content::before {
+    }
+  }
+  &:last-child {
+    .match {
+      &::before, &::after {
+        display: none !important;
+      }
+    }
+    .match__content::before {
+      content: "";
+      display: block;
+      width: 20px;
+      border-bottom: 2px solid $bracketlinecolor;
+      margin-left: -10px;
+      position: absolute;
+      top: 50%;
+      left: -10px;
+    }
+  }
+  .match {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 10px;
+    padding: 6px 0;
+    flex-grow: 1;
+    position: relative;
+    vertical-align: middle;
+    &::before {
+      content: "";
+      display: block;
+      min-height: 20px;
+      border-left: 2px solid $bracketlinecolor;
+      position: absolute;
+      left: -10px;
+      top: 60%;
+      margin-top: -15px;
+      margin-left: -2px;
+    }
+    &:nth-child(2n+0) {
+      padding-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    &:nth-child(odd)::after {
+      content: "";
+      display: block;
+      border: 2px solid transparent;
+      border-top-color: $bracketlinecolor;
+      border-right-color: $bracketlinecolor;
+      height: 50%;
+      position: absolute;
+      right: -10px;
+      width: 10px;
+      top: 60%;
+    }
+    &:nth-child(even)::after {
+      content: "";
+      display: block;
+      border: 2px solid transparent;
+      border-bottom-color: $bracketlinecolor;
+      border-right-color: $bracketlinecolor;
+      height: 50%;
+      position: absolute;
+      right: -10px;
+      width: 10px;
+      bottom: 50%;
+    }
+    .match__content {
+      &::before {
         content: "";
         display: block;
         width: 20px;
         border-bottom: 2px solid $bracketlinecolor;
-        margin-left: -10px;
+        margin-left: -2px;
         position: absolute;
-        top: 50%;
-        left: -10px;
+        top: 55%;
+        //left: -10px;
       }
     }
-    .match {
+    .matchplayer {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      margin: 0 10px;
-      padding: 6px 0;
-      flex-grow: 1;
+      //width: 100%;
       position: relative;
-      vertical-align: middle;
-      &::before {
-        content: "";
-        display: block;
-        min-height: 20px;
-        border-left: 2px solid $bracketlinecolor;
-        position: absolute;
-        left: -10px;
-        top: 60%;
-        margin-top: -15px;
-        margin-left: -2px;
-      }
-      &:nth-child(2n+0) {
-        padding-top: 0;
-        padding-top: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-      &:nth-child(odd)::after {
-        content: "";
-        display: block;
-        border: 2px solid transparent;
-        border-top-color: $bracketlinecolor;
-        border-right-color: $bracketlinecolor;
-        height: 50%;
-        position: absolute;
-        right: -10px;
-        width: 10px;
-        top: 60%;
-      }
-      &:nth-child(even)::after {
-        content: "";
-        display: block;
-        border: 2px solid transparent;
-        border-bottom-color: $bracketlinecolor;
-        border-right-color: $bracketlinecolor;
-        height: 50%;
-        position: absolute;
-        right: -10px;
-        width: 10px;
-        bottom: 50%;
-      }
-      .match__content {
-        &::before {
-          content: "";
-          display: block;
-          width: 20px;
-          border-bottom: 2px solid $bracketlinecolor;
-          margin-left: -2px;
-          position: absolute;
-          top: 55%;
-          //left: -10px;
-        }
-      }
-      .matchplayer {
-        display: flex;
-        flex-direction: column;
-        //width: 100%;
-        position: relative;
+      margin: 0;
+      padding: 0;
+      .player {
+        flex: 1 1 auto;
         margin: 0;
-        padding: 0;
-        .player {
-          flex: 1 1 auto;
-          margin: 0;
-          padding: 0.3rem 1rem;
-          border: 2px solid $green;
-          background: $black;
-          color: $orange;
-          border-radius: 0.25rem;
-          text-align: left;
-          position: relative;
-          &.winner {
-			      &::after {
-              content: "🏅";
-              float: right;
-            }
-            //background: gold;
+        padding: 0.3rem 1rem;
+        border: 2px solid $green;
+        background: $black;
+        color: $orange;
+        border-radius: 0.25rem;
+        text-align: left;
+        position: relative;
+        &.winner {
+          &::after {
+            content: "🏅";
+            float: right;
           }
+          //background: gold;
         }
       }
     }
