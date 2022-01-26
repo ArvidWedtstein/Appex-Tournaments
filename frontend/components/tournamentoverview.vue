@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="flex flex-auto content-center items-center rounded p-8">
+		<div class="flex flex-auto content-center items-center rounded p-8 bg-appexgrey">
 			<div v-if="tournament" class="flex content-center items-center">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
 					<div class="match" v-for="(match, m) in round" :key="m">
