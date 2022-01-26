@@ -50,14 +50,14 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center" v-if="showTournamentScreen">
+      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="fixed top-0 right-0 text-6xl" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
         <div class="flex-auto p-1 bg-appexblack text-white">
-          <div class="flex-auto relative content-center self-center align-middle">
+          <div class="flex content-center items-center">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
                 <!-- <div class="match__content">{{match.id}}</div> -->
