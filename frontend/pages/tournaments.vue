@@ -116,9 +116,9 @@
           <p class="">{{tournament.Name}}</p>
         </div>
         <div class="tfooter">
+          <!-- <p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p> -->
           <p class="players">{{countPlayers(tournament)}}</p>
           <p v-if="tournament.status" class="status">{{tournament.status}}</p>
-          <!-- <p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p> -->
         </div>
       </div>
     </div>
