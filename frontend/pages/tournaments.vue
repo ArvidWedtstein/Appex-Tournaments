@@ -113,7 +113,7 @@
           <p>Dato: {{formatDate(tournament.date)}}</p>
         </div>
         <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
-          <button class="">{{tournament.Name}}</button>
+          <p class="">{{tournament.Name}}</p>
         </div>
         <div class="tfooter">
           <p class="players">{{countPlayers(tournament)}}</p>
