@@ -162,8 +162,18 @@ export default {
         scrollContainer.addEventListener("wheel", (evt) => {
           evt.preventDefault();
           scrollContainer.scrollLeft += evt.deltaY;
+          
         });
+        scrollContainer.addEventListener('touchmove', (evt) => {
+          evt.preventDefault();
+          scrollContainer.scrollLeft += evt.deltaY;
+        })
+      } else {
+        setTimeout(() => {
+          this.horizontalScroll();
+        }, 1000)
       }
+      
     },
     formatDate(date) {
       const options = { year: "numeric", month: "numeric", day: "2-digit" };
@@ -190,13 +200,12 @@ export default {
       console.log(this.editPlayers)
     },
     left() {
-      const scrollContainer = document.querySelector("main");
+     const scrollContainer = document.querySelector("main"); 
       var x = window.innerWidth;
       var tournaments = document.getElementsByClassName("tournament").length;
       for (let i = 0; i < 8; i++) {
         var step = (x / tournaments) * -2;
         scrollContainer.scrollLeft += step;
-        console.log(i);
         setTimeout(1000);
       }
     },
@@ -219,7 +228,6 @@ export default {
           }
         }
       }
-      console.log(this.editPlayers)
     },
     async showTournament(tournament) {
       this.showTournamentData = await tournament;
