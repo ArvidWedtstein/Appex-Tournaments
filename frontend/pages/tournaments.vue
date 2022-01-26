@@ -26,7 +26,7 @@
           <p class="text-2xl">{{editTournamentData.Name}}</p>
         </div>
         <div class="flex flex-row content-center justify-center">
-          <div class="flex flex-auto flex-col content-center justify-center w-50">
+          <div class="flex flex-auto flex-col content-center justify-center">
             <div class="flex-auto">
               <h1 class="text-3md font-semibold">Navn:</h1>  
               <input v-model="editTournamentChanges.name" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="text" placeholder="Tournament navn">
