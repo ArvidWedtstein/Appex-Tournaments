@@ -4,12 +4,12 @@
       <div class="pg2-content-container w-full h-4/5 p-16 items-center">
         <div class="inputBox py-20 my-20">
           <h1>Skriv inn navnet på tournamentet</h1>
-          <input v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
+          <input class="relative flex-auto bg-transparent text-left align-middle outline-0 w-full border-1 hover:border-2 text-appexdarkgrey pb-2 text-base" v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
           <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
         </div>
         <div class="inputBox py-20 my-20">
           <h1 class="text-xl">Tournament dato</h1>
-          <input class="relative flex-auto bg-transparent text-left align-middle outline-0 w-full border-0 decoration-[#00000080] pb-2 text-base " v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
+          <input class="relative flex-auto bg-transparent text-left align-middle outline-0 w-full border-1 hover:border-2 text-appexdarkgrey pb-2 text-base " v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -243,10 +243,11 @@ $orange: #FAB487;
       font-size: 20px;
       font-weight: 600;
     }
-    input {
+    input {/*
       position: relative;
       flex: 1 1 auto;
-      background: transparent;
+      //background: transparent;
+      background: hotpink;
       text-align: left;
       vertical-align: middle;
       outline: none;
@@ -258,7 +259,7 @@ $orange: #FAB487;
       letter-spacing: 1px;
       transition: all 0.3s ease;
       border-bottom: 2px solid $inputcolor;
-      
+      */
       &:focus {
         color: $inputhovercolor;
         border-bottom: 2px solid $inputhovercolor;

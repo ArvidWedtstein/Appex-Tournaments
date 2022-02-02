@@ -20,7 +20,8 @@ module.exports = {
         appexlightgrey: "#EDECE9",
         appexblue: "#0835C4",
         appexgreen: "#DDE78B",
-        appexorange: "#FAB487"
+        appexorange: "#FAB487",
+        appexinput: "#00000080"
       },
       backgroundImage: {
         'frontpageGrapics': "/images/frontpage-grapics.png"
