@@ -41,8 +41,8 @@
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
-    <div v-if="page === 2" class="page flex justify-center content-center relative flex-col w-full max-h-full h-full">
-      <h1 class="font-14">Oppsett:</h1>
+    <div v-if="page === 2" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
+      <h1 class="text-2xl">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering" :clickable="false"></Tournamentoverview>
       <br>
       <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear abosulute bottom-4 right-3" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>

@@ -145,16 +145,22 @@ public class TournamentController : ControllerBase {
 
     [Route("/updateTournamentPlayers")]
     [HttpPost]
-    public async Task<ActionResult> UpdateTournamentPlayers(string Id, [FromBody]List<string> players)
+    public async Task<ActionResult> UpdateTournamentPlayers(string Id, [FromBody]List<Tournament.Player> players)
     {
         var tournament = await _tournamentService.GetAsync(Id);
-        for (int g = 0; g < players.Count; g++) {
-            for (int s = 0; s < tournament.Rounds[0].Count; s++) {
-                for (int h = 0; h < tournament.Rounds[0][s].Players.Count; h++) {
-                    tournament.Rounds[0][s].Players[h].name = players[g];
+        if (tournament is null)
+        {
+            return NotFound();
+        }
+        for (int s = 0; s < tournament.Rounds[0].Count; s++) {
+            for (int h = 0; h < tournament.Rounds[0][s].Players.Count; h++) {
+                var p = players.Find(x => x.Id == tournament.Rounds[0][s].Players[h].Id);
+                if (p != null) {
+                    tournament.Rounds[0][s].Players[h].name = p.name;
                 }
             }
         }
+        
         await _tournamentService.UpdateAsync(Id, tournament);
         return Ok(tournament);
     }

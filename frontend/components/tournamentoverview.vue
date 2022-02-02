@@ -6,7 +6,7 @@
 					<div class="match" v-for="(match, m) in round" :key="m">
 						<div class="match__content"></div>
 						<div class="matchplayer" v-for="player in match.players" :key="player">
-							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</button>
+							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player.id, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player, 'clickable': clickable }">{{ player.name }}</button>
 							<button class="player" v-else type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player.name }}</button>
 						</div>
 						<!--<p>Match: {{m+1}}</p>-->
@@ -290,7 +290,9 @@ body {
         position: relative;
         transition: border 0.3s ease;
         &:hover {
-          border: 2px dashed $green;
+          &.clickable {
+            border: 2px dashed $green;
+          }
         }
         &.winner {
           &::after {

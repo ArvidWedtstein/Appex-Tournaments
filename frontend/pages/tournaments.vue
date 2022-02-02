@@ -36,7 +36,7 @@
             <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="date">
           </div>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-20 m-3 appexsm:m-0">
+        <!-- <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-20 m-3 appexsm:m-0">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in editTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
@@ -47,7 +47,8 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+        <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false"></Tournamentoverview>
         <div class="flex flex-auto flex-row items-center content-center justify-center">
           <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Lagre</button>
@@ -68,12 +69,13 @@
               <div class="match" v-for="match in round" :key="match">
                 <div class="match__content"></div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
-                  <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
+                  <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player.name }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- <Tournamentoverview v-cloak :tournamentprop="showTournamentData" :clickable="false"></Tournamentoverview> -->
         <div class="flex flex-auto flex-row items-center content-center">
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
@@ -204,15 +206,13 @@ export default {
       });
     },
     async redigerDeltakere() {
-       axios.post(`${this.$config.baseURL}/updateTournamentPlayers`, {
-        id: this.editTournamentData._id,
+       axios.post(`${this.$config.baseURL}/updateTournamentPlayers?id=${this.editTournamentData.id}`, {
         players: this.editPlayers
       }).then((res) => {
         this.redigerDeltakerScreen = false;
         this.editPlayers = [];
         this.$nuxt.refresh();
       });
-      console.log(this.editPlayers)
     },
     left() {
      const scrollContainer = document.getElementById('scrollContainer'); 
@@ -234,19 +234,15 @@ export default {
     async editTournament(tournament) {
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
-      for (let a = 0; a < await tournament.rounds.length; a++) {
-        console.log(tournament.rounds[a])
-        for (let b = 0; b < tournament.rounds[a].length; b++) {
-          for (let c = 0; c < tournament.rounds[a][b].players.length; c++) {
-            this.editPlayers.push(tournament.rounds[a][b].players[c])
-          }
+      for (let b = 0; b < tournament.rounds[0].length; b++) {
+        for (let c = 0; c < tournament.rounds[0][b].players.length; c++) {
+          this.editPlayers.push(tournament.rounds[0][b].players[c].name)
         }
       }
     },
     async showTournament(tournament) {
       this.showTournamentData = await tournament;
       this.showTournamentScreen = true;
-      console.log(this.showTournamentData);
     },
     closeTournament() {
       this.editTournamentScreen = false;
@@ -256,6 +252,7 @@ export default {
       this.editTournamentChanges.date = "";
       this.editTournamentChanges.status = "";
       this.editTournamentChanges.players = [];
+      this.editPlayers = [];
       this.editTournamentData = null;
       this.showTournamentData = null;
     },
