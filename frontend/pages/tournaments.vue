@@ -42,7 +42,9 @@
               <div class="match" v-for="match in round" :key="match">
                 <div class="match__content"></div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
-                  <p class="player" v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</p>
+                  <!-- FIKS VINNER-->
+                  <p class="player" v-if="match.winner" v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</p>
+                  <p class="player" v-else>{{ player.name }}</p>
                 </div>
               </div>
             </div>
@@ -86,7 +88,7 @@
             <p class="">{{tournament.Name}}</p>
           </div>
           <div class="tfooter">
-            <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id != ''">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p>
+            <!-- <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id != ''">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p> -->
             <p>
               {{countPlayers(tournament)}}
               <svg aria-hidden="true" focusable="false" data-prefix="fas" width="20" data-icon="users" class="svg-inline--fa fa-users fa-w-1 inline" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">

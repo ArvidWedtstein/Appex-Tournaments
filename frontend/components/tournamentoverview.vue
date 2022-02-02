@@ -11,7 +11,7 @@
 						</div>
 						<p>Match: {{m+1}}</p>
 					</div>
-          <div v-if="tournament.rounds[tournament.rounds.length-1][0].winner != null" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
+          <div v-if="tournament.rounds[tournament.rounds.length-1][0].winner != null && preview == false" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
             <div class="text-center">
               <h3 class="text-4xl">Final Winner:</h3>
               <h1 class="text-6xl">{{ tournament.rounds[tournament.rounds.length - 1][0].winner.name }}</h1>
@@ -33,7 +33,8 @@ export default {
 	name: "tournamentoverview",
 	props: {
 		tournamentprop: {},
-    clickable: false
+    clickable: false,
+    preview: false
 	},
 	data() {
 		return {
