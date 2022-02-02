@@ -1,5 +1,5 @@
 <template>
-  <div id='newtournament' class="bg-appexbackclr h-screen">
+  <div id='newtournament' class="bg-appexbackclr overflow-y-visible">
     <div v-if="page === 0" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
       <div class="pg2-content-container w-full h-4/5 p-16 items-center">
         <div class="inputBox py-20 my-20">
@@ -18,12 +18,12 @@
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 overscroll-y-auto overflow-y-visible">
+    <div v-if="page === 1" class="flex overflow-visible content-center justify-center items-center relative flex-col min-h-100 w-100 overscroll-y-auto overflow-y-visible">
       <div class="text-center relative w-100 mx-auto min-h-10 my-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
       </div>
-      <div class="relative min-h-max w-24 my-16">
+      <div class="relative w-24 my-16">
         <div class="text-center font-semibold">
           <h1 class="text-appexblue text-4lg w-100">{{ players.length }}</h1>
           <p class="text-center w-100">Deltakere</p>
@@ -33,7 +33,7 @@
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
-      <div v-for="(name, index) in players" :key="index" class="flex flex-col content-left overflow-y-visible">
+      <div v-for="(name, index) in players" :key="index" class="flex h-auto flex-col content-left overflow-y-visible">
         <div class="flex">
           <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
         </div>

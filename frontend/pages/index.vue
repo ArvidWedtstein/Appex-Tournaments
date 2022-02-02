@@ -46,7 +46,7 @@ export default {
 $backclr: #edebe9;
 
 body, html {
-  overflow: hidden !important;
+  //overflow: hidden !important;
 }
 
 

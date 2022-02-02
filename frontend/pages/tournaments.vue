@@ -103,10 +103,10 @@
       </div>
     </transition>
     <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
-      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded">
+      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
         <!-- <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button> -->
         <img src="/images/nam.PNG" width="300">
-        <div class="absolute bottom-0 left-0 p-5" @click="editTournament(tournament)">
+        <div class="absolute bottom-0 left-0 p-5">
           <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
             <p>Dato: {{formatDate(tournament.date)}}</p>
           </div>
@@ -322,6 +322,9 @@ html {
   margin: 1rem 2rem;
   transition: all 0.5s ease;
 
+  &:hover {
+
+  }
   .tfooter {
     width: 100%;
     font-weight: 500;
