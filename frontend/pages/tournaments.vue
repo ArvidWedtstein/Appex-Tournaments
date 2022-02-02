@@ -1,13 +1,13 @@
 
 <template>
-  <main class="overflow-x-hidden fixed w-full h-full left-0 bottom-0 p-8 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none">
+  <main class="fixed w-full h-full overflow-x-visible overflow-y-hidden left-0 top-0 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none appexsm:overflow-x-hidden appexsm:overflow-y-visible appexsm:flex-col">
     <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
-    <button class="fixed w-12 mx-4 my-8 left-0 bottom-0" @click="left()">
+    <button class="fixed w-12 mx-4 my-8 left-0 bottom-0 appexsm:hidden" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-4 my-8 right-0 bottom-0" @click="right()">
+    <button class="fixed w-12 mx-4 my-8 right-0 bottom-0 appexsm:hidden" @click="right()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
       </svg>
@@ -56,7 +56,6 @@
             </div>
           </div>
         </div>
-        
         <div class="flex flex-auto flex-row items-center content-center justify-center">
           <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Update</button>
@@ -105,8 +104,8 @@
         <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div class="container">
-      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" >
+    <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
+      <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded">
         <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
         <div class="absolute bottom-0 left-0 p-5 " @click="showTournament(tournament)">
           <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
@@ -174,8 +173,8 @@ export default {
       this.tournaments = tournamentlist.data;
     },
     horizontalScroll() {
-      const scrollContainer = document.querySelector("main");
-      if (scrollContainer) {
+      const scrollContainer = document.getElementById('scrollContainer');
+      if (scrollContainer && screen.width >= 640) {
         scrollContainer.addEventListener("wheel", (evt) => {
           evt.preventDefault();
           scrollContainer.scrollLeft += evt.deltaY;
@@ -217,7 +216,7 @@ export default {
       console.log(this.editPlayers)
     },
     left() {
-     const scrollContainer = document.querySelector("main"); 
+     const scrollContainer = document.getElementById('scrollContainer'); 
       var x = window.innerWidth;
       var tournaments = document.getElementsByClassName("tournament").length;
       for (let i = 0; i < 8; i++) {
@@ -227,7 +226,7 @@ export default {
       }
     },
     right() {
-      const scrollContainer = document.querySelector("main");
+      const scrollContainer = document.getElementById('scrollContainer');
       var x = window.innerWidth;
       var tournaments = document.getElementsByClassName("tournament").length;
       var step = (x / tournaments) * 16;
@@ -305,9 +304,6 @@ html {
   overflow-x: scroll;
 }
 .tournament {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex: 1 1 auto;
   min-height: 300px;
   max-height: 300px;
@@ -323,7 +319,7 @@ html {
   word-wrap: break-word;
   padding: 0rem;
   padding-top: 4rem;
-  margin: 0rem 2rem;
+  margin: 1rem 2rem;
   transition: all 0.5s ease;
 
   .tfooter {
@@ -366,6 +362,7 @@ html {
     color: $orange;
   }
 }
+
 .round {
   flex: 1 1 auto;
   display: flex;

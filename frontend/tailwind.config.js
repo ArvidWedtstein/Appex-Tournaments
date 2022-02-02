@@ -32,6 +32,11 @@ module.exports = {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
+      'appexsm': {"max": '640px'},
+      'appexmd': {"max": '768px'},
+      'appexlg': {"max": '1024px'},
+      'appexxl': {"max": '1280px'},
+      'appex2xl': {"max": '1536px'},
     }
   },
   variants: {
