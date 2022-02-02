@@ -1,5 +1,5 @@
 <template>
-  <div id='newtournament' class="bg-appexbackclr overflow-y-visible">
+  <div id='newtournament' class="bg-appexbackclr overflow-y-visible overflow-x-hidden">
     <div v-if="page === 0" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
       <div class="pg2-content-container w-full h-4/5 p-16 items-center">
         <div class="inputBox py-20 my-20">
