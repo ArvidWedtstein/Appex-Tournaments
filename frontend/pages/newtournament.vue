@@ -18,7 +18,7 @@
         </button>
       </div>
     </div>
-    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-y-visible">
+    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-x-hidden overflow-y-visible">
       <div class="text-center relative w-100 mx-auto min-h-10 mt-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
