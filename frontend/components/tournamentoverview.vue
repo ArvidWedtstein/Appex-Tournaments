@@ -1,22 +1,31 @@
 <template>
 	<div class="container flex flex-col content-center justify-center align-center">
 		<div class="flex flex-auto content-center items-center rounded p-8 bg-appexdarkgrey">
-			<div v-if="tournament" class="flex content-center items-center">
+			<div v-if="tournament" class="flex-auto flex content-center items-center">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
 					<div class="match" v-for="(match, m) in round" :key="m">
 						<div class="match__content"></div>
 						<div class="matchplayer" v-for="player in match.players" :key="player">
-							<button class="player" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player.id, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id, 'clickable': clickable }">{{ player.name }}</button>
+							<button class="player" v-else type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</button>
 						</div>
 						<!--<p>Match: {{m+1}}</p>-->
 					</div>
-          <div v-if="!Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')" class="fixed top-0 left-0 right-0 bottom-0 bg-appexblue">
+          <!-- <div v-if="!Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')" class="fixed top-0 left-0 right-0 bottom-0 bg-appexblue">
             <div class="fixed top-50 left-50 right-50 bottom-50">
               {{Contains(tournament.rounds[tournament.rounds.length-1][0], 'winner')}}
               <h3>Final Winner:</h3>
               <h1>{{ tournament.rounds[tournament.rounds.length - 1][0] }}</h1>
               <br>
               <NuxtLink to="/">Hjem</NuxtLink>
+            </div>
+          </div> -->
+          <div v-if="tournament.rounds[tournament.rounds.length-1][0].winner != null" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
+            <div class="text-center">
+              <h3 class="text-4xl">Final Winner:</h3>
+              <h1 class="text-6xl">{{ tournament.rounds[tournament.rounds.length - 1][0].winner.name }}</h1>
+              <br>
+              <NuxtLink class="text-2xl" to="/">Hjem</NuxtLink>
             </div>
           </div>
 				</div>
@@ -32,7 +41,8 @@ import axios from 'axios';
 export default {
 	name: "tournamentoverview",
 	props: {
-		tournamentprop: {}
+		tournamentprop: {},
+    clickable: false
 	},
 	data() {
 		return {
@@ -51,30 +61,31 @@ export default {
 		}
 	},
 	methods: {
-		async matchWin(tournamentId, winner, matchId) {
-      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament?id=${tournamentId}&winner=${winner}&matchId=${matchId}`
+		async matchWin(tournamentId, winnerId, matchId) {
+      const uri = `${this.$config.baseURL}/matchwin?id=${tournamentId}&winnerId=${winnerId}&matchId=${matchId}`
 			await axios({
 				method: 'post',
 				url: uri
 			}).then(async (response) => {
         
         this.tournament = response.data;
-        //await this.$nuxt.refresh();
-        await window.location.reload()
+        await this.$nuxt.refresh();
+        // await window.location.reload()
 				//this.getTournament(tournamentId)
 			});
 		},
 		async getTournament(id) {
 			await axios({
 				method: 'get',
-				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
+				url: `${this.$config.baseURL}/get-tournament/${id}`
 			}).then(async (response) => {
 				this.tournament = response.data;
 			});
 		},
     async Contains(obj, key) {
-      if (!obj) return false;
       let value = false;
+      if (!obj) value = false;
+      
       if (obj.winner == null || obj.winner == 'undefined') {
         value = false;
       } else if (obj.winner != null) {
@@ -286,6 +297,12 @@ body {
         border-radius: 0.25rem;
         text-align: left;
         position: relative;
+        transition: border 0.3s ease;
+        &:hover {
+          &.clickable {
+            border: 2px dashed $green;
+          }
+        }
         &.winner {
           &::after {
             content: "🏅";

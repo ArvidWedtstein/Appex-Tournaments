@@ -1,5 +1,5 @@
 <template>
-  <div id='newtournament' class="bg-appexbackclr h-screen">
+  <div id='newtournament' class="bg-appexbackclr overflow-y-visible overflow-x-hidden">
     <div v-if="page === 0" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
       <div class="pg2-content-container w-full h-4/5 p-16 items-center">
         <div class="inputBox py-20 my-20">
@@ -33,7 +33,7 @@
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
       </div>
-      <div v-for="(name, index) in players" :key="index" class="flex flex-col content-left overflow-y-visible">
+      <div v-for="(name, index) in players" :key="index" class="flex h-auto flex-col content-left overflow-y-visible">
         <div class="flex">
           <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
         </div>
@@ -41,9 +41,9 @@
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
-    <div v-if="page === 2" class="page flex justify-center content-center relative flex-col w-full max-h-full h-full">
-      <h1 class="font-14">Oppsett:</h1>
-      <Tournamentoverview :tournamentprop="previewturnering"></Tournamentoverview>
+    <div v-if="page === 2" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
+      <h1 class="text-2xl">Oppsett:</h1>
+      <Tournamentoverview :tournamentprop="previewturnering" :clickable="false"></Tournamentoverview>
       <br>
       <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear abosulute bottom-4 right-3" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
