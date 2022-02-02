@@ -48,7 +48,6 @@
             </div>
           </div>
         </div>
-        <!-- <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false"></Tournamentoverview> -->
         <div class="flex flex-auto flex-row items-center content-center justify-center">
           <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" title="Endre navn på deltakere" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" title="Lagre Endringer" @click="updateTournament()">Lagre</button>
@@ -87,7 +86,7 @@
             <p class="">{{tournament.Name}}</p>
           </div>
           <div class="tfooter">
-            <!-- <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p> -->
+            <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id != ''">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p>
             <p>
               {{countPlayers(tournament)}}
               <svg aria-hidden="true" focusable="false" data-prefix="fas" width="20" data-icon="users" class="svg-inline--fa fa-users fa-w-1 inline" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
