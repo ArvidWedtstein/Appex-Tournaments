@@ -50,7 +50,7 @@ public class Tournament
     public class Match 
     {
         public string? Id { get; set; }
-        public Player Winner { get; set; } = null!;
+        public Player Winner { get; set; } = new Player("", "");
         public List<Player> Players { get; set; } = null!;
 
         public Match() {

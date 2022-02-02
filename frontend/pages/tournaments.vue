@@ -1,6 +1,6 @@
 
 <template>
-  <main class="fixed w-full h-full overflow-x-visible overflow-y-hidden left-0 top-0 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none appexsm:overflow-x-hidden appexsm:overflow-y-visible appexsm:flex-col">
+  <main class="fixed w-full h-full overflow-hidden left-0 top-0 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none appexsm:overflow-x-hidden appexsm:overflow-y-visible appexsm:flex-col">
     <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
     <button class="fixed w-12 mx-4 my-8 left-0 bottom-0 appexsm:hidden" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -21,7 +21,7 @@
     <transition name="fade">
       <div class="w-full fixed bottom-0 top-0 left-0 p-8 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center" v-if="editTournamentScreen">
         <button class="fixed top-0 right-0 text-6xl m-6" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="flex-auto text-left appexsm:mt-20">
+        <div class="flex-auto text-center appexsm:mt-20">
           <p class="text-3xl p-1">Rediger <b>{{editTournamentData.Name}}</b></p>
           <hr class="border-t-appexblack">
           <p class="text-xl">Status: {{editTournamentData.status}}</p>
@@ -48,11 +48,10 @@
             </div>
           </div>
         </div>
-        <!-- <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false"></Tournamentoverview> -->
         <div class="flex flex-auto flex-row items-center content-center justify-center">
-          <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
-          <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Lagre</button>
-          <button class="text-base bg-red-900 hover:bg-red-500 text-white font-semibold hover:text-appexblack m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
+          <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" title="Endre navn på deltakere" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
+          <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" title="Lagre Endringer" @click="updateTournament()">Lagre</button>
+          <button class="text-base bg-red-900 hover:bg-red-500 text-white font-semibold hover:text-appexblack m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" title="Slett Turnering" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
         </div>
         <div class="flex flex-auto flex-row items-center content-center">
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
@@ -61,32 +60,6 @@
         </div>
       </div>
     </transition>
-    <!-- <transition name="fade">
-      <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
-        <button class="fixed top-0 right-0 text-6xl p-12" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="text-center flex-auto appexsm:mt-12">
-          <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
-          <h3>Status: <b>{{showTournamentData.status}}</b></h3>
-        </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey m-10 appexsm:m-0">
-          <div class="flex content-center items-center">
-            <div class="round" v-for="round in showTournamentData.rounds" :key="round">
-              <div class="match" v-for="match in round" :key="match">
-                <div class="match__content"></div>
-                <div class="matchplayer" v-for="player in match.players" :key="player">
-                  <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player.name }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-auto flex-row items-center content-center">
-          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
-          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
-          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
-        </div>
-      </div>
-    </transition> -->
     <transition name="fade">
       <div v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center justify-items-stretch">
         <button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
@@ -104,7 +77,6 @@
     </transition>
     <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
-        <!-- <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button> -->
         <img src="/images/nam.PNG" width="300">
         <div class="absolute bottom-0 left-0 p-5">
           <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
@@ -114,8 +86,14 @@
             <p class="">{{tournament.Name}}</p>
           </div>
           <div class="tfooter">
-            <!-- <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p> -->
-            <p>{{countPlayers(tournament)}}</p>
+            <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id != ''">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p>
+            <p>
+              {{countPlayers(tournament)}}
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" width="20" data-icon="users" class="svg-inline--fa fa-users fa-w-1 inline" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path fill="currentColor" d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z">
+                </path>
+              </svg>
+            </p>
             <p v-if="tournament.status">{{tournament.status}}</p>
           </div>
         </div>
@@ -128,7 +106,6 @@
 //import env from '~/dotenv.json'
 import axios from 'axios'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
-let intPlayer = 1;
 export default {
   name: "Tournaments",
   async asyncData({ $axios, $config }) {
@@ -138,10 +115,8 @@ export default {
     return {
       tournaments: null,
       editTournamentScreen: false,
-      // showTournamentScreen: false,
       redigerDeltakerScreen: false,
       editTournamentData: null,
-      // showTournamentData: null,
       editPlayers: [],
       editTournamentChanges: {
         name: "",
@@ -198,12 +173,10 @@ export default {
         id: this.editTournamentData._id,
         name: this.editTournamentChanges.name,
         date: this.editTournamentChanges.date,
-        status: this.editTournamentChanges.status
       }).then((res) => {
         this.editTournamentScreen = false;
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";
-        this.editTournamentChanges.status = "";
         this.editTournamentChanges.players = [];
         this.editTournamentData = null;
         this.$nuxt.refresh();
@@ -238,15 +211,13 @@ export default {
     async editTournament(tournament) {
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
+      
+      this.editTournamentChanges.name = tournament.name;
       for (let b = 0; b < tournament.rounds[0].length; b++) {
         for (let c = 0; c < tournament.rounds[0][b].players.length; c++) {
           this.editPlayers.push(tournament.rounds[0][b].players[c].name)
         }
       }
-    },
-    async showTournament(tournament) {
-      this.showTournamentData = await tournament;
-      this.showTournamentScreen = true;
     },
     closeTournament() {
       this.editTournamentScreen = false;
@@ -254,7 +225,6 @@ export default {
       this.redigerDeltakerScreen = false;
       this.editTournamentChanges.name = "";
       this.editTournamentChanges.date = "";
-      this.editTournamentChanges.status = "";
       this.editTournamentChanges.players = [];
       this.editPlayers = [];
       this.editTournamentData = null;
