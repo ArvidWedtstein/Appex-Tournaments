@@ -19,16 +19,16 @@
       </div>
     </div>
     <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-y-visible">
-      <div class="text-center relative w-100 mx-auto min-h-10 my-16">
+      <div class="text-center relative w-100 mx-auto min-h-10 mt-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Rediger deltakere</p>
       </div>
-      <div class="relative min-h-max w-24 my-16">
+      <div class="relative min-h-max w-24 mt-8">
         <div class="text-center font-semibold">
           <h1 class="text-appexblue text-4lg w-100">{{ players.length }}</h1>
           <p class="text-center w-100">Deltakere</p>
         </div>
-        <div class="text-2xl font-semibold flex items-center my-16">
+        <div class="text-2xl font-semibold flex items-center mt-16">
           <button class="absolute text-4xl left-0 bottom-0" @click="removePlayer()">-</button>
           <button class="absolute text-4xl right-0 bottom-0" @click="addPlayer()">+</button>
         </div>
