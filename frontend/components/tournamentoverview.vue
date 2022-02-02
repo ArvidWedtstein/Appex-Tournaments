@@ -1,12 +1,13 @@
 <template>
 	<div class="container flex flex-col content-center justify-center align-center">
 		<div class="flex flex-auto content-center items-center rounded p-8 bg-appexdarkgrey">
-			<div v-if="tournament" class="flex content-center items-center">
+			<div v-if="tournament" class="flex-auto flex content-center items-center">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
 					<div class="match" v-for="(match, m) in round" :key="m">
 						<div class="match__content"></div>
 						<div class="matchplayer" v-for="player in match.players" :key="player">
-							<button class="player" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</button>
+							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</button>
+							<button class="player" v-else type="button" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player.name }}</button>
 						</div>
 						<!--<p>Match: {{m+1}}</p>-->
 					</div>
@@ -32,7 +33,8 @@ import axios from 'axios';
 export default {
 	name: "tournamentoverview",
 	props: {
-		tournamentprop: {}
+		tournamentprop: {},
+    clickable: false
 	},
 	data() {
 		return {
@@ -52,7 +54,7 @@ export default {
 	},
 	methods: {
 		async matchWin(tournamentId, winner, matchId) {
-      const uri = `https://appex-tournaments-gylkpaupva-uc.a.run.app/Tournament?id=${tournamentId}&winner=${winner}&matchId=${matchId}`
+      const uri = `${this.$config.baseURL}/matchwin?id=${tournamentId}&winnerId=${winner.id}&matchId=${matchId}`
 			await axios({
 				method: 'post',
 				url: uri
@@ -67,7 +69,7 @@ export default {
 		async getTournament(id) {
 			await axios({
 				method: 'get',
-				url: `https://appex-tournaments-gylkpaupva-uc.a.run.app/get-tournament/${id}`
+				url: `${this.$config.baseURL}/get-tournament/${id}`
 			}).then(async (response) => {
 				this.tournament = response.data;
 			});
@@ -286,6 +288,10 @@ body {
         border-radius: 0.25rem;
         text-align: left;
         position: relative;
+        transition: border 0.3s ease;
+        &:hover {
+          border: 2px dashed $green;
+        }
         &.winner {
           &::after {
             content: "🏅";

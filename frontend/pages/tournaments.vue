@@ -204,7 +204,7 @@ export default {
       });
     },
     async redigerDeltakere() {
-       axios.post(`${this.$config.baseURL}/updateTournament`, {
+       axios.post(`${this.$config.baseURL}/updateTournamentPlayers`, {
         id: this.editTournamentData._id,
         players: this.editPlayers
       }).then((res) => {

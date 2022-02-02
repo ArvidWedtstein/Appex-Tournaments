@@ -19,7 +19,8 @@ public class TournamentController : ControllerBase {
     [HttpGet]
     public async Task<List<Tournament>> Get() 
     {
-        return await _tournamentService.GetAsync();
+        var tournament = await _tournamentService.GetAsync();
+        return tournament;
     } 
 
     // GET: api/Tournaments/5
@@ -35,26 +36,7 @@ public class TournamentController : ControllerBase {
 
         return tournament;
     }
-    // public class Match 
-    // {
-    //     public string? Id { get; set; }
-    //     public string? nextMatchId { get; set; }
-    //     public string Winner { get; set; } = null!;
-    //     public List<Player> Players { get; set; } = null!;
 
-    //     public Match() {
-    //         Random generator = new Random();
-    //         Id = generator.Next(0, 1000000).ToString("D6");
-    //     }
-    // }
-    // public class Player {
-    //     public string name { get; set; }
-    //     public string? Id { get; set; }
-    //     public Player (string name, string Id) {
-    //         this.name = name;
-    //         this.Id = Id;
-    //     }
-    // }
 
 
     private static Random rng = new Random();
