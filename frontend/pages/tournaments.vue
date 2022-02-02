@@ -82,18 +82,18 @@
       </div>
     </transition>
     <transition name="fade">
-      <div v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 px-40 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
+      <div v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center justify-items-stretch">
         <button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="text-center flex-auto">
+        <div class="text-center appexsm:mt-12">
           <h1 class="text-xl">"{{ editTournamentData.Name }}" Deltakere</h1>
           <p class="text-lg">Rediger deltakere</p>
         </div>
-        <div v-for="(player, h) in editPlayers" :key="player" class="flex-auto">
-          <div class="m-auto flex">
-            <input class="py-2 px-1 flex-auto bg-appexgrey border-b-2 border-solid border-abbexblue text-appexblack" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+        <div class="flex-auto justify-self-start flex-col mt-3 content-center justify-center items-center justify-items-stretch">
+          <div class="m-auto flex-auto" v-for="(player, h) in editPlayers" :key="player">
+            <input class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 my-1" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
           </div>
         </div>
-        <button class="bg-appexblue text-center text-white rounded py-4 px-16 m-3hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
+        <button class="flex-start bg-appexblue text-center text-white rounded py-4 px-16 m-3hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
     <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
@@ -204,6 +204,14 @@ export default {
       });
     },
     async redigerDeltakere() {
+       axios.post(`${this.$config.baseURL}/updateTournament`, {
+        id: this.editTournamentData._id,
+        players: this.editPlayers
+      }).then((res) => {
+        this.redigerDeltakerScreen = false;
+        this.editPlayers = [];
+        this.$nuxt.refresh();
+      });
       console.log(this.editPlayers)
     },
     left() {

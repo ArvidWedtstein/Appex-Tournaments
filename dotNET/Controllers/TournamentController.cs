@@ -35,28 +35,36 @@ public class TournamentController : ControllerBase {
 
         return tournament;
     }
-    public class Match 
-    {
-        public string? Id { get; set; }
-        public string? nextMatchId { get; set; }
-        public string Winner { get; set; } = null!;
-        public List<string> Players { get; set; } = null!;
+    // public class Match 
+    // {
+    //     public string? Id { get; set; }
+    //     public string? nextMatchId { get; set; }
+    //     public string Winner { get; set; } = null!;
+    //     public List<Player> Players { get; set; } = null!;
 
-        public Match() {
-            Random generator = new Random();
-            Id = generator.Next(0, 1000000).ToString("D6");
-        }
-    }
+    //     public Match() {
+    //         Random generator = new Random();
+    //         Id = generator.Next(0, 1000000).ToString("D6");
+    //     }
+    // }
+    // public class Player {
+    //     public string name { get; set; }
+    //     public string? Id { get; set; }
+    //     public Player (string name, string Id) {
+    //         this.name = name;
+    //         this.Id = Id;
+    //     }
+    // }
 
 
     private static Random rng = new Random();
     // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
     [Route("/matchwin")]
     [HttpPost]
-    public async Task<ActionResult> matchwin(string id, string winner, string matchId)
+    public async Task<ActionResult> matchwin(string id, string winnerId, string matchId)
     {
         var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
-         _logger.LogInformation(winner);
+         _logger.LogInformation(winnerId);
          _logger.LogInformation(matchId);
          _logger.LogInformation(id);
         if (tournament is null)
@@ -72,22 +80,23 @@ public class TournamentController : ControllerBase {
         for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
             var match = rounds[ᛖ].Find(match => match.Id == matchId); // find match with id in list of rounds
             if (match != null) {
-                match.Winner = winner; 
+                match.Winner = match.Players.Find(player => player.Id == winnerId);
+
                 tournament.Rounds = rounds;
                 if (ᛖ == rounds.Count - 1) {
                     tournament.Status = "Gjennomført";
                 }
                 await _tournamentService.UpdateAsync(id, tournament);
 
-                _logger.LogInformation(Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner))).ToJson()); // logg true false
+                _logger.LogInformation(Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))).ToJson()); // logg true false
                 
-                if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner))) && ᛖ != rounds.Count - 1) { // If all Matches have a winner then make new matches for next round
+                if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { // If all Matches have a winner then make new matches for next round
                     rounds = newRound(rounds, ᛖ);
                 }
             }
         }
         List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
-            var winners = new List<string>();
+            var winners = new List<Tournament.Player>();
             for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
                 var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
                 winners.Add(matchwinner);
@@ -95,10 +104,11 @@ public class TournamentController : ControllerBase {
             var shuffledwinners = winners.OrderBy(a => rng.Next()).ToList(); // shuffle winners
             for (int ᛉ = 0; ᛉ < shuffledwinners.Count; ᛉ+=2) {
                     var match = new Tournament.Match();
-                match.Players = new List<string>() {
-                    shuffledwinners[ᛉ],
-                    shuffledwinners[ᛉ+1]
-                };
+
+                    match.Players = new List<Tournament.Player>() {
+                        new Tournament.Player(shuffledwinners[ᛉ].name, shuffledwinners[ᛉ].Id),
+                        new Tournament.Player(shuffledwinners[ᛉ+1].name, shuffledwinners[ᛉ+1].Id)
+                    };
                 tournamentrounds[ᛖ+1].Add(match); // add match to round
             }
             return tournamentrounds;
@@ -123,9 +133,9 @@ public class TournamentController : ControllerBase {
         var round1 = new List<Tournament.Match>();
         for (int ᛚ = 0; ᛚ < players.Count; ᛚ+=2) {
             var match = new Tournament.Match();
-            match.Players = new List<string>() {
-                shuffledplayers[ᛚ],
-                shuffledplayers[ᛚ+1]
+            match.Players = new List<Tournament.Player>() {
+                new Tournament.Player(shuffledplayers[ᛚ], rng.Next(0, 1000000).ToString("D6")),
+                new Tournament.Player(shuffledplayers[ᛚ+1], rng.Next(0, 1000000).ToString("D6"))
             };
             round1.Add(match);
         }
@@ -151,6 +161,22 @@ public class TournamentController : ControllerBase {
         return CreatedAtAction(nameof(Get), new { id = newTournament.Id }, newTournament);
     }
 
+    [Route("/updateTournamentPlayers")]
+    [HttpPost]
+    public async Task<ActionResult> UpdateTournamentPlayers(string Id, [FromBody]List<string> players)
+    {
+        var tournament = await _tournamentService.GetAsync(Id);
+        for (int g = 0; g < players.Count; g++) {
+            for (int s = 0; s < tournament.Rounds[0].Count; s++) {
+                for (int h = 0; h < tournament.Rounds[0][s].Players.Count; h++) {
+                    tournament.Rounds[0][s].Players[h].name = players[g];
+                }
+            }
+        }
+        await _tournamentService.UpdateAsync(Id, tournament);
+        return Ok(tournament);
+    }
+
     [Route("/previewmatch")]
     [HttpPost]
     public async Task<ActionResult<Tournament>> PreviewMatch(string id)
@@ -170,13 +196,13 @@ public class TournamentController : ControllerBase {
                 var winner = match.Players[index];
                 match.Winner = winner;
             });
-            if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner))) && ᛖ != rounds.Count - 1) { 
+            if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { 
                 rounds = newRound(rounds, ᛖ);
             }
         }
 
         List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
-            var winners = new List<string>();
+            var winners = new List<Tournament.Player>();
             for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
                 var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
                 winners.Add(matchwinner);
@@ -184,10 +210,10 @@ public class TournamentController : ControllerBase {
             var shuffledwinners = winners.OrderBy(a => rng.Next()).ToList(); // shuffle winners
             for (int ᛉ = 0; ᛉ < shuffledwinners.Count; ᛉ+=2) {
                     var match = new Tournament.Match();
-                    match.Players = new List<string>() {
-                    shuffledwinners[ᛉ],
-                    shuffledwinners[ᛉ+1]
-                };
+                    match.Players = new List<Tournament.Player>() {
+                        new Tournament.Player(shuffledwinners[ᛉ].name, shuffledwinners[ᛉ].Id),
+                        new Tournament.Player(shuffledwinners[ᛉ+1].name, shuffledwinners[ᛉ+1].Id)
+                    };
                 tournamentrounds[ᛖ+1].Add(match); // add match to round
             }
             return tournamentrounds;
@@ -222,7 +248,7 @@ public class TournamentController : ControllerBase {
         {
             return NotFound();
         }
-        var players = new List<String>();
+        var players = new List<Tournament.Player>();
         for (int i = 0; i < tournament.Rounds[0].Count(); i++) {
             var playersinmatch = tournament.Rounds[0][i].Players;
             players = players.Concat(playersinmatch).ToList();
@@ -236,9 +262,9 @@ public class TournamentController : ControllerBase {
         var round1 = new List<Tournament.Match>();
         for (int ᛚ = 0; ᛚ < players.Count; ᛚ+=2) {
             var match = new Tournament.Match();
-            match.Players = new List<string>() {
-                shuffledplayers[ᛚ],
-                shuffledplayers[ᛚ+1]
+            match.Players = new List<Tournament.Player>() {
+                new Tournament.Player(shuffledplayers[ᛚ].name, shuffledplayers[ᛚ].Id),
+                new Tournament.Player(shuffledplayers[ᛚ+1].name, shuffledplayers[ᛚ+1].Id)
             };
             round1.Add(match);
         }

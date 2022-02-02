@@ -50,14 +50,23 @@ public class Tournament
     public class Match 
     {
         public string? Id { get; set; }
-        public string Winner { get; set; } = null!;
-        public List<string> Players { get; set; } = null!;
+        public Player Winner { get; set; } = null!;
+        public List<Player> Players { get; set; } = null!;
 
         public Match() {
             Random generator = new Random();
             Id = generator.Next(0, 1000000).ToString("D6");
         }
+
     }
+    public class Player {
+        public string name { get; set; }
+        public string? Id { get; set; }
+        public Player (string name, string? Id) {
+            this.name = name;
+            this.Id = Id;
+        }
+    }
+
 }
 
-    
