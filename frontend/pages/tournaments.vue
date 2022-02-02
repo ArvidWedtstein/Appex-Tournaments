@@ -21,9 +21,10 @@
     <transition name="fade">
       <div class="w-full fixed bottom-0 top-0 left-0 p-8 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center" v-if="editTournamentScreen">
         <button class="fixed top-0 right-0 text-6xl m-6" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="text-center flex-auto">
-          <h1 class="text-4xl">Rediger Tournament</h1>
-          <p class="text-2xl">{{editTournamentData.Name}}</p>
+        <div class="flex-auto text-left appexsm:mt-20">
+          <p class="text-3xl p-1">Rediger <b>{{editTournamentData.Name}}</b></p>
+          <hr class="border-t-appexblack">
+          <p class="text-xl">Status: {{editTournamentData.status}}</p>
         </div>
         <div class="flex flex-auto flex-col content-center justify-center">
           <div class="flex-auto">
@@ -34,21 +35,12 @@
             <h1 class="text-3md font-semibold">Dato:</h1> 
             <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="date">
           </div>
-          <div class="flex-auto">
-            <h1 class="text-3md font-semibold">Status:</h1>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Fremtidig" value="Fremtidig" :checked="editTournamentData.status == 'Fremtidig'">
-            <label for="Fremtidig">Fremtidig</label>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Påbegynt" value="Påbegynt" :checked="editTournamentData.status == 'Påbegynt'">
-            <label for="Påbegynt">Påbegynt</label>
-            <input v-model="editTournamentChanges.status" class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 m-2" type="radio" name="status" id="Gjennomført" value="Gjennomført" :checked="editTournamentData.status == 'Gjennomført'">
-            <label for="Gjennomført">Gjennomført</label>
-          </div>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-20">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-20 m-3 appexsm:m-0">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in editTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
-                <div class="match__content">{{match.id}}</div>
+                <div class="match__content"></div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
                   <p class="player" v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
                 </div>
@@ -58,7 +50,7 @@
         </div>
         <div class="flex flex-auto flex-row items-center content-center justify-center">
           <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
-          <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Update</button>
+          <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Lagre</button>
           <button class="text-base bg-red-900 hover:bg-red-500 text-white font-semibold hover:text-appexblack m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
         </div>
       </div>
@@ -66,15 +58,15 @@
     <transition name="fade">
       <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="fixed top-0 right-0 text-6xl p-12" type="button" v-on:click="closeTournament()">✖</button>
-        <div class="text-center flex-auto">
+        <div class="text-center flex-auto appexsm:mt-12">
           <h3><b>"{{showTournamentData.Name}}"</b> Turnering</h3>
           <h3>Status: <b>{{showTournamentData.status}}</b></h3>
         </div>
-        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey m-10">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey m-10 appexsm:m-0">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in showTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
-                <!-- <div class="match__content">{{match.id}}</div> -->
+                <div class="match__content"></div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
                   <p class="player" v-cloak v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
                 </div>
@@ -96,12 +88,12 @@
           <h1 class="text-xl">"{{ editTournamentData.Name }}" Deltakere</h1>
           <p class="text-lg">Rediger deltakere</p>
         </div>
-        <div v-for="(player, h) in editPlayers" :key="player">
+        <div v-for="(player, h) in editPlayers" :key="player" class="flex-auto">
           <div class="m-auto flex">
             <input class="py-2 px-1 flex-auto bg-appexgrey border-b-2 border-solid border-abbexblue text-appexblack" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
           </div>
         </div>
-        <button class="bg-appexblue text-white rounded py-4 px-8 mx-2 my-2 hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
+        <button class="bg-appexblue text-center text-white rounded py-4 px-16 m-3hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
     <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
@@ -148,7 +140,6 @@ export default {
         name: "",
         date: "",
         players: [],
-        status: ""
       },
     };
   },
