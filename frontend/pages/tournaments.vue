@@ -36,27 +36,32 @@
             <input v-model="editTournamentChanges.date" class="flex-auto self-center bg-appexgrey text-black border-b border-2 border-appexblue rounded p-2" type="date">
           </div>
         </div>
-        <!-- <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-20 m-3 appexsm:m-0">
+        <div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-40 m-3 appexsm:m-0 appexsm:px-20">
           <div class="flex content-center items-center">
             <div class="round" v-for="round in editTournamentData.rounds" :key="round">
               <div class="match" v-for="match in round" :key="match">
                 <div class="match__content"></div>
                 <div class="matchplayer" v-for="player in match.players" :key="player">
-                  <p class="player" v-bind:class="{ 'winner': match.winner == player }">{{ player }}</p>
+                  <p class="player" v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</p>
                 </div>
               </div>
             </div>
           </div>
-        </div> -->
-        <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false"></Tournamentoverview>
+        </div>
+        <!-- <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false"></Tournamentoverview> -->
         <div class="flex flex-auto flex-row items-center content-center justify-center">
           <button class="text-base bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" type="button" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
           <button class="text-base bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="updateTournament()">Lagre</button>
           <button class="text-base bg-red-900 hover:bg-red-500 text-white font-semibold hover:text-appexblack m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
         </div>
+        <div class="flex flex-auto flex-row items-center content-center">
+          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
+          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="resetTournament(editTournamentData.id)" v-if="editTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
+          <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
+        </div>
       </div>
     </transition>
-    <transition name="fade">
+    <!-- <transition name="fade">
       <div v-if="showTournamentScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center">
         <button class="fixed top-0 right-0 text-6xl p-12" type="button" v-on:click="closeTournament()">✖</button>
         <div class="text-center flex-auto appexsm:mt-12">
@@ -75,14 +80,13 @@
             </div>
           </div>
         </div>
-        <!-- <Tournamentoverview v-cloak :tournamentprop="showTournamentData" :clickable="false"></Tournamentoverview> -->
         <div class="flex flex-auto flex-row items-center content-center">
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</a>
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="resetTournament(showTournamentData.id)" v-if="showTournamentData.status == 'Gjennomført'" type="button">Gjenopprett turnering</a>
           <a class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :href="'/tournament/' + showTournamentData.id" v-if="showTournamentData.status == 'Fremtidig'" type="button">Begynn turnering</a>
         </div>
       </div>
-    </transition>
+    </transition> -->
     <transition name="fade">
       <div v-if="redigerDeltakerScreen" class="w-full fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center justify-items-stretch">
         <button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
@@ -100,8 +104,9 @@
     </transition>
     <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded">
-        <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button>
-        <div class="absolute bottom-0 left-0 p-5 " @click="showTournament(tournament)">
+        <!-- <button class="absolute rotate-90 top-2.5 right-2.5 w-6 text-center" v-on:click="editTournament(tournament)">✎</button> -->
+        <img src="/images/nam.PNG" width="300">
+        <div class="absolute bottom-0 left-0 p-5" @click="editTournament(tournament)">
           <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
             <p>Dato: {{formatDate(tournament.date)}}</p>
           </div>
@@ -109,9 +114,9 @@
             <p class="">{{tournament.Name}}</p>
           </div>
           <div class="tfooter">
-            <!-- <p class="winner" :v-if="tournament.rounds[tournament.rounds.length - 1][0]">{{tournament.rounds[tournament.rounds.length - 1][0].winner}}</p> -->
-            <p class="players">{{countPlayers(tournament)}}</p>
-            <p v-if="tournament.status" class="status">{{tournament.status}}</p>
+            <!-- <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p> -->
+            <p>{{countPlayers(tournament)}}</p>
+            <p v-if="tournament.status">{{tournament.status}}</p>
           </div>
         </div>
       </div>
@@ -133,10 +138,10 @@ export default {
     return {
       tournaments: null,
       editTournamentScreen: false,
-      showTournamentScreen: false,
+      // showTournamentScreen: false,
       redigerDeltakerScreen: false,
       editTournamentData: null,
-      showTournamentData: null,
+      // showTournamentData: null,
       editPlayers: [],
       editTournamentChanges: {
         name: "",
@@ -148,7 +153,6 @@ export default {
   methods: {
     async resetTournament(id) {
       const t = await axios.get(`${this.$config.baseURL}/resetTournament/${id}`).then(async (res) => {
-        console.log(res.data)
         let chosentournament = this.tournaments.find(t => t.id === res.data.id);
         
         chosentournament = res.data;
@@ -314,7 +318,7 @@ html {
   min-width: 300px;
   word-wrap: break-word;
   padding: 0rem;
-  padding-top: 4rem;
+  // padding-top: 4rem;
   margin: 1rem 2rem;
   transition: all 0.5s ease;
 
@@ -326,9 +330,10 @@ html {
     display: flex;
     flex-direction: row;
     & > *:not(:last-child) {
-      flex: 1 1 auto;
+      padding: 0rem 0.3rem;
       &::after {
         content: '//';
+        padding: 0rem 0.3rem;
         // padding: 0 0.5rem;
       }
     }
