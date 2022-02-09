@@ -80,7 +80,7 @@
     <div id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
         <figure class="tournamentimg">
-          <img src="/images/nam.PNG" width="300">
+          <!-- <img src="/images/nam.PNG" width="300"> -->
         </figure>
         <div class="absolute bottom-0 left-0 m-3">
           <div class="w-100 text-md pb-4 min-h-100 overflow-auto font-light">
@@ -472,5 +472,25 @@ html {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.rgbline {
+  background: linear-gradient(90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: auto;
+  height: 1px;
+  border: 0;
+  background-size: 200% 200%;
+  box-shadow: 0px 1px 10px #23d5ab;
+}
+
+.expandline {
+  animation: expandline 2s linear;
+}
+@keyframes expandline {
+	0% {
+		width: 1%;
+	}
+	100% {
+		width: 100%;
+	}
 }
 </style>
