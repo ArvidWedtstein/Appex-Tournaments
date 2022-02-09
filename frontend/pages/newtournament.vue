@@ -5,7 +5,7 @@
         <div class="inputBox py-20 my-20">
           <h1>Skriv inn navnet på tournamentet</h1>
           <input class="relative flex-auto bg-transparent text-left shadow-none align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
-          <span class="limiter">{{ 69 - tournament.name.length }} bokstaver til overs</span>
+          <span class="limiter">{{ 69 - tournament.name.length }} {{tournament.name.length >= 68 ? `bokstav` : `bokstaver`}} til overs</span>
         </div>
         <div class="inputBox py-20 my-20">
           <h1 class="text-xl">Tournament dato</h1>
@@ -88,16 +88,9 @@ export default {
           data: this.players
         }).then(async (response) => {
           
-          console.log(response.data);
-          this.matches = response.data.rounds;
-          this.turnering = response.data;
-          axios({
-            method: 'POST',
-            url: `${this.$config.baseURL}/previewmatch?id=${response.data.id}`
-          }).then(async (res) => {
-            console.log(res.data)
-            this.previewturnering = res.data;
-          })
+          this.matches = response.data.newTournament.rounds;
+          this.turnering = response.data.newTournament;
+          this.previewturnering = response.data.previewtournament;
         })
         this.increasePage()
       },

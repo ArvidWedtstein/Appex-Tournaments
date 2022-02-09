@@ -1,18 +1,18 @@
 
 <template>
   <main class="fixed w-full h-full overflow-hidden left-0 top-0 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none appexsm:overflow-x-hidden appexsm:overflow-y-visible appexsm:flex-col">
-    <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center p-3 bg-white">Tidligere Turneringer</h1>
-    <button class="fixed w-12 mx-4 my-8 left-0 bottom-0 appexsm:hidden" @click="left()">
+    <h1 class="fixed text-2xl lg:text-4xl py-[3rem] top-0 appexsm:py-[4rem] font-semibold w-full text-center bg-white z-10 border-b-8 border-solid border-appexblue">Tidligere Turneringer</h1>
+    <button class="fixed w-12 z-10 mx-4 my-8 left-0 bottom-0 appexsm:hidden bg-white" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-4 my-8 right-0 bottom-0 appexsm:hidden" @click="right()">
+    <button class="fixed z-10 w-12 mx-4 my-8 right-0 bottom-0 appexsm:hidden" @click="right()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
       </svg>
     </button>
-    <button class="fixed w-12 mx-4 my-20 left-0 top-0" @click="$router.go(-1)" title="back">
+    <button class="fixed w-12 z-10 py-[4rem] appexsm:py-[6rem] mx-4 left-0 top-0" @click="$router.go(-1)" title="back">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path>
       </svg>
@@ -79,9 +79,11 @@
     </transition>
     <div id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
-        <img src="/images/nam.PNG" width="300">
-        <div class="absolute bottom-0 left-0 p-5">
-          <div class="w-100 text-md pb-0 min-h-100 overflow-auto font-light">
+        <figure class="tournamentimg">
+          <img src="/images/nam.PNG" width="300">
+        </figure>
+        <div class="absolute bottom-0 left-0 m-3">
+          <div class="w-100 text-md pb-4 min-h-100 overflow-auto font-light">
             <p>Dato: {{ formatDate(tournament.date) }}</p>
           </div>
           <div class="flex-auto w-100 max-h-8 text-xl font-semibold">
@@ -291,9 +293,20 @@ html {
   // padding-top: 4rem;
   margin: 1rem 2rem;
   transition: all 0.5s ease;
-
+  z-index: 0;
   &:hover {
-
+    .tournamentimg {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .tournamentimg {
+    overflow: hidden;
+    width: 300px;
+    img {
+      transition: 0.3s transform ease;
+    }
   }
   .tfooter {
     width: 100%;
@@ -312,25 +325,16 @@ html {
     }
   }
   &:nth-child(3n) {
-    &:hover {
-      border: 2px solid $black;
-    }
     background-color: $orange;
     border: 2px solid transparent;
     color: $black;
   }
   &:nth-child(3n - 1) {
-    &:hover {
-      border: 2px solid $backclr;
-    }
     background-color: $blue;
     border: 2px solid transparent;
     color: $backclr;
   }
   &:nth-child(3n - 2) {
-    &:hover {
-      border: 2px solid $orange;
-    }
     background-color: $black;
     border: 2px solid transparent;
     color: $orange;

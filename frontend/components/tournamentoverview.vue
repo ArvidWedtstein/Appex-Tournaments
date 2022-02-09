@@ -283,7 +283,6 @@ body {
         flex: 1 1 auto;
         margin: 0;
         padding: 0.3rem 1rem;
-        max-width: 10rem;
         border: 2px solid $green;
         background: $black;
         color: $orange;

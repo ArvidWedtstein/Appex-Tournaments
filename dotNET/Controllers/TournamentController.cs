@@ -75,11 +75,11 @@ public class TournamentController : ControllerBase {
                 _logger.LogInformation(Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))).ToJson()); // logg true false
                 
                 if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { // If all Matches have a winner then make new matches for next round
-                    rounds = newRound(rounds, ᛖ);
+                    rounds = newRounds(rounds, ᛖ);
                 }
             }
         }
-        List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
+        List<List<Tournament.Match>> newRounds(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
             var winners = new List<Tournament.Player>();
             for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
                 var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
@@ -108,7 +108,7 @@ public class TournamentController : ControllerBase {
     [HttpPost]
     public async Task<ActionResult> CreateTournament(string tournamentName, DateTime? tournamentDate, [FromBody]List<string> players)
     {
-        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2, 1 }; // Roundslist for creating matches
+        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 }; // Roundslist for creating matches
         var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList(); // Calculate numbers of round
         // _logger.LogInformation(string.Join(",", calculatedRounds.Count));
         
@@ -147,7 +147,46 @@ public class TournamentController : ControllerBase {
         
         await _tournamentService.CreateAsync(newTournament);
 
-        return CreatedAtAction(nameof(Get), new { id = newTournament.Id }, newTournament);
+        var previewtournament = await _tournamentService.GetAsync(newTournament.Id); // Get tournament from database
+        
+        if (previewtournament is null)
+        {
+            return NotFound();
+        }
+        var previewrounds = previewtournament.Rounds; // Get number of rounds
+        _logger.LogInformation(previewrounds.ToArray().ToString());
+        for (int ᛖ = 0; ᛖ < previewrounds.Count; ᛖ++) {
+            var matches = previewrounds[ᛖ];
+            matches.ForEach(match => {
+                int index = rng.Next(match.Players.Count); // set random winner
+                var winner = match.Players[index];
+                match.Winner = winner;
+            });
+            if (Convert.ToBoolean(previewrounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != previewrounds.Count - 1) { 
+                previewrounds = newRound(previewrounds, ᛖ);
+            }
+        }
+
+        List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
+            var winners = new List<Tournament.Player>();
+            for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
+                var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
+                winners.Add(matchwinner);
+            }
+            var shuffledwinners = winners.OrderBy(a => rng.Next()).ToList(); // shuffle winners
+            for (int ᛉ = 0; ᛉ < shuffledwinners.Count; ᛉ+=2) {
+                    var match = new Tournament.Match();
+                    match.Players = new List<Tournament.Player>() {
+                        new Tournament.Player(shuffledwinners[ᛉ].name, shuffledwinners[ᛉ].Id),
+                        new Tournament.Player(shuffledwinners[ᛉ+1].name, shuffledwinners[ᛉ+1].Id)
+                    };
+                tournamentrounds[ᛖ+1].Add(match); // add match to round
+            }
+            return tournamentrounds;
+        }
+        _logger.LogInformation(previewrounds.ToArray().ToString());
+        CreatedAtAction(nameof(Get), new { id = newTournament.Id }, newTournament);
+        return Ok(new { newTournament, previewtournament});
     }
 
     [Route("/updateTournamentPlayers")]
@@ -171,53 +210,53 @@ public class TournamentController : ControllerBase {
         await _tournamentService.UpdateAsync(Id, tournament);
         return Ok(tournament);
     }
+    
 
-    [Route("/previewmatch")]
-    [HttpPost]
-    public async Task<ActionResult<Tournament>> PreviewMatch(string id)
-    {
-        var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
+    // [Route("/previewmatch")]
+    // [HttpPost]
+    // public async Task<ActionResult<Tournament>> PreviewMatch(string id)
+    // {
+    //     var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
         
-        if (tournament is null)
-        {
-            return NotFound();
-        }
-        var rounds = tournament.Rounds; // Get number of rounds
-        if (rounds is null) {
-            return NotFound();
-        }
-        _logger.LogInformation(rounds.ToArray().ToString());
-        for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
-            var matches = rounds[ᛖ];
-            matches.ForEach(match => {
-                int index = rng.Next(match.Players.Count); // set random winner
-                var winner = match.Players[index];
-                match.Winner = winner;
-            });
-            if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { 
-                rounds = newRound(rounds, ᛖ);
-            }
-        }
+    //     if (tournament is null)
+    //     {
+    //         return NotFound();
+    //     }
+    //     var rounds = tournament.Rounds; // Get number of rounds
+    //     _logger.LogInformation(rounds.ToArray().ToString());
+    //     for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
+    //         var matches = rounds[ᛖ];
+    //         matches.ForEach(match => {
+    //             int index = rng.Next(match.Players.Count); // set random winner
+    //             _logger.LogInformation(index.ToString());
+    //             var winner = match.Players[index];
+    //             match.Winner = winner;
+    //         });
+    //         if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { 
+    //             rounds = newRound(rounds, ᛖ);
+    //         }
+    //     }
 
-        List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
-            var winners = new List<Tournament.Player>();
-            for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
-                var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
-                winners.Add(matchwinner);
-            }
-            var shuffledwinners = winners.OrderBy(a => rng.Next()).ToList(); // shuffle winners
-            for (int ᛉ = 0; ᛉ < shuffledwinners.Count; ᛉ+=2) {
-                    var match = new Tournament.Match();
-                    match.Players = new List<Tournament.Player>() {
-                        new Tournament.Player(shuffledwinners[ᛉ].name, shuffledwinners[ᛉ].Id),
-                        new Tournament.Player(shuffledwinners[ᛉ+1].name, shuffledwinners[ᛉ+1].Id)
-                    };
-                tournamentrounds[ᛖ+1].Add(match); // add match to round
-            }
-            return tournamentrounds;
-        }
-        return Ok(tournament);
-    }
+    //     List<List<Tournament.Match>> newRound(List<List<Tournament.Match>> tournamentrounds, int ᛖ) { // function for creating new rounds & matches
+    //         var winners = new List<Tournament.Player>();
+    //         for (int ᛟ = 0; ᛟ < tournamentrounds[ᛖ].Count; ᛟ++) { // Add all winners to a list
+    //             var matchwinner = tournamentrounds[ᛖ][ᛟ].Winner;
+    //             winners.Add(matchwinner);
+    //         }
+    //         _logger.LogInformation(ᛖ.ToString());
+    //         var shuffledwinners = winners.OrderBy(a => rng.Next()).ToList(); // shuffle winners
+    //         for (int ᛉ = 0; ᛉ < shuffledwinners.Count; ᛉ+=2) {
+    //                 var match = new Tournament.Match();
+    //                 match.Players = new List<Tournament.Player>() {
+    //                     new Tournament.Player(shuffledwinners[ᛉ].name, shuffledwinners[ᛉ].Id),
+    //                     new Tournament.Player(shuffledwinners[ᛉ+1].name, shuffledwinners[ᛉ+1].Id)
+    //                 };
+    //             tournamentrounds[ᛖ+1].Add(match); // add match to round
+    //         }
+    //         return tournamentrounds;
+    //     }
+    //     return Ok(tournament);
+    // }
 
     //[HttpPut("{id:length(24)}")]
     [Route("/updateTournment")]
