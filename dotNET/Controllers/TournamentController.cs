@@ -20,6 +20,7 @@ public class TournamentController : ControllerBase {
     public async Task<List<Tournament>> Get() 
     {
         var tournament = await _tournamentService.GetAsync();
+
         return tournament;
     } 
 
@@ -34,7 +35,7 @@ public class TournamentController : ControllerBase {
             return NotFound();
         }
 
-        return tournament;
+        return Ok(tournament);
     }
 
 
