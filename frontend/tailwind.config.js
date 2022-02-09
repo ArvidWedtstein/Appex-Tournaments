@@ -22,6 +22,11 @@ module.exports = {
         appexorange: "#FAB487",
         appexinput: "#00000080"
       },
+      padding: {
+        '3rem': '3rem',
+        '4rem': '4rem',
+        '6rem': '6rem'
+      },
       backgroundImage: {
         'frontpageGrapics': "/images/frontpage-grapics.png"
       }
@@ -37,11 +42,6 @@ module.exports = {
       'appexlg': {"max": '1024px'},
       'appexxl': {"max": '1280px'},
       'appex2xl': {"max": '1536px'},
-    },
-    padding: {
-      '3rem': '3rem',
-      '4rem': '4rem',
-      '6rem': '6rem'
     }
   },
   variants: {
