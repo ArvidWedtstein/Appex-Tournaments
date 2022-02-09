@@ -1,7 +1,6 @@
 <template>
   <div class="container w-screen h-screen overflow-hidden">
-    <div class="bg-[url('/images/frontpage-grapics.png')] bg-[length:1008px] bg-no-repeat bg-left-bottom h-full absolute w-full sm:bg-[length:800px]">
-      <div class="bg-[url('/images/tegn.svg')] bg-[length:1008px] h-full w-2/5 absolute right-0 overflow-hidden z-[-1]"></div>
+    <div class="bg-[url('/images/frontpage-grapics.png')] bg-[length:1008px]  appexsm:bg-[length:800px] bg-no-repeat absolute bg-left-bottom w-screen h-screen">
       <div class="md:container md:my-auto">
         <div class="grid auto-cols-2 justify-items-start items-center">
           <h1 class="m-2 px-4 mt-40 py-10 text-4xl row-span-3">Velkommen til Appex Tournaments!</h1>
