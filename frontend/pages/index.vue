@@ -11,7 +11,6 @@
         </div>
       </div>
     </div>
-    <hr class="extendedline rgbline">
   </div>
 </template>
 
