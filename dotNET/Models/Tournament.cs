@@ -33,16 +33,28 @@ public class Tournament
                 "id": 1234,
                 "winner": "",
                 "Players": [
-                    "Player1"
-                    "Player2"
+                    {
+                        "name": "Player1",
+                        "id: "123456"
+                    },
+                    {
+                        "name": "Player1",
+                        "id: "123456"
+                    }
                 ]
             },
             {
                 "id": 1234,
                 "winner": "",
                 "Players": [
-                    "Player1"
-                    "Player2"
+                    {
+                        "name": "Player1",
+                        "id: "123456"
+                    },
+                    {
+                        "name": "Player1",
+                        "id: "123456"
+                    }
                 ]
             }
         ]
