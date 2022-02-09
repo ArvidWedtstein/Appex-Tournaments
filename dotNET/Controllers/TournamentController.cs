@@ -29,12 +29,13 @@ public class TournamentController : ControllerBase {
     public async Task<ActionResult<Tournament>> Get(string id)
     {
         var tournament = await _tournamentService.GetAsync(id);
+        var tournament2 = await _tournamentService.GetAsync(id);
 
         if (tournament is null)
         {
             return NotFound();
         }
-
+        // return Ok(new { tournament, tournament2});
         return Ok(tournament);
     }
 
@@ -123,10 +124,10 @@ public class TournamentController : ControllerBase {
             };
             round.Add(match);
         }
-        
-        _logger.LogInformation(string.Join(",", round));
+
         rounds.Add(round);
 
+        // Add rest of the rounds
         for (int ᚦ = 0; ᚦ < calculatedRounds.Count - 1; ᚦ++) {
             var round1 = new List<Tournament.Match>();
             rounds.Add(round1);
@@ -134,16 +135,18 @@ public class TournamentController : ControllerBase {
         _logger.LogInformation(string.Join(", Round: ", rounds));
  
         _logger.LogInformation(tournamentDate.ToString());
-        _logger.LogInformation(DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm")).ToString());
 
         var newTournament = new Tournament();
         newTournament.Name = tournamentName;
-
-        newTournament.Date = tournamentDate;
+        if (tournamentDate is null) {
+            newTournament.Date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm"));
+        } else {
+            newTournament.Date = tournamentDate;
+        }
         newTournament.Rounds = rounds;
         
         await _tournamentService.CreateAsync(newTournament);
-       
+
         return CreatedAtAction(nameof(Get), new { id = newTournament.Id }, newTournament);
     }
 
@@ -180,12 +183,16 @@ public class TournamentController : ControllerBase {
             return NotFound();
         }
         var rounds = tournament.Rounds; // Get number of rounds
-        
+        if (rounds is null) {
+            return NotFound();
+        }
+        _logger.LogInformation(rounds.ToArray().ToString());
         for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
             var matches = rounds[ᛖ];
             matches.ForEach(match => {
                 int index = rng.Next(match.Players.Count); // set random winner
-                match.Winner = match.Players[index];
+                var winner = match.Players[index];
+                match.Winner = winner;
             });
             if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { 
                 rounds = newRound(rounds, ᛖ);

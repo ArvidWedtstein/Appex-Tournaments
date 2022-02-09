@@ -1,7 +1,7 @@
 
 <template>
   <main class="fixed w-full h-full overflow-hidden left-0 top-0 flex flex-row items-center flex-nowrap transition-all duration-500 ease-in-out select-none appexsm:overflow-x-hidden appexsm:overflow-y-visible appexsm:flex-col">
-    <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center">Tidligere Turneringer</h1>
+    <h1 class="fixed text-2xl lg:text-4xl top-16 lg:top-8 font-semibold w-full text-center p-3 bg-white">Tidligere Turneringer</h1>
     <button class="fixed w-12 mx-4 my-8 left-0 bottom-0 appexsm:hidden" @click="left()">
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
         <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
@@ -77,7 +77,7 @@
         <button class="flex-start bg-appexblue text-center text-white rounded py-4 px-16 m-3hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
       </div>
     </transition>
-    <div id="scrollContainer" class="flex flex-row overflow-hidden scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
+    <div id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto">
       <div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
         <img src="/images/nam.PNG" width="300">
         <div class="absolute bottom-0 left-0 p-5">
@@ -263,9 +263,7 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-template{
-  overflow: hidden;
-}
+
 html {
   height: 100%;
   position: absolute;
