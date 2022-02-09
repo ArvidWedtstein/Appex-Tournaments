@@ -9,7 +9,7 @@
 							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player.id, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id, 'clickable': clickable }">{{ player.name }}</button>
 							<button class="player" v-else type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</button>
 						</div>
-						<p>Match: {{m+1}}</p>
+						<!-- <p>Match: {{m+1}}</p> -->
 					</div>
           <div v-if="tournament.rounds[tournament.rounds.length-1][0].winner != null && preview == false" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
             <div class="text-center">
@@ -283,6 +283,7 @@ body {
         flex: 1 1 auto;
         margin: 0;
         padding: 0.3rem 1rem;
+        max-width: 10rem;
         border: 2px solid $green;
         background: $black;
         color: $orange;
