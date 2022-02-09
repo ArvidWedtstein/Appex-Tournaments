@@ -112,7 +112,7 @@ export default {
           console.log(intPlayer)
           var playerDevide = (intPlayer / 2)
           for (var i = 0; i < playerDevide; i++){
-            this.players.splice(index, 1);
+            this.players.pop();
             intPlayer = this.players.length;
           }
         }
