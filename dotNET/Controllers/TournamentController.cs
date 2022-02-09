@@ -105,10 +105,10 @@ public class TournamentController : ControllerBase {
     // https://localhost:7021/Tournament?tournamentName=name&tournamentDate=date
     [Route("/createTournament")]
     [HttpPost]
-    public async Task<ActionResult> CreateTournament(string tournamentName, string? tournamentDate, [FromBody]List<string> players)
+    public async Task<ActionResult> CreateTournament(string tournamentName, DateTime? tournamentDate, [FromBody]List<string> players)
     {
-        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 };
-        var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList();
+        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 }; // Roundslist for creating matches
+        var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList(); // Calculate numbers of round
         _logger.LogInformation(string.Join(",", calculatedRounds.Count));
         
         var rounds = new List<List<Tournament.Match>>();
