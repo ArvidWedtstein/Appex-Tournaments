@@ -16,8 +16,7 @@ public class Tournament
     public string Name { get; set; } = null!;
 
 
-  
-    public DateTime? Date { get; set; } = DateTime.Now;
+    public DateTime? Date { get; set; } = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm"));
     
     public string? Status { get; set; } = "Fremtidig"!;
     

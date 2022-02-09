@@ -9,7 +9,7 @@
         </div>
         <div class="inputBox py-20 my-20">
           <h1 class="text-xl">Tournament dato</h1>
-          <input class="relative flex-auto bg-transparent shadow-none text-left align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.date" type="date" id="tdate" name="tdate" placeholder="Dato" required>
+          <input class="relative flex-auto bg-transparent shadow-none text-left align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.date" type="datetime-local" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -71,11 +71,12 @@ export default {
         players: [""],
         matches: [],
         turnering: {},
-        previewturnering: {}
+        previewturnering: {},
       }
     },
     methods: {
       async newTournament() {
+        console.time('turnament')
         axios({
           method: 'POST',
           url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
@@ -92,8 +93,8 @@ export default {
             console.log(res.data)
             this.previewturnering = res.data;
           })
-          
         })
+        console.timeEnd('turnament')
         this.increasePage()
       },
       addPlayer() { 

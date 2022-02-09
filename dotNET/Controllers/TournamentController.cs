@@ -107,35 +107,38 @@ public class TournamentController : ControllerBase {
     [HttpPost]
     public async Task<ActionResult> CreateTournament(string tournamentName, DateTime? tournamentDate, [FromBody]List<string> players)
     {
-        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 }; // Roundslist for creating matches
+        var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2, 1 }; // Roundslist for creating matches
         var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList(); // Calculate numbers of round
         // _logger.LogInformation(string.Join(",", calculatedRounds.Count));
         
         var rounds = new List<List<Tournament.Match>>();
-        var shuffledplayers = players.OrderBy(a => rng.Next()).ToList();
-        var round1 = new List<Tournament.Match>();
+        var shuffledplayers = players.OrderBy(a => rng.Next()).ToList(); // shuffle players
+        var round = new List<Tournament.Match>();
         for (int ᛚ = 0; ᛚ < players.Count; ᛚ+=2) {
             var match = new Tournament.Match();
+            var id = () => { return rng.Next(0, 1000000).ToString("D6"); }; // Generates new ID.
             match.Players = new List<Tournament.Player>() {
-                new Tournament.Player(shuffledplayers[ᛚ], rng.Next(0, 1000000).ToString("D6")),
-                new Tournament.Player(shuffledplayers[ᛚ+1], rng.Next(0, 1000000).ToString("D6"))
+                new Tournament.Player(shuffledplayers[ᛚ], id()),
+                new Tournament.Player(shuffledplayers[ᛚ+1], id())
             };
-            round1.Add(match);
+            round.Add(match);
         }
         
-        _logger.LogInformation(string.Join(",", round1));
-        rounds.Add(round1);
+        _logger.LogInformation(string.Join(",", round));
+        rounds.Add(round);
 
         for (int ᚦ = 0; ᚦ < calculatedRounds.Count - 1; ᚦ++) {
-            var round = new List<Tournament.Match>();
-            rounds.Add(round);
+            var round1 = new List<Tournament.Match>();
+            rounds.Add(round1);
         }
         _logger.LogInformation(string.Join(", Round: ", rounds));
-        
-
+ 
+        _logger.LogInformation(tournamentDate.ToString());
+        _logger.LogInformation(DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm")).ToString());
 
         var newTournament = new Tournament();
         newTournament.Name = tournamentName;
+
         newTournament.Date = tournamentDate;
         newTournament.Rounds = rounds;
         
@@ -181,9 +184,8 @@ public class TournamentController : ControllerBase {
         for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
             var matches = rounds[ᛖ];
             matches.ForEach(match => {
-                int index = rng.Next(match.Players.Count);
-                var winner = match.Players[index];
-                match.Winner = winner;
+                int index = rng.Next(match.Players.Count); // set random winner
+                match.Winner = match.Players[index];
             });
             if (Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))) && ᛖ != rounds.Count - 1) { 
                 rounds = newRound(rounds, ᛖ);
