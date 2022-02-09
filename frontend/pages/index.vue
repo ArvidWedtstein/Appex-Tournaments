@@ -41,7 +41,24 @@ $backclr: #edebe9;
 // body, html {
 //   overflow: hidden !important;
 // }
+.rgbline {
+  background: linear-gradient(90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: auto;
+  height: 1px;
+  border: 0;
+  background-size: 200% 200%;
+  box-shadow: 0px 1px 10px #23d5ab;
+}
 
-
-
+.expandline {
+  animation: expandline 2s linear;
+}
+@keyframes expandline {
+	0% {
+		width: 1%;
+	}
+	100% {
+		width: 100%;
+	}
+}
 </style>

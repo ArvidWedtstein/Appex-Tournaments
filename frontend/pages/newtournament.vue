@@ -107,9 +107,9 @@ export default {
         }
         intPlayer = (intPlayer * 2);
       }},
-      removePlayer(index) {
+      removePlayer() {
         if(intPlayer > 1){
-          console.log(intPlayer)
+  
           var playerDevide = (intPlayer / 2)
           for (var i = 0; i < playerDevide; i++){
             this.players.pop();

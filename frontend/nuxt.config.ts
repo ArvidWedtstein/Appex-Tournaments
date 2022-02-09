@@ -14,17 +14,17 @@ export default defineNuxtConfig({
         }
       },
     },
-    // head: {
-    //     script: [
-    //         {
-    //             src: "https://kit.fontawesome.com/0cda3bb6df.js"
-    //         }
-    //     ],
-    //     link: [
-    //         { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" },
-    //         { rel: "icon", type: "image/x-icon", href: "/appexico.ico" }
-    //     ]
-    // },
+    head: {
+        script: [
+            {
+                src: "https://kit.fontawesome.com/0cda3bb6df.js"
+            }
+        ],
+        link: [
+            { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" },
+            { rel: "icon", type: "image/x-icon", href: "/appexico.ico" }
+        ]
+    },
     /*axios: {
       baseURL: "http://localhost:3001"
     },*/
