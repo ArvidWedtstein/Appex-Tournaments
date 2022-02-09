@@ -5,7 +5,7 @@
         <div class="inputBox py-20 my-20">
           <h1>Skriv inn navnet på tournamentet</h1>
           <input class="relative flex-auto bg-transparent text-left shadow-none align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
-          <span class="limiter">{{ 69 - tournament.name.length }} characters remaining</span>
+          <span class="limiter">{{ 69 - tournament.name.length }} bokstaver til overs</span>
         </div>
         <div class="inputBox py-20 my-20">
           <h1 class="text-xl">Tournament dato</h1>
@@ -21,7 +21,7 @@
     <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-x-hidden overflow-y-visible">
       <div class="text-center relative w-100 mx-auto min-h-10 mt-16">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
-        <p class="text-2md text-center">Rediger deltakere</p>
+        <p class="text-2md text-center">Sett deltakere</p>
       </div>
       <div class="relative min-h-max w-24 mt-8">
         <div class="text-center font-semibold">
@@ -35,7 +35,7 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="flex h-auto flex-col content-left overflow-y-visible">
         <div class="flex">
-          <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index">
+          <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index" required>
         </div>
       </div>
       <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
@@ -53,7 +53,6 @@
 
 
 <script>
-let intPlayer = 1;
 import axios from 'axios';
 //import env from '~/dotenv.json'
 import tournamentoverview from '~~/components/tournamentoverview.vue';
@@ -72,11 +71,17 @@ export default {
         matches: [],
         turnering: {},
         previewturnering: {},
+        intPlayer: 1,
       }
+    },
+    beforeRouteLeave(to, from, next) {
+      this.intPlayer = 1;
     },
     methods: {
       async newTournament() {
-        console.time('turnament')
+        for (let i = 0; i < this.players.length; i++) {
+          if (this.players[i] == "" || null) return alert('Field cannot be empty')
+        }
         axios({
           method: 'POST',
           url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
@@ -94,35 +99,37 @@ export default {
             this.previewturnering = res.data;
           })
         })
-        console.timeEnd('turnament')
         this.increasePage()
       },
       addPlayer() { 
-        if (intPlayer < 32){
-        const adj = ["Gretten", "Glad", "Fjern", "Smart", "God", "Vakker", "Snill", "Første", "Rask", "Kreativ", "Lys", "Mandig", "Treig", "Smart"];
-        const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
-        for(let i = 0; i < intPlayer; i++) {
-          let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
-          this.players.push(playername)
+        if (this.intPlayer < 32){
+          console.log(this.intPlayer)
+          const adj = ["Gretten", "Glad", "Fjern", "Smart", "God", "Vakker", "Snill", "Første", "Rask", "Kreativ", "Lys", "Mandig", "Treig", "Smart"];
+          const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
+          for(let i = 0; i < this.intPlayer; i++) {
+            let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
+            this.players.push(playername)
+            
+          }
+          this.intPlayer = (this.intPlayer * 2);
         }
-        intPlayer = (intPlayer * 2);
-      }},
+      },
       removePlayer() {
-        if(intPlayer > 1){
+        if(this.intPlayer > 1){
   
-          var playerDevide = (intPlayer / 2)
+          var playerDevide = (this.intPlayer / 2)
           for (var i = 0; i < playerDevide; i++){
             this.players.pop();
-            intPlayer = this.players.length;
+            this.intPlayer = this.players.length;
           }
         }
       },
       increasePage() {
         if (this.page == 2) return
-        const regex = /[^A-Za-z0-9]+/
-        /*if (!regex.test(this.tournament.name)) {
-          return alert('Name cannot contain invalid characters (only letters and numbers)')
-        }*/
+          const regex = /[^A-Za-z0-9]+/
+          /*if (!regex.test(this.tournament.name)) {
+            return alert('Name cannot contain invalid characters (only letters and numbers)')
+          }*/
         if (this.tournament.name && this.tournament.date) {
           this.page += 1;
         } else {
