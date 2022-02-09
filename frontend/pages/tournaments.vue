@@ -263,9 +263,7 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-template{
-  overflow: hidden;
-}
+
 html {
   height: 100%;
   position: absolute;
