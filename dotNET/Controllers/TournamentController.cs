@@ -109,7 +109,7 @@ public class TournamentController : ControllerBase {
     {
         var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 }; // Roundslist for creating matches
         var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList(); // Calculate numbers of round
-        _logger.LogInformation(string.Join(",", calculatedRounds.Count));
+        // _logger.LogInformation(string.Join(",", calculatedRounds.Count));
         
         var rounds = new List<List<Tournament.Match>>();
         var shuffledplayers = players.OrderBy(a => rng.Next()).ToList();
