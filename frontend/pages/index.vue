@@ -25,17 +25,10 @@ export default {
       return {
       }
     },
-    mounted() {
 
-    },
     async asyncData({ $config }) {
       console.log($config.axios)
-    },
-    methods: {
-      refresh() {
-        //window.location.reload(true)
-      },
-    },
+    }
 }
 </script>
 

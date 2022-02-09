@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from 'nuxt3'
-// import dotenv from 'dotenv'
-// dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config();
 export default defineNuxtConfig({
     target: 'server',
 		srcDir: './',
