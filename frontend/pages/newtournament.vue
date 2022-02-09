@@ -150,7 +150,9 @@ $light-grey: #EDECE9;
 $blue: #0835C4;
 $green: #DDE78B;
 $orange: #FAB487;
-
+body, html {
+  overflow: visible !important;
+}
 .page {
   /*display: flex;
   justify-content: center;

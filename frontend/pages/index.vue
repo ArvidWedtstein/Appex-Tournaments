@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-screen h-screen overflow-x-hidden">
+  <div class="container w-screen h-screen overflow-hidden">
     <div class="bg-[url('/images/frontpage-grapics.png')] bg-[length:1008px] bg-no-repeat bg-left-bottom h-full absolute w-full sm:bg-[length:800px]">
       <div class="bg-[url('/images/tegn.svg')] bg-[length:1008px] h-full w-2/5 absolute right-0 overflow-hidden z-[-1]"></div>
       <div class="md:container md:my-auto">
@@ -46,7 +46,7 @@ export default {
 $backclr: #edebe9;
 
 body, html {
-  //overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 
