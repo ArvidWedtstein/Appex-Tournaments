@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import '~/assets/tailwind.scss'
-const config = useRuntimeConfig()
+// const config = useRuntimeConfig()
 
 </script>
 

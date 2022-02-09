@@ -45,9 +45,9 @@ export default {
 <style lang="scss">
 $backclr: #edebe9;
 
-body, html {
-  overflow: hidden !important;
-}
+// body, html {
+//   overflow: hidden !important;
+// }
 
 
 
