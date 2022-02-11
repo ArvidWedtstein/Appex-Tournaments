@@ -1,25 +1,28 @@
 <template>
-  <div id='newtournament' class="bg-appexbackclr overflow-y-visible overflow-x-hidden">
-    <div v-if="page === 0" class="page flex justify-center content-center items-center relative flex-col w-full max-h-full h-full">
-      <div class="pg2-content-container w-full h-4/5 p-16 items-center">
-        <div class="inputBox py-20 my-20">
+  <div id="newtournament" class="bg-appexbackclr">
+
+		<!-- Page 0 -->
+    <div v-if="page === 0" class="container page">
+        <div class="my-5">
           <h1>Skriv inn navnet på tournamentet</h1>
-          <input class="relative flex-auto bg-transparent text-left shadow-none align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
+          <input class="input w-full" v-model="tournament.name" type="text" id="tname" name="tname" placeholder="Tournament navn" maxlength = "69" required>
           <span class="limiter">{{ 69 - tournament.name.length }} {{tournament.name.length >= 68 ? `bokstav` : `bokstaver`}} til overs</span>
         </div>
-        <div class="inputBox py-20 my-20">
+        <div class="my-5">
           <h1 class="text-xl">Tournament dato</h1>
-          <input class="relative flex-auto bg-transparent shadow-none text-left align-middle !outline-none w-full border-b-2 border-solid border-appexblack text-appexdarkgrey pb-2 text-base" v-model="tournament.date" type="datetime-local" id="tdate" name="tdate" placeholder="Dato" required>
+          <input class="input w-full" v-model="tournament.date" type="datetime-local" id="tdate" name="tdate" placeholder="Dato" required>
         </div>
         <button class="fixed w-12 m-16 right-0 bottom-0" @click="increasePage()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-right" class="svg-inline--fa fa-arrow-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"></path>
           </svg>
         </button>
-      </div>
     </div>
-    <div v-if="page === 1" class="flex content-center justify-center items-center relative flex-col w-100 h-auto overflow-x-hidden overflow-y-visible">
-      <div class="text-center relative w-100 mx-auto min-h-10 mt-16">
+
+
+		<!-- Page 1 -->
+    <div v-if="page === 1" class="container flex content-center justify-center items-center relative flex-col">
+      <div class="text-center relative">
         <h1 class="text-3xl text-center w-100">"{{ tournament.name }}" Deltakere</h1>
         <p class="text-2md text-center">Sett deltakere</p>
       </div>
@@ -35,26 +38,28 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="flex h-auto flex-col content-left overflow-y-visible">
         <div class="flex">
-          <input class="p-2 border-b-2 border-solid border-appexblue bg-appexgrey" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index" required>
+          <input class="input my-5" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index" required>
         </div>
       </div>
-      <button class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" @click="newTournament()" type="button">Ny Turnering</button>
+      <button class="button button--blue" @click="newTournament()" type="button">Ny Turnering</button>
     </div>
 
-    <div v-if="page === 2" class="flex flex-col justify-center align-center content-center mt-20 items-center relative w-full max-h-full h-full">
+
+		<!-- Page 2 -->
+    <div v-if="page === 2" class="container flex flex-col justify-center align-center content-center items-center">
       <h1 class="text-2xl">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering" :clickable="false" :preview="true"></Tournamentoverview>
       <br>
-      <NuxtLink class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear abosulute bottom-4 right-3" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
-      <NuxtLink class="bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black m-1 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear" to="/">Utsett turnering</NuxtLink>
+      <NuxtLink class="button button--blue" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
+      <NuxtLink class="button button--orange" to="/">Utsett turnering</NuxtLink>
     </div>
+
   </div>
 </template>
 
 
 <script>
 import axios from 'axios';
-//import env from '~/dotenv.json'
 import tournamentoverview from '~~/components/tournamentoverview.vue';
 export default {
    template: 'newtournament',
@@ -76,8 +81,11 @@ export default {
     },
     beforeRouteLeave(to, from, next) {
       this.intPlayer = 1;
+			next()
     },
     methods: {
+
+			// New tournament
       async newTournament() {
         for (let i = 0; i < this.players.length; i++) {
           if (this.players[i] == "" || null) return alert('Field cannot be empty')
@@ -87,29 +95,38 @@ export default {
           url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
           data: this.players
         }).then(async (response) => {
-          
+
           this.matches = response.data.newTournament.rounds;
           this.turnering = response.data.newTournament;
           this.previewturnering = response.data.previewtournament;
         })
         this.increasePage()
       },
-      addPlayer() { 
+
+			// Add player
+			// Generate random username
+      addPlayer() {
         if (this.intPlayer < 32){
           console.log(this.intPlayer)
+
+					// Adjectives
           const adj = ["Gretten", "Glad", "Fjern", "Smart", "God", "Vakker", "Snill", "Første", "Rask", "Kreativ", "Lys", "Mandig", "Treig", "Smart"];
+
+					// Nouns
           const noun = ["gris", "data", "gnager","mann", "kvinne", "Franskmann", "Amerikaner","Tysker","Nordmann", "script"];
-          for(let i = 0; i < this.intPlayer; i++) {
+
+          for (let i = 0; i < this.intPlayer; i++) {
             let playername = adj[Math.floor(Math.random()*adj.length)] + " " + noun[Math.floor(Math.random()*noun.length)];
             this.players.push(playername)
-            
           }
           this.intPlayer = (this.intPlayer * 2);
         }
       },
+
+			// Remove player
       removePlayer() {
-        if(this.intPlayer > 1){
-  
+        if (this.intPlayer > 1){
+
           var playerDevide = (this.intPlayer / 2)
           for (var i = 0; i < playerDevide; i++){
             this.players.pop();
@@ -117,6 +134,8 @@ export default {
           }
         }
       },
+
+			// Next page
       increasePage() {
         if (this.page == 2) return
           const regex = /[^A-Za-z0-9]+/
@@ -129,6 +148,8 @@ export default {
           alert('Name and/or date cannot be empty')
         }
       },
+
+			// Previous page
       decreasePage() {
         if (this.page == 0) return
         this.page -= 1;
@@ -140,144 +161,5 @@ export default {
 }
 </script>
 <style lang="scss">
-$inputcolor: rgba(0,0,0,0.5);
-$inputhovercolor: rgba(0,0,0,1);
-$backclr: #edece9;
-$black: #221E20;
-$dark-grey: #464544;
-$grey: #D6D2CE;
-$light-grey: #EDECE9;
-$blue: #0835C4;
-$green: #DDE78B;
-$orange: #FAB487;
-body, html {
-  overflow: visible !important;
-}
-.page {
-  /*display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  position: relative;
-  flex-direction: column;
-  width: 100%;
-  max-height: 100%;
-  height: 100%;*/
-  .headerContainer{/*
-    text-align: center;
-    position: absolute;
-    top: 2vh;
-    left: 50%;
-    transform: translateX(-50%);
-    min-height: 10vh;
-    h1{
-        font-size: 4vw;
-    }
-    p{
-        font-size: 2vw;
-    }*/
-  }
-  .playerAddContainer {
-    position: absolute;
-    top: 2vh;
-    right: 128px;
-    height: 140px;
-    width: 100px;
-  }
-  .btnContainer {
-    font-size: 3rem;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    .plusBtn {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-    .minusBtn {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-  }
-  .countContainer {
-    .playerCount{
-      color: $blue;
-      font-size: 2.5rem;
-      font-weight: 400;
-      width: 100%;
-      text-align: center;
-    }
-    p{
-      width: 100%;
-      text-align: center;
-      font-weight: 400;
-    }
-  }
-  @mixin rad-shadow {
-    border: 1px solid hsl(200 10% 50% / 15%);
-    box-shadow: 0 1rem .5rem -.5rem;
-    box-shadow:
-    0 2.8px 2.2px hsl(200 50% 3% / calc(.3 + .03)),
-    0 6.7px 5.3px hsl(200 50% 3% / calc(.3 + .01)),
-    0 12.5px 10px hsl(200 50% 3% / calc(.3 + .02)),
-    0 22.3px 17.9px hsl(200 50% 3% / calc(.3 + .02)),
-    0 41.8px 33.4px hsl(200 50% 3% / calc(.3 + .03)),
-    0 100px 80px hsl(200 50% 3% / .3)
-    ;
-  }
-  .inputBox {
-    padding: 0.2rem;
-    &.padding {
-      margin: 4vw 0;
-      padding: 5rem 0;
-    }
-    &.border {
-      display: flex;
-      flex: 1 1 auto;
-      align-content: center;
-      align-items: center;
-      padding: 8rem 8rem !important;
-      background: $dark-grey;
-      border-radius: 0.5rem;
-      @include rad-shadow;
-    }
-    h1{
-      font-size: 20px;
-      font-weight: 600;
-    }
-    input {/*
-      position: relative;
-      flex: 1 1 auto;
-      //background: transparent;
-      background: hotpink;
-      text-align: left;
-      vertical-align: middle;
-      outline: none;
-      width: 100%;
-      border: none;
-      color: $inputcolor;
-      padding-bottom: 10px;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border-bottom: 2px solid $inputcolor;
-      */
-      &:focus {
-        color: $inputhovercolor;
-        border-bottom: 2px solid $inputhovercolor;
-      }
-      &:-webkit-autofill,
-      &:-webkit-autofill:hover, 
-      &:-webkit-autofill:focus, 
-      &:-webkit-autofill:active  {
-          -webkit-text-fill-color: black;
-        -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-        box-shadow: 0 0 0px 1000px #000 inset;
-        transition: background-color 5000s ease-in-out 0s;
-      }
-    }
-  }
-  
-}
+
 </style>
