@@ -62,25 +62,6 @@ export default {
       this.tournaments.getById(tournamentId);
       console.log(this.tournament)
 		},
-		async getTournament(id) {
-			await axios({
-				method: 'get',
-				url: `${this.$config.baseURL}/get-tournament/${id}`
-			}).then(async (response) => {
-				this.tournament = response.data;
-			});
-		},
-    async Contains(obj, key) {
-      let value = false;
-      if (!obj) value = false;
-      
-      if (obj.winner == null || obj.winner == 'undefined') {
-        value = false;
-      } else if (obj.winner != null) {
-        value = true;
-      }
-      return value;
-    }
 	},
   computed:{
     tournament(){
