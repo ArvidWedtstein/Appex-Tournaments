@@ -62,7 +62,8 @@ public class TournamentController : ControllerBase {
         }
         
         for (int ᛖ = 0; ᛖ < rounds.Count; ᛖ++) {
-            var match = rounds[ᛖ].Find(match => match.Id == matchId); // find match with id in list of rounds
+            var match = rounds[ᛖ].Find(match => match.Id == matchId);
+             // find match with id in list of rounds
             if (match != null) {
                 match.Winner = match.Players.Find(player => player.Id == winnerId);
 

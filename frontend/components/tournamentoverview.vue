@@ -1,7 +1,7 @@
 <template>
-	<div class="container flex flex-col content-center justify-center align-center">
+	<div v-cloak v-bind:class="{ 'mx-12': clickable == true }" class="my-8 flex flex-col content-center justify-center align-center">
 		<div class="flex flex-auto content-center items-center rounded p-8 bg-appexdarkgrey">
-			<div v-if="tournament" class="flex-auto flex content-center items-center">
+			<div v-cloak v-if="tournament" class="flex content-center items-center">
 				<div class="round" v-for="(round, i) in tournament.rounds" :key="i">
 					<div class="match" v-for="(match, m) in round" :key="m">
 						<div class="match__content"></div>
@@ -9,9 +9,8 @@
 							<button class="player" v-if="clickable" @click="matchWin(tournament.id, player.id, match.id)" type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id, 'clickable': clickable }">{{ player.name }}</button>
 							<button class="player" v-else type="button" v-cloak v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</button>
 						</div>
-						<!-- <p>Match: {{m+1}}</p> -->
 					</div>
-          <div v-if="tournament.rounds[tournament.rounds.length-1][0].winner != null && preview == false" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
+          <div v-if="tournament.rounds[tournament.rounds.length-2][0].winner != null && preview == false" class="fixed top-0 left-0 bottom-0 right-0 m-40 rounded-2xl bg-appexblue flex flex-col justify-center align-center content-center items-center">
             <div class="text-center">
               <h3 class="text-4xl">Final Winner:</h3>
               <h1 class="text-6xl">{{ tournament.rounds[tournament.rounds.length - 1][0].winner.name }}</h1>
@@ -21,6 +20,9 @@
           </div>
 				</div>
 			</div>
+      <div v-else>
+        <p class="text-white">Tournament could not be loaded</p>
+      </div>
 		</div>
 	</div>
 </template>										
@@ -29,6 +31,7 @@
 
 <script>
 import axios from 'axios';
+import { useTournamentStore } from '~/stores/tournament'
 export default {
 	name: "tournamentoverview",
 	props: {
@@ -38,33 +41,26 @@ export default {
 	},
 	data() {
 		return {
-			tournament: {}
+			// tournament: {} || tournamentsprop,
+      tournaments: useTournamentStore()
 		}
 	},
 	async mounted() {
     
 	},
-	watch: {
-		tournamentprop: function () {
-			this.tournament = this.tournamentprop;
-		},
-		tournament: function () {
-			this.tournament = this.tournamentprop;
-		}
-	},
+	// watch: {
+	// 	tournamentprop: function () {
+	// 		this.tournament = this.tournamentprop;
+	// 	},
+	// 	tournament: function () {
+	// 		this.tournament = this.tournamentprop || this.tournament;
+	// 	}
+	// },
 	methods: {
 		async matchWin(tournamentId, winnerId, matchId) {
-      const uri = `${this.$config.baseURL}/matchwin?id=${tournamentId}&winnerId=${winnerId}&matchId=${matchId}`
-			await axios({
-				method: 'post',
-				url: uri
-			}).then(async (response) => {
-        
-        this.tournament = response.data;
-        await this.$nuxt.refresh();
-        // await window.location.reload()
-				//this.getTournament(tournamentId)
-			});
+      this.tournaments.matchwin(this.$config.baseURL, tournamentId, winnerId, matchId);
+      this.tournaments.getById(tournamentId);
+      console.log(this.tournament)
 		},
 		async getTournament(id) {
 			await axios({
@@ -86,6 +82,12 @@ export default {
       return value;
     }
 	},
+  computed:{
+    tournament(){
+      if (!this.tournamentprop) return
+      return this.tournaments.getById(this.tournamentprop.id)
+    }
+  }
 }
 </script>
 
@@ -93,6 +95,18 @@ export default {
 
 
 <style lang="scss">
+:root {
+	--backclr: #edece9;
+	--black: #221E20;
+	--dark-grey: #464544;
+	--grey: #D6D2CE;
+	--light-grey: #EDECE9;
+	--blue: #0835C4;
+	--green: #DDE78B;
+	--orange: #FAB487;
+  scroll-behavior: smooth;
+}
+
 $inputcolor: rgba(0,0,0,0.5);
 $inputhovercolor: rgba(0,0,0,1);
 $backclr: #edece9;
@@ -203,7 +217,7 @@ body {
       content: "";
       display: block;
       width: 20px;
-      border-bottom: 2px solid $bracketlinecolor;
+      border-bottom: 2px solid var(--green);
       margin-left: -10px;
       position: absolute;
       top: 50%;
@@ -223,7 +237,7 @@ body {
       content: "";
       display: block;
       min-height: 20px;
-      border-left: 2px solid $bracketlinecolor;
+      border-left: 2px solid var(--green);
       position: absolute;
       left: -10px;
       top: 60%;
@@ -240,8 +254,8 @@ body {
       content: "";
       display: block;
       border: 2px solid transparent;
-      border-top-color: $bracketlinecolor;
-      border-right-color: $bracketlinecolor;
+      border-top-color: var(--green);
+      border-right-color: var(--green);
       height: 50%;
       position: absolute;
       right: -10px;
@@ -252,8 +266,8 @@ body {
       content: "";
       display: block;
       border: 2px solid transparent;
-      border-bottom-color: $bracketlinecolor;
-      border-right-color: $bracketlinecolor;
+      border-bottom-color: var(--green);
+      border-right-color: var(--green);
       height: 50%;
       position: absolute;
       right: -10px;
@@ -265,7 +279,7 @@ body {
         content: "";
         display: block;
         width: 20px;
-        border-bottom: 2px solid $bracketlinecolor;
+        border-bottom: 2px solid var(--green);
         margin-left: -2px;
         position: absolute;
         top: 55%;
@@ -275,7 +289,6 @@ body {
     .matchplayer {
       display: flex;
       flex-direction: column;
-      //width: 100%;
       position: relative;
       margin: 0;
       padding: 0;
@@ -283,18 +296,13 @@ body {
         flex: 1 1 auto;
         margin: 0;
         padding: 0.3rem 1rem;
-        border: 2px solid $green;
-        background: $black;
-        color: $orange;
+        border: 2px solid var(--green);
+        background: var(--black);
+        color: var(--orange);
         border-radius: 0.25rem;
         text-align: left;
         position: relative;
         transition: border 0.3s ease;
-        &:hover {
-          &.clickable {
-            border: 2px dashed $green;
-          }
-        }
         &.winner {
           &::after {
             content: "🏅";

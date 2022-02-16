@@ -8,32 +8,22 @@
 <script>
 
 import axios from 'axios'
+import { useTournamentStore } from '~/stores/tournament'
 export default {
   name: "tournament",
-  async asyncData({ $axios, params, $route }) {
-
-  },
   data() {
     return {
-      tournament: ""
+      tournament: useTournamentStore()
     }
   },
   methods: {
     async getturnering() {
-      await axios.get(`${this.$config.baseURL}/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
-        console.log(res.data)
-        this.tournament = res.data
-      })
-    },
-    async getTournament(id) {
-      await axios({
-        method: 'get',
-        url: `${this.$config.baseURL}/get-tournament/${id}`
-      }).then(async (response) => {
-        //await console.log(response.data)
-        this.tournament = response.data;
-      });
-    },
+      this.tournament = this.tournament.getById(this.$route.params.id[0]);
+      // await axios.get(`${this.$config.baseURL}/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
+      //   console.log(res.data)
+      //   this.tournament = res.data
+      // })
+    }
   },
   mounted() {
     this.getturnering();

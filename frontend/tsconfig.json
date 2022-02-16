@@ -1,4 +1,10 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
-  "allowJs": true
+  "compilerOptions": {
+    "allowJs": true,
+    "types": [
+      // ...
+      "@pinia/nuxt"
+    ]
+  },
+  "extends": "./.nuxt/tsconfig.json"
 }

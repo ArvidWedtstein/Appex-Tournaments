@@ -1,6 +1,6 @@
 
 <template>
-	<div>
+	<div style="margin: 150px auto;" >
 		<!-- <header class="w-full border-b-8 border-solid border-appexblue z-10 fixed bg-white"> -->
 		<!-- 	<h1 class="text-2xl lg:text-4xl py-[3rem] top-0 appexsm:py-[4rem] font-semibold">Tidligere Turneringer</h1> -->
 		<!-- </header> -->
@@ -11,7 +11,7 @@
 			<button class="fixed top-0 right-0 text-6xl m-6" type="button" v-on:click="closeTournament()">✖</button>
 			<div class="flex-auto text-center appexsm:mt-20">
 				<p class="text-3xl p-1">Rediger <b>{{editTournamentData.Name}}</b></p>
-				<hr class="border-t-appexblack">
+				<hr class="line">
 				<p class="text-xl">Status: {{editTournamentData.status}}</p>
 			</div>
 			<div class="flex flex-auto flex-col content-center justify-center">
@@ -24,28 +24,17 @@
 					<input v-model="editTournamentChanges.date" class="input" type="date">
 				</div>
 			</div>
-			<div class="flex flex-auto content-center items-center rounded bg-appexdarkgrey p-8 px-40 m-3 appexsm:m-0 appexsm:px-20">
-				<div class="flex content-center items-center">
-					<div class="round" v-for="round in editTournamentData.rounds" :key="round">
-						<div class="match" v-for="match in round" :key="match">
-							<div class="match__content"></div>
-							<div class="matchplayer" v-for="player in match.players" :key="player">
-								<!-- FIKS VINNER-->
-								<p class="player" v-if="match.winner" v-bind:class="{ 'winner': match.winner.id == player.id }">{{ player.name }}</p>
-								<p class="player" v-else>{{ player.name }}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+      <!-- Tournament Bracket -->
+      <Tournamentoverview :tournamentprop="editTournamentData" :clickable="false" :preview="true"></Tournamentoverview>
+
 			<div class="flex flex-auto flex-row items-center content-center justify-center">
-				<button class="button" title="Endre navn på deltakere" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
+				<button class="button button--blue" title="Endre navn på deltakere" v-if="editTournamentData.status == 'Fremtidig'" @click="redigerDeltakerScreen = true">Rediger Deltakere</button>
 				<button class="button button--orange" type="button" @click="updateTournament()">Lagre</button>
-				<button class="button" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
+				<button class="button button--orange" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
 			</div>
 
 			<div class="flex flex-auto flex-row items-center content-center">
-				<nuxt-link class="bg-appexblue hover:bg-white text-white font-semibold hover:text-appexblue m-1 py-4 px-8 border border-transparent hover:border-appexblue rounded transition-all duration-300 ease-linear" :to="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</nuxt-link>
+				<nuxt-link class="button button--blue" :to="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</nuxt-link>
 				<button class="button button--blue" @click="resetTournament(editTournamentData.id)" v-if="editTournamentData.status == 'Gjennomført'">Gjenopprett turnering</button>
 				<nuxt-link class="button button--orange" :to="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Fremtidig'">Begynn turnering</nuxt-link>
 			</div>
@@ -62,20 +51,19 @@
 			</div>
 			<div class="flex-auto justify-self-start flex-col mt-3 content-center justify-center items-center justify-items-stretch">
 				<div class="m-auto flex-auto" v-for="(player, h) in editPlayers" :key="player">
-					<input class="flex-auto self-center bg-appexgrey text-black border-2 border-appexblue rounded p-2 my-1" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+					<input class="input input--small input--blue" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
 				</div>
 			</div>
-			<button class="flex-start bg-appexblue text-center text-white rounded py-4 px-16 m-3hover:bg-white border border-transparent font-semibold hover:border-appexblue transition-all duration-100 ease-linear hover:text-appexblue" @click="redigerDeltakere()" type="button">Lagre</button>
+			<button class="button button--blue" @click="redigerDeltakere()" type="button">Lagre</button>
 		</main>
 
 
-
-		<!-- tournaments view -->
-		<main id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto mt-32" v-if="!editTournamentScreen">
-			<div v-for="(tournament, i) in tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
-				<figure class="tournamentimg">
-					<!-- <img src="/images/nam.PNG" width="300" alt="beer"> -->
-				</figure>
+		<!-- tournaments list -->
+		<main id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
+			<div v-for="(tournament, i) in tournaments.tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
+				<!-- <figure class="tournamentimg">
+					<img src="/images/nam.PNG" width="300" alt="beer">
+				</figure> -->
 				<div class="absolute bottom-0 left-0 m-3">
 					<div class="w-100 text-md pb-4 min-h-100 overflow-auto font-light">
 						<p>Dato: {{ formatDate(tournament.date) }}</p>
@@ -84,7 +72,6 @@
 						<p class="">{{ tournament.Name }}</p>
 					</div>
 					<div class="tfooter">
-						<!-- <p :v-if="tournament.rounds[tournament.rounds.length - 1][0].winner.id != ''">{{tournament.rounds[tournament.rounds.length - 1][0].winner.name}}</p> -->
 						<p>
 							{{ countPlayers(tournament) }}
 							<svg aria-hidden="true" focusable="false" data-prefix="fas" width="20" data-icon="users" class="svg-inline--fa fa-users fa-w-1 inline" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
@@ -102,12 +89,13 @@
 
 <script>
 import axios from 'axios'
+import { useTournamentStore } from '~/stores/tournament'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
 export default {
   name: "Tournaments",
   data() {
     return {
-      tournaments: null,
+      tournaments: useTournamentStore(),
       editTournamentScreen: false,
       redigerDeltakerScreen: false,
       editTournamentData: null,
@@ -119,30 +107,18 @@ export default {
       },
     };
   },
+  components: { Tournamentoverview },
   methods: {
-
 		// Reset tournament
     async resetTournament(id) {
-      const t = await axios.get(`${this.$config.baseURL}/resetTournament/${id}`).then(async (res) => {
-        let chosentournament = this.tournaments.find(t => t.id === res.data.id);
-
-        chosentournament = res.data;
-        this.tournaments[this.tournaments.indexOf(chosentournament)] = chosentournament;
-      });
-      window.location.reload();
+      this.tournaments.reset(this.$config.baseURL, id);
+      this.editTournamentData = this.tournaments.getById(id)
     },
 
 		// Count players
     countPlayers(tournament) {
       let length = tournament.rounds[0].length * 2;
       return length
-    },
-
-		// Fetch tournaments
-    async fetchTournaments() {
-      this.tournaments = [];
-      const tournamentlist = await axios.get(`${this.$config.baseURL}/get-tournament`);
-      this.tournaments = tournamentlist.data;
     },
 
 		// Format date
@@ -175,7 +151,7 @@ export default {
 				this.redigerDeltakerScreen = false;
 				this.editPlayers = [];
 				this.$nuxt.refresh();
-      });
+      });8
     },
 
 		// Edit tournament
@@ -190,7 +166,6 @@ export default {
         }
       }
     },
-
 		// Close tournament
     closeTournament() {
       this.editTournamentScreen = false;
@@ -206,22 +181,19 @@ export default {
 
 		// Delete tournament
     deleteTournament(tournamentId) {
-      axios.delete(`${this.$config.baseURL}/deletetournament`, {
-        id: tournamentId
-      });
-    }
+      this.tournaments.delete(this.$config.baseURL, tournamentId)
+    },
   },
 
 	created() {
-    this.fetchTournaments();
+
 	},
 
   mounted() {
+
   },
-  components: { Tournamentoverview }
 }
 </script>
-
 
 
 
@@ -290,135 +262,26 @@ export default {
   }
 }
 
-.round {
-  flex: 1 1 auto;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-  &:first-child {
-    .match {
-      &::before {
-        display: none;
-      }
-    }
-    .match__content {
-      &::before {
-        display: none !important;
-      }
-    }
-  }
-  &:last-child {
-    .match {
-      &::before, &::after {
-        display: none !important;
-      }
-    }
-    .match__content::before {
-      content: "";
-      display: block;
-      width: 20px;
-      border-bottom: 2px solid var(--green);
-      margin-left: -10px;
-      position: absolute;
-      top: 50%;
-      left: -10px;
-    }
-  }
-  .match {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 10px;
-    padding: 6px 0;
-    flex-grow: 1;
-    position: relative;
-    vertical-align: middle;
-    &::before {
-      content: "";
-      display: block;
-      min-height: 20px;
-      border-left: 2px solid var(--green);
-      position: absolute;
-      left: -10px;
-      top: 60%;
-      margin-top: -15px;
-      margin-left: -2px;
-    }
-    &:nth-child(2n+0) {
-      padding-top: 0;
-      padding-top: 0;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    &:nth-child(odd)::after {
-      content: "";
-      display: block;
-      border: 2px solid transparent;
-      border-top-color: var(--green);
-      border-right-color: var(--green);
-      height: 50%;
-      position: absolute;
-      right: -10px;
-      width: 10px;
-      top: 60%;
-    }
-    &:nth-child(even)::after {
-      content: "";
-      display: block;
-      border: 2px solid transparent;
-      border-bottom-color: var(--green);
-      border-right-color: var(--green);
-      height: 50%;
-      position: absolute;
-      right: -10px;
-      width: 10px;
-      bottom: 50%;
-    }
-    .match__content {
-      &::before {
-        content: "";
-        display: block;
-        width: 20px;
-        border-bottom: 2px solid var(--green);
-        margin-left: -2px;
-        position: absolute;
-        top: 55%;
-        //left: -10px;
-      }
-    }
-    .matchplayer {
-      display: flex;
-      flex-direction: column;
-      //width: 100%;
-      position: relative;
-      margin: 0;
-      padding: 0;
-      .player {
-        flex: 1 1 auto;
-        margin: 0;
-        padding: 0.3rem 1rem;
-        border: 2px solid var(--green);
-        background: var(--black);
-        color: var(--orange);
-        border-radius: 0.25rem;
-        text-align: left;
-        position: relative;
-        &.winner {
-          &::after {
-            content: "🏅";
-            float: right;
-          }
-        }
-      }
-    }
-  }
-}
 .fade-enter-active, .fade-leave-active {
   transition: all .5s ease-in-out;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.line {
+  background: var(--black);
+  height: 1px;
+  border: 0;
+  animation: expandline 1s linear;
+}
+@keyframes expandline {
+	0% {
+		width: 1%;
+    margin: 0 50%;
+	}
+	100% {
+		width: 100%;
+    margin: 0 0%;
+	}
 }
 </style>

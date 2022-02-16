@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt3'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 dotenv.config();
 export default defineNuxtConfig({
     target: 'server',
@@ -33,5 +33,10 @@ export default defineNuxtConfig({
     },
     privateRuntimeConfig: {
       baseURL: process.env.BASE_URL
-    }
+    },
+    buildModules: [
+      // Nuxt 2 only:
+      // https://composition-api.nuxtjs.org/getting-started/setup#quick-start
+      '@pinia/nuxt',
+    ],  
 })

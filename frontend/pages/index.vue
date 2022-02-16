@@ -18,12 +18,14 @@
 
 <script>
 // import axios from 'axios'
+import { useTournamentStore } from '~/stores/tournament'
 export default {
-    name: "TournamentsHome",
-    data() {
-      return {
-      }
-    },
+  name: "TournamentsHome",
+  data() {
+    return {
+      tournaments: useTournamentStore()
+    }
+  },
 }
 </script>
 
