@@ -4,7 +4,6 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
-using Microsoft.Extensions.DependencyInjection;
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
@@ -42,8 +41,8 @@ try
     builder.Services.AddSwaggerGen();
     //builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
-    builder.Host.UseDefaultServiceProvider(new AutofacServiceProviderFactory());
-
+    builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+    builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder=>containerBuilder.RegisterModule<TournamentModule>());
     var app = builder.Build();
 
 

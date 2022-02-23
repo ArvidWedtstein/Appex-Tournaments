@@ -9,8 +9,8 @@ namespace tournament.Controllers;
 public class TournamentController : ControllerBase {
 
     private readonly ILogger _logger;
-    private readonly TournamentService _tournamentService;
-    public TournamentController(TournamentService tournamentService, ILogger<TournamentController> logger) {
+    private readonly ITournamentService _tournamentService;
+    public TournamentController(ITournamentService tournamentService, ILogger<TournamentController> logger) {
         _tournamentService = tournamentService;
         _logger = logger;
     }
