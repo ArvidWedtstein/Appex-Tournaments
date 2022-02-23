@@ -15,18 +15,21 @@ export const useTournamentStore = defineStore('tournaments', {
       this.tournaments = tournamentlist.data;
     },
     async new(baseURL, name, date, players: string[]) {
+      let newtournament = {};
+      let previewtournament = {};
       try {
         await axios.post(`${baseURL}/createTournament?tournamentName=${name}&tournamentDate=${date}`, players).then(async (res) => {
           this.tournaments.push(res.data.newTournament);
-          let newtournament = res.data.newTournament;
-          let previewtournament = res.data.previewtournament;
+          newtournament = res.data.newTournament;
+          previewtournament = res.data.previewtournament;
   
           console.log(res.data)
-          return {newtournament, previewtournament}
+          return;
         })
       } catch (error) {
         return console.error(error)
       }
+      return {newtournament, previewtournament};
       
     },
     getById(id) {

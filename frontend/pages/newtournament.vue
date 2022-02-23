@@ -38,7 +38,7 @@
       </div>
       <div v-for="(name, index) in players" :key="index" class="flex h-auto flex-col content-left overflow-y-visible">
         <div class="flex">
-          <input class="input my-5" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index" required>
+          <input class="input my-2" v-model="players[index]" type="text" v-bind:placeholder= "'Deltaker' + index" required>
         </div>
       </div>
       <button class="button button--blue" @click="newTournament()" type="button">Ny Turnering</button>
@@ -50,7 +50,7 @@
       <h1 class="text-2xl">Oppsett:</h1>
       <Tournamentoverview :tournamentprop="previewturnering" :clickable="false" :preview="true"></Tournamentoverview>
       <br>
-      <NuxtLink class="button button--blue" :to="'/tournament/' + turnering.id">Begynn turnering</NuxtLink>
+      <NuxtLink class="button button--blue" :to="'/tournament/' + previewturnering.id">Begynn turnering</NuxtLink>
       <NuxtLink class="button button--orange" to="/">Utsett turnering</NuxtLink>
     </div>
 
@@ -90,16 +90,18 @@ export default {
       async newTournament() {
         if (this.players.some((player) => player === "")) return alert('Field cannot be empty'); // Check if player fields are empty
 
-        const newTournament = await this.tournamentStore.new(this.$config.baseURL, this.tournament.name, this.tournament.date, this.players)
-        setTimeout(async () => {
-          console.log(await newTournament)
-        }, 3000)
+        const newTournament = this.tournamentStore.new(this.$config.baseURL, this.tournament.name, this.tournament.date, this.players).then(async (t) => {
+          console.log(t)
+          this.turnering = t.newTournament;
+          this.previewturnering = t.previewtournament;
+
+          await this.increasePage()
+        })
         
-        // this.turnering = newTournament.newTournament;
-        // this.previewturnering = newTournament.previewtournament;
+        
         
 
-        this.increasePage()
+        
       },
 
 			// Add player
