@@ -33,7 +33,22 @@ export default {
 
 
 <style lang="scss">
-::-webkit-scrollbar{
-  width: 50px;
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8e8d8b;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5e5e5d;
 }
 </style>

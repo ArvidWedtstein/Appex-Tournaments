@@ -59,16 +59,16 @@
 
 
 		<!-- tournaments list -->
-		<main id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-y-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
+		<main id="scrollContainer" class="flex flex-row scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-x-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
 			<div v-for="(tournament, i) in tournaments.tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
 				<!-- <figure class="tournamentimg">
 					<img src="/images/nam.PNG" width="300" alt="beer">
 				</figure> -->
 				<div class="absolute bottom-0 left-0 m-3">
-					<div class="w-100 text-md pb-4 min-h-100 overflow-auto font-light">
+					<div class="w-25 text-md pb-4 min-h-100 overflow-auto font-light">
 						<p>Dato: {{ formatDate(tournament.date) }}</p>
 					</div>
-					<div class="flex-auto w-100 max-h-8 text-xl font-semibold">
+					<div class="flex-auto w-25 max-h-8 text-xl font-semibold">
 						<p class="">{{ tournament.Name }}</p>
 					</div>
 					<div class="tfooter">
