@@ -19,6 +19,7 @@ export default {
   mounted() {
     const tournaments = useTournamentStore()
     tournaments.load(this.$config.baseURL);
+    console.log('reload')
   },
   computed: {
     tournaments: function () {
