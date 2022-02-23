@@ -15,7 +15,7 @@ Skal fungere noenlunde som https://challonge.com/
 	- Skjermbilde hvor man kan registrere utfall av kamper
 	- Skjermbilde som viser turnerlingsløpet + neste kamp/spill
 	- Flere?
-- Sette opp et design på dette i Fimga. Bør følge Appex sin stil og tone. Minimalistisk og pent. Sender PDF med oppdatert profil.
+- Sette opp et design på dette i Ligma. Bør følge Appex sin stil og tone. Minimalistisk og pent. Sender PDF med oppdatert profil.
 - Finn ut hvordan dere ønsker å lagre data.
 - Finn ut hvilken teknologi som skal benyttes for backend.
 - Kan man bruke eksisternede open-source kode for å lette på arbeidet her? Google f.eks: Vue bracket component elns.

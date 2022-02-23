@@ -14,6 +14,21 @@ export const useTournamentStore = defineStore('tournaments', {
       const tournamentlist = await axios.get(`${baseURL}/get-tournament`);
       this.tournaments = tournamentlist.data;
     },
+    async new(baseURL, name, date, players: string[]) {
+      try {
+        await axios.post(`${baseURL}/createTournament?tournamentName=${name}&tournamentDate=${date}`, players).then(async (res) => {
+          this.tournaments.push(res.data.newTournament);
+          let newtournament = res.data.newTournament;
+          let previewtournament = res.data.previewtournament;
+  
+          console.log(res.data)
+          return {newtournament, previewtournament}
+        })
+      } catch (error) {
+        return console.error(error)
+      }
+      
+    },
     getById(id) {
       return this.tournaments.find((tournament) => tournament.id === id);
     },
@@ -24,7 +39,6 @@ export const useTournamentStore = defineStore('tournaments', {
         var match = t.rounds[i].find((match) => match.id === matchId);
         if (match) {
           if (match.winner) {
-            console.log(match.winner)
             if (match.winner.id != '') {
               return
             } else {

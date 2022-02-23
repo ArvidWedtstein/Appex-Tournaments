@@ -60,6 +60,7 @@
 
 <script>
 import axios from 'axios';
+import { useTournamentStore } from '~/stores/tournament'
 import tournamentoverview from '~~/components/tournamentoverview.vue';
 export default {
    template: 'newtournament',
@@ -68,12 +69,12 @@ export default {
    data() {
       return {
         page: 0,
+        tournamentStore: useTournamentStore(),
         tournament: {
           name: '',
           date: ''
         },
-        players: [""],
-        matches: [],
+        players: ["Peder"],
         turnering: {},
         previewturnering: {},
         intPlayer: 1,
@@ -87,19 +88,17 @@ export default {
 
 			// New tournament
       async newTournament() {
-        for (let i = 0; i < this.players.length; i++) {
-          if (this.players[i] == "" || null) return alert('Field cannot be empty')
-        }
-        axios({
-          method: 'POST',
-          url: `${this.$config.baseURL}/createTournament?tournamentName=${this.tournament.name}&tournamentDate=${this.tournament.date}`,
-          data: this.players
-        }).then(async (response) => {
+        if (this.players.some((player) => player === "")) return alert('Field cannot be empty'); // Check if player fields are empty
 
-          this.matches = response.data.newTournament.rounds;
-          this.turnering = response.data.newTournament;
-          this.previewturnering = response.data.previewtournament;
-        })
+        const newTournament = await this.tournamentStore.new(this.$config.baseURL, this.tournament.name, this.tournament.date, this.players)
+        setTimeout(async () => {
+          console.log(await newTournament)
+        }, 3000)
+        
+        // this.turnering = newTournament.newTournament;
+        // this.previewturnering = newTournament.previewtournament;
+        
+
         this.increasePage()
       },
 
