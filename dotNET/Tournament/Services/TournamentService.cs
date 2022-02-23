@@ -3,52 +3,59 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using tournament.Models;
-using Microsoft.Extensions.Options;
 using tournament.Controllers;
 
 namespace tournament.Services;
-
 public class TournamentService : ITournamentService
 {
-    private readonly IMongoCollection<Tournament> _tournaments;
-    public TournamentService(IOptions<TournamentDatabaseSettings> tournamentDatabaseSettings)
-    {
-        var client = new MongoClient(tournamentDatabaseSettings.Value.ConnectionString);
-        var database = client.GetDatabase(tournamentDatabaseSettings.Value.DatabaseName);
+    private readonly ITournamentRepository _tournamentRepository;
 
-        _tournaments = database.GetCollection<Tournament>(tournamentDatabaseSettings.Value.TournamentsCollectionName);
+    public TournamentService(ITournamentRepository tournamentRepository)
+    {
+        _tournamentRepository = tournamentRepository;
+    }
+    public Task CreateAsync(Tournament newTournament)
+    {
+        return _tournamentRepository.CreateAsync(newTournament);
     }
 
-    public async Task<List<Tournament>> GetAsync()
+    public Task<List<Tournament>> GetAsync()
     {
-
-        return await _tournaments.Find(tournament => true).ToListAsync();
+        return _tournamentRepository.GetAsync();
     }
 
-    public async Task<Tournament?> GetAsync(string id)
+    public Task<Tournament?> GetAsync(string id)
     {
-        return await _tournaments.Find(tournament => tournament.Id == id).FirstOrDefaultAsync();
+        return _tournamentRepository.GetAsync(id);
     }
 
-    public async Task CreateAsync(Tournament newTournament)
+    public Task RemoveAsync(string id)
     {
-        await _tournaments.InsertOneAsync(newTournament);
+        return _tournamentRepository.RemoveAsync(id);
     }
 
-
-    public async Task UpdateAsync(string id, Tournament updatedTournament)
+    public Task UpdateAsync(string id, Tournament updatedTournament)
     {
-        await _tournaments.ReplaceOneAsync(tournament => tournament.Id == id, updatedTournament);
+        return _tournamentRepository.UpdateAsync(id, updatedTournament);
     }
 
-    /*public async Task MatchWinAsync(string id, Tournament data, Tournament.Match rounds) {
-        await _tournaments.UpdateOneAsync(tournament => tournament.Id == id, data);
+    public async Task<Tournament> UpdateTournamentPlayers(string id, List<Tournament.Player> players) {
+        var tournament = await GetAsync(id);
+        if (tournament is null)
+        {
+            return null;
+        }
+        for (int s = 0; s < tournament.Rounds[0].Count; s++) {
+            for (int h = 0; h < tournament.Rounds[0][s].Players.Count; h++) {
+                var p = players.Find(x => x.Id == tournament.Rounds[0][s].Players[h].Id);
+                if (p != null) {
+                    tournament.Rounds[0][s].Players[h].name = p.name;
+                }
+            }
+        }
         
-        //await _tournaments.FindOneAndUpdateAsync( id, new { Rounds = rounds});
-    }*/
+        await UpdateAsync(id, tournament);
 
-    public async Task RemoveAsync(string id)
-    {
-        await _tournaments.DeleteOneAsync(tournament => tournament.Id == id);
+        return tournament;
     }
 }

@@ -2,12 +2,11 @@ using tournament.Models;
 
 namespace tournament.Services;
 
-public interface ITournamentService
+public interface ITournamentRepository
 {
     Task CreateAsync(Tournament newTournament);
     Task<List<Tournament>> GetAsync();
     Task<Tournament?> GetAsync(string id);
     Task RemoveAsync(string id);
     Task UpdateAsync(string id, Tournament updatedTournament);
-    Task<Tournament> UpdateTournamentPlayers(string id, List<Tournament.Player> players);
 }

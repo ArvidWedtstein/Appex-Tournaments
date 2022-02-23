@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/dotNET/bin/Debug/net6.0/tournament.dll",
+            "program": "${workspaceFolder}/dotNET/Tournament/bin/Debug/net6.0/tournament.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/dotNET",
+            "cwd": "${workspaceFolder}/dotNET/Tournament",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
