@@ -19,9 +19,15 @@ public class TournamentController : ControllerBase {
     [HttpGet]
     public async Task<List<Tournament>> Get() 
     {
-        var tournament = await _tournamentService.GetAsync();
+        try {
+            _logger.LogInformation("getting tournaments");   
+            var tournament = await _tournamentService.GetAsync();
 
-        return tournament;
+            return tournament;
+        } catch (Exception err) {
+            _logger.LogError(err, "something quite terrible when getting tournaments");
+            throw;
+        }
     } 
 
     // GET: api/Tournaments/5
@@ -47,10 +53,8 @@ public class TournamentController : ControllerBase {
     [HttpPost]
     public async Task<ActionResult> matchwin(string id, string winnerId, string matchId)
     {
+        _logger.LogInformation("Setting new winner with id: {WinnerId} & matchId: {MatchId} in tournament {@TournamentId}", winnerId, matchId, id);
         var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
-         _logger.LogInformation(winnerId);
-         _logger.LogInformation(matchId);
-         _logger.LogInformation(id);
         if (tournament is null)
         {
             _logger.LogInformation("no tournament");
