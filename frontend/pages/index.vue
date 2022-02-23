@@ -33,5 +33,7 @@ export default {
 
 
 <style lang="scss">
-
+::-webkit-scrollbar{
+  width: 50px;
+}
 </style>
