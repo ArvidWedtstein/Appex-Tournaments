@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
       <symbol id="trophy" viewBox="0 0 576 512">
         <path d="M552 64H448V24c0-13.3-10.7-24-24-24H152c-13.3 0-24 10.7-24 24v40H24C10.7 64 0 74.7 0 88v56c0 35.7 22.5 72.4 61.9 100.7 31.5 22.7 69.8 37.1 110 41.7C203.3 338.5 240 360 240 360v72h-48c-35.3 0-64 20.7-64 56v12c0 6.6 5.4 12 12 12h296c6.6 0 12-5.4 12-12v-12c0-35.3-28.7-56-64-56h-48v-72s36.7-21.5 68.1-73.6c40.3-4.6 78.6-19 110-41.7 39.3-28.3 61.9-65 61.9-100.7V88c0-13.3-10.7-24-24-24zM99.3 192.8C74.9 175.2 64 155.6 64 144v-16h64.2c1 32.6 5.8 61.2 12.8 86.2-15.1-5.2-29.2-12.4-41.7-21.4zM512 144c0 16.1-17.7 36.1-35.3 48.8-12.5 9-26.7 16.2-41.8 21.4 7-25 11.8-53.6 12.8-86.2H512v16z"/>
@@ -8,25 +8,25 @@
         <path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm-96 206.6l-28.7 28.7c-14.8 14.8-37.8-7.5-22.6-22.6l28.7-28.7-28.7-28.7c-15-15 7.7-37.6 22.6-22.6l28.7 28.7 28.7-28.7c15-15 37.6 7.7 22.6 22.6L174.6 192l28.7 28.7c15.2 15.2-7.9 37.4-22.6 22.6L152 214.6zM248 416c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm147.3-195.3c15.2 15.2-7.9 37.4-22.6 22.6L344 214.6l-28.7 28.7c-14.8 14.8-37.8-7.5-22.6-22.6l28.7-28.7-28.7-28.7c-15-15 7.7-37.6 22.6-22.6l28.7 28.7 28.7-28.7c15-15 37.6 7.7 22.6 22.6L366.6 192l28.7 28.7z"/>
       </symbol>
     </svg>
-    <div v-cloak v-bind:class="{ 'mx-12': clickable == true }" class="my-8 flex flex-col content-center justify-center align-center tournament__desktop">
+    <div v-cloak v-bind:class="{ 'mx-3': clickable == true }" class="my-8">
       <div v-if="tournament" class="tournament-bracket tournament-bracket--rounded">                                                     
         <div v-for="(round, i) in tournament.rounds" :key="i" class="tournament-bracket__round">
           <h3 class="tournament-bracket__round-title">Runde {{i+1}}</h3>
           <ul class="tournament-bracket__list">
             <li v-for="(match, m) in round" :key="m" class="tournament-bracket__item">
-              <div class="tournament-bracket__match" tabindex="0">
+              <div class="tournament-bracket__match appexlg:w-100" tabindex="0">
                 <table class="tournament-bracket__table">
                   <tbody class="tournament-bracket__content">
-                    <tr v-if="clickable" v-for="player in match.players" :key="player" class="tournament-bracket__team" @click="matchWin(tournament.id, player.id, match.id)" type="button">
+                    <tr v-if="clickable" v-for="player in match.players" :key="player" v-bind:class="{'clickable': clickable}" class="tournament-bracket__team" @click="matchWin(tournament.id, player.id, match.id)" type="button">
                       <td class="tournament-bracket__player">
                         <button class="tournament-bracket__playertxt" v-cloak>{{ player.name }}</button>
                       </td>
                       <td class="tournament-bracket__winner">
                         <span v-if="match.winner.id == player.id" class="tournament-bracket__number">
-                          <svg width="40" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
+                          <svg width="40" fill="white" id="trophy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
                         </span>
                         <span v-else class="tournament-bracket__number">
-                          <svg width="40" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
+                          <svg width="40" fill="white" id="loser" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
                         </span>
                       </td>
                     </tr>
@@ -36,10 +36,10 @@
                       </td>
                       <td class="tournament-bracket__winner">
                         <span v-if="match.winner.id == player.id" class="tournament-bracket__number">
-                          <svg width="40" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
+                          <svg width="40" fill="white" id="trophy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
                         </span>
                         <span v-else class="tournament-bracket__number">
-                          <svg width="40" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
+                          <svg width="40" fill="white" id="loser" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
                         </span>
                       </td>
                     </tr>
@@ -79,14 +79,6 @@ export default {
 	async mounted() {
     
 	},
-	// watch: {
-	// 	tournamentprop: function () {
-	// 		this.tournament = this.tournamentprop;
-	// 	},
-	// 	tournament: function () {
-	// 		this.tournament = this.tournamentprop || this.tournament;
-	// 	}
-	// },
 	methods: {
 		async matchWin(tournamentId, winnerId, matchId) {
       this.tournaments.matchwin(this.$config.baseURL, tournamentId, winnerId, matchId);
@@ -216,6 +208,19 @@ $borderradius: 0rem;
   @media (min-width: $breakpoint-sm) {
     flex-direction: row;
   }
+  &__winner {
+    display: flex;
+    align-items: center;
+    
+    .tournament-bracket__team:first-child & {
+      flex-direction: row-reverse;
+      padding-left: 0.75em;
+    }
+    
+    .tournament-bracket__team:last-child & {
+      padding-right: 0.75em;
+    }
+  }
   &__list {
     display: flex;
     flex-direction: column;
@@ -239,10 +244,6 @@ $borderradius: 0rem;
       border-right: 1px dashed var(--light-grey);
       border-bottom: 0;
     }
-    
-    .tournament-bracket__round:last-child & {
-      border: 0;
-    }
   }
   &__round {
     display: block;
@@ -256,6 +257,105 @@ $borderradius: 0rem;
       font-style: italic;
       margin-bottom: 0.5em;
     }
+    &:first-child .tournament-bracket__match {
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+    &:last-child {
+      border: 0;
+      .tournament-bracket__match {
+        &::before,
+        &::after {
+          border-left: 0;
+        }
+        
+        &::before  {
+          border-bottom-left-radius: 0;
+        }
+        
+        &::after  {
+          display: none;
+        }
+        display: flex;
+        width: 100%;
+        padding: 1em;
+        // border: 4px solid var(--orange);
+        border-radius: $borderradius;
+        box-shadow: 0 2px 0 0 var(--light-grey);
+        outline: none; 
+        cursor: pointer;
+        transition: padding 0.2s ease-in-out, border 0.2s linear;
+        
+        &:focus {
+          border-color: var(--orange);
+        }
+        
+        &::before,
+        &::after {
+          transition: all 0.2s linear;
+        }
+        
+        @media (max-width: $breakpoint-xs) {
+          padding: 0.75em 0.5em;
+        }
+        
+        @media (min-width: $breakpoint-sm) {
+          &::before,
+          &::after {
+            position: absolute;
+            left: 1px;
+            // left: 0px;
+            z-index: 1;
+            content: '';
+            display: block;
+            width: 1em;
+            height: 10%;
+            border-left: 2px solid var(--dark-grey);
+          }
+
+          &::before  {
+            bottom: 50%;
+            border-bottom: 2px solid var(--dark-grey);
+            transform: translate(0, 1px);
+            
+            .tournament-bracket--rounded & {
+              border-bottom-left-radius: 0.6em;
+            }
+          }
+
+          &::after  {
+            top: 50%;
+            border-top: 2px solid var(--dark-grey);
+            transform: translate(0, -1px);
+            
+            .tournament-bracket--rounded & {
+              border-top-left-radius: 0.6em;
+            }
+          }
+        }
+        
+        @media (min-width: $breakpoint-lg) {
+          &::before,
+          &::after {
+            width: 1.5em;
+          }
+          
+          &::before {
+            transform: translate(0, 1px);
+          }
+          
+          &::after {
+            transform: translate(0, -1px);
+          }
+        }
+      }
+    }
+  }
+  &__table {
+    width: 100%;
+    max-width: 100%;
   }
   &__match {
     display: flex;
@@ -337,17 +437,19 @@ $borderradius: 0rem;
     justify-content: center;
     flex-direction: column;
     align-items: flex-start;
+    // align-items: center;
     position: relative;
     padding: 2% 0;
-    width: 48%;
+    // width: 48%;
+    width: 100%;
     transition: padding 0.2s linear;
 
     &:nth-child(odd) {
-      margin-right: 2%;
+      // margin-right: 2%;
     }
     
     &:nth-child(even) {
-      margin-left: 2%;
+      // margin-left: 2%;
     }
     
     &::after {
@@ -425,25 +527,31 @@ $borderradius: 0rem;
   }
   &__team {
     display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  border-radius: 0.25rem;
-  transition: all 0.1s ease-in-out;
-  color: var(--light-grey);
-  border: 1px solid transparent;
-  border-radius: $borderradius;
-  &[xlink\:href="#trophy"] {
-    fill: var(--orange) !important;
-  }
-  &:hover {
-    color: var(--orange) !important;
-    border: 1px solid var(--orange);
-    svg {
-      fill: var(--orange) !important;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    transition: all 0.1s ease-in-out;
+    color: var(--light-grey);
+    border: 1px solid transparent;
+    width: 50%;
+    border-radius: $borderradius;
+    svg { 
+      &#trophy {
+        fill: gold !important;
+      }
     }
-  }
+    
+    &.clickable {
+      &:hover {
+        color: var(--orange) !important;
+        border: 1px solid var(--orange);
+        svg {
+          fill: var(--orange);
+        }
+      }
+    }
   @media (min-width: $breakpoint-xs) {
     flex-direction: column-reverse;
   }
@@ -453,104 +561,10 @@ $borderradius: 0rem;
   }
   }
 }
-// Last round
-.tournament-bracket__round:last-child .tournament-bracket__match {
-  &::before,
-  &::after {
-    border-left: 0;
-  }
-  
-  &::before  {
-    border-bottom-left-radius: 0;
-  }
-  
-  &::after  {
-    display: none;
-  }
-  display: flex;
-  width: 100%;
-  padding: 1em;
-  // border: 4px solid var(--orange);
-  border-radius: $borderradius;
-  box-shadow: 0 2px 0 0 var(--light-grey);
-  outline: none; 
-  cursor: pointer;
-  transition: padding 0.2s ease-in-out, border 0.2s linear;
-  
-  &:focus {
-    border-color: var(--orange);
-  }
-  
-  &::before,
-  &::after {
-    transition: all 0.2s linear;
-  }
-  
-  @media (max-width: $breakpoint-xs) {
-    padding: 0.75em 0.5em;
-  }
-  
-  @media (min-width: $breakpoint-sm) {
-    &::before,
-    &::after {
-      position: absolute;
-      left: 1px;
-      // left: 0px;
-      z-index: 1;
-      content: '';
-      display: block;
-      width: 1em;
-      height: 10%;
-      border-left: 2px solid var(--dark-grey);
-    }
 
-    &::before  {
-      bottom: 50%;
-      border-bottom: 2px solid var(--dark-grey);
-      transform: translate(0, 1px);
-      
-      .tournament-bracket--rounded & {
-        border-bottom-left-radius: 0.6em;
-      }
-    }
-
-    &::after  {
-      top: 50%;
-      border-top: 2px solid var(--dark-grey);
-      transform: translate(0, -1px);
-      
-      .tournament-bracket--rounded & {
-        border-top-left-radius: 0.6em;
-      }
-    }
-  }
-  
-  @media (min-width: $breakpoint-lg) {
-    &::before,
-    &::after {
-      width: 1.5em;
-    }
-    
-    &::before {
-      transform: translate(0, 1px);
-    }
-    
-    &::after {
-      transform: translate(0, -1px);
-    }
-  }
-}
-
-.tournament-bracket__round:first-child .tournament-bracket__match {
-  &::before,
-  &::after {
-    display: none;
-  }
-}
 
 .tournament-bracket__content {
   display: flex;
-  
   &::after {
     content: ':';
     width: 1em;
@@ -567,7 +581,7 @@ $borderradius: 0rem;
     }
   }
   
-  & .tournament-bracket__team:first-child {
+  &.tournament-bracket__team:first-child {
     width: 50%;
     order: 0;
     text-align: right;
@@ -576,7 +590,7 @@ $borderradius: 0rem;
       align-items: flex-end;
     }
     
-    & .tournament-bracket__player {
+    &.tournament-bracket__player {
       order: 2;
       justify-content: flex-end;
       
@@ -590,7 +604,7 @@ $borderradius: 0rem;
       }
     }
     
-    & .tournament-bracket__winner {
+    &.tournament-bracket__winner {
       order: 0;
       
       @media (min-width: $breakpoint-xs) {
@@ -625,21 +639,12 @@ $borderradius: 0rem;
 }
 
 
-.tournament-bracket__table {
-  width: 100%;
-}
-
-
-.tournament-bracket__team {
-  
-}
 
 .tournament-bracket__player {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   display: flex;
   margin-top: 0.5em;
   align-items: center;
-  
   @media (max-width: $breakpoint-xs) {
     margin-top: 0;
   }
@@ -667,22 +672,6 @@ $borderradius: 0rem;
   
   @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
     padding: 0;
-  }
-}
-// ----------------------------
-// Winner
-// ----------------------------
-.tournament-bracket__winner {
-  display: flex;
-  align-items: center;
-  
-  .tournament-bracket__team:first-child & {
-    flex-direction: row-reverse;
-    padding-left: 0.75em;
-  }
-  
-  .tournament-bracket__team:last-child & {
-    padding-right: 0.75em;
   }
 }
 

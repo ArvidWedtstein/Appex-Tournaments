@@ -91,6 +91,7 @@ body, html {
     color: white;
     // Specific hover effect for variation
     &:hover {
+      transform: translateY(-2px);
     }
   }
   &--orange {

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overscroll-y-visible flex flex-col content-center justify-center align-center mt-3">
+  <div class="relative overscroll-y-visible flex flex-col content-center justify-center align-center">
     <Tournamentoverview class="m-auto" :tournamentprop="tournament" :clickable="true"></Tournamentoverview>
     <nuxt-link to="/tournaments" class="mx-auto bg-appexblack hover:bg-appexorange text-appexorange font-semibold hover:text-black my-8 py-4 px-8 border border-transparent hover:border-black rounded transition-all duration-300 ease-linear">Sett turnering på pause</nuxt-link>
   </div>
