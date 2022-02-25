@@ -20,7 +20,7 @@ public class TournamentRepository : ITournamentRepository
         return await _tournaments.Find(tournament => true).ToListAsync();
     }
 
-    public async Task<Tournament?> GetAsync(string id)
+    public async Task<Tournament> GetAsync(string id)
     {
         return await _tournaments.Find(tournament => tournament.Id == id).FirstOrDefaultAsync();
     }
