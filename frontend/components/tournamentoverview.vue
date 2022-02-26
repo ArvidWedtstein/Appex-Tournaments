@@ -88,7 +88,9 @@ export default {
   computed:{
     tournament(){
       // if (!this.tournamentprop) return
-
+      if (!this.tournaments.getById(this.tournamentprop.id || this.$route.params.id[0])) {
+        this.tournaments.load(this.$config.baseURL)
+      }
       return this.tournaments.getById(this.tournamentprop.id || this.$route.params.id[0])
     }
   }
@@ -111,17 +113,6 @@ export default {
   scroll-behavior: smooth;
 }
 
-$inputcolor: rgba(0,0,0,0.5);
-$inputhovercolor: rgba(0,0,0,1);
-$backclr: #edece9;
-$black: #221E20;
-$dark-grey: #464544;
-$grey: #D6D2CE;
-$light-grey: #EDECE9;
-$blue: #0835C4;
-$green: #DDE78B;
-$orange: #FAB487;
-$bracketlinecolor: #DDE78B;
 @mixin rad-shadow {
   border: 1px solid hsl(200 10% 50% / 15%);
   box-shadow: 0 1rem .5rem -.5rem;
@@ -221,6 +212,9 @@ $borderradius: 0rem;
       padding-right: 0.75em;
     }
   }
+  // ----------------------------
+  // List of matches/round
+  // ----------------------------
   &__list {
     display: flex;
     flex-direction: column;
@@ -525,6 +519,9 @@ $borderradius: 0rem;
       }
     }
   }
+  // ----------------------------
+  // Team
+  // ----------------------------
   &__team {
     display: flex;
     flex-direction: row-reverse;
@@ -552,155 +549,147 @@ $borderradius: 0rem;
         }
       }
     }
-  @media (min-width: $breakpoint-xs) {
-    flex-direction: column-reverse;
-  }
-  
-  @media (min-width: $breakpoint-sm) {
-    flex-direction: column-reverse;
-  }
-  }
-}
-
-
-.tournament-bracket__content {
-  display: flex;
-  &::after {
-    content: ':';
-    width: 1em;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.2em 0.1em;
-    color: white;
+    @media (min-width: $breakpoint-xs) {
+      flex-direction: column-reverse;
+    }
+    
     @media (min-width: $breakpoint-sm) {
-       order: 1;
+      flex-direction: column-reverse;
     }
   }
-  
-  &.tournament-bracket__team:first-child {
-    width: 50%;
-    order: 0;
-    text-align: right;
+  // ----------------------------
+  // Player
+  // ----------------------------
+  &__player {
+    font-size: 0.85rem;
+    display: flex;
+    margin-top: 0.5em;
+    align-items: center;
+    @media (max-width: $breakpoint-xs) {
+      margin-top: 0;
+    }
     
     @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
-      align-items: flex-end;
+      display: flex;
+      flex-direction: column;
+      
+      .tournament-bracket__playertxt {
+        margin-top: 0.2em;
+      }
+    }
+  }
+  &__content {
+    display: flex;
+    &::after {
+      content: ':';
+      width: 1em;
+      text-align: center;
+      align-self: center;
+      justify-self: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.2em 0.1em;
+      color: white;
+      @media (min-width: $breakpoint-sm) {
+        order: 1;
+      }
     }
     
-    &.tournament-bracket__player {
-      order: 2;
-      justify-content: flex-end;
-      
-      @media (min-width: $breakpoint-xs) {
-        order: 0;
-      } 
+    &.tournament-bracket__team:first-child {
+      width: 50%;
+      order: 0;
+      text-align: right;
       
       @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
-        flex-direction: column-reverse;
         align-items: flex-end;
       }
-    }
-    
-    &.tournament-bracket__winner {
-      order: 0;
       
-      @media (min-width: $breakpoint-xs) {
-         order: 2;
+      &.tournament-bracket__player {
+        order: 2;
+        justify-content: flex-end;
+        
+        @media (min-width: $breakpoint-xs) {
+          order: 0;
+        } 
+        
+        @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+          flex-direction: column-reverse;
+          align-items: flex-end;
+        }
+      }
+      
+      &.tournament-bracket__winner {
+        order: 0;
+        
+        @media (min-width: $breakpoint-xs) {
+          order: 2;
+        }
       }
     }
-  }
-  
-  &.tournament-bracket__team:last-child {
-    width: 50%;
-    order: 2;
-    text-align: left;
     
-    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
-      align-items: flex-start;
-    }
-    
-    & .tournament-bracket__player {
-      @media (min-width: $breakpoint-sm) {
-        justify-content: flex-start;
-      }
+    &.tournament-bracket__team:last-child {
+      width: 50%;
+      order: 2;
+      text-align: left;
       
       @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
         align-items: flex-start;
       }
+      
+      &.tournament-bracket__player {
+        @media (min-width: $breakpoint-sm) {
+          justify-content: flex-start;
+        }
+        
+        @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+          align-items: flex-start;
+        }
+      }
+      
+      .tournament-bracket__playertxt {
+        order: 1;
+      }
+    }
+  }
+  &__playertxt {
+    padding: 0 0.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: help;
+    transition: all 0.1s ease-in-out;
+    @media (max-width: $breakpoint-xs) {
+      padding: 0 0.25em;
     }
     
-    .tournament-bracket__playertxt {
-      order: 1;
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+      padding: 0;
+    }
+  }
+  // ----------------------------
+  // Win/Loose icon box | 🏅/❌
+  // ----------------------------
+  &__number {
+    display: inline-block;
+    padding: 0.2em 0.4em 0.2em;
+    border-bottom: 0.075em solid transparent;
+    font-size: 0.95rem;
+  }
+  &__medal {
+    padding: 0 0.5em;
+    &--gold {
+      color: #FFD700;
+      fill: #FFD700;
+    }
+    &--silver {
+      color: #C0C0C0;
+      fill: #C0C0C0;
+    }
+    &--bronze {
+      color: #CD7F32;
+      fill: #CD7F32;
     }
   }
 }
-
-
-
-.tournament-bracket__player {
-  font-size: 0.85rem;
-  display: flex;
-  margin-top: 0.5em;
-  align-items: center;
-  @media (max-width: $breakpoint-xs) {
-    margin-top: 0;
-  }
-  
-  @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
-    display: flex;
-    flex-direction: column;
-    
-    .tournament-bracket__playertxt {
-      margin-top: 0.2em;
-    }
-  }
-}
-
-.tournament-bracket__playertxt {
-  padding: 0 0.5em;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: help;
-  transition: all 0.1s ease-in-out;
-  @media (max-width: $breakpoint-xs) {
-    padding: 0 0.25em;
-  }
-  
-  @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
-    padding: 0;
-  }
-}
-
-// ----------------------------
-// Win/Loose icon box | 🏅/❌
-// ----------------------------
-.tournament-bracket__number {
-  display: inline-block;
-  padding: 0.2em 0.4em 0.2em;
-  border-bottom: 0.075em solid transparent;
-  font-size: 0.95rem;
-}
-
-.tournament-bracket__medal {
-  padding: 0 0.5em;
-}
-
-.tournament-bracket__medal--gold {
-  color: #FFD700;
-}
-
-.tournament-bracket__medal--silver {
-  color: #C0C0C0;
-}
-
-.tournament-bracket__medal--bronze {
-  color: #CD7F32;
-}
-
-
-
 </style>
