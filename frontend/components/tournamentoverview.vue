@@ -135,14 +135,14 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba($blue, 0.5);
+	background: rgba(var(--blue), 0.5);
 	.bogs {
 		position: fixed;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		background: $dark-grey;
-		color: $light-grey;
+		background: var(--dark-grey);
+		color: var(--light-grey);
 		padding: 5rem 8rem;
 		border-radius: 0.25rem;
 		text-align: center;
