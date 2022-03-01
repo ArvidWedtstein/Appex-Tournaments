@@ -82,7 +82,7 @@
 				</div>
 			</div>
       <footer class="w-full bottom-0 z-10 fixed">
-        <h1 class="text-xl text-center font-thin">Made with a lot of pain and crappy code by Aleksnadder, Victor & Arvid</h1>
+        <h1 class="text-xl text-center font-thin">Made with a lot of pain by Aleksnadder, Victor & Arvid</h1>
       </footer>
 		</main>
 	</div>
