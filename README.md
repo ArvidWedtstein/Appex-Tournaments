@@ -34,7 +34,4 @@ Skal fungere noenlunde som https://challonge.com/
 <p align="center">Frontend: Aleksnadder</p>
 <p align="center">Backend: Arvid</p>
 
-
-<img align="center" width=800 src="frontend/public/images/sneakpeak1.PNG" />
-<img align="center" width=800 src="frontend/public/images/sneakpeak2.PNG" />
-<img align="center" width=800 src="frontend/public/images/sneakpeak3.PNG" />
+![Languages Used](https://arvidgithubembed.herokuapp.com/skills?languages=nuxtjs,tailwindcss,typescript,docker,csharp,dotnetcore&backgroundcolor=333333&title=Languages%20used%20for%20this%20project&titlecolor=ffffff&textcolor=000000)
