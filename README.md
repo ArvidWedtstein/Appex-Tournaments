@@ -13,7 +13,9 @@
 
 </div>
 
-<a align="center" href="https://appextournament.netlify.app/">Link til Appex Tournaments</a>
+<div align="center">
+	<a href="https://appextournament.netlify.app/">Link til Appex Tournaments</a>
+</div>
 
 ## Oppgave 
 
