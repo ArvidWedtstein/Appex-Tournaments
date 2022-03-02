@@ -56,6 +56,8 @@ Skal fungere noenlunde som https://challonge.com/
 <h1 align="center">How to use Abbegs Tournaments</h1>
 
 <h1 align="center"> Hvordan lager jeg ny turnering?
+
+<div align="center">
   
 For å opprette en ny turnering, trykk "Lag ny turnering"
 
@@ -150,3 +152,5 @@ Trykk deretter ```Lagre``` for å lagre dine eventuelle endringer.
 <img align="center" width="300" src="frontend/public/images/tutorial9.PNG" />
 
 Du kan også trykke ```Slett``` for å la turneringen forsvinne på magisk vis.
+
+</div>
