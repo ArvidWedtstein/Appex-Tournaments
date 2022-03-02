@@ -1,12 +1,8 @@
-.NET tournament api
+API.
 
-Routes: 
-|Request Type|Name|Funker|
-|---|---|---|
-|GET|get-tournament|✔|
-|GET|get-tournament/id|✔|
-|POST|createTournament|✔|
-|POST|updateTournament|✔|
-|GET|resetTournament|✔|
-|DELETE|Tournament/id|✔|
-|POST|Tournament|✔|
+
+### TODO:
+
+Lage flere tester for routene
+
+Finne ut hvorfor APIet nekter å samarbeide (kommer opp med feilmelding på hver request)
