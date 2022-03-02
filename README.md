@@ -1,6 +1,8 @@
 <h1 align="center">Velkommen til Appex Tournaments!</h1>
 <h1 align="center">- Innhold -</h1>
 
+<div align="center">
+
 [The Quest (Oppgaven)](#Oppgave)
 
 [Hvordan lager jeg ny turnering?](#Hvordan-lager-jeg-ny-turnering?)
@@ -9,6 +11,7 @@
 
 [Hvordan redigerer jeg en turnering?](#Hvordan-redigerer-jeg-en-turnering?)
 
+</div>
 
 ## Oppgave 
 
