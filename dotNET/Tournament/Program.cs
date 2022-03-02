@@ -21,7 +21,7 @@ try
         .WriteTo.Console()
         .WriteTo.Seq("http://localhost:5341")
         .ReadFrom.Configuration(ctx.Configuration));
-    
+
     // Add services to the container.
     builder.Services.Configure<TournamentDatabaseSettings>(builder.Configuration.GetSection(nameof(TournamentDatabaseSettings)));
     builder.Services.AddCors(options =>
@@ -59,7 +59,7 @@ try
     app.UseAuthorization();
 
     app.UseSerilogRequestLogging();
-    
+
     app.MapControllers();
     app.UseStaticFiles();
 

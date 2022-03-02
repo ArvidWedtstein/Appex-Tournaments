@@ -15,15 +15,17 @@ public class TournamentController : ControllerBase {
         _logger = logger;
     }
 
-    [Route("/get-tournament")]
-    [HttpGet]
+    [HttpGet("/get-tournament")]
     public async Task<List<Tournament>> Get() 
     {
         try {
-            _logger.LogInformation("getting tournaments");   
-            var tournament = await _tournamentService.GetAsync();
+            var tournaments = await _tournamentService.GetAsync();
 
-            return tournament;
+            if (tournaments is null)
+            {
+                return NotFound();
+            }
+            return tournaments;
         } catch (Exception err) {
             _logger.LogError(err, "something quite terrible when getting tournaments");
             throw;
@@ -32,31 +34,33 @@ public class TournamentController : ControllerBase {
 
     // GET: api/Tournaments/5
     [HttpGet("/get-tournament/{id:length(24)}")]
-    public async Task<ActionResult<Tournament>> Get(string id)
+    public async Task<ActionResult<Tournament>> Get(string tournamentId)
     {
-        var tournament = await _tournamentService.GetAsync(id);
+        try {
+            var tournament = await _tournamentService.GetAsync(tournamentId);
 
-        if (tournament is null)
-        {
-            return NotFound();
+            if (tournament == null)
+            {
+                return NotFound();
+            }
+            return Ok(tournament);
+        } catch (Exception err) {
+            _logger.LogError(err, $"could not GET tournament with id: {tournamentId}");
+            throw;
         }
-        // return Ok(new { tournament, tournament2});
-        return Ok(tournament);
+        
     }
 
 
 
     private static Random rng = new Random();
-    // POST: https://localhost:7021/Tournament/tournamentId?winner=matchwinner&matchId=MatchID
-    [Route("/matchwin")]
-    [HttpPost]
-    public async Task<ActionResult> matchwin(string id, string winnerId, string matchId)
+    // POST: https://localhost:7021/Tournament/tournamentId=tournamentId?winner=matchwinner&matchId=MatchID
+    [HttpPost("/matchwin")]
+    public async Task<ActionResult> matchwin(string tournamentId, string winnerId, string matchId)
     {
-        _logger.LogInformation("Setting new winner with id: {WinnerId} & matchId: {MatchId} in tournament {@TournamentId}", winnerId, matchId, id);
-        var tournament = await _tournamentService.GetAsync(id); // Get tournament from database
-        if (tournament is null)
+        var tournament = await _tournamentService.GetAsync(tournamentId); // Get tournament from database
+        if (tournament == null)
         {
-            _logger.LogInformation("no tournament");
             return NotFound();
         }
         var rounds = tournament.Rounds; // Get number of rounds
@@ -74,7 +78,7 @@ public class TournamentController : ControllerBase {
                 if (ᛖ == rounds.Count - 1) {
                     tournament.Status = "Gjennomført";
                 }
-                await _tournamentService.UpdateAsync(id, tournament);
+                await _tournamentService.UpdateAsync(tournamentId, tournament);
 
                 _logger.LogInformation(Convert.ToBoolean(rounds[ᛖ].TrueForAll(z => !String.IsNullOrEmpty(z.Winner.Id))).ToJson()); // logg true false
                 
@@ -102,20 +106,17 @@ public class TournamentController : ControllerBase {
             return tournamentrounds;
         }
         tournament.Rounds = rounds;
-        _logger.LogInformation(tournament.Rounds.ToJson());
-        await _tournamentService.UpdateAsync(id, tournament); // update tournament in db
+        await _tournamentService.UpdateAsync(tournamentId, tournament); // update tournament in db
         return Ok(tournament);
     }
 
-    // https://localhost:7021/Tournament?tournamentName=name&tournamentDate=date
-    [Route("/createTournament")]
-    [HttpPost]
+
+    [HttpPost("/createTournament")]
     public async Task<ActionResult> CreateTournament(string tournamentName, DateTime? tournamentDate, [FromBody]List<string> players)
     {
 
         var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 }; // Roundslist for creating matches
         var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList(); // Calculate numbers of round
-        // _logger.LogInformation(string.Join(",", calculatedRounds.Count));
         
         var rounds = new List<List<Tournament.Match>>();
         var shuffledplayers = players.OrderBy(a => rng.Next()).ToList(); // shuffle players
@@ -137,13 +138,11 @@ public class TournamentController : ControllerBase {
             var round1 = new List<Tournament.Match>();
             rounds.Add(round1);
         }
-        _logger.LogInformation(string.Join(", Round: ", rounds));
- 
-        _logger.LogInformation(tournamentDate.ToString());
+
 
         var newTournament = new Tournament();
         newTournament.Name = tournamentName;
-        if (tournamentDate is null) {
+        if (tournamentDate == null) {
             newTournament.Date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm"));
         } else {
             newTournament.Date = tournamentDate;
@@ -154,7 +153,7 @@ public class TournamentController : ControllerBase {
 
         var previewtournament = await _tournamentService.GetAsync(newTournament.Id); // Get tournament from database
         
-        if (previewtournament is null)
+        if (previewtournament == null)
         {
             return NotFound();
         }
@@ -194,25 +193,22 @@ public class TournamentController : ControllerBase {
         return Ok(new { newTournament, previewtournament});
     }
 
-    [Route("/updateTournamentPlayers")]
-    [HttpPost]
-    public async Task<ActionResult> UpdateTournamentPlayers(string id, [FromBody]List<Tournament.Player> players)
+    [HttpPost("/updateTournamentPlayers")]
+    public async Task<ActionResult> UpdateTournamentPlayers(string tournamentId, [FromBody]List<Tournament.Player> players)
     {
-        Tournament tournament = await _tournamentService.UpdateTournamentPlayers(id, players);
+        Tournament tournament = await _tournamentService.UpdateTournamentPlayers(tournamentId, players);
         if (tournament == null) {
             return NotFound();
         }
         return Ok(tournament);
     }
 
-    //[HttpPut("{id:length(24)}")]
-    [Route("/updateTournment")]
-    [HttpPost]
+    [HttpPost("/updateTournment")]
     public async Task<IActionResult> Update(string id, Tournament updatedTournament)
     {
         var tournament = await _tournamentService.GetAsync(id);
 
-        if (tournament is null)
+        if (tournament == null)
         {
             return NotFound();
         }
@@ -222,8 +218,7 @@ public class TournamentController : ControllerBase {
         return NoContent();
     }
 
-    [Route("/resetTournament/{id:length(24)}")]
-    [HttpGet]
+    [HttpGet("/resetTournament/{id:length(24)}")]
     public async Task<IActionResult> Reset(string id)
     {
         Tournament tournament = await _tournamentService.ResetTournament(id);
@@ -234,12 +229,11 @@ public class TournamentController : ControllerBase {
     }
 
     // DELETE: /Tournaments/id
-    [Route("/deleteTournament/{id:length(24)}")]
-    [HttpDelete]
+    [HttpDelete("/deleteTournament/{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
         var tournament = await _tournamentService.GetAsync(id);
-        if (tournament is null)
+        if (tournament == null)
         {
             return NotFound();
         }

@@ -17,7 +17,6 @@ public class TournamentService : ITournamentService
     }
     public Task CreateAsync(Tournament newTournament)
     {
-
         return _tournamentRepository.CreateAsync(newTournament);
     }
 
@@ -43,7 +42,7 @@ public class TournamentService : ITournamentService
 
     public async Task<Tournament> UpdateTournamentPlayers(string id, List<Tournament.Player> players) {
         var tournament = await GetAsync(id);
-        if (tournament is null)
+        if (tournament == null)
         {
             return null;
         }
@@ -63,7 +62,8 @@ public class TournamentService : ITournamentService
     private static Random rng = new Random();
     public async Task<Tournament> ResetTournament(string id) {
         var tournament = await GetAsync(id);
-        if (tournament is null)
+
+        if (tournament == null)
         {
             return null;
         }
@@ -72,6 +72,7 @@ public class TournamentService : ITournamentService
             var playersinmatch = tournament.Rounds[0][i].Players;
             players = players.Concat(playersinmatch).ToList();
         }
+
         var defaultRounds = new List<int> { 256, 128, 64, 32, 16, 8, 4, 2 };
         var calculatedRounds = defaultRounds.Where(e => e <= players.Count).ToList();
 

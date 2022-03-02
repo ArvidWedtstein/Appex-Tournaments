@@ -19,7 +19,7 @@
 					<input v-model="editTournamentChanges.date" class="input" type="date">
 				</div>
 			</div>
-      <!-- Tournament Bracket -->
+      <!-- Tournament Bracket Preview -->
       <div class="text-center my-8">
         <hr class="line">
         <h1 class="text-2xl">Preview</h1>
@@ -48,8 +48,8 @@
 				<p class="text-lg">Rediger deltakere</p>
 			</div>
 			<div class="flex-auto justify-self-start flex-col mt-3 content-center justify-center items-center justify-items-stretch">
-				<div class="m-auto flex-auto" v-for="(player, h) in editPlayers" :key="player">
-					<input class="input input--small input--blue" v-model="editPlayers[h]" type="text" :placeholder= "'Deltaker' + h">
+				<div class="m-auto flex-auto" v-for="(player, h) in editTournamentChanges.players" :key="player">
+					<input class="input input--small input--blue" v-model="editTournamentChanges.players[h].name" type="text" :placeholder= "'Deltaker' + h">
 				</div>
 			</div>
 			<button class="button button--blue" @click="redigerDeltakere()" type="button">Lagre</button>
@@ -58,7 +58,7 @@
 
 		<!-- tournaments list -->
 		<main id="scrollContainer" class="flex flex-row my-auto scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-x-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
-			<div v-for="(tournament, i) in tournaments.tournaments" :key="tournament" :id="'tournament' + i" class="tournament rounded" @click="editTournament(tournament)">
+			<div v-for="(tournament, i) in tournaments.tournaments" :key="tournament" :id="'tournament' + i" class="tournament" @click="editTournament(tournament)">
 				<!-- <figure class="tournamentimg">
 					<img src="/images/nam.PNG" width="300" alt="beer">
 				</figure> -->
@@ -82,7 +82,7 @@
 				</div>
 			</div>
       <footer class="w-full bottom-0 z-10 fixed">
-        <h1 class="text-xl text-center font-thin">Made with a lot of pain by Aleksnadder, Victor & Arvid</h1>
+        <h1 class="text-xl text-center font-thin">Made by Aleksnadder, Victor & Arvid</h1>
       </footer>
 		</main>
 	</div>
@@ -100,7 +100,6 @@ export default {
       editTournamentScreen: false,
       redigerDeltakerScreen: false,
       editTournamentData: null,
-      editPlayers: [],
       editTournamentChanges: {
         name: '',
         date: '',
@@ -146,24 +145,23 @@ export default {
 
 		// Edit players
     async redigerDeltakere() {
-			axios.post(`${this.$config.baseURL}/updateTournamentPlayers?id=${this.editTournamentData.id}`, {
-      	players: this.editPlayers
-      }).then((res) => {
-				this.redigerDeltakerScreen = false;
-				this.editPlayers = [];
-				this.$nuxt.refresh();
-      });8
+      this.tournaments.editPlayers(this.$config.baseURL, this.editTournamentData.id, this.editTournamentChanges.players);
+      this.editTournamentData = this.tournaments.getById(this.editTournamentData.id)
+			
+      this.redigerDeltakerScreen = false;
+      this.editTournamentChanges.players = [];
+      this.$nuxt.refresh();
     },
 
 		// Edit tournament
     async editTournament(tournament) {
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
-      //
+
       this.editTournamentChanges.name = tournament.name;
       for (let b = 0; b < tournament.rounds[0].length; b++) {
         for (let c = 0; c < tournament.rounds[0][b].players.length; c++) {
-          this.editPlayers.push(tournament.rounds[0][b].players[c].name)
+          this.editTournamentChanges.players.push(tournament.rounds[0][b].players[c])
         }
       }
     },
@@ -175,7 +173,6 @@ export default {
       this.editTournamentChanges.name = "";
       this.editTournamentChanges.date = "";
       this.editTournamentChanges.players = [];
-      this.editPlayers = [];
       this.editTournamentData = null;
       this.showTournamentData = null;
     },

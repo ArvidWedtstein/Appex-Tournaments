@@ -9,7 +9,7 @@
       </symbol>
     </svg>
     <div v-cloak v-bind:class="{ 'mx-3': clickable == true }" class="my-8">
-      <div v-if="tournament" class="tournament-bracket tournament-bracket--rounded">                                                     
+      <div v-if="tournament" class="tournament-bracket tournament-bracket__rounded">                                                     
         <div v-for="(round, i) in tournament.rounds" :key="i" class="tournament-bracket__round">
           <h3 class="tournament-bracket__round-title">Runde {{i+1}}</h3>
           <ul class="tournament-bracket__list">
@@ -149,17 +149,22 @@ body {
 		h1 {
 			background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
 			-webkit-background-size: 150px;
+			background-size: 150px;
 			-webkit-background-clip: text;
+			background-clip: text;
 			color: rgba(255, 255, 255, 0.3);
 			-webkit-animation-name: shine;
+			animation-name: shine;
 			-webkit-animation-duration: 5s;
+			animation-duration: 5s;
 			-webkit-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
 			text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5);
 			font-size: 5ch;
 		}
 	}
 }
-@-webkit-keyframes shine {
+@keyframes shine {
 	0%, 10% {
 		background-position: -1000px;
 	}
@@ -260,18 +265,6 @@ $borderradius: 0rem;
     &:last-child {
       border: 0;
       .tournament-bracket__match {
-        &::before,
-        &::after {
-          border-left: 0;
-        }
-        
-        &::before  {
-          border-bottom-left-radius: 0;
-        }
-        
-        &::after  {
-          display: none;
-        }
         display: flex;
         width: 100%;
         padding: 1em;
@@ -285,9 +278,15 @@ $borderradius: 0rem;
         &:focus {
           border-color: var(--orange);
         }
-        
+        &::before  {
+          border-bottom-left-radius: 0;
+        }
+        &::after  {
+          display: none;
+        }
         &::before,
         &::after {
+          border-left: 0;
           transition: all 0.2s linear;
         }
         
@@ -314,7 +313,7 @@ $borderradius: 0rem;
             border-bottom: 2px solid var(--dark-grey);
             transform: translate(0, 1px);
             
-            .tournament-bracket--rounded & {
+            .tournament-bracket__rounded & {
               border-bottom-left-radius: 0.6em;
             }
           }
@@ -324,7 +323,7 @@ $borderradius: 0rem;
             border-top: 2px solid var(--dark-grey);
             transform: translate(0, -1px);
             
-            .tournament-bracket--rounded & {
+            .tournament-bracket__rounded & {
               border-top-left-radius: 0.6em;
             }
           }
@@ -394,8 +393,8 @@ $borderradius: 0rem;
         border-bottom: 2px solid var(--dark-grey);
         transform: translate(0, 1px);
         
-        .tournament-bracket--rounded & {
-          border-bottom-left-radius: 0.6em;
+        .tournament-bracket__rounded & {
+          border-bottom-left-radius: 0em;
         }
       }
 
@@ -404,7 +403,7 @@ $borderradius: 0rem;
         border-top: 2px solid var(--dark-grey);
         transform: translate(0, -1px);
         
-        .tournament-bracket--rounded & {
+        .tournament-bracket__rounded & {
           border-top-left-radius: 0.6em;
         }
       }
@@ -485,7 +484,7 @@ $borderradius: 0rem;
         border-top: 2px solid var(--dark-grey);
         transform: translateY(-1px);
         
-        .tournament-bracket--rounded & {
+        .tournament-bracket__rounded & {
           border-top-right-radius: 0.6em;
         }
       }
@@ -495,7 +494,7 @@ $borderradius: 0rem;
         border-bottom: 2px solid var(--dark-grey);
         transform: translateY(1px);
         
-        .tournament-bracket--rounded & {
+        .tournament-bracket__rounded & {
           border-bottom-right-radius: 0.6em;
         }
       }

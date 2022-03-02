@@ -6,8 +6,6 @@ export const useTournamentStore = defineStore('tournaments', {
       tournaments: []
     }
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
   actions: {
     async load(baseURL) {
 
@@ -73,6 +71,13 @@ export const useTournamentStore = defineStore('tournaments', {
         data: {
           id: tournamentId
         }
+      });
+    },
+    async editPlayers(baseURL: string, tournamentId: string, players: string[]) {
+      axios.post(`${baseURL}/updateTournamentPlayers?tournamentId=${tournamentId}`, {
+      	players: players
+      }).then((res) => {
+        console.log(res)
       });
     }
   }

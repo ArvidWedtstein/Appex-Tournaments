@@ -116,10 +116,12 @@ body, html {
   padding: 20px 40px;
   border: 4px solid var(--orange);
   outline: none;
-  transition: 0.2s border-color ease;
+  transition: 0.2s all ease;
   border-radius: 0.25rem;
   &:focus {
     border-color: var(--dark-grey);
+    // background-color: var(--dark-grey);
+    // color: var(--backclr);
   }
   &--small {
     padding: 0.5rem !important;
