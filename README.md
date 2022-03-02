@@ -61,7 +61,7 @@ Skal fungere noenlunde som https://challonge.com/
 
 <div align="center">
   
-For å opprette en ny turnering, trykk "Lag ny turnering"-
+For å opprette en ny turnering, trykk "Lag ny turnering"
 
 <img align="center" width=300 src="frontend/public/images/tutorial1.PNG" />
 
