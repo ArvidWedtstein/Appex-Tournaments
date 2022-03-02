@@ -7,12 +7,12 @@ export const useTournamentStore = defineStore('tournaments', {
     }
   },
   actions: {
-    async load(baseURL) {
+    async load(baseURL: string) { // Load tournaments function
 
       const tournamentlist = await axios.get(`${baseURL}/get-tournament`);
       this.tournaments = tournamentlist.data;
     },
-    async new(baseURL, name, date, players: string[]) {
+    async new(baseURL: string, name: string, date: any, players: any) { // Function for creating new tournaments
       let newtournament = {};
       let previewtournament = {};
       try {
@@ -28,13 +28,13 @@ export const useTournamentStore = defineStore('tournaments', {
         return console.error(error)
       }
       return {newtournament, previewtournament};
-      
     },
-    getById(id) {
+    getById(id) { // Function for gettin a tournaments by ID
       return this.tournaments.find((tournament) => tournament.id === id);
     },
-    async matchwin(baseURL, tournamentId, winnerId, matchId) {
+    async matchwin(baseURL: string, tournamentId, winnerId, matchId) { // Function for setting a winner
       const t = this.tournaments.find((tournament) => tournament.id === tournamentId);
+
       // Crappy code for checking if the match has a winner.
       for(let i = 0; i < t.rounds.length; i++) {
         var match = t.rounds[i].find((match) => match.id === matchId);
@@ -57,14 +57,14 @@ export const useTournamentStore = defineStore('tournaments', {
         }
       }
     },
-    async reset(baseURL, id) {
-      const t = await axios.get(`${baseURL}/resetTournament/${id}`).then(async (res) => {
-        let chosentournament = this.tournaments.find((tournament) => tournament.id === id);
+    async reset(baseURL: string, tournamentId: string) { // Function for resetting a tournament.
+      await axios.get(`${baseURL}/resetTournament/${tournamentId}`).then(async (res) => {
+        let chosentournament = this.tournaments.find((tournament) => tournament.id === tournamentId);
 
         this.tournaments[this.tournaments.indexOf(chosentournament)] = res.data;
       });
     },
-    async delete(baseURL, tournamentId) {
+    async delete(baseURL: string, tournamentId: string) { // Function for letting a tournament disappear
       const del = this.tournaments.find((tournament) => tournament.id === tournamentId);
       this.tournaments.splice(this.tournaments.indexOf(del), 1);
       axios.delete(`${baseURL}/deletetournament`, {
@@ -76,15 +76,11 @@ export const useTournamentStore = defineStore('tournaments', {
     async editPlayers(baseURL: string, tournamentId: string, players: string[]) {
       axios.post(`${baseURL}/updateTournamentPlayers?tournamentId=${tournamentId}`, {
       	players: players
-      }).then((res) => {
-        console.log(res)
       });
     },
     async updateTournament(baseURL: string, tournament: any) {
       if (!tournament) return "Invalid Tournament";
-      console.log(tournament)
-      let baseURL2 = "https://localhost:7021"
-      axios.post(`${baseURL2}/updateTournament`, {
+      axios.post(`${baseURL}/updateTournament`, {
         id: tournament.id,
         name: tournament.Name,
         rounds: tournament.rounds

@@ -1,7 +1,18 @@
 
 <template>
 	<div style="margin: 100px 0;" class="my-auto">
-		<!--Edit tournament-->
+  
+    <!-- Tournaments List - Will change to a vertical list on mobile screen sizes -->
+		<main id="scrollContainer" class="flex flex-row my-auto scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-x-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
+			<div v-for="(tournament, i) in tournaments.tournaments" class="cycleColor" :id="'tournament' + i" @click="editTournament(tournament)" :key="tournament">
+				<Tournamentcard :tournament="tournament"></Tournamentcard>
+			</div>
+      <footer class="w-full bottom-0 m-3 z-10 fixed">
+        <h1 class="footertxt text-xl text-center font-light">Made by Aleksnadder, Victor, David & Arvid</h1>
+      </footer>
+		</main>
+
+		<!-- Screen for editing Tournament -->
 		<main class="m-6 z-[2] bg-appexbackclr text-appexblack" v-if="editTournamentScreen">
 			<button class="fixed top-0 right-0 text-6xl m-6" type="button" v-on:click="closeTournament()">✖</button>
 			<div class="flex-auto text-center appexsm:mt-20">
@@ -19,7 +30,6 @@
 					<input v-model="editTournamentChanges.date" class="input" type="date">
 				</div>
 			</div>
-      <!-- Tournament Bracket Preview -->
       <div class="text-center my-8">
         <hr class="line">
         <h1 class="text-2xl">Preview</h1>
@@ -38,9 +48,7 @@
 			</div>
 		</main>
 
-
-
-		<!-- edit player screen -->
+		<!-- Screen for editing Tournament players-->
 		<main v-if="redigerDeltakerScreen" class="w-full appexsm:overscroll-y-visible fixed bottom-0 top-0 left-0 pt-12 z-[2] bg-appexbackclr text-appexblack flex flex-col content-center justify-center items-center justify-items-stretch">
 			<button class="text-2xl absolute top-0 right-0 p-12 hover:text-opacity-70" type="button" v-on:click="closeTournament()">✖</button>
 			<div class="text-center appexsm:mt-12">
@@ -54,42 +62,10 @@
 			</div>
 			<button class="button button--blue" @click="redigerDeltakere()" type="button">Lagre</button>
 		</main>
-
-
-		<!-- tournaments list -->
-		<main id="scrollContainer" class="flex flex-row my-auto scroll-smooth overscroll-x-auto snap-normal touch-pan-x appexsm:flex-col appexsm:overflow-x-visible appexsm:overscroll-x-none appexsm:overscroll-y-auto appexsm:touch-pan-y appexsm:mt-32 appexsm:h-auto" v-if="!editTournamentScreen">
-			<div v-for="(tournament, i) in tournaments.tournaments" :key="tournament" :id="'tournament' + i" class="tournament" @click="editTournament(tournament)">
-				<!-- <figure class="tournamentimg">
-					<img src="/images/nam.PNG" width="300" alt="beer">
-				</figure> -->
-				<div class="absolute bottom-0 left-0 m-3">
-					<div class="w-25 text-md pb-4 min-h-100 overflow-auto font-light">
-						<p>Dato: {{ formatDate(tournament.date) }}</p>
-					</div>
-					<div class="flex-auto w-25 max-h-8 text-xl font-semibold">
-						<p class="">{{ tournament.Name }}</p>
-					</div>
-					<div class="tfooter">
-						<p>
-							{{ countPlayers(tournament) }}
-							<svg aria-hidden="true" focusable="false" data-prefix="fas" width="20" data-icon="users" class="svg-inline--fa fa-users fa-w-1 inline" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-								<path fill="currentColor" d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z">
-								</path>
-							</svg>
-						</p>
-						<p v-if="tournament.status">{{ tournament.status }}</p>
-					</div>
-				</div>
-			</div>
-      <footer class="w-full bottom-0 z-10 fixed">
-        <h1 class="text-xl text-center font-thin">Made by Aleksnadder, Victor, David & Arvid</h1>
-      </footer>
-		</main>
 	</div>
 </template>
 
 <script>
-import axios from 'axios'
 import { useTournamentStore } from '~/stores/tournament'
 import Tournamentoverview from '~~/components/tournamentoverview.vue'
 export default {
@@ -109,26 +85,19 @@ export default {
   },
   components: { Tournamentoverview },
   methods: {
-		// Reset tournament
-    async resetTournament(id) {
-      this.tournaments.reset(this.$config.baseURL, id);
-      this.editTournamentData = this.tournaments.getById(id)
+    async resetTournament(tournamentId) { // Reset tournament
+      this.tournaments.reset(this.$config.baseURL, tournamentId);
+      this.editTournamentData = this.tournaments.getById(tournamentId)
     },
-
-		// Count players
-    countPlayers(tournament) {
+    countPlayers(tournament) { // Count players
       let length = tournament.rounds[0].length * 2;
       return length
     },
-
-		// Format date
-		formatDate(date) {
+		formatDate(date) { // Format date
       const options = { year: "numeric", month: "numeric", day: "2-digit" };
       return new Date(date).toLocaleDateString("no", options);
     },
-
-		// Update tournament
-    async updateTournament() {
+    async updateTournament() { // Update tournament
       await this.tournaments.updateTournament(this.$config.baseURL, this.editTournamentData).then(() => {
         this.editTournamentScreen = false;
         this.editTournamentChanges.name = "";
@@ -137,30 +106,26 @@ export default {
         this.editTournamentData = null;
       })
     },
-
-		// Edit players
-    async redigerDeltakere() {
+    async redigerDeltakere() { // Edit players
       await this.tournaments.editPlayers(this.$config.baseURL, this.editTournamentData.id, this.editTournamentData.players);
       this.editTournamentData = await this.tournaments.getById(this.editTournamentData.id)
 			
       this.redigerDeltakerScreen = false;
       this.editTournamentChanges.players = [];
     },
-
-		// Edit tournament
-    async editTournament(tournament) {
+    async editTournament(tournament) { // Edit tournament
       this.editTournamentData = await tournament;
       this.editTournamentScreen = true;
 
       this.editTournamentChanges.name = tournament.name;
-      for (let b = 0; b < tournament.rounds[0].length; b++) {
-        for (let c = 0; c < tournament.rounds[0][b].players.length; c++) {
-          this.editTournamentChanges.players.push(tournament.rounds[0][b].players[c])
-        }
-      }
+
+      tournament.rounds[0].forEach(async (match) => {
+        match.players.forEach(async (player) => {
+          this.editTournamentChanges.players.push(player)
+        })
+      })
     },
-		// Close tournament
-    closeTournament() {
+    closeTournament() { // Close tournament
       this.editTournamentScreen = false;
       this.showTournamentScreen = false;
       this.redigerDeltakerScreen = false;
@@ -170,96 +135,63 @@ export default {
       this.editTournamentData = null;
       this.showTournamentData = null;
     },
-
-		// Delete tournament
-    deleteTournament(tournamentId) {
+    deleteTournament(tournamentId) { // Delete tournament
       this.tournaments.delete(this.$config.baseURL, tournamentId)
     },
-  },
-
-	created() {
-
-	},
-
-  mounted() {
-
-  },
+  }
 }
 </script>
 
 
 
 <style lang="scss">
-.tournament {
-  flex: 1 1 auto;
-  min-height: 300px;
-  max-height: 300px;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 300px;
-  word-wrap: break-word;
-  padding: 0rem;
-  margin: 1rem 2rem;
-  transition: all 0.5s ease;
-  z-index: 0;
-  &:hover {
-    .tournamentimg {
-      img {
-        transform: scale(1.1);
-      }
-    }
-  }
-  .tournamentimg {
-    overflow: hidden;
-    width: 300px;
-    img {
-      transition: 0.3s transform ease;
-    }
-  }
-  .tfooter {
-    width: 100%;
-    font-weight: 500;
-    font-size: 12px;
-    padding-top: 5px;
-    display: flex;
-    flex-direction: row;
-    & > *:not(:last-child) {
-      padding: 0rem 0.3rem;
-      &::after {
-        content: '//';
-        padding: 0rem 0.3rem;
-      }
-    }
-  }
+.cycleColor {
   &:nth-child(3n) {
-    background-color: var(--orange);
-    border: 2px solid transparent;
-    color: var(--black);
+    .tournament {
+      background-color: var(--orange);
+      border: 2px solid transparent;
+      color: var(--black);
+    }
   }
   &:nth-child(3n - 1) {
-    background-color: var(--blue);
-    border: 2px solid transparent;
-    color: var(--backclr);
+    .tournament {
+      background-color: var(--blue);
+      border: 2px solid transparent;
+      color: var(--backclr);
+    }
   }
   &:nth-child(3n - 2) {
-    background-color: var(--black);
-    border: 2px solid transparent;
-    color: var(--orange);
+    .tournament {
+      background-color: var(--black);
+      border: 2px solid transparent;
+      color: var(--orange);
+    }
+  }
+}
+// ----------------------------
+// Brackets on footer text
+// ----------------------------
+.footertxt {
+  &::before,
+  &::after {
+    font-family: 'poppins';
+    font-size: 40px;
+    font-weight: 300;
+    position: relative;
+    text-rendering: optimizeSpeed;
+    transform: matrix(1, 0, 0, 1, 0, -129.6);
+    vertical-align: middle;
+  }
+  &::before {
+    content: '{';
+    right: 1rem;
+  }
+  &::after {
+    content: '}';
+    left: 1rem;
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all .5s ease-in-out;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
 .line {
   background: var(--black);
   height: 1px;
