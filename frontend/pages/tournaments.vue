@@ -136,9 +136,6 @@ export default {
         this.editTournamentChanges.players = [];
         this.editTournamentData = null;
       })
-      
-      
-      // this.$nuxt.refresh();
     },
 
 		// Edit players
@@ -148,7 +145,6 @@ export default {
 			
       this.redigerDeltakerScreen = false;
       this.editTournamentChanges.players = [];
-      // this.$nuxt.refresh();
     },
 
 		// Edit tournament

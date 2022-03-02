@@ -14,9 +14,10 @@
           <h3 class="tournament-bracket__round-title">Runde {{i+1}}</h3>
           <ul class="tournament-bracket__list">
             <li v-for="(match, m) in round" :key="m" class="tournament-bracket__item">
-              <div class="tournament-bracket__match appexlg:w-100" tabindex="0">
+              <div class="tournament-bracket__match" tabindex="0">
                 <table class="tournament-bracket__table">
                   <tbody class="tournament-bracket__content">
+                    <!-- This is for the clickable version -->
                     <tr v-if="clickable" v-for="player in match.players" :key="player" v-bind:class="{'clickable': clickable}" class="tournament-bracket__team" @click="matchWin(tournament.id, player.id, match.id)" type="button">
                       <td class="tournament-bracket__player">
                         <button class="tournament-bracket__playertxt" v-cloak>{{ player.name }}</button>
@@ -25,11 +26,15 @@
                         <span v-if="match.winner.id == player.id" class="tournament-bracket__number">
                           <svg width="40" fill="white" id="trophy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
                         </span>
-                        <span v-else class="tournament-bracket__number">
+                        <span v-else-if="match.winner.id != player.id" class="tournament-bracket__number">
                           <svg width="40" fill="white" id="loser" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
+                        </span>
+                        <span v-else class="tournament-bracket__number">
+                          <p>No winner selected</p>
                         </span>
                       </td>
                     </tr>
+                    <!-- This is for the not clickable version / preview -->
                     <tr v-else v-for="player in match.players" :key="player + 'p'" class="tournament-bracket__team" type="button">
                       <td class="tournament-bracket__player">
                         <button class="tournament-bracket__playertxt" v-cloak>{{ player.name }}</button>
@@ -38,8 +43,11 @@
                         <span v-if="match.winner.id == player.id" class="tournament-bracket__number">
                           <svg width="40" fill="white" id="trophy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#trophy"/></svg>
                         </span>
-                        <span v-else class="tournament-bracket__number">
+                        <span v-else-if="match.winner.id != player.id" class="tournament-bracket__number">
                           <svg width="40" fill="white" id="loser" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><use xlink:href="#loser"/></svg>
+                        </span>
+                        <span v-else-if="match.winner.id == ''" class="tournament-bracket__number">
+                          <p>No winner selected</p>
                         </span>
                       </td>
                     </tr>
@@ -51,7 +59,7 @@
         </div>
       </div>
       <div v-else>
-        <p>Cannot display tournament</p>
+        <p>Could not load Tournament</p>
       </div>
     </div>
   </div>
@@ -87,11 +95,10 @@ export default {
 	},
   computed:{
     tournament(){
-      // if (!this.tournamentprop) return
-      if (!this.tournaments.getById(this.tournamentprop.id || this.$route.params.id[0])) {
+      if (!this.tournamentprop) {
         this.tournaments.load(this.$config.baseURL)
       }
-      return this.tournaments.getById(this.tournamentprop.id || this.$route.params.id[0])
+      return this.tournaments.getById(this.$route.params.id[0])
     }
   }
 }
