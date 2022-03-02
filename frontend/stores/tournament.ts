@@ -8,7 +8,6 @@ export const useTournamentStore = defineStore('tournaments', {
   },
   actions: {
     async load(baseURL: string) { // Load tournaments function
-
       const tournamentlist = await axios.get(`${baseURL}/get-tournament`);
       this.tournaments = tournamentlist.data;
     },
@@ -20,9 +19,6 @@ export const useTournamentStore = defineStore('tournaments', {
           this.tournaments.push(res.data.newTournament);
           newtournament = res.data.newTournament;
           previewtournament = res.data.previewtournament;
-  
-          console.log(res.data)
-          return;
         })
       } catch (error) {
         return console.error(error)
@@ -36,8 +32,8 @@ export const useTournamentStore = defineStore('tournaments', {
       const t = this.tournaments.find((tournament) => tournament.id === tournamentId);
 
       // Crappy code for checking if the match has a winner.
-      for(let i = 0; i < t.rounds.length; i++) {
-        var match = t.rounds[i].find((match) => match.id === matchId);
+      t.rounds.forEach(async (round) => {
+        var match =round.find((match) => match.id === matchId);
         if (match) {
           if (match.winner) {
             if (match.winner.id != '') {
@@ -55,16 +51,15 @@ export const useTournamentStore = defineStore('tournaments', {
             }
           }
         }
-      }
+      });
     },
     async reset(baseURL: string, tournamentId: string) { // Function for resetting a tournament.
       await axios.get(`${baseURL}/resetTournament/${tournamentId}`).then(async (res) => {
         let chosentournament = this.tournaments.find((tournament) => tournament.id === tournamentId);
-
         this.tournaments[this.tournaments.indexOf(chosentournament)] = res.data;
       });
     },
-    async delete(baseURL: string, tournamentId: string) { // Function for letting a tournament disappear
+    async delete(baseURL: string, tournamentId: string) { // Function for letting a tournament magically disappear
       const del = this.tournaments.find((tournament) => tournament.id === tournamentId);
       this.tournaments.splice(this.tournaments.indexOf(del), 1);
       axios.delete(`${baseURL}/deletetournament`, {
@@ -73,19 +68,17 @@ export const useTournamentStore = defineStore('tournaments', {
         }
       });
     },
-    async editPlayers(baseURL: string, tournamentId: string, players: string[]) {
+    async editPlayers(baseURL: string, tournamentId: string, players: string[]) { // Function for editing the players of a tournament
       axios.post(`${baseURL}/updateTournamentPlayers?tournamentId=${tournamentId}`, {
       	players: players
       });
     },
-    async updateTournament(baseURL: string, tournament: any) {
+    async update(baseURL: string, tournament: any) { // Function for updating a tournament
       if (!tournament) return "Invalid Tournament";
       axios.post(`${baseURL}/updateTournament`, {
         id: tournament.id,
         name: tournament.Name,
         rounds: tournament.rounds
-      }).then((res) => {
-
       });
     }
   }

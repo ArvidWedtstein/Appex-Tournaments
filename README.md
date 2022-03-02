@@ -43,8 +43,8 @@ Skal fungere noenlunde som https://challonge.com/
 - Kode CRUD logikken for datamodellen, og sette opp sette opp api endepunkter i backend for dette (hente ut og lagre nye data). F.eks trenger man POST /api/tournaments og GET /api/tournaments/id/ etc.
 - Lage frontend pages og komponenter som får på plass de nødvendige skjermbildene
 - Sende og hente nødvendig data mellom frontend og backend.
-- Teste og justere.
-- Kalle inn til første test-turnering "Appex Biljard 2022"  :D
+- Teste og justere. 
+- Kalle inn til første test-turnering "Appex Biljard 2022"  :D (_Mission failed successfully_)
 
 
 

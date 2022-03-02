@@ -40,7 +40,6 @@
 				<button class="button button--orange" type="button" @click="updateTournament()">Lagre</button>
 				<button class="button button--orange" type="button" @click="deleteTournament(editTournamentData._id)">Slett</button>
 			</div>
-
 			<div class="flex flex-auto flex-row items-center content-center justify-center">
 				<nuxt-link class="button button--blue" :to="'/tournament/' + editTournamentData.id" v-if="editTournamentData.status == 'Påbegynt'" type="button">Fortsett turnering</nuxt-link>
 				<button class="button button--blue" @click="resetTournament(editTournamentData.id)" v-if="editTournamentData.status == 'Gjennomført'">Gjenopprett turnering</button>
@@ -89,16 +88,8 @@ export default {
       this.tournaments.reset(this.$config.baseURL, tournamentId);
       this.editTournamentData = this.tournaments.getById(tournamentId)
     },
-    countPlayers(tournament) { // Count players
-      let length = tournament.rounds[0].length * 2;
-      return length
-    },
-		formatDate(date) { // Format date
-      const options = { year: "numeric", month: "numeric", day: "2-digit" };
-      return new Date(date).toLocaleDateString("no", options);
-    },
     async updateTournament() { // Update tournament
-      await this.tournaments.updateTournament(this.$config.baseURL, this.editTournamentData).then(() => {
+      await this.tournaments.update(this.$config.baseURL, this.editTournamentData).then(() => {
         this.editTournamentScreen = false;
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";

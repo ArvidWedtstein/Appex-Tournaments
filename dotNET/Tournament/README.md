@@ -5,7 +5,7 @@ API.
 
 Lage flere tester for routene
 
-Finne ut hvorfor APIet nekter å samarbeide (kommer opp med feilmelding på hver request)
+Finne ut hvorfor APIet nekte å samarbeida (kommer opp med feilmelding på hver request. Detta problemet oppsto ette at me flytta logikken ut av controlleren siden David sa me ikkje sko ha all logikken i controlleren. )
 
 
 # Hvordan bytte database:
