@@ -80,7 +80,7 @@ Velg så antatt deltakere ved å trykke på ```[+]``` eller ```[-]```
 
 <img align="center" width="300" src="frontend/public/images/tutorial3.PNG" />
 
-Klikk deretter på _**```Ny Turnering```**_
+Klikk deretter på _**```Ny Turnering```**_-
 
 #
 
