@@ -5,8 +5,8 @@
         <div class="grid auto-cols-2 justify-items-start items-center">
           <h1 class="m-2 px-4 mt-40 py-10 text-4xl row-span-3">Velkommen til Appex Tournaments!</h1>
           <div class="m-2 px-4 flex flex-row gap-1">
-            <nuxt-link to="/newtournament" class="button button--blue">Lag nytt tournament</nuxt-link>
-            <nuxt-link to="/tournaments" class="button button--grey">Se tidligere tournaments</nuxt-link>
+            <nuxt-link to="/newtournament" class="button button--orange">Lag ny turnering</nuxt-link>
+            <nuxt-link to="/tournaments" class="button button--grey">Se tidligere turneringer</nuxt-link>
           </div>
         </div>
       </div>
