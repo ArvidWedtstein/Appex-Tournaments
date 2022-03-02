@@ -13,6 +13,8 @@
 
 </div>
 
+<a align="center" href="https://appextournament.netlify.app/">Link til Appex Tournaments</a>
+
 ## Oppgave 
 
 Appex Tournaments!Her skal dere lage en turneringsapp!
@@ -44,7 +46,7 @@ Skal fungere noenlunde som https://challonge.com/
 
 
 
-### Roller:
+<h3 align="center">Roller:</h3>
 
 <p align="center">Frontend: Aleksnadder</p>
 <p align="center">Backend: Arvid</p>
