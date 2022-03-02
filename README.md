@@ -57,7 +57,7 @@ Skal fungere noenlunde som https://challonge.com/
 
 <h1 align="center"> Hvordan lager jeg ny turnering?
   
-<p>For å opprette en ny turnering, trykk "Lag ny turnering"</p>
+For å opprette en ny turnering, trykk "Lag ny turnering"
 
 <img align="center" width=300 src="frontend/public/images/tutorial1.PNG" />
 
