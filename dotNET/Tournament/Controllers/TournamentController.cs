@@ -15,31 +15,27 @@ public class TournamentController : ControllerBase {
         _logger = logger;
     }
 
+
     [HttpGet("/get-tournament")]
-    public async Task<List<Tournament>> Get() 
+    public async Task<List<Tournament>> GetAsync() 
     {
         try {
-            var tournaments = await _tournamentService.GetAsync();
+            var tournament = await _tournamentService.GetAsync();
 
-            if (tournaments is null)
-            {
-                return NotFound();
-            }
-            return tournaments;
+            return tournament;
         } catch (Exception err) {
             _logger.LogError(err, "something quite terrible when getting tournaments");
             throw;
         }
     } 
 
-    // GET: api/Tournaments/5
-    [HttpGet("/get-tournament/{id:length(24)}")]
+    [HttpGet("/get-tournament/{tournamentId:length(24)}")]
     public async Task<ActionResult<Tournament>> Get(string tournamentId)
     {
         try {
             var tournament = await _tournamentService.GetAsync(tournamentId);
 
-            if (tournament == null)
+            if (tournament is null)
             {
                 return NotFound();
             }
@@ -203,25 +199,26 @@ public class TournamentController : ControllerBase {
         return Ok(tournament);
     }
 
-    [HttpPost("/updateTournment")]
-    public async Task<IActionResult> Update(string id, Tournament updatedTournament)
+    [HttpPost("/updateTournament")]
+    public async Task<IActionResult> Update(string tournamentId, Tournament updatedTournament)
     {
-        var tournament = await _tournamentService.GetAsync(id);
+        _logger.LogInformation(updatedTournament.ToString());
+        var tournament = await _tournamentService.GetAsync(tournamentId);
 
-        if (tournament == null)
+        if (tournament is null)
         {
             return NotFound();
         }
 
         updatedTournament.Id = tournament.Id;
-        await _tournamentService.UpdateAsync(id, updatedTournament);
+        await _tournamentService.UpdateAsync(tournamentId, updatedTournament);
         return NoContent();
     }
 
     [HttpGet("/resetTournament/{id:length(24)}")]
-    public async Task<IActionResult> Reset(string id)
+    public async Task<IActionResult> Reset(string tournamentId)
     {
-        Tournament tournament = await _tournamentService.ResetTournament(id);
+        Tournament tournament = await _tournamentService.ResetTournament(tournamentId);
         if (tournament == null) {
             return NotFound();
         }
@@ -230,9 +227,9 @@ public class TournamentController : ControllerBase {
 
     // DELETE: /Tournaments/id
     [HttpDelete("/deleteTournament/{id:length(24)}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(string tournamentId)
     {
-        var tournament = await _tournamentService.GetAsync(id);
+        var tournament = await _tournamentService.GetAsync(tournamentId);
         if (tournament == null)
         {
             return NotFound();

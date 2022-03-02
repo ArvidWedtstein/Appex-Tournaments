@@ -193,7 +193,6 @@ $breakpoint-lg: 72em;
 
 $borderradius: 0rem;
 
-
 // ----------------------------
 // Tournament Bracket
 // ----------------------------
@@ -259,7 +258,7 @@ $borderradius: 0rem;
     &:first-child .tournament-bracket__match {
       &::before,
       &::after {
-        display: none;
+        display: none !important;
       }
     }
     &:last-child {
@@ -355,7 +354,6 @@ $borderradius: 0rem;
     width: 100%;
     background-color: var(--black);
     padding: 1em;
-    // border: 4px solid var(--orange);
     border-radius: $borderradius;
     box-shadow: 0 2px 0 0 var(--light-grey);
     outline: none; 
@@ -394,7 +392,7 @@ $borderradius: 0rem;
         transform: translate(0, 1px);
         
         .tournament-bracket__rounded & {
-          border-bottom-left-radius: 0em;
+          border-bottom-left-radius: 0.6em;
         }
       }
 
@@ -437,13 +435,6 @@ $borderradius: 0rem;
     width: 100%;
     transition: padding 0.2s linear;
 
-    &:nth-child(odd) {
-      // margin-right: 2%;
-    }
-    
-    &:nth-child(even) {
-      // margin-left: 2%;
-    }
     
     &::after {
       transition: width 0.2s linear;

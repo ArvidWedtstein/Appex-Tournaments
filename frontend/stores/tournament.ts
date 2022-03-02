@@ -79,6 +79,18 @@ export const useTournamentStore = defineStore('tournaments', {
       }).then((res) => {
         console.log(res)
       });
+    },
+    async updateTournament(baseURL: string, tournament: any) {
+      if (!tournament) return "Invalid Tournament";
+      console.log(tournament)
+      let baseURL2 = "https://localhost:7021"
+      axios.post(`${baseURL2}/updateTournament`, {
+        id: tournament.id,
+        name: tournament.Name,
+        rounds: tournament.rounds
+      }).then((res) => {
+
+      });
     }
   }
 })

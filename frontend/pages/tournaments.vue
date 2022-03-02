@@ -82,7 +82,7 @@
 				</div>
 			</div>
       <footer class="w-full bottom-0 z-10 fixed">
-        <h1 class="text-xl text-center font-thin">Made by Aleksnadder, Victor & Arvid</h1>
+        <h1 class="text-xl text-center font-thin">Made by Aleksnadder, Victor, David & Arvid</h1>
       </footer>
 		</main>
 	</div>
@@ -128,29 +128,27 @@ export default {
     },
 
 		// Update tournament
-    updateTournament() {
-      axios.post(`${this.$config.baseURL}/updateTournament`, {
-        id: this.editTournamentData._id,
-        name: this.editTournamentChanges.name,
-        date: this.editTournamentChanges.date,
-      }).then((res) => {
+    async updateTournament() {
+      await this.tournaments.updateTournament(this.$config.baseURL, this.editTournamentData).then(() => {
         this.editTournamentScreen = false;
         this.editTournamentChanges.name = "";
         this.editTournamentChanges.date = "";
         this.editTournamentChanges.players = [];
         this.editTournamentData = null;
-        this.$nuxt.refresh();
-      });
+      })
+      
+      
+      // this.$nuxt.refresh();
     },
 
 		// Edit players
     async redigerDeltakere() {
-      this.tournaments.editPlayers(this.$config.baseURL, this.editTournamentData.id, this.editTournamentChanges.players);
-      this.editTournamentData = this.tournaments.getById(this.editTournamentData.id)
+      await this.tournaments.editPlayers(this.$config.baseURL, this.editTournamentData.id, this.editTournamentData.players);
+      this.editTournamentData = await this.tournaments.getById(this.editTournamentData.id)
 			
       this.redigerDeltakerScreen = false;
       this.editTournamentChanges.players = [];
-      this.$nuxt.refresh();
+      // this.$nuxt.refresh();
     },
 
 		// Edit tournament
