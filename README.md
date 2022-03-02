@@ -57,7 +57,7 @@ Skal fungere noenlunde som https://challonge.com/
   
 <p>For å opprette en ny turnering, trykk "Lag ny turnering"</p>
 
-<img align="center" width=300 src="public/images/tutorial1.PNG" />
+<img align="center" width=300 src="frontend/public/images/tutorial1.PNG" />
 
 <h1></h1>
 OBS Navn kan ikke inne være lenger enn 69 karakterer.
