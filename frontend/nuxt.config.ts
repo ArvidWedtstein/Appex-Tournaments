@@ -29,10 +29,12 @@ export default defineNuxtConfig({
       baseURL: "http://localhost:3001"
     },*/
     publicRuntimeConfig: {
-      baseURL: process.env.BASE_URL
+      // baseURL: process.env.BASE_URL
+      baseURL: "https://localhost:7021"
     },
     privateRuntimeConfig: {
-      baseURL: process.env.BASE_URL
+      // baseURL: process.env.BASE_URL
+      baseURL: "https://localhost:7021"
     },
     buildModules: [
       // Nuxt 2 only:
