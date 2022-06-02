@@ -20,3 +20,5 @@ Finne ut hvorfor APIet nekte å samarbeida (kommer opp med feilmelding på hver 
 
 
 Command for running test: `dotnet test` in tournament.tests folder
+
+SEQ - logging `localhost:7341`

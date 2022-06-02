@@ -4,6 +4,9 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
+
+
+
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
