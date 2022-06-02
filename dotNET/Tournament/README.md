@@ -17,3 +17,6 @@ Finne ut hvorfor APIet nekte å samarbeida (kommer opp med feilmelding på hver 
 5. Opprett collection kalt "tournaments"
 6. Hent connectionstringen til clusteret. 
 7. Lim inn connectionstringen i ```appsettings.json``` på _```ConnectionString:```_
+
+
+Command for running test: `dotnet test` in tournament.tests folder
