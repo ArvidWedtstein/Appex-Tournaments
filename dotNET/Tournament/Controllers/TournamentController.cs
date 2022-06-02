@@ -135,14 +135,10 @@ public class TournamentController : ControllerBase
         newTournament.Name = tournamentName;
 
         // If tournamentdate for some reason is null, then just create a date
-        if (tournamentDate == null)
-        {
-            newTournament.Date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm"));
-        }
-        else
-        {
-            newTournament.Date = tournamentDate;
-        }
+        newTournament.Date = tournamentDate == null 
+            ? DateTime.Parse(DateTime.Now.ToString("yyyy-MM-ddTHH:mm")) 
+            : tournamentDate;
+
         newTournament.Rounds = rounds;
 
         await _tournamentService.CreateAsync(newTournament);
