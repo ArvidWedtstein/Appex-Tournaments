@@ -84,7 +84,6 @@ Velg så antatt deltakere ved å trykke på ```[+]``` eller ```[-]```
 
 Klikk deretter på _**```Ny Turnering```**_
 
-#
 
 Du vil/burde (vis APIet funker) da få opp ett oppsett av turneringen.
 
@@ -94,8 +93,6 @@ Trykk på ```Begynn turnering``` for å starte turneringen med en gang.
 
 Du kan også trykke på ```Utsett turnering``` for å utsette turneringen. Du kan da finne turneringen under ```Tidligere Turneringer``` på forsiden.
 
-
-#
 
 Om du trykket ```Begynn turnering``` så vil/burde du få opp turneringen din.
 
