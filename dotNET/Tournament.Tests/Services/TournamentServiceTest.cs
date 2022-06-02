@@ -85,6 +85,5 @@ public class TournamentServiceTest
         tournament.Rounds[0][0].Players[0].Id.Should().Be(tournamentTest.Rounds[0][0].Players[0].Id);
         tournament.Rounds[0][0].Players[0].name.Should().Be(tournamentTest.Rounds[0][0].Players[0].name);
         tournament.Id.Should().Be(Id);
-        
     }
 }

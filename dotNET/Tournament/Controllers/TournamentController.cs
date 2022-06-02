@@ -11,8 +11,10 @@ public class TournamentController : ControllerBase
 
     private static Random rng = new Random();
     private readonly ILogger _logger; // Define Logger
-    private readonly ITournamentService _tournamentService;
-    public TournamentController(ITournamentService tournamentService, ILogger<TournamentController> logger)
+    // private readonly ITournamentService _tournamentService;
+    private readonly TournamentService _tournamentService;
+    // public TournamentController(ITournamentService tournamentService, ILogger<TournamentController> logger)
+    public TournamentController(TournamentService tournamentService, ILogger<TournamentController> logger)
     {
         _tournamentService = tournamentService;
         _logger = logger;
