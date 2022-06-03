@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { load } from 'dotenv';
 export const useTournamentStore = defineStore('tournaments', {
   state: () => {
     return { 
@@ -26,6 +27,10 @@ export const useTournamentStore = defineStore('tournaments', {
       return {newtournament, previewtournament};
     },
     getById(id) { // Function for gettin a tournaments by ID
+      if (this.tournaments.length < 1) {
+        console.log('get tournament')
+        this.load("https://localhost:7021");
+      }
       return this.tournaments.find((tournament) => tournament.id === id);
     },
     async matchwin(baseURL: string, tournamentId, winnerId, matchId) { // Function for setting a winner

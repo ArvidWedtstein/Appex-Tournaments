@@ -10,5 +10,4 @@ public interface ITournamentRepository
     Task<Tournament> GetAsync(string id);
     Task RemoveAsync(string id);
     Task UpdateAsync(string id, Tournament updatedTournament);
-
 }

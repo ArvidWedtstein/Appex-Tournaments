@@ -83,8 +83,8 @@ export default {
     methods: {
       async newTournament() {	// Function for creating a New tournament
         if (this.players.some((player) => player === "")) return alert('Field cannot be empty'); // Check if player fields are empty
-
-        const newTournament = this.tournamentStore.new(this.$config.baseURL, this.tournament.name, this.tournament.date, this.players).then(async (t) => {
+        console.log(this.$config.baseURL, this.tournament.name, this.tournament.date, this.players)
+        const newTournament = this.tournamentStore.new(this.$config.baseURL, this.tournament.name, this.tournament.date, await this.players).then(async (t) => {
           this.turnering = t.newTournament;
           this.previewturnering = t.previewtournament;
 

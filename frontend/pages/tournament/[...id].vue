@@ -21,10 +21,6 @@ export default {
   methods: {
     async getturnering() {
       this.tournament = this.tournament.getById(this.$route.params.id[0]);
-      // await axios.get(`${this.$config.baseURL}/get-tournament/${this.$route.params.id[0]}`).then(async (res) => {
-      //   console.log(res.data)
-      //   this.tournament = res.data
-      // })
     }
   },
   mounted() {

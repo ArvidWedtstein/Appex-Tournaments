@@ -9,10 +9,12 @@
   </div>
 </template>
 <script setup>
+import '~/assets/tailwind.scss'
 const config = useRuntimeConfig()
 
 </script>
 <script>
+import { useTournamentStore } from '~/stores/tournament'
 export default {
   mounted() {
     const tournaments = useTournamentStore()
