@@ -291,18 +291,18 @@ Thanks to [Victor](https://www.github.com/VictorBerland), [Harald](https://www.g
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/ArvidWedtstein/ArkDashboard.svg?style=for-the-badge
-[contributors-url]: https://github.com/ArvidWedtstein/ArkDashboard/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ArvidWedtstein/ArkDashboard.svg?style=for-the-badge
-[forks-url]: https://github.com/ArvidWedtstein/ArkDashboard/network/members
-[stars-shield]: https://img.shields.io/github/stars/ArvidWedtstein/ArkDashboard.svg?style=for-the-badge
-[stars-url]: https://github.com/ArvidWedtstein/ArkDashboard/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ArvidWedtstein/ArkDashboard.svg?style=for-the-badge
-[issues-url]: https://github.com/ArvidWedtstein/ArkDashboard/issues
-[license-shield]: https://img.shields.io/github/license/ArvidWedtstein/ArkDashboard.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/ArvidWedtstein//Appex-Tournaments.svg?style=for-the-badge
+[contributors-url]: https://github.com/ArvidWedtstein//Appex-Tournaments/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ArvidWedtstein//Appex-Tournaments.svg?style=for-the-badge
+[forks-url]: https://github.com/ArvidWedtstein//Appex-Tournaments/network/members
+[stars-shield]: https://img.shields.io/github/stars/ArvidWedtstein//Appex-Tournaments.svg?style=for-the-badge
+[stars-url]: https://github.com/ArvidWedtstein//Appex-Tournaments/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ArvidWedtstein//Appex-Tournaments.svg?style=for-the-badge
+[issues-url]: https://github.com/ArvidWedtstein//Appex-Tournaments/issues
+[license-shield]: https://img.shields.io/github/license/ArvidWedtstein//Appex-Tournaments.svg?style=for-the-badge
 [license-url]: https://github.com/ArvidWedtstein/ArkDashboard/blob/prod/LICENSE.txt
-[version-shield]: https://img.shields.io/github/package-json/v/ArvidWedtstein/ArkDashboard/dev?style=for-the-badge
-[version-url]: https://github.com/ArvidWedtstein/ArkDashboard
+[version-shield]: https://img.shields.io/github/package-json/v/ArvidWedtstein//Appex-Tournaments?style=for-the-badge
+[version-url]: https://github.com/ArvidWedtstein//Appex-Tournaments
 [Nuxt.js]: https://img.shields.io/badge/Nuxt.js-35495E?style=for-the-badge&logo=nuxtdotjs&logoColor=4FC08D
 [Nuxt-url]: https://nuxtjs.org/
 [DotNet]: https://img.shields.io/badge/.NET-dddddd?style=for-the-badge&logo=dotnet&logoColor=572b8a
