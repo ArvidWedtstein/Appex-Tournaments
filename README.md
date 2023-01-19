@@ -49,11 +49,10 @@
     <li>
       <a href="#usage">Usage</a>
       <ul>
-        <li><a href="#pages">Pages</a></li>
+        <li><a href="#how-to">How to</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -276,12 +275,6 @@ Nothing planned for this project in the future
 See the [open issues](https://github.com/ArvidWedtstein/Appex-Tournaments/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- ACKNOWLEDGMENTS -->
 
